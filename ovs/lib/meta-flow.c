@@ -819,7 +819,7 @@ mf_get_value(const struct mf_field *mf, const struct flow *flow,
         value->be16 = flow->tcp_flags;
         break;
     case MFF_GTP_TEID:
-        value->be32 = flow->gtp_teid;
+        value->be32 = htonl(flow->gtp_teid);
         break;
 
     case MFF_ICMPV4_TYPE:
@@ -1388,7 +1388,7 @@ mf_set_flow_value(const struct mf_field *mf,
         flow->tcp_flags = value->be16;
         break;
     case MFF_GTP_TEID:
-        flow->gtp_teid = value->be32;
+        flow->gtp_teid = ntohl(value->be32);
         break;
 
     case MFF_ICMPV4_TYPE:
