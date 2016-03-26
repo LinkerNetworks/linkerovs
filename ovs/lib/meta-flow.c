@@ -871,7 +871,7 @@ mf_set_value(const struct mf_field *mf,
         match_set_tun_id(match, value->be64);
         break;
     case MFF_GTP_TEID:
-        match_set_gtp_teid(match, value->be32);
+        match_set_gtp_teid(match, ntohl(value->be32));
         break;
     case MFF_TUN_SRC:
         match_set_tun_src(match, value->be32);
@@ -1953,7 +1953,7 @@ mf_set(const struct mf_field *mf,
         break;
 
     case MFF_GTP_TEID:
-        match_set_gtp_teid_masked(match, value->be32, mask->be32);
+        match_set_gtp_teid_masked(match, ntohl(value->be32), ntohl(mask->be32));
         break;
 
     case MFF_N_IDS:
