@@ -1,1 +1,1 @@
-/home/ubuntu/openvswitch/linkerovs/ovs/datapath/linux/../linux/compat/lisp.c
+/home/openstack/linkerovs/ovs/datapath/linux/../linux/compat/lisp.c

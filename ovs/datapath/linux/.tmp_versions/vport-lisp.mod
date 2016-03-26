@@ -1,2 +1,2 @@
-/home/ubuntu/openvswitch/linkerovs/ovs/datapath/linux/vport-lisp.ko
-/home/ubuntu/openvswitch/linkerovs/ovs/datapath/linux/vport-lisp.o
+/home/openstack/linkerovs/ovs/datapath/linux/vport-lisp.ko
+/home/openstack/linkerovs/ovs/datapath/linux/vport-lisp.o

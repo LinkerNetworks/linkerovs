@@ -1,2 +1,2 @@
-/home/ubuntu/openvswitch/linkerovs/ovs/datapath/linux/vport-stt.ko
-/home/ubuntu/openvswitch/linkerovs/ovs/datapath/linux/vport-stt.o
+/home/openstack/linkerovs/ovs/datapath/linux/vport-stt.ko
+/home/openstack/linkerovs/ovs/datapath/linux/vport-stt.o

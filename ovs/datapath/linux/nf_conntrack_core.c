@@ -1,1 +1,1 @@
-/home/ubuntu/openvswitch/linkerovs/ovs/datapath/linux/../linux/compat/nf_conntrack_core.c
+/home/openstack/linkerovs/ovs/datapath/linux/../linux/compat/nf_conntrack_core.c

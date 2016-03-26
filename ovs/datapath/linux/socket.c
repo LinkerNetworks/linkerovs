@@ -1,1 +1,1 @@
-/home/ubuntu/openvswitch/linkerovs/ovs/datapath/linux/../linux/compat/socket.c
+/home/openstack/linkerovs/ovs/datapath/linux/../linux/compat/socket.c

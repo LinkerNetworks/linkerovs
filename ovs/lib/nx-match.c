@@ -1009,8 +1009,7 @@ nx_put_raw(struct ofpbuf *b, enum ofp_version oxm, const struct match *match,
                            flow->arp_tha, match->wc.masks.arp_tha);
     }
 
-    nxm_put_32(b, MFF_GTP_TEID, oxm,
-                flow->gtp_teid);
+    nxm_put_32m(b, MFF_GTP_TEID, oxm, flow->gtp_teid, match->wc.masks.gtp_teid);
 
     /* Tunnel ID. */
     nxm_put_64m(b, MFF_TUN_ID, oxm,

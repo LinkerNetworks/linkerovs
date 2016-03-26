@@ -1,1 +1,1 @@
-/home/ubuntu/openvswitch/linkerovs/ovs/datapath/linux/../linux/compat/genetlink-openvswitch.c
+/home/openstack/linkerovs/ovs/datapath/linux/../linux/compat/genetlink-openvswitch.c

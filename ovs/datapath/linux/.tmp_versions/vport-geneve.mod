@@ -1,2 +1,2 @@
-/home/ubuntu/openvswitch/linkerovs/ovs/datapath/linux/vport-geneve.ko
-/home/ubuntu/openvswitch/linkerovs/ovs/datapath/linux/vport-geneve.o
+/home/openstack/linkerovs/ovs/datapath/linux/vport-geneve.ko
+/home/openstack/linkerovs/ovs/datapath/linux/vport-geneve.o

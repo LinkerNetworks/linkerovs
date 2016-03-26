@@ -1,8 +1,8 @@
 # -*- makefile -*-
-export builddir = /home/ubuntu/openvswitch/linkerovs/ovs/datapath/linux
-export srcdir = /home/ubuntu/openvswitch/linkerovs/ovs/datapath/linux
-export top_srcdir = /home/ubuntu/openvswitch/linkerovs/ovs
-export KSRC = /lib/modules/3.13.0-74-generic/build
+export builddir = /home/openstack/linkerovs/ovs/datapath/linux
+export srcdir = /home/openstack/linkerovs/ovs/datapath/linux
+export top_srcdir = /home/openstack/linkerovs/ovs
+export KSRC = /lib/modules/4.2.0-27-generic/build
 export VERSION = 2.5.0
 
 include $(srcdir)/../Modules.mk

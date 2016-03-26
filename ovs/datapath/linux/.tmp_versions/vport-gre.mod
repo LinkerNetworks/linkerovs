@@ -1,2 +1,2 @@
-/home/ubuntu/openvswitch/linkerovs/ovs/datapath/linux/vport-gre.ko
-/home/ubuntu/openvswitch/linkerovs/ovs/datapath/linux/vport-gre.o
+/home/openstack/linkerovs/ovs/datapath/linux/vport-gre.ko
+/home/openstack/linkerovs/ovs/datapath/linux/vport-gre.o

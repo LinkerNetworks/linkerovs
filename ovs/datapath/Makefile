@@ -177,14 +177,14 @@ am__relativize = \
     dir1=`echo "$$dir1" | sed -e "$$sed_rest"`; \
   done; \
   reldir="$$dir2"
-ACLOCAL = ${SHELL} /home/ubuntu/openvswitch/linkerovs/ovs/build-aux/missing aclocal-1.14
+ACLOCAL = ${SHELL} /home/openstack/linkerovs/ovs/build-aux/missing aclocal-1.14
 AMTAR = $${TAR-tar}
 AM_DEFAULT_VERBOSITY = 1
 AR = ar
-AUTOCONF = ${SHELL} /home/ubuntu/openvswitch/linkerovs/ovs/build-aux/missing autoconf
-AUTOHEADER = ${SHELL} /home/ubuntu/openvswitch/linkerovs/ovs/build-aux/missing autoheader
-AUTOM4TE = ${SHELL} /home/ubuntu/openvswitch/linkerovs/ovs/build-aux/missing autom4te
-AUTOMAKE = ${SHELL} /home/ubuntu/openvswitch/linkerovs/ovs/build-aux/missing automake-1.14
+AUTOCONF = ${SHELL} /home/openstack/linkerovs/ovs/build-aux/missing autoconf
+AUTOHEADER = ${SHELL} /home/openstack/linkerovs/ovs/build-aux/missing autoheader
+AUTOM4TE = ${SHELL} /home/openstack/linkerovs/ovs/build-aux/missing autom4te
+AUTOMAKE = ${SHELL} /home/openstack/linkerovs/ovs/build-aux/missing automake-1.14
 AWK = gawk
 CAPNG_LDADD = 
 CC = $(if $(C),env REAL_CC="gcc -std=gnu99" CHECK="$(SPARSE) -I $(top_srcdir)/include/sparse $(SPARSEFLAGS) $(SPARSE_EXTRA_INCLUDES) " cgcc $(CGCCFLAGS),gcc -std=gnu99)
@@ -219,7 +219,7 @@ INSTALL_PROGRAM = ${INSTALL}
 INSTALL_SCRIPT = ${INSTALL}
 INSTALL_STRIP_PROGRAM = $(install_sh) -c -s
 KARCH = 
-KBUILD = /lib/modules/3.13.0-74-generic/build
+KBUILD = /lib/modules/4.2.0-27-generic/build
 LD = /usr/bin/ld -m elf_x86_64
 LDFLAGS = 
 LIBOBJS = 
@@ -232,7 +232,7 @@ LTLIBOBJS =
 LT_AGE = 0
 LT_CURRENT = 1
 LT_REVISION = 0
-MAKEINFO = ${SHELL} /home/ubuntu/openvswitch/linkerovs/ovs/build-aux/missing makeinfo
+MAKEINFO = ${SHELL} /home/openstack/linkerovs/ovs/build-aux/missing makeinfo
 MANIFEST_TOOL = :
 MKDIR_P = /bin/mkdir -p
 MSVC64_LDFLAGS = 
@@ -283,10 +283,10 @@ STRIP = strip
 VERSION = 2.5.0
 VSTUDIO_CONFIG = 
 WARNING_FLAGS =  -Wall -Wextra -Wno-sign-compare -Wpointer-arith -Wformat-security -Wswitch-enum -Wunused-parameter -Wbad-function-cast -Wcast-align -Wmissing-prototypes -Wmissing-field-initializers -fno-strict-aliasing
-abs_builddir = /home/ubuntu/openvswitch/linkerovs/ovs/datapath
-abs_srcdir = /home/ubuntu/openvswitch/linkerovs/ovs/datapath
-abs_top_builddir = /home/ubuntu/openvswitch/linkerovs/ovs
-abs_top_srcdir = /home/ubuntu/openvswitch/linkerovs/ovs
+abs_builddir = /home/openstack/linkerovs/ovs/datapath
+abs_srcdir = /home/openstack/linkerovs/ovs/datapath
+abs_top_builddir = /home/openstack/linkerovs/ovs
+abs_top_srcdir = /home/openstack/linkerovs/ovs
 ac_ct_AR = ar
 ac_ct_CC = gcc
 ac_ct_DUMPBIN = 
@@ -315,7 +315,7 @@ host_vendor = unknown
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
-install_sh = ${SHELL} /home/ubuntu/openvswitch/linkerovs/ovs/build-aux/install-sh
+install_sh = ${SHELL} /home/openstack/linkerovs/ovs/build-aux/install-sh
 libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
 localedir = ${datarootdir}/locale
@@ -493,9 +493,9 @@ $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am $(srcdir)/Modules.mk $(srcdir)/lin
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign datapath/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu datapath/Makefile'; \
 	$(am__cd) $(top_srcdir) && \
-	  $(AUTOMAKE) --foreign datapath/Makefile
+	  $(AUTOMAKE) --gnu datapath/Makefile
 .PRECIOUS: Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \

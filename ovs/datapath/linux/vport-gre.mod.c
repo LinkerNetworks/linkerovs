@@ -17,19 +17,19 @@ __attribute__((section(".gnu.linkonce.this_module"))) = {
 static const struct modversion_info ____versions[]
 __used
 __attribute__((section("__versions"))) = {
-	{ 0x1fc32c62, __VMLINUX_SYMBOL_STR(module_layout) },
-	{ 0x9c507e57, __VMLINUX_SYMBOL_STR(rpl_gre_fb_xmit) },
-	{ 0xf4721ed7, __VMLINUX_SYMBOL_STR(ovs_netdev_tunnel_destroy) },
-	{ 0xbccea4c4, __VMLINUX_SYMBOL_STR(ovs_vport_ops_unregister) },
-	{ 0x69f8e35e, __VMLINUX_SYMBOL_STR(__ovs_vport_ops_register) },
-	{ 0x8bc8d441, __VMLINUX_SYMBOL_STR(ovs_vport_free) },
-	{ 0xa8ce66de, __VMLINUX_SYMBOL_STR(ovs_netdev_link) },
+	{ 0x96cec1da, __VMLINUX_SYMBOL_STR(module_layout) },
+	{ 0x3803ae42, __VMLINUX_SYMBOL_STR(rpl_gre_fb_xmit) },
+	{ 0x548a293c, __VMLINUX_SYMBOL_STR(ovs_netdev_tunnel_destroy) },
+	{ 0xd32b02b0, __VMLINUX_SYMBOL_STR(ovs_vport_ops_unregister) },
+	{ 0x3d3561f0, __VMLINUX_SYMBOL_STR(__ovs_vport_ops_register) },
+	{ 0x519b60a0, __VMLINUX_SYMBOL_STR(ovs_vport_free) },
+	{ 0xcfd4a865, __VMLINUX_SYMBOL_STR(ovs_netdev_link) },
 	{ 0x6e720ff2, __VMLINUX_SYMBOL_STR(rtnl_unlock) },
-	{ 0x227074ad, __VMLINUX_SYMBOL_STR(dev_change_flags) },
-	{ 0x6c86afc3, __VMLINUX_SYMBOL_STR(rpl_gretap_fb_dev_create) },
+	{ 0x27438599, __VMLINUX_SYMBOL_STR(dev_change_flags) },
+	{ 0x4b36dc99, __VMLINUX_SYMBOL_STR(rpl_gretap_fb_dev_create) },
 	{ 0xc7a4fbed, __VMLINUX_SYMBOL_STR(rtnl_lock) },
-	{ 0x99adf22d, __VMLINUX_SYMBOL_STR(ovs_vport_alloc) },
-	{ 0xc31c3682, __VMLINUX_SYMBOL_STR(ovs_tunnel_get_egress_info) },
+	{ 0x5d8bd7ff, __VMLINUX_SYMBOL_STR(ovs_vport_alloc) },
+	{ 0xc320017b, __VMLINUX_SYMBOL_STR(ovs_tunnel_get_egress_info) },
 	{ 0xbdfb6dbb, __VMLINUX_SYMBOL_STR(__fentry__) },
 };
 
@@ -39,4 +39,4 @@ __attribute__((section(".modinfo"))) =
 "depends=openvswitch";
 
 
-MODULE_INFO(srcversion, "F0B520847D09307E07957CF");
+MODULE_INFO(srcversion, "6826B0BFB602CB64F5501DF");

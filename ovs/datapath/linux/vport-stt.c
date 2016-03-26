@@ -1,1 +1,1 @@
-/home/ubuntu/openvswitch/linkerovs/ovs/datapath/linux/../vport-stt.c
+/home/openstack/linkerovs/ovs/datapath/linux/../vport-stt.c
