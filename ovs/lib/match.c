@@ -165,16 +165,10 @@ match_set_tun_id_masked(struct match *match, ovs_be64 tun_id, ovs_be64 mask)
 }
 
 void
-match_set_gtp_teid(struct match *match, ovs_be32 gtp_teid)
+match_set_gtp_teid(struct match *match, uint32_t gtp_teid)
 {
-    match_set_gtp_teid_masked(match, gtp_teid, OVS_BE32_MAX);
-}
-
-void
-match_set_gtp_teid_masked(struct match *match, ovs_be32 gtp_teid, ovs_be32 mask)
-{
-    match->wc.masks.gtp_teid = mask;
-    match->flow.gtp_teid = gtp_teid & mask;
+    match->wc.masks.gtp_teid = UINT32_MAX;
+    match->flow.gtp_teid = gtp_teid;
 }
 
 void

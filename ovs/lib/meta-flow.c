@@ -1799,6 +1799,7 @@ mf_set(const struct mf_field *mf,
     case MFF_ICMPV4_CODE:
     case MFF_ICMPV6_TYPE:
     case MFF_ICMPV6_CODE:
+    case MFF_GTP_TEID:
         return OFPUTIL_P_NONE;
 
     case MFF_DP_HASH:
@@ -1950,10 +1951,6 @@ mf_set(const struct mf_field *mf,
 
     case MFF_TCP_FLAGS:
         match_set_tcp_flags_masked(match, value->be16, mask->be16);
-        break;
-
-    case MFF_GTP_TEID:
-        match_set_gtp_teid_masked(match, ntohl(value->be32), ntohl(mask->be32));
         break;
 
     case MFF_N_IDS:

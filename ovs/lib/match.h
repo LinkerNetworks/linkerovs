@@ -67,7 +67,6 @@ void match_set_metadata_masked(struct match *,
 void match_set_tun_id(struct match *, ovs_be64 tun_id);
 void match_set_tun_id_masked(struct match *, ovs_be64 tun_id, ovs_be64 mask);
 void match_set_gtp_teid(struct match *, ovs_be32 gtp_teid);
-void match_set_gtp_teid_masked(struct match *, ovs_be32 gtp_teid, ovs_be32 mask);
 void match_set_tun_src(struct match *match, ovs_be32 src);
 void match_set_tun_src_masked(struct match *match, ovs_be32 src, ovs_be32 mask);
 void match_set_tun_dst(struct match *match, ovs_be32 dst);
