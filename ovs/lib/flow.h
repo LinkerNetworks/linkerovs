@@ -133,8 +133,8 @@ struct flow {
     struct eth_addr arp_tha;    /* ARP/ND target hardware address. */
     ovs_be16 tcp_flags;         /* TCP flags. With L3 to avoid matching L4. */
     ovs_be16 pad3;
-    ovs_be32 gtp_teid;
-    ovs_be32 pad4;              /* Pad to 64 bits. */
+    uint32_t gtp_teid;
+    uint8_t pad4[4];              /* Pad to 64 bits. */
 
     /* L4 (64-bit aligned) */
     ovs_be16 tp_src;            /* TCP/UDP/SCTP source port/ICMP type. */

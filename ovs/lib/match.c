@@ -1310,7 +1310,7 @@ match_format(const struct match *match, struct ds *s, int priority)
     }
 
     if (wc->masks.gtp_teid) {
-        format_be32_masked(s, "gtp_teid", f->gtp_teid, wc->masks.gtp_teid);
+        format_uint32_masked(s, "gtp_teid", f->gtp_teid, wc->masks.gtp_teid);
     }
 
     if (s->length > start_len) {
