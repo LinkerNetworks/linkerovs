@@ -1,1 +1,0 @@
-cmd_/home/openstack/linkerovs/ovs/datapath/linux/vport-stt.ko := ld -r -m elf_x86_64 -T ./scripts/module-common.lds --build-id  -o /home/openstack/linkerovs/ovs/datapath/linux/vport-stt.ko /home/openstack/linkerovs/ovs/datapath/linux/vport-stt.o /home/openstack/linkerovs/ovs/datapath/linux/vport-stt.mod.o
