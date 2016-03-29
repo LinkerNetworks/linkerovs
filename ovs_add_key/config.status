@@ -573,7 +573,7 @@ FGREP='/bin/grep -F'
 LD='/usr/bin/ld -m elf_x86_64'
 NM='/usr/bin/nm -B'
 LN_S='ln -s'
-max_cmd_len='1572864'
+max_cmd_len='3458764513820540925'
 ac_objext='o'
 exeext=''
 lt_unset='unset'
@@ -600,7 +600,7 @@ old_postuninstall_cmds=''
 old_archive_cmds='$AR $AR_FLAGS $oldlib$oldobjs~$RANLIB $tool_oldlib'
 lock_old_archive_extraction='no'
 CC='$(if $(C),env REAL_CC="gcc -std=gnu99" CHECK="$(SPARSE) -I $(top_srcdir)/include/sparse $(SPARSEFLAGS) $(SPARSE_EXTRA_INCLUDES) " cgcc $(CGCCFLAGS),gcc -std=gnu99)'
-CFLAGS='-g -O0'
+CFLAGS='-g -O2'
 compiler='gcc -std=gnu99'
 GCC='yes'
 lt_cv_sys_global_symbol_pipe='sed -n -e '\''s/^.*[	 ]\([ABCDGIRSTW][ABCDGIRSTW]*\)[	 ][	 ]*\([_A-Za-z][_A-Za-z0-9]*\)$/\1 \2 \2/p'\'' | sed '\''/ __gnu_lto/d'\'''
@@ -685,7 +685,7 @@ old_striplib='strip --strip-debug'
 striplib='strip --strip-unneeded'
 
 LTCC='gcc -std=gnu99'
-LTCFLAGS='-g -O0'
+LTCFLAGS='-g -O2'
 compiler='gcc -std=gnu99'
 
 # A function that is used when there is no print builtin or printf.
@@ -968,7 +968,7 @@ S["EXEEXT"]=""
 S["ac_ct_CC"]="gcc"
 S["CPPFLAGS"]=""
 S["LDFLAGS"]=""
-S["CFLAGS"]="-g -O0"
+S["CFLAGS"]="-g -O2"
 S["CC"]="$(if $(C),env REAL_CC=\"gcc -std=gnu99\" CHECK=\"$(SPARSE) -I $(top_srcdir)/include/sparse $(SPARSEFLAGS) $(SPARSE_EXTRA_INCLUDES) \" cgcc $(CGCCFLAGS),"\
 "gcc -std=gnu99)"
 S["AM_BACKSLASH"]="\\"

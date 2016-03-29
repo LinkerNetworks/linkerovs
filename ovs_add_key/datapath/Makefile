@@ -189,7 +189,7 @@ AWK = gawk
 CAPNG_LDADD = 
 CC = $(if $(C),env REAL_CC="gcc -std=gnu99" CHECK="$(SPARSE) -I $(top_srcdir)/include/sparse $(SPARSEFLAGS) $(SPARSE_EXTRA_INCLUDES) " cgcc $(CGCCFLAGS),gcc -std=gnu99)
 CCDEPMODE = depmode=gcc3
-CFLAGS = -g -O0
+CFLAGS = -g -O2
 CGCCFLAGS = -target=x86_64
 CPP = gcc -std=gnu99 -E
 CPPFLAGS = 
@@ -493,9 +493,9 @@ $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am $(srcdir)/Modules.mk $(srcdir)/lin
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu datapath/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign datapath/Makefile'; \
 	$(am__cd) $(top_srcdir) && \
-	  $(AUTOMAKE) --gnu datapath/Makefile
+	  $(AUTOMAKE) --foreign datapath/Makefile
 .PRECIOUS: Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
