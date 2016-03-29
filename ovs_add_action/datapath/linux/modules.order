@@ -1,0 +1,6 @@
+kernel//home/openstack/linkerovs/ovs_add_action/datapath/linux/openvswitch.ko
+kernel//home/openstack/linkerovs/ovs_add_action/datapath/linux/vport-geneve.ko
+kernel//home/openstack/linkerovs/ovs_add_action/datapath/linux/vport-gre.ko
+kernel//home/openstack/linkerovs/ovs_add_action/datapath/linux/vport-lisp.ko
+kernel//home/openstack/linkerovs/ovs_add_action/datapath/linux/vport-stt.ko
+kernel//home/openstack/linkerovs/ovs_add_action/datapath/linux/vport-vxlan.ko

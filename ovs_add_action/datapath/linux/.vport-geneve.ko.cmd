@@ -1,0 +1,1 @@
+cmd_/home/openstack/linkerovs/ovs_add_action/datapath/linux/vport-geneve.ko := ld -r -m elf_x86_64 -T ./scripts/module-common.lds --build-id  -o /home/openstack/linkerovs/ovs_add_action/datapath/linux/vport-geneve.ko /home/openstack/linkerovs/ovs_add_action/datapath/linux/vport-geneve.o /home/openstack/linkerovs/ovs_add_action/datapath/linux/vport-geneve.mod.o
