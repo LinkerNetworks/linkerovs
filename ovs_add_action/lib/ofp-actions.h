@@ -63,9 +63,10 @@
                                                                         \
     /* Header changes. */                                               \
     OFPACT(SET_FIELD,       ofpact_set_field,   ofpact, "set_field")    \
-    OFPACT(HANDLE_GTP,      ofpact_handle_gtp,  ofpact, "handle_gtp")    \
-    OFPACT(ADD_GTP,         ofpact_add_gtp,     ofpact, "add_gtp")    \
-    OFPACT(DEL_GTP,         ofpact_del_gtp,     ofpact, "del_gtp")    \
+    OFPACT(HANDLE_GTP,      ofpact_null,        ofpact, "handle_gtp")    \
+    OFPACT(OPERATE_GTP,     ofpact_operate_gtp, ofpact, "operate_gtp")    \
+    OFPACT(GTP_TEID,        ofpact_gtp_teid,    ofpact, "gtp_teid")    \
+    OFPACT(GTP_PGW_IP,      ofpact_gtp_pgw_ip,  ofpact, "gtp_pgw_ip")    \
     OFPACT(SET_VLAN_VID,    ofpact_vlan_vid,    ofpact, "set_vlan_vid") \
     OFPACT(SET_VLAN_PCP,    ofpact_vlan_pcp,    ofpact, "set_vlan_pcp") \
     OFPACT(STRIP_VLAN,      ofpact_null,        ofpact, "strip_vlan")   \
@@ -417,29 +418,28 @@ struct ofpact_set_field {
     union mf_value mask;
 };
 
-/* OFPACT_HANDLE_GTP.
+/* OFPACT_OPERATE_GTP.
  *
  * Used for NXAST_XXXXXX */
-struct ofpact_handle_gtp {
+struct ofpact_operate_gtp {
     struct ofpact ofpact;
+    uint8_t operation;
 };
 
-/* OFPACT_ADD_GTP.
+/* OFPACT_GTP_TEID.
  *
  * Used for NXAST_XXXXXX */
-struct ofpact_add_gtp {
+struct ofpact_gtp_teid {
     struct ofpact ofpact;
     uint32_t gtp_teid;
-    ovs_be32 pgw_ipv4;
 };
 
-/* OFPACT_DEL_GTP.
+/* OFPACT_GTP_PGW_IP.
  *
  * Used for NXAST_XXXXXX */
-struct ofpact_del_gtp {
+struct ofpact_gtp_pgw_ip {
     struct ofpact ofpact;
-    uint32_t gtp_teid;
-    ovs_be32 pgw_ipv4;
+    ovs_be32 gtp_pgw_ip;
 };
 
 /* OFPACT_PUSH_VLAN/MPLS/PBB

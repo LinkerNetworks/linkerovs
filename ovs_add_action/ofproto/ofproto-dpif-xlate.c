@@ -4226,8 +4226,9 @@ recirc_unroll_actions(const struct ofpact *ofpacts, size_t ofpacts_len,
         case OFPACT_DEBUG_RECIRC:
         case OFPACT_CT:
         case OFPACT_HANDLE_GTP:
-        case OFPACT_ADD_GTP:
-        case OFPACT_DEL_GTP:
+        case OFPACT_OPERATE_GTP:
+        case OFPACT_GTP_TEID:
+        case OFPACT_GTP_PGW_IP:
             /* These may not generate PACKET INs. */
             break;
 

@@ -208,6 +208,16 @@ enum ofp_raw_action_type {
     OFPAT_RAW12_SET_FIELD,
     /* OF1.5+(25): struct ofp12_action_set_field, ... */
     OFPAT_RAW15_SET_FIELD,
+
+    /* OF1.2-1.4(28): void. */
+    OFPAT_RAW12_HANDLE_GTP,
+    /* OF1.2-1.4(29): uint8_t. */
+    OFPAT_RAW12_OPERATE_GTP,
+    /* OF1.2-1.4(30): uint32_t. */
+    OFPAT_RAW12_GTP_TEID,
+    /* OF1.2-1.4(31): ovs_be32. */
+    OFPAT_RAW12_GTP_PGW_IP,
+
     /* NX1.0-1.4(7): struct nx_action_reg_load.
      *
      * [In OpenFlow 1.5, set_field is a superset of reg_load functionality, so
@@ -414,8 +424,9 @@ ofpact_next_flattened(const struct ofpact *ofpact)
     case OFPACT_WRITE_METADATA:
     case OFPACT_GOTO_TABLE:
     case OFPACT_HANDLE_GTP:
-    case OFPACT_ADD_GTP:
-    case OFPACT_DEL_GTP:
+    case OFPACT_OPERATE_GTP:
+    case OFPACT_GTP_TEID:
+    case OFPACT_GTP_PGW_IP:
         return ofpact_next(ofpact);
 
     case OFPACT_CT:
@@ -1397,6 +1408,78 @@ format_STRIP_VLAN(const struct ofpact_null *a, struct ds *s)
                     : "strip_vlan"));
 }
 
+/* handle gtp actions. */
+static enum ofperr
+decode_OFPAT_RAW12_HANDLE_GTP(struct ofpbuf *out)
+{
+    ofpact_put_HANDLE_GTP(out)->ofpact.raw = OFPAT_RAW12_HANDLE_GTP;
+    return 0;
+}
+
+static void
+encode_HANDLE_GTP(const struct ofpact_null *null OVS_UNUSED,
+                  enum ofp_version ofp_version, struct ofpbuf *out)
+{
+    put_OFPAT12_HANDLE_GTP(out);
+}
+
+static char * OVS_WARN_UNUSED_RESULT
+parse_HANDLE_GTP(char *arg OVS_UNUSED, struct ofpbuf *ofpacts,
+                 enum ofputil_protocol *usable_protocols OVS_UNUSED)
+{
+    ofpact_put_HANDLE_GTP(ofpacts)->ofpact.raw = OFPAT_RAW12_HANDLE_GTP;
+    return NULL;
+}
+
+static void
+format_HANDLE_GTP(const struct ofpact_null *a, struct ds *s)
+{
+    ds_put_cstr(s, "handle_gtp");
+}
+
+/* Set operate gtp actions. */
+static enum ofperr
+decode_OFPAT_RAW12_OPERATE_GTP(uint8_t operation,
+                              enum ofp_version ofp_version OVS_UNUSED,
+                              struct ofpbuf *out)
+{
+    ofpact_put_OPERATE_GTP(out)->operation = operation;
+    return 0;
+}
+
+static void
+encode_OPERATE_GTP(const struct ofpact_operate_gtp *operation,
+                  enum ofp_version ofp_version, struct ofpbuf *out)
+{
+    if (ofp_version > OFP11_VERSION) {
+        put_OFPAT12_OPERATE_GTP(out, operation->operation);
+    } else {
+        /* XXX */
+    }
+}
+
+static char * OVS_WARN_UNUSED_RESULT
+parse_OPERATE_GTP(char *arg, struct ofpbuf *ofpacts,
+                  enum ofputil_protocol *usable_protocols OVS_UNUSED)
+{
+    uint8_t operation;
+    char *error;
+
+    error = str_to_u8(arg, "operate_gtp", &operation);
+    if (error) {
+        return error;
+    }
+
+    ofpact_put_OPERATE_GTP(ofpacts)->operation = operation;
+    return NULL;
+}
+
+static void
+format_OPERATE_GTP(const struct ofpact_operate_gtp *a, struct ds *s)
+{
+    ds_put_format(s, "operate_gtp:%d", a->operation);
+}
+
 /* Push VLAN action. */
 
 static enum ofperr
@@ -1616,6 +1699,37 @@ static void
 format_SET_IPV4_DST(const struct ofpact_ipv4 *a, struct ds *s)
 {
     ds_put_format(s, "mod_nw_dst:"IP_FMT, IP_ARGS(a->ipv4));
+}
+
+/* Set gtp pgw ip actions. */
+static enum ofperr
+decode_OFPAT_RAW12_GTP_PGW_IP(ovs_be32 gtp_pgw_ip,
+                            enum ofp_version ofp_version OVS_UNUSED,
+                            struct ofpbuf *out)
+{
+    ofpact_put_GTP_PGW_IP(out)->gtp_pgw_ip = gtp_pgw_ip;
+    return 0;
+}
+
+static void
+encode_GTP_PGW_IP(const struct ofpact_gtp_pgw_ip *gtp_pgw_ip,
+                    enum ofp_version ofp_version, struct ofpbuf *out)
+{
+    ovs_be32 addr = gtp_pgw_ip->gtp_pgw_ip;
+    put_OFPAT12_GTP_PGW_IP(out, ntohl(addr));
+}
+
+static char * OVS_WARN_UNUSED_RESULT
+parse_GTP_PGW_IP(char *arg, struct ofpbuf *ofpacts,
+                   enum ofputil_protocol *usable_protocols OVS_UNUSED)
+{
+    return str_to_ip(arg, &ofpact_put_GTP_PGW_IP(ofpacts)->gtp_pgw_ip);
+}
+
+static void
+format_GTP_PGW_IP(const struct ofpact_gtp_pgw_ip *a, struct ds *s)
+{
+    ds_put_format(s, "gtp_pgw_ip:"IP_FMT, IP_ARGS(a->gtp_pgw_ip));
 }
 
 /* Set IPv4/v6 TOS actions. */
@@ -3366,6 +3480,36 @@ format_SET_TUNNEL(const struct ofpact_tunnel *a, struct ds *s)
                   (a->tun_id > UINT32_MAX
                    || a->ofpact.raw == NXAST_RAW_SET_TUNNEL64 ? "64" : ""),
                   a->tun_id);
+}
+
+/* Set gtp teid actions. */
+static enum ofperr
+decode_OFPAT_RAW12_GTP_TEID(uint32_t gtp_teid,
+                         enum ofp_version ofp_version OVS_UNUSED,
+                         struct ofpbuf *out)
+{
+    ofpact_put_GTP_TEID(out)->gtp_teid = gtp_teid;
+    return 0;
+}
+
+static void
+encode_GTP_TEID(const struct ofpact_gtp_teid *gtp_teid,
+             enum ofp_version ofp_version, struct ofpbuf *out)
+{
+    put_OFPAT12_GTP_TEID(out, gtp_teid->gtp_teid);
+}
+
+static char * OVS_WARN_UNUSED_RESULT
+parse_GTP_TEID(char *arg, struct ofpbuf *ofpacts,
+                    enum ofputil_protocol *usable_protocols OVS_UNUSED)
+{
+    return str_to_u32(arg, &ofpact_put_GTP_TEID(ofpacts)->gtp_teid);
+}
+
+static void
+format_GTP_TEID(const struct ofpact_gtp_teid *a, struct ds *s)
+{
+    ds_put_format(s, "gtp_teid:%#"PRIx32, a->gtp_teid);
 }
 
 /* Set queue action. */
@@ -5363,8 +5507,9 @@ ofpact_is_set_or_move_action(const struct ofpact *a)
     case OFPACT_SET_VLAN_PCP:
     case OFPACT_SET_VLAN_VID:
     case OFPACT_HANDLE_GTP:
-    case OFPACT_ADD_GTP:
-    case OFPACT_DEL_GTP:
+    case OFPACT_OPERATE_GTP:
+    case OFPACT_GTP_TEID:
+    case OFPACT_GTP_PGW_IP:
         return true;
     case OFPACT_BUNDLE:
     case OFPACT_CLEAR_ACTIONS:
@@ -5436,8 +5581,9 @@ ofpact_is_allowed_in_actions_set(const struct ofpact *a)
     case OFPACT_SET_VLAN_VID:
     case OFPACT_STRIP_VLAN:
     case OFPACT_HANDLE_GTP:
-    case OFPACT_ADD_GTP:
-    case OFPACT_DEL_GTP:
+    case OFPACT_OPERATE_GTP:
+    case OFPACT_GTP_TEID:
+    case OFPACT_GTP_PGW_IP:
         return true;
 
     /* In general these actions are excluded because they are not part of
@@ -5678,8 +5824,9 @@ ovs_instruction_type_from_ofpact_type(enum ofpact_type type)
     case OFPACT_DEBUG_RECIRC:
     case OFPACT_CT:
     case OFPACT_HANDLE_GTP:
-    case OFPACT_ADD_GTP:
-    case OFPACT_DEL_GTP:
+    case OFPACT_OPERATE_GTP:
+    case OFPACT_GTP_TEID:
+    case OFPACT_GTP_PGW_IP:
     default:
         return OVSINST_OFPIT11_APPLY_ACTIONS;
     }
@@ -6125,8 +6272,9 @@ ofpact_check__(enum ofputil_protocol *usable_protocols, struct ofpact *a,
         return 0;
 
     case OFPACT_HANDLE_GTP:
-    case OFPACT_ADD_GTP:
-    case OFPACT_DEL_GTP:    
+    case OFPACT_OPERATE_GTP:
+    case OFPACT_GTP_TEID: 
+    case OFPACT_GTP_PGW_IP:   
         return 0;
 
     case OFPACT_SET_IPV4_SRC:
@@ -6654,8 +6802,9 @@ get_ofpact_map(enum ofp_version version)
         /* OF1.3+ OFPAT_PUSH_PBB (26) not supported. */
         /* OF1.3+ OFPAT_POP_PBB (27) not supported. */
         { OFPACT_HANDLE_GTP, 28 },
-        { OFPACT_ADD_GTP, 29 },
-        { OFPACT_DEL_GTP, 30 },
+        { OFPACT_OPERATE_GTP, 29 },
+        { OFPACT_GTP_TEID, 30 },
+        { OFPACT_GTP_PGW_IP, 31 },
         { 0, -1 },
     };
 
@@ -6785,8 +6934,9 @@ ofpact_outputs_to_port(const struct ofpact *ofpact, ofp_port_t port)
     case OFPACT_DEBUG_RECIRC:
     case OFPACT_CT:
     case OFPACT_HANDLE_GTP:
-    case OFPACT_ADD_GTP:
-    case OFPACT_DEL_GTP:
+    case OFPACT_OPERATE_GTP:
+    case OFPACT_GTP_TEID:
+    case OFPACT_GTP_PGW_IP:
     default:
         return false;
     }
