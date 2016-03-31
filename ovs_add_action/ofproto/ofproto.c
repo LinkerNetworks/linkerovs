@@ -5309,7 +5309,7 @@ handle_flow_mod(struct ofconn *ofconn, const struct ofp_header *oh)
                 ds_put_format(&results, "%s=", "pgw_ipv4");
                 ds_put_format(&results, IP_FMT, IP_ARGS(pgw_ipv4));
                 VLOG_INFO("Adding GTP rule : %s.", ds_cstr(&results));
-                ds_destroy(&results)
+                ds_destroy(&results);
                 error = 0;
             } else if (a->type == OFPACT_DEL_GTP) {
                 uint32_t gtp_teid = ofpact_get_DEL_GTP(a)->gtp_teid;
@@ -5321,7 +5321,7 @@ handle_flow_mod(struct ofconn *ofconn, const struct ofp_header *oh)
                 ds_put_format(&results, "%s=", "pgw_ipv4");
                 ds_put_format(&results, IP_FMT, IP_ARGS(pgw_ipv4));
                 VLOG_INFO("Deleting GTP rule : %s.", ds_cstr(&results));
-                ds_destroy(&results)
+                ds_destroy(&results);
                 error = 0;                
             }
         }
