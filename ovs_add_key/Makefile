@@ -1361,7 +1361,7 @@ AWK = gawk
 CAPNG_LDADD = 
 CC = $(if $(C),env REAL_CC="gcc -std=gnu99" CHECK="$(SPARSE) -I $(top_srcdir)/include/sparse $(SPARSEFLAGS) $(SPARSE_EXTRA_INCLUDES) " cgcc $(CGCCFLAGS),gcc -std=gnu99)
 CCDEPMODE = depmode=gcc3
-CFLAGS = -g -O0
+CFLAGS = -g -O2
 CGCCFLAGS = -target=x86_64
 CPP = gcc -std=gnu99 -E
 CPPFLAGS = 
