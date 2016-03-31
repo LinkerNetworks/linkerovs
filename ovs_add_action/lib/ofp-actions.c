@@ -413,6 +413,9 @@ ofpact_next_flattened(const struct ofpact *ofpact)
     case OFPACT_CLEAR_ACTIONS:
     case OFPACT_WRITE_METADATA:
     case OFPACT_GOTO_TABLE:
+    case OFPACT_HANDLE_GTP:
+    case OFPACT_ADD_GTP:
+    case OFPACT_DEL_GTP:
         return ofpact_next(ofpact);
 
     case OFPACT_CT:
@@ -5359,6 +5362,9 @@ ofpact_is_set_or_move_action(const struct ofpact *a)
     case OFPACT_SET_TUNNEL:
     case OFPACT_SET_VLAN_PCP:
     case OFPACT_SET_VLAN_VID:
+    case OFPACT_HANDLE_GTP:
+    case OFPACT_ADD_GTP:
+    case OFPACT_DEL_GTP:
         return true;
     case OFPACT_BUNDLE:
     case OFPACT_CLEAR_ACTIONS:
@@ -5429,6 +5435,9 @@ ofpact_is_allowed_in_actions_set(const struct ofpact *a)
     case OFPACT_SET_VLAN_PCP:
     case OFPACT_SET_VLAN_VID:
     case OFPACT_STRIP_VLAN:
+    case OFPACT_HANDLE_GTP:
+    case OFPACT_ADD_GTP:
+    case OFPACT_DEL_GTP:
         return true;
 
     /* In general these actions are excluded because they are not part of
@@ -5668,6 +5677,9 @@ ovs_instruction_type_from_ofpact_type(enum ofpact_type type)
     case OFPACT_SAMPLE:
     case OFPACT_DEBUG_RECIRC:
     case OFPACT_CT:
+    case OFPACT_HANDLE_GTP:
+    case OFPACT_ADD_GTP:
+    case OFPACT_DEL_GTP:
     default:
         return OVSINST_OFPIT11_APPLY_ACTIONS;
     }
@@ -6110,6 +6122,11 @@ ofpact_check__(enum ofputil_protocol *usable_protocols, struct ofpact *a,
 
     case OFPACT_SET_ETH_SRC:
     case OFPACT_SET_ETH_DST:
+        return 0;
+
+    case OFPACT_HANDLE_GTP:
+    case OFPACT_ADD_GTP:
+    case OFPACT_DEL_GTP:    
         return 0;
 
     case OFPACT_SET_IPV4_SRC:
@@ -6636,6 +6653,9 @@ get_ofpact_map(enum ofp_version version)
         { OFPACT_SET_FIELD, 25 },
         /* OF1.3+ OFPAT_PUSH_PBB (26) not supported. */
         /* OF1.3+ OFPAT_POP_PBB (27) not supported. */
+        { OFPACT_HANDLE_GTP, 28 },
+        { OFPACT_ADD_GTP, 29 },
+        { OFPACT_DEL_GTP, 30 },
         { 0, -1 },
     };
 
@@ -6764,6 +6784,9 @@ ofpact_outputs_to_port(const struct ofpact *ofpact, ofp_port_t port)
     case OFPACT_GROUP:
     case OFPACT_DEBUG_RECIRC:
     case OFPACT_CT:
+    case OFPACT_HANDLE_GTP:
+    case OFPACT_ADD_GTP:
+    case OFPACT_DEL_GTP:
     default:
         return false;
     }

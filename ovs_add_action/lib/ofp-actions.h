@@ -63,6 +63,9 @@
                                                                         \
     /* Header changes. */                                               \
     OFPACT(SET_FIELD,       ofpact_set_field,   ofpact, "set_field")    \
+    OFPACT(HANDLE_GTP,      ofpact_handle_gtp,  ofpact, "handle_gtp")    \
+    OFPACT(ADD_GTP,         ofpact_add_gtp,     ofpact, "add_gtp")    \
+    OFPACT(DEL_GTP,         ofpact_del_gtp,     ofpact, "del_gtp")    \
     OFPACT(SET_VLAN_VID,    ofpact_vlan_vid,    ofpact, "set_vlan_vid") \
     OFPACT(SET_VLAN_PCP,    ofpact_vlan_pcp,    ofpact, "set_vlan_pcp") \
     OFPACT(STRIP_VLAN,      ofpact_null,        ofpact, "strip_vlan")   \
@@ -412,6 +415,31 @@ struct ofpact_set_field {
     bool flow_has_vlan;   /* VLAN present at action validation time. */
     union mf_value value;
     union mf_value mask;
+};
+
+/* OFPACT_HANDLE_GTP.
+ *
+ * Used for NXAST_XXXXXX */
+struct ofpact_handle_gtp {
+    struct ofpact ofpact;
+};
+
+/* OFPACT_ADD_GTP.
+ *
+ * Used for NXAST_XXXXXX */
+struct ofpact_add_gtp {
+    struct ofpact ofpact;
+    uint32_t gtp_teid;
+    ovs_be32 pgw_ipv4;
+};
+
+/* OFPACT_DEL_GTP.
+ *
+ * Used for NXAST_XXXXXX */
+struct ofpact_del_gtp {
+    struct ofpact ofpact;
+    uint32_t gtp_teid;
+    ovs_be32 pgw_ipv4;
 };
 
 /* OFPACT_PUSH_VLAN/MPLS/PBB

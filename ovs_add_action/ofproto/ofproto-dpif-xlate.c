@@ -4225,6 +4225,9 @@ recirc_unroll_actions(const struct ofpact *ofpacts, size_t ofpacts_len,
         case OFPACT_SAMPLE:
         case OFPACT_DEBUG_RECIRC:
         case OFPACT_CT:
+        case OFPACT_HANDLE_GTP:
+        case OFPACT_ADD_GTP:
+        case OFPACT_DEL_GTP:
             /* These may not generate PACKET INs. */
             break;
 
@@ -4460,6 +4463,11 @@ do_xlate_actions(const struct ofpact *ofpacts, size_t ofpacts_len,
                 memset(&wc->masks.nw_dst, 0xff, sizeof wc->masks.nw_dst);
                 flow->nw_dst = ofpact_get_SET_IPV4_DST(a)->ipv4;
             }
+            break;
+//XXXXXX
+
+	case OFPACT_HANDLE_GTP:
+            VLOG_INFO("OFPACT_HANDLE_GTP");
             break;
 
         case OFPACT_SET_IP_DSCP:
