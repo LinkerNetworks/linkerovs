@@ -209,6 +209,24 @@ enum ofp_raw_action_type {
     /* OF1.5+(25): struct ofp12_action_set_field, ... */
     OFPAT_RAW15_SET_FIELD,
 
+    /* OF1.0(28): void. */
+    OFPAT_RAW10_HANDLE_GTP,
+    /* OF1.0(29): uint8_t. */
+    OFPAT_RAW10_OPERATE_GTP,
+    /* OF1.0(30): uint32_t. */
+    OFPAT_RAW10_GTP_TEID,
+    /* OF1.0(31): ovs_be32. */
+    OFPAT_RAW10_GTP_PGW_IP,
+
+    /* OF1.1(28): void. */
+    OFPAT_RAW11_HANDLE_GTP,
+    /* OF1.1(29): uint8_t. */
+    OFPAT_RAW11_OPERATE_GTP,
+    /* OF1.1(30): uint32_t. */
+    OFPAT_RAW11_GTP_TEID,
+    /* OF1.1(31): ovs_be32. */
+    OFPAT_RAW11_GTP_PGW_IP,
+
     /* OF1.2-1.4(28): void. */
     OFPAT_RAW12_HANDLE_GTP,
     /* OF1.2-1.4(29): uint8_t. */
@@ -1410,6 +1428,20 @@ format_STRIP_VLAN(const struct ofpact_null *a, struct ds *s)
 
 /* handle gtp actions. */
 static enum ofperr
+decode_OFPAT_RAW10_HANDLE_GTP(struct ofpbuf *out)
+{
+    ofpact_put_HANDLE_GTP(out)->ofpact.raw = OFPAT_RAW10_HANDLE_GTP;
+    return 0;
+}
+
+static enum ofperr
+decode_OFPAT_RAW11_HANDLE_GTP(struct ofpbuf *out)
+{
+    ofpact_put_HANDLE_GTP(out)->ofpact.raw = OFPAT_RAW11_HANDLE_GTP;
+    return 0;
+}
+
+static enum ofperr
 decode_OFPAT_RAW12_HANDLE_GTP(struct ofpbuf *out)
 {
     ofpact_put_HANDLE_GTP(out)->ofpact.raw = OFPAT_RAW12_HANDLE_GTP;
@@ -1420,14 +1452,20 @@ static void
 encode_HANDLE_GTP(const struct ofpact_null *null OVS_UNUSED,
                   enum ofp_version ofp_version, struct ofpbuf *out)
 {
-    put_OFPAT12_HANDLE_GTP(out);
+    if (ofp_version == OFP10_VERSION) {
+        put_OFPAT10_HANDLE_GTP(out);
+    } else if (ofp_version == OFP11_VERSION) {
+        put_OFPAT11_HANDLE_GTP(out);
+    } else {
+        put_OFPAT12_HANDLE_GTP(out);
+    }
 }
 
 static char * OVS_WARN_UNUSED_RESULT
 parse_HANDLE_GTP(char *arg OVS_UNUSED, struct ofpbuf *ofpacts,
                  enum ofputil_protocol *usable_protocols OVS_UNUSED)
 {
-    ofpact_put_HANDLE_GTP(ofpacts)->ofpact.raw = OFPAT_RAW12_HANDLE_GTP;
+    ofpact_put_HANDLE_GTP(ofpacts)->ofpact.raw = OFPAT_RAW10_HANDLE_GTP;
     return NULL;
 }
 
@@ -1438,6 +1476,24 @@ format_HANDLE_GTP(const struct ofpact_null *a, struct ds *s)
 }
 
 /* Set operate gtp actions. */
+static enum ofperr
+decode_OFPAT_RAW10_OPERATE_GTP(uint8_t operation,
+                              enum ofp_version ofp_version OVS_UNUSED,
+                              struct ofpbuf *out)
+{
+    ofpact_put_OPERATE_GTP(out)->operation = operation;
+    return 0;
+}
+
+static enum ofperr
+decode_OFPAT_RAW11_OPERATE_GTP(uint8_t operation,
+                              enum ofp_version ofp_version OVS_UNUSED,
+                              struct ofpbuf *out)
+{
+    ofpact_put_OPERATE_GTP(out)->operation = operation;
+    return 0;
+}
+
 static enum ofperr
 decode_OFPAT_RAW12_OPERATE_GTP(uint8_t operation,
                               enum ofp_version ofp_version OVS_UNUSED,
@@ -1451,10 +1507,12 @@ static void
 encode_OPERATE_GTP(const struct ofpact_operate_gtp *operation,
                   enum ofp_version ofp_version, struct ofpbuf *out)
 {
-    if (ofp_version > OFP11_VERSION) {
-        put_OFPAT12_OPERATE_GTP(out, operation->operation);
+    if (ofp_version == OFP10_VERSION) {
+        put_OFPAT10_OPERATE_GTP(out, operation->operation);
+    } else if (ofp_version == OFP11_VERSION) {
+        put_OFPAT11_OPERATE_GTP(out, operation->operation);
     } else {
-        /* XXX */
+        put_OFPAT12_OPERATE_GTP(out, operation->operation);
     }
 }
 
@@ -1703,6 +1761,24 @@ format_SET_IPV4_DST(const struct ofpact_ipv4 *a, struct ds *s)
 
 /* Set gtp pgw ip actions. */
 static enum ofperr
+decode_OFPAT_RAW10_GTP_PGW_IP(ovs_be32 gtp_pgw_ip,
+                            enum ofp_version ofp_version OVS_UNUSED,
+                            struct ofpbuf *out)
+{
+    ofpact_put_GTP_PGW_IP(out)->gtp_pgw_ip = gtp_pgw_ip;
+    return 0;
+}
+
+static enum ofperr
+decode_OFPAT_RAW11_GTP_PGW_IP(ovs_be32 gtp_pgw_ip,
+                            enum ofp_version ofp_version OVS_UNUSED,
+                            struct ofpbuf *out)
+{
+    ofpact_put_GTP_PGW_IP(out)->gtp_pgw_ip = gtp_pgw_ip;
+    return 0;
+}
+
+static enum ofperr
 decode_OFPAT_RAW12_GTP_PGW_IP(ovs_be32 gtp_pgw_ip,
                             enum ofp_version ofp_version OVS_UNUSED,
                             struct ofpbuf *out)
@@ -1716,7 +1792,13 @@ encode_GTP_PGW_IP(const struct ofpact_gtp_pgw_ip *gtp_pgw_ip,
                     enum ofp_version ofp_version, struct ofpbuf *out)
 {
     ovs_be32 addr = gtp_pgw_ip->gtp_pgw_ip;
-    put_OFPAT12_GTP_PGW_IP(out, ntohl(addr));
+    if (ofp_version == OFP10_VERSION) {
+        put_OFPAT10_GTP_PGW_IP(out, ntohl(addr));
+    } else if (ofp_version == OFP11_VERSION) {
+        put_OFPAT11_GTP_PGW_IP(out, ntohl(addr));
+    } else {
+        put_OFPAT12_GTP_PGW_IP(out, ntohl(addr));
+    }
 }
 
 static char * OVS_WARN_UNUSED_RESULT
@@ -1729,7 +1811,7 @@ parse_GTP_PGW_IP(char *arg, struct ofpbuf *ofpacts,
 static void
 format_GTP_PGW_IP(const struct ofpact_gtp_pgw_ip *a, struct ds *s)
 {
-    ds_put_format(s, "gtp_pgw_ip:"IP_FMT, IP_ARGS(a->gtp_pgw_ip));
+    ds_put_format(s, "gtp_pgw_ip:"IP_FMT, IP_ARGS(ntohl(a->gtp_pgw_ip)));
 }
 
 /* Set IPv4/v6 TOS actions. */
@@ -3484,6 +3566,24 @@ format_SET_TUNNEL(const struct ofpact_tunnel *a, struct ds *s)
 
 /* Set gtp teid actions. */
 static enum ofperr
+decode_OFPAT_RAW10_GTP_TEID(uint32_t gtp_teid,
+                         enum ofp_version ofp_version OVS_UNUSED,
+                         struct ofpbuf *out)
+{
+    ofpact_put_GTP_TEID(out)->gtp_teid = gtp_teid;
+    return 0;
+}
+
+static enum ofperr
+decode_OFPAT_RAW11_GTP_TEID(uint32_t gtp_teid,
+                         enum ofp_version ofp_version OVS_UNUSED,
+                         struct ofpbuf *out)
+{
+    ofpact_put_GTP_TEID(out)->gtp_teid = gtp_teid;
+    return 0;
+}
+
+static enum ofperr
 decode_OFPAT_RAW12_GTP_TEID(uint32_t gtp_teid,
                          enum ofp_version ofp_version OVS_UNUSED,
                          struct ofpbuf *out)
@@ -3496,7 +3596,13 @@ static void
 encode_GTP_TEID(const struct ofpact_gtp_teid *gtp_teid,
              enum ofp_version ofp_version, struct ofpbuf *out)
 {
-    put_OFPAT12_GTP_TEID(out, gtp_teid->gtp_teid);
+    if (ofp_version == OFP10_VERSION) {
+        put_OFPAT10_GTP_TEID(out, gtp_teid->gtp_teid);
+    } else if (ofp_version == OFP11_VERSION) {
+        put_OFPAT11_GTP_TEID(out, gtp_teid->gtp_teid);
+    } else {
+        put_OFPAT12_GTP_TEID(out, gtp_teid->gtp_teid);
+    }
 }
 
 static char * OVS_WARN_UNUSED_RESULT
@@ -6750,6 +6856,10 @@ get_ofpact_map(enum ofp_version version)
         { OFPACT_SET_L4_SRC_PORT, 9 },
         { OFPACT_SET_L4_DST_PORT, 10 },
         { OFPACT_ENQUEUE, 11 },
+        { OFPACT_HANDLE_GTP, 28 },
+        { OFPACT_OPERATE_GTP, 29 },
+        { OFPACT_GTP_TEID, 30 },
+        { OFPACT_GTP_PGW_IP, 31 },
         { 0, -1 },
     };
 
@@ -6780,6 +6890,10 @@ get_ofpact_map(enum ofp_version version)
         { OFPACT_GROUP, 22 },
         { OFPACT_SET_IP_TTL, 23 },
         { OFPACT_DEC_TTL, 24 },
+        { OFPACT_HANDLE_GTP, 28 },
+        { OFPACT_OPERATE_GTP, 29 },
+        { OFPACT_GTP_TEID, 30 },
+        { OFPACT_GTP_PGW_IP, 31 },
         { 0, -1 },
     };
 

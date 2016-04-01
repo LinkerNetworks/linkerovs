@@ -420,7 +420,7 @@ struct ofpact_set_field {
 
 /* OFPACT_OPERATE_GTP.
  *
- * Used for OFPAT12_OPERATE_GTP */
+ * Used for OFPAT10_OPERATE_GTP, OFPAT11_OPERATE_GTP, OFPAT12_OPERATE_GTP  */
 struct ofpact_operate_gtp {
     struct ofpact ofpact;
     uint8_t operation;
@@ -428,7 +428,7 @@ struct ofpact_operate_gtp {
 
 /* OFPACT_GTP_TEID.
  *
- * Used for OFPAT12_GTP_TEID */
+ * Used for OFPAT10_GTP_TEID, OFPAT11_GTP_TEID, OFPAT12_GTP_TEID */
 struct ofpact_gtp_teid {
     struct ofpact ofpact;
     uint32_t gtp_teid;
@@ -436,7 +436,7 @@ struct ofpact_gtp_teid {
 
 /* OFPACT_GTP_PGW_IP.
  *
- * Used for OFPAT12_GTP_PGW_IP */
+ * Used for OFPAT10_GTP_PGW_IP, OFPAT11_GTP_PGW_IP, OFPAT12_GTP_PGW_IP */
 struct ofpact_gtp_pgw_ip {
     struct ofpact ofpact;
     ovs_be32 gtp_pgw_ip;
