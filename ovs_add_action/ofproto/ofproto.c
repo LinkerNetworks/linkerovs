@@ -5315,7 +5315,7 @@ handle_flow_mod(struct ofconn *ofconn, const struct ofp_header *oh)
         if (operation != 0 && gtp_teid != 0 && gtp_pgw_ip != 0) {
             struct ds results;
             ds_init(&results);
-            ds_put_format(&results, "operate_gtp=%#"PRIu8",", operation);
+            ds_put_format(&results, "operate_gtp=%"PRIu8",", operation);
             ds_put_format(&results, "gtp_teid=%#"PRIx32",", gtp_teid);
             ds_put_format(&results, "%s=", "gtp_pgw_ip");
             ds_put_format(&results, IP_FMT, IP_ARGS(ntohl(gtp_pgw_ip)));

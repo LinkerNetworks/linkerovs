@@ -1470,7 +1470,7 @@ parse_HANDLE_GTP(char *arg OVS_UNUSED, struct ofpbuf *ofpacts,
 }
 
 static void
-format_HANDLE_GTP(const struct ofpact_null *a, struct ds *s)
+format_HANDLE_GTP(const struct ofpact_null *a OVS_UNUSED, struct ds *s)
 {
     ds_put_cstr(s, "handle_gtp");
 }
