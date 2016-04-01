@@ -4467,7 +4467,7 @@ do_xlate_actions(const struct ofpact *ofpacts, size_t ofpacts_len,
             break;
 //XXXXXX
 
-        case OFPACT_HANDLE_GTP:
+        case OFPACT_OPERATE_GTP:
         case OFPACT_GTP_TEID:
         case OFPACT_GTP_PGW_IP:
             VLOG_INFO("SHOULD NOT BE HERE");
