@@ -5297,35 +5297,33 @@ handle_flow_mod(struct ofconn *ofconn, const struct ofp_header *oh)
     
     if (!error) {
         //add gtp parameters to data structures, but do not add the flow to the table
+        uint8_t operation = 0;
+        uint32_t gtp_teid = 0;
+        ovs_be32 gtp_pgw_ip = 0;
         const struct ofpact *a;
         OFPACT_FOR_EACH_FLATTENED (a, ofm.fm.ofpacts, ofm.fm.ofpacts_len) {
-            if (a->type == OFPACT_ADD_GTP) {
-                uint32_t gtp_teid = ofpact_get_ADD_GTP(a)->gtp_teid;
-                ovs_be32 pgw_ipv4 = ofpact_get_ADD_GTP(a)->pgw_ipv4;
-                struct ds results;
-                ds_init(&results);
-                ds_put_format(&results, "gtp_teid=%#"PRIx32",", gtp_teid);
-                ds_put_char(&results, ',');
-                ds_put_format(&results, "%s=", "pgw_ipv4");
-                ds_put_format(&results, IP_FMT, IP_ARGS(pgw_ipv4));
-                VLOG_INFO("Adding GTP rule : %s.", ds_cstr(&results));
-                ds_destroy(&results);
-                error = 0;
-            } else if (a->type == OFPACT_DEL_GTP) {
-                uint32_t gtp_teid = ofpact_get_DEL_GTP(a)->gtp_teid;
-                ovs_be32 pgw_ipv4 = ofpact_get_DEL_GTP(a)->pgw_ipv4;
-                struct ds results;
-                ds_init(&results);
-                ds_put_format(&results, "gtp_teid=%#"PRIx32",", gtp_teid);
-                ds_put_char(&results, ',');
-                ds_put_format(&results, "%s=", "pgw_ipv4");
-                ds_put_format(&results, IP_FMT, IP_ARGS(pgw_ipv4));
-                VLOG_INFO("Deleting GTP rule : %s.", ds_cstr(&results));
-                ds_destroy(&results);
-                error = 0;                
+            if (a->type == OFPACT_OPERATE_GTP){
+                operation = ofpact_get_OPERATE_GTP(a)->operation;
             }
+            if (a->type == OFPACT_GTP_TEID){
+                gtp_teid = ofpact_get_GTP_TEID(a)->gtp_teid;
+            }
+            if (a->type == OFPACT_GTP_PGW_IP){
+                gtp_pgw_ip = ofpact_get_GTP_PGW_IP(a)->gtp_pgw_ip;
+            } 
         }
-	goto exit_free_ofpacts;
+        if (operation != 0 && gtp_teid != 0 && gtp_pgw_ip != 0) {
+            struct ds results;
+            ds_init(&results);
+            ds_put_format(&results, "operate_gtp=%#"PRIu8",", operation);
+            ds_put_format(&results, "gtp_teid=%#"PRIx32",", gtp_teid);
+            ds_put_format(&results, "%s=", "gtp_pgw_ip");
+            ds_put_format(&results, IP_FMT, IP_ARGS(gtp_pgw_ip));
+            VLOG_INFO("Adding GTP rule : %s.", ds_cstr(&results));
+            ds_destroy(&results);
+            error = 0;
+            goto exit_free_ofpacts;
+        }
     }
 
     if (!error) {
