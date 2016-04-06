@@ -4229,6 +4229,8 @@ recirc_unroll_actions(const struct ofpact *ofpacts, size_t ofpacts_len,
         case OFPACT_OPERATE_GTP:
         case OFPACT_GTP_TEID:
         case OFPACT_GTP_PGW_IP:
+        case OFPACT_OVS_ID:
+        case OFPACT_OVS_TOTAL:
             /* These may not generate PACKET INs. */
             break;
 
@@ -4470,6 +4472,8 @@ do_xlate_actions(const struct ofpact *ofpacts, size_t ofpacts_len,
         case OFPACT_OPERATE_GTP:
         case OFPACT_GTP_TEID:
         case OFPACT_GTP_PGW_IP:
+        case OFPACT_OVS_ID:
+        case OFPACT_OVS_TOTAL:
             VLOG_INFO("SHOULD NOT BE HERE");
             break;
 	case OFPACT_HANDLE_GTP:

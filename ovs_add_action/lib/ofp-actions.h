@@ -67,6 +67,8 @@
     OFPACT(OPERATE_GTP,     ofpact_operate_gtp, ofpact, "operate_gtp")    \
     OFPACT(GTP_TEID,        ofpact_gtp_teid,    ofpact, "gtp_teid")    \
     OFPACT(GTP_PGW_IP,      ofpact_gtp_pgw_ip,  ofpact, "gtp_pgw_ip")    \
+    OFPACT(OVS_ID,          ofpact_ovs_id,      ofpact, "ovs_id")    \
+    OFPACT(OVS_TOTAL,       ofpact_ovs_total,   ofpact, "ovs_total")    \
     OFPACT(SET_VLAN_VID,    ofpact_vlan_vid,    ofpact, "set_vlan_vid") \
     OFPACT(SET_VLAN_PCP,    ofpact_vlan_pcp,    ofpact, "set_vlan_pcp") \
     OFPACT(STRIP_VLAN,      ofpact_null,        ofpact, "strip_vlan")   \
@@ -440,6 +442,22 @@ struct ofpact_gtp_teid {
 struct ofpact_gtp_pgw_ip {
     struct ofpact ofpact;
     ovs_be32 gtp_pgw_ip;
+};
+
+/* OFPACT_OVS_ID.
+ *
+ * Used for OFPAT10_OVS_ID, OFPAT11_OVS_ID, OFPAT12_OVS_ID */
+struct ofpact_ovs_id {
+    struct ofpact ofpact;
+    uint16_t ovs_id;
+};
+
+/* OFPACT_OVS_TOTAL.
+ *
+ * Used for OFPAT10_OVS_TOTAL, OFPAT11_OVS_TOTAL, OFPAT12_OVS_TOTAL */
+struct ofpact_ovs_total {
+    struct ofpact ofpact;
+    uint16_t ovs_total;
 };
 
 /* OFPACT_PUSH_VLAN/MPLS/PBB
