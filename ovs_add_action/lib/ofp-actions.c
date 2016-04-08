@@ -447,6 +447,8 @@ ofpact_next_flattened(const struct ofpact *ofpact)
     case OFPACT_GTP_PGW_IP:
     case OFPACT_OVS_ID:
     case OFPACT_OVS_TOTAL:
+    case OFPACT_GTP_PGW_PORT:
+    case OFPACT_OVS_PHY_PORT:
         return ofpact_next(ofpact);
 
     case OFPACT_CT:
@@ -1585,7 +1587,7 @@ static char * OVS_WARN_UNUSED_RESULT
 parse_OVS_ID(char *arg, struct ofpbuf *ofpacts,
                   enum ofputil_protocol *usable_protocols OVS_UNUSED)
 {
-    uint32_t ovs_id;
+    uint16_t ovs_id;
     char *error;
 
     error = str_to_u16(arg, "ovs_id", &ovs_id);
@@ -1649,7 +1651,7 @@ static char * OVS_WARN_UNUSED_RESULT
 parse_OVS_TOTAL(char *arg, struct ofpbuf *ofpacts,
                   enum ofputil_protocol *usable_protocols OVS_UNUSED)
 {
-    uint32_t ovs_total;
+    uint16_t ovs_total;
     char *error;
 
     error = str_to_u16(arg, "ovs_total", &ovs_total);
@@ -1665,6 +1667,134 @@ static void
 format_OVS_TOTAL(const struct ofpact_ovs_total *a, struct ds *s)
 {
     ds_put_format(s, "ovs_total:%d", a->ovs_total);
+}
+
+
+/* Set operate gtp pgw port actions. */
+static enum ofperr
+decode_OFPAT_RAW10_GTP_PGW_PORT(uint16_t gtp_pgw_port,
+                              enum ofp_version ofp_version OVS_UNUSED,
+                              struct ofpbuf *out)
+{
+    ofpact_put_GTP_PGW_PORT(out)->gtp_pgw_port = gtp_pgw_port;
+    return 0;
+}
+
+static enum ofperr
+decode_OFPAT_RAW11_GTP_PGW_PORT(uint16_t gtp_pgw_port,
+                              enum ofp_version ofp_version OVS_UNUSED,
+                              struct ofpbuf *out)
+{
+    ofpact_put_GTP_PGW_PORT(out)->gtp_pgw_port = gtp_pgw_port;
+    return 0;
+}
+
+static enum ofperr
+decode_OFPAT_RAW12_GTP_PGW_PORT(uint16_t gtp_pgw_port,
+                              enum ofp_version ofp_version OVS_UNUSED,
+                              struct ofpbuf *out)
+{
+    ofpact_put_GTP_PGW_PORT(out)->gtp_pgw_port = gtp_pgw_port;
+    return 0;
+}
+
+static void
+encode_GTP_PGW_PORT(const struct ofpact_gtp_pgw_port *gtp_pgw_port,
+                  enum ofp_version ofp_version, struct ofpbuf *out)
+{
+    if (ofp_version == OFP10_VERSION) {
+        put_OFPAT10_GTP_PGW_PORT(out, gtp_pgw_port->gtp_pgw_port);
+    } else if (ofp_version == OFP11_VERSION) {
+        put_OFPAT11_GTP_PGW_PORT(out, gtp_pgw_port->gtp_pgw_port);
+    } else {
+        put_OFPAT12_GTP_PGW_PORT(out, gtp_pgw_port->gtp_pgw_port);
+    }
+}
+
+static char * OVS_WARN_UNUSED_RESULT
+parse_GTP_PGW_PORT(char *arg, struct ofpbuf *ofpacts,
+                  enum ofputil_protocol *usable_protocols OVS_UNUSED)
+{
+    uint16_t gtp_pgw_port;
+    char *error;
+
+    error = str_to_u16(arg, "gtp_pgw_port", &gtp_pgw_port);
+    if (error) {
+        return error;
+    }
+
+    ofpact_put_GTP_PGW_PORT(ofpacts)->gtp_pgw_port = gtp_pgw_port;
+    return NULL;
+}
+
+static void
+format_GTP_PGW_PORT(const struct ofpact_gtp_pgw_port *a, struct ds *s)
+{
+    ds_put_format(s, "gtp_pgw_port:%d", a->gtp_pgw_port);
+}
+
+
+/* Set operate ovs phy port actions. */
+static enum ofperr
+decode_OFPAT_RAW10_OVS_PHY_PORT(uint16_t ovs_phy_port,
+                              enum ofp_version ofp_version OVS_UNUSED,
+                              struct ofpbuf *out)
+{
+    ofpact_put_OVS_PHY_PORT(out)->ovs_phy_port = ovs_phy_port;
+    return 0;
+}
+
+static enum ofperr
+decode_OFPAT_RAW11_OVS_PHY_PORT(uint16_t ovs_phy_port,
+                              enum ofp_version ofp_version OVS_UNUSED,
+                              struct ofpbuf *out)
+{
+    ofpact_put_OVS_PHY_PORT(out)->ovs_phy_port = ovs_phy_port;
+    return 0;
+}
+
+static enum ofperr
+decode_OFPAT_RAW12_OVS_PHY_PORT(uint16_t ovs_phy_port,
+                              enum ofp_version ofp_version OVS_UNUSED,
+                              struct ofpbuf *out)
+{
+    ofpact_put_OVS_PHY_PORT(out)->ovs_phy_port = ovs_phy_port;
+    return 0;
+}
+
+static void
+encode_OVS_PHY_PORT(const struct ofpact_ovs_phy_port *ovs_phy_port,
+                  enum ofp_version ofp_version, struct ofpbuf *out)
+{
+    if (ofp_version == OFP10_VERSION) {
+        put_OFPAT10_OVS_PHY_PORT(out, ovs_phy_port->ovs_phy_port);
+    } else if (ofp_version == OFP11_VERSION) {
+        put_OFPAT11_OVS_PHY_PORT(out, ovs_phy_port->ovs_phy_port);
+    } else {
+        put_OFPAT12_OVS_PHY_PORT(out, ovs_phy_port->ovs_phy_port);
+    }
+}
+
+static char * OVS_WARN_UNUSED_RESULT
+parse_OVS_PHY_PORT(char *arg, struct ofpbuf *ofpacts,
+                  enum ofputil_protocol *usable_protocols OVS_UNUSED)
+{
+    uint16_t ovs_phy_port;
+    char *error;
+
+    error = str_to_u16(arg, "ovs_phy_port", &ovs_phy_port);
+    if (error) {
+        return error;
+    }
+
+    ofpact_put_OVS_PHY_PORT(ofpacts)->ovs_phy_port = ovs_phy_port;
+    return NULL;
+}
+
+static void
+format_OVS_PHY_PORT(const struct ofpact_ovs_phy_port *a, struct ds *s)
+{
+    ds_put_format(s, "ovs_phy_port:%d", a->ovs_phy_port);
 }
 
 
@@ -5748,6 +5878,8 @@ ofpact_is_set_or_move_action(const struct ofpact *a)
     case OFPACT_GTP_PGW_IP:
     case OFPACT_OVS_ID:
     case OFPACT_OVS_TOTAL:
+    case OFPACT_GTP_PGW_PORT:
+    case OFPACT_OVS_PHY_PORT:
         return true;
     case OFPACT_BUNDLE:
     case OFPACT_CLEAR_ACTIONS:
@@ -5824,6 +5956,8 @@ ofpact_is_allowed_in_actions_set(const struct ofpact *a)
     case OFPACT_GTP_PGW_IP:
     case OFPACT_OVS_ID:
     case OFPACT_OVS_TOTAL:
+    case OFPACT_GTP_PGW_PORT:
+    case OFPACT_OVS_PHY_PORT:
         return true;
 
     /* In general these actions are excluded because they are not part of
@@ -6069,6 +6203,8 @@ ovs_instruction_type_from_ofpact_type(enum ofpact_type type)
     case OFPACT_GTP_PGW_IP:
     case OFPACT_OVS_ID:
     case OFPACT_OVS_TOTAL:
+    case OFPACT_GTP_PGW_PORT:
+    case OFPACT_OVS_PHY_PORT:
     default:
         return OVSINST_OFPIT11_APPLY_ACTIONS;
     }
@@ -6998,8 +7134,10 @@ get_ofpact_map(enum ofp_version version)
         { OFPACT_GTP_PGW_IP, 31 },
         { OFPACT_OVS_ID, 32},
         { OFPACT_OVS_TOTAL, 33},
+        { OFPACT_GTP_PGW_PORT, 34},
+        { OFPACT_OVS_PHY_PORT, 35},
         { 0, -1 },
-    };
+    };, 34
 
     /* OpenFlow 1.1 actions. */
     static const struct ofpact_map of11[] = {
@@ -7034,6 +7172,8 @@ get_ofpact_map(enum ofp_version version)
         { OFPACT_GTP_PGW_IP, 31 },
         { OFPACT_OVS_ID, 32},
         { OFPACT_OVS_TOTAL, 33},
+        { OFPACT_GTP_PGW_PORT, 34},
+        { OFPACT_OVS_PHY_PORT, 35},
         { 0, -1 },
     };
 
@@ -7061,6 +7201,8 @@ get_ofpact_map(enum ofp_version version)
         { OFPACT_GTP_PGW_IP, 31 },
         { OFPACT_OVS_ID, 32},
         { OFPACT_OVS_TOTAL, 33},
+        { OFPACT_GTP_PGW_PORT, 34},
+        { OFPACT_OVS_PHY_PORT, 35},
         { 0, -1 },
     };
 
@@ -7195,6 +7337,8 @@ ofpact_outputs_to_port(const struct ofpact *ofpact, ofp_port_t port)
     case OFPACT_GTP_PGW_IP:
     case OFPACT_OVS_ID:
     case OFPACT_OVS_TOTAL:
+    case OFPACT_GTP_PGW_PORT:
+    case OFPACT_OVS_PHY_PORT:
     default:
         return false;
     }

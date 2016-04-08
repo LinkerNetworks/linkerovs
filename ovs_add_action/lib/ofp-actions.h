@@ -69,6 +69,8 @@
     OFPACT(GTP_PGW_IP,      ofpact_gtp_pgw_ip,  ofpact, "gtp_pgw_ip")    \
     OFPACT(OVS_ID,          ofpact_ovs_id,      ofpact, "ovs_id")    \
     OFPACT(OVS_TOTAL,       ofpact_ovs_total,   ofpact, "ovs_total")    \
+    OFPACT(GTP_PGW_PORT,    ofpact_gtp_pgw_port,ofpact, "gtp_pgw_port")    \
+    OFPACT(OVS_PHY_PORT,    ofpact_ovs_phy_port,ofpact, "ovs_phy_port")    \
     OFPACT(SET_VLAN_VID,    ofpact_vlan_vid,    ofpact, "set_vlan_vid") \
     OFPACT(SET_VLAN_PCP,    ofpact_vlan_pcp,    ofpact, "set_vlan_pcp") \
     OFPACT(STRIP_VLAN,      ofpact_null,        ofpact, "strip_vlan")   \
@@ -458,6 +460,22 @@ struct ofpact_ovs_id {
 struct ofpact_ovs_total {
     struct ofpact ofpact;
     uint16_t ovs_total;
+};
+
+/* OFPACT_GTP_PGW_PORT.
+ *
+ * Used for OFPAT10_GTP_PGW_PORT, OFPAT11_GTP_PGW_PORT, OFPAT12_GTP_PGW_PORT */
+struct ofpact_gtp_pgw_port {
+    struct ofpact ofpact;
+    uint16_t gtp_pgw_port;
+};
+
+/* OFPACT_OVS_PHY_PORT.
+ *
+ * Used for OFPAT10_OVS_PHY_PORT, OFPAT11_OVS_PHY_PORT, OFPAT12_OVS_PHY_PORT */
+struct ofpact_ovs_phy_port {
+    struct ofpact ofpact;
+    uint16_t ovs_phy_port;
 };
 
 /* OFPACT_PUSH_VLAN/MPLS/PBB

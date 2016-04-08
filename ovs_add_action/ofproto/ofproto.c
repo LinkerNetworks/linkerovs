@@ -5303,6 +5303,8 @@ handle_flow_mod(struct ofconn *ofconn, const struct ofp_header *oh)
         ovs_be32 gtp_pgw_ip = 0;
         uint16_t ovs_id = 0;
         uint16_t ovs_total = 0;
+        uint16_t gtp_pgw_port = 0;
+        uint16_t ovs_phy_port = 0;
         const struct ofpact *a;
         OFPACT_FOR_EACH_FLATTENED (a, ofm.fm.ofpacts, ofm.fm.ofpacts_len) {
             if (a->type == OFPACT_OPERATE_GTP){
@@ -5320,12 +5322,18 @@ handle_flow_mod(struct ofconn *ofconn, const struct ofp_header *oh)
             if (a->type == OFPACT_OVS_TOTAL){
                 ovs_total = ofpact_get_OVS_TOTAL(a)->ovs_total;
             }
+            if (a->type == OFPACT_GTP_PGW_PORT){
+                gtp_pgw_port = ofpact_get_GTP_PGW_PORT(a)->gtp_pgw_port;
+            }
+            if (a->type == OFPACT_OVS_PHY_PORT){
+                ovs_phy_port = ofpact_get_OVS_PHY_PORT(a)->ovs_phy_port;
+            }
         }
         if (operation != 0) {
             switch(operation) {
                 case 1: 
                     VLOG_INFO("Adding a pgw.");
-                    gtp_manager_add_pgw(gtp_pgw_ip);
+                    gtp_manager_add_pgw(gtp_pgw_ip, gtp_pgw_port);
                     break;
                 case 2:
                     VLOG_INFO("Deleting a pgw.");
@@ -5333,13 +5341,15 @@ handle_flow_mod(struct ofconn *ofconn, const struct ofp_header *oh)
                     break;
                 case 3:
                     VLOG_INFO("Set ovs id and total number.");
-                    gtp_manager_set_ovs_id(ovs_id, ovs_total);
+                    gtp_manager_set_ovs_id(ovs_id, ovs_total, ovs_phy_port);
             }
             struct ds results;
             ds_init(&results);
             ds_put_format(&results, "operate_gtp=%"PRIu8",", operation);
             ds_put_format(&results, "ovs_id=%"PRIu16",", ovs_id);
             ds_put_format(&results, "ovs_total=%"PRIu16",", ovs_total);
+            ds_put_format(&results, "gtp_pgw_port=%"PRIu16",", gtp_pgw_port);
+            ds_put_format(&results, "ovs_phy_port=%"PRIu16",", ovs_phy_port);
             ds_put_format(&results, "gtp_teid=%#"PRIx32",", gtp_teid);
             ds_put_format(&results, "%s=", "gtp_pgw_ip");
             ds_put_format(&results, IP_FMT, IP_ARGS(ntohl(gtp_pgw_ip)));

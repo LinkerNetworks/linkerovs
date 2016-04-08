@@ -4231,6 +4231,8 @@ recirc_unroll_actions(const struct ofpact *ofpacts, size_t ofpacts_len,
         case OFPACT_GTP_PGW_IP:
         case OFPACT_OVS_ID:
         case OFPACT_OVS_TOTAL:
+        case OFPACT_GTP_PGW_PORT:
+        case OFPACT_OVS_PHY_PORT:
             /* These may not generate PACKET INs. */
             break;
 
@@ -4474,10 +4476,28 @@ do_xlate_actions(const struct ofpact *ofpacts, size_t ofpacts_len,
         case OFPACT_GTP_PGW_IP:
         case OFPACT_OVS_ID:
         case OFPACT_OVS_TOTAL:
+        case OFPACT_GTP_PGW_PORT:
+        case OFPACT_OVS_PHY_PORT: 
             VLOG_INFO("SHOULD NOT BE HERE");
             break;
 	case OFPACT_HANDLE_GTP:
             VLOG_INFO("OFPACT_HANDLE_GTP");
+            CHECK_MPLS_RECIRCULATION();
+            if (maybe_gtpc_message(flow)){
+                struct gtpc_message * gtpcmsg = NULL;
+                gtpcmsg = parse_gtpc_message(flow, ctx->xin->packet);
+                if(gtpcmsg != NULL) {
+                    handle_gtpc_message(flow, gtpcmsg);
+                    free(gtpcmsg);                    
+                }
+            } else if (maybe_gtpu_message(flow)){
+                struct gtpu_message * gtpumsg = NULL;
+                gtpumsg = parse_gtpu_message(flow, ctx->xin->packet);
+                if(gtpumsg != NULL) {
+                    handle_gtpu_message(flow, gtpumsg);
+                    free(gtpcmsg);                    
+                }
+            }
             break;
 
         case OFPACT_SET_IP_DSCP:
