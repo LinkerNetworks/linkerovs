@@ -64,6 +64,7 @@
     /* Header changes. */                                               \
     OFPACT(SET_FIELD,       ofpact_set_field,   ofpact, "set_field")    \
     OFPACT(HANDLE_GTP,      ofpact_null,        ofpact, "handle_gtp")    \
+    OFPACT(HANDLE_PGW_SGI,  ofpact_null,        ofpact, "handle_pgw_sgi")    \
     OFPACT(OPERATE_GTP,     ofpact_operate_gtp, ofpact, "operate_gtp")    \
     OFPACT(GTP_TEID,        ofpact_gtp_teid,    ofpact, "gtp_teid")    \
     OFPACT(GTP_PGW_IP,      ofpact_gtp_pgw_ip,  ofpact, "gtp_pgw_ip")    \
@@ -71,6 +72,8 @@
     OFPACT(OVS_TOTAL,       ofpact_ovs_total,   ofpact, "ovs_total")    \
     OFPACT(GTP_PGW_PORT,    ofpact_gtp_pgw_port,ofpact, "gtp_pgw_port")    \
     OFPACT(OVS_PHY_PORT,    ofpact_ovs_phy_port,ofpact, "ovs_phy_port")    \
+    OFPACT(PGW_SGI_PORT,    ofpact_pgw_sgi_port,ofpact, "pgw_sgi_port")    \
+    OFPACT(PGW_FASTPATH,    ofpact_pgw_fastpath,ofpact, "pgw_fastpath")    \
     OFPACT(SET_VLAN_VID,    ofpact_vlan_vid,    ofpact, "set_vlan_vid") \
     OFPACT(SET_VLAN_PCP,    ofpact_vlan_pcp,    ofpact, "set_vlan_pcp") \
     OFPACT(STRIP_VLAN,      ofpact_null,        ofpact, "strip_vlan")   \
@@ -430,6 +433,14 @@ struct ofpact_operate_gtp {
     uint8_t operation;
 };
 
+/* OFPACT_PGW_FASTPATH.
+ *
+ * Used for OFPAT10_PGW_FASTPATH, OFPAT11_PGW_FASTPATH, OFPAT12_PGW_FASTPATH  */
+struct ofpact_pgw_fastpath {
+    struct ofpact ofpact;
+    uint8_t pgw_fastpath;
+};
+
 /* OFPACT_GTP_TEID.
  *
  * Used for OFPAT10_GTP_TEID, OFPAT11_GTP_TEID, OFPAT12_GTP_TEID */
@@ -477,6 +488,16 @@ struct ofpact_ovs_phy_port {
     struct ofpact ofpact;
     uint16_t ovs_phy_port;
 };
+
+/* OFPACT_PGW_SGI_PORT.
+ *
+ * Used for OFPAT10_PGW_SGI_PORT, OFPAT11_PGW_SGI_PORT, OFPAT12_PGW_SGI_PORT */
+struct ofpact_pgw_sgi_port {
+    struct ofpact ofpact;
+    uint16_t pgw_sgi_port;
+};
+
+
 
 /* OFPACT_PUSH_VLAN/MPLS/PBB
  *

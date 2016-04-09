@@ -5305,6 +5305,7 @@ handle_flow_mod(struct ofconn *ofconn, const struct ofp_header *oh)
         uint16_t ovs_total = 0;
         uint16_t gtp_pgw_port = 0;
         uint16_t ovs_phy_port = 0;
+        uint8_t pgw_fastpath = 0;
         const struct ofpact *a;
         OFPACT_FOR_EACH_FLATTENED (a, ofm.fm.ofpacts, ofm.fm.ofpacts_len) {
             if (a->type == OFPACT_OPERATE_GTP){
@@ -5328,20 +5329,26 @@ handle_flow_mod(struct ofconn *ofconn, const struct ofp_header *oh)
             if (a->type == OFPACT_OVS_PHY_PORT){
                 ovs_phy_port = ofpact_get_OVS_PHY_PORT(a)->ovs_phy_port;
             }
+            if (a->type == OFPACT_PGW_FASTPATH){
+                pgw_fastpath = ofpact_get_PGW_FASTPATH(a)->pgw_fastpath;
+            }
+            if (a->type == OFPACT_PGW_SGI_PORT){
+                pgw_sgi_port = ofpact_get_PGW_SGI_PORT(a)->pgw_sgi_port;
+            }
         }
         if (operation != 0) {
             switch(operation) {
                 case 1: 
                     VLOG_INFO("Adding a pgw.");
-                    gtp_manager_add_pgw(gtp_pgw_ip, gtp_pgw_port);
+                    gtp_manager_add_pgw(gtp_pgw_ip, gtp_pgw_port, pgw_sgi_port);
                     break;
                 case 2:
                     VLOG_INFO("Deleting a pgw.");
                     gtp_manager_del_pgw(gtp_pgw_ip);
                     break;
                 case 3:
-                    VLOG_INFO("Set ovs id and total number.");
-                    gtp_manager_set_ovs_id(ovs_id, ovs_total, ovs_phy_port);
+                    VLOG_INFO("Set global parameters.");
+                    gtp_manager_set_params(ovs_id, ovs_total, ovs_phy_port, pgw_fastpath);
             }
             struct ds results;
             ds_init(&results);
@@ -5350,6 +5357,8 @@ handle_flow_mod(struct ofconn *ofconn, const struct ofp_header *oh)
             ds_put_format(&results, "ovs_total=%"PRIu16",", ovs_total);
             ds_put_format(&results, "gtp_pgw_port=%"PRIu16",", gtp_pgw_port);
             ds_put_format(&results, "ovs_phy_port=%"PRIu16",", ovs_phy_port);
+            ds_put_format(&results, "pgw_sgi_port=%"PRIu16",", pgw_sgi_port);
+            ds_put_format(&results, "pgw_fastpath=%"PRIu8",", pgw_fastpath);
             ds_put_format(&results, "gtp_teid=%#"PRIx32",", gtp_teid);
             ds_put_format(&results, "%s=", "gtp_pgw_ip");
             ds_put_format(&results, IP_FMT, IP_ARGS(ntohl(gtp_pgw_ip)));

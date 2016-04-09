@@ -10,6 +10,7 @@ static struct ovs_mutex mutex;
 static uint16 ovs_id OVS_GUARDED_BY(mutex);
 static uint16 ovs_total OVS_GUARDED_BY(mutex);
 static uint16 ovs_phy_port OVS_GUARDED_BY(mutex);
+static uint8 pgw_fastpath OVS_GUARDED_BY(mutex);
 
 static struct gtp_pgw_node pgw_list[MAX_PGW_PER_NODE];
 static uint16 current;
@@ -17,6 +18,9 @@ static uint16 end;
 
 static struct ovs_mutex teid2pgw_mutex[HASHMAP_PART_NUM];
 static struct cmap teid2pgw[HASHMAP_PART_NUM];
+
+static struct ovs_mutex ueip2pgw_mutex[HASHMAP_PART_NUM];
+static struct cmap ueip2pgw[HASHMAP_PART_NUM];
 
 void
 gtp_manager_init(void)
@@ -40,17 +44,18 @@ gtp_manager_init(void)
 }
 
 void
-gtp_manager_set_ovs_id(uint16 ovsid, uint16 total, uint16 phyport)
+gtp_manager_set_params(uint16 ovsid, uint16 total, uint16 phyport, uint8 fastpath)
 {
     ovs_mutex_lock(&mutex);
     ovs_id = ovsid;
     ovs_total = total;
     ovs_phy_port = phyport;
+    pgw_fastpath = fastpath;
     ovs_mutex_unlock(&mutex);
 }
 
 void
-gtp_manager_add_pgw(ovs_be32 gtp_pgw_ip, uint16 gtp_pgw_port) 
+gtp_manager_add_pgw(ovs_be32 gtp_pgw_ip, uint16 gtp_pgw_port, uint16 pgw_sgi_port) 
 {
     bool found = false;
     int i = 0;
@@ -60,6 +65,7 @@ gtp_manager_add_pgw(ovs_be32 gtp_pgw_ip, uint16 gtp_pgw_port)
         {
             pgw_list[i].gtp_pgw_ip = gtp_pgw_ip;
             pgw_list[i].gtp_pgw_port = gtp_pgw_port;
+            pgw_list[i].pgw_sgi_port = pgw_sgi_port;
             found = true;
             break;
         }
@@ -70,6 +76,7 @@ gtp_manager_add_pgw(ovs_be32 gtp_pgw_ip, uint16 gtp_pgw_port)
         i = end++;
         pgw_list[i].gtp_pgw_ip = gtp_pgw_ip;
         pgw_list[i].gtp_pgw_port = gtp_pgw_port;
+        pgw_list[i].pgw_sgi_port = pgw_sgi_port;
     }
 }
 
@@ -88,27 +95,28 @@ gtp_manager_del_pgw(ovs_be32 gtp_pgw_ip)
     }
 }
 
-struct gtp_pgw_node *
+int
 gtp_manager_get_pgw(void)
 {
     struct gtp_pgw_node * pnode = NULL;
+    int index = -1;
     int i;
     for (i = current; i < end; ++i)
     {
         if (pgw_list[i].gtp_pgw_ip != 0)
         {
-            pnode = pgw_list[i];
+            index = i;
             current = i + 1;
             break;
         }
     }
-    if (pnode == NULL)
+    if (index == -1)
     {
-        pnode = pgw_list[0];
+        index = 0;
         current = 1;
     }
 
-    return pnode;
+    return index;
 }
 
 int
@@ -148,8 +156,8 @@ gtp_manager_get_teid_pgw(uint32 teid)
     struct gtp_teid_to_pgw_node *pgw_node;
 
     CMAP_FOR_EACH_WITH_HASH (pgw_node, node, hash_int(teid, 0), &teid2pgwmap) {
-        if (pgw_node->teid == teid && pgw_list[pgw_node->pgw_index].gtp_pgw_ip != 0) {
-            return &(pgw_list[pgw_node->pgw_index]);
+        if (pgw_node->teid == teid && pgw_list[pgw_node->gtp_tunnel_node->pgw_index].gtp_pgw_ip != 0) {
+            return &(pgw_list[pgw_node->gtp_tunnel_node->pgw_index]);
         }
     }
     return NULL;
@@ -174,6 +182,8 @@ int gtp_manager_del_teid_pgw(uint32 teid)
     }
     ovs_mutex_lock(&teid2pgw_mutex[cmap_id]);
     size_t ret = cmap_remove(&teid2pgwmap, found_node->node, hash);
+    //free the node?
+    //unref gtp_tunnel_node
     ovs_mutex_unlock(&teid2pgw_mutex[cmap_id]);
     return ret;
 }
@@ -192,10 +202,10 @@ bool maybe_gtpu_message(struct flow *flow){
     return false;
 } 
 
-struct gtpc_message *
-parse_gtpc_message(struct flow *flow, struct dp_packet * packet)
+struct gtpc_msg_header *
+parse_gtpc_msg_header(struct flow *flow, struct dp_packet * packet)
 {
-    struct gtpc_message * msg = xmalloc(sizeof *msg);
+    struct gtpc_msg_header * msg = xmalloc(sizeof *msg);
     int offset = 0;
     uint8 * flag = dp_packet_at(packet, offset, 1);
     msg->version = (*flag & 0xe0) >> 5;
@@ -218,13 +228,15 @@ parse_gtpc_message(struct flow *flow, struct dp_packet * packet)
     }
     uint32 * seq_num = dp_packet_at(packet, offset, 4);
     msg->seq_num = (*seq_num) >> 8;
+    offset = offset + 4;
+    msg->body_offset = offset;   
     return msg;
 }
 
-struct gtpu_message *
+struct gtpu_msg_header *
 parse_gtpu_message(struct flow *flow, struct dp_packet * packet)
 {
-    struct gtpu_message * msg = xmalloc(sizeof *msg);
+    struct gtpu_msg_header * msg = xmalloc(sizeof *msg);
     int offset = 0;
     uint8 * flag = dp_packet_at(packet, offset, 1);
     msg->version = (*flag & 0xe0) >> 5;
@@ -241,6 +253,8 @@ parse_gtpu_message(struct flow *flow, struct dp_packet * packet)
     offset = offset + 2;
     uint32 * teid = dp_packet_at(packet, offset, 4);
     msg->teid = *teid;
+    offset = offset + 4;
+    msg->body_offset = offset;
     return msg;
 }
 
@@ -253,7 +267,14 @@ handle_gtpc_message(struct flow *flow, struct gtpc_message * gtpcmsg)
         {
             if (gtpcmsg->seq_num%ovs_total == ovs_id)
             {
-                struct gtp_pgw_node * ramdompgw = gtp_manager_get_pgw();
+                int ramdompgw = gtp_manager_get_pgw();
+                if (pgw_fastpath != 0)
+                {
+                    //enable fast path
+                    //parse body to get t2, t3
+                    //create gtp_tunnel_node, set t2, t3, pgwindex
+                    //put t2->pnode, t3->pnode, ref_count=2
+                }
                 //set dst to pgw ip
                 //output to pgw port   
             }
@@ -276,15 +297,29 @@ handle_gtpc_message(struct flow *flow, struct gtpc_message * gtpcmsg)
             //output to phy port
         } else if (gtpcmsg->message_type == 33){
             //create session response
-            int ret = gtp_manager_put_teid_pgw(gtpcmsg->teid, flow->nw_src);
+            //int ret = gtp_manager_put_teid_pgw(gtpcmsg->teid, flow->nw_src);
+            //get t2 from header
             //continue to parse body
-            //get gtp-c teid for sgw, and put teid->pgw to map
-            //get gtp-u teid for sgw, and put teid->pgw to map
-            //get ue ip, and put ueip->teid->pgw and teid->ueip->pgw
+            //get t4, t5, ueip
+            //if fastpath, then 
+                ////get gtp_tunnel_node with t2 
+                ////and check gtp_tunnel_node's pgw==the current pgw
+                ////set t4, t5, ueip
+                ////put t4->pnode, t5->pnode, ueip->pnode
+                ////refcount = refcount+3
+            //else not fastpath, 
+                ////create gtp_tunnel_node,
+                ////set t4, t5, ueip, pgwindex, also set t2 for delete response
+                ////put t4->pnode, t5->pnode, ueip->pnode, t2->pnode
+                ////refcount = refcount+4
             //output to phy port
         } else if (gtpcmsg->message_type == 37) {
             //delete session response
-            int ret = gtp_manager_del_teid_pgw(gtpcmsg->teid);
+            //int ret = gtp_manager_del_teid_pgw(gtpcmsg->teid);
+            //teid in header is t2
+            //both fastpath and not fastpath, the t2 is in map, get gtp_tunnel_node from t2
+            //delete t2, t3 when fastpath, t4, t5, ueip in map, delete one, unref one, if zero, free the node
+            //output to phy port
         } else {
             //output to phy port
         } 
@@ -299,10 +334,79 @@ handle_gtpu_message(struct flow *flow, struct gtpu_message * gtpumsg)
         if (gtpumsg->teid == 0){
             //drop
         } else {
-            
+            if (pgw_fastpath == 0){
+                //not fastpath
+                //teid in header is t5
+                //get gtp_tunnel_node with t5 from map
+                //get pgw
+                //output to pgw port                
+            } else {
+                //get body from package
+                //send the ip msg in body to phy port
+                //how? modify the current? drop the current and create new one?
+                //learn from gre
+            }
         }
     } else {
         //from pgw to sgw
+        if (pgw_fastpath == 0)
+        {
+            //not fast path
+            //output to phy port
+        } else {
+            //should not be here
+        }
+    }
+}
+
+void handle_gtp(struct flow *flow, struct dp_packet * packet)
+{
+    if (maybe_gtpc_message(flow)){
+        struct gtpc_msg_header * gtpcmsgheader = NULL;
+        gtpcmsgheader = parse_gtpc_msg_header(flow, packet);
+        if(gtpcmsgheader != NULL) {
+            handle_gtpc_message(flow, gtpcmsgheader, packet);
+                free(gtpcmsgheader);                    
+            }
+        } else if (maybe_gtpu_message(flow)){
+            struct gtpu_msg_header * gtpumsgheader = NULL;
+            gtpumsgheader = parse_gtpu_message(flow, packet);
+            if(gtpumsgheader != NULL) {
+                handle_gtpu_message(flow, gtpumsgheader, packet);
+                free(gtpumsgheader);                    
+            }
+        }
+    }
+}
+
+//src_ip=ueip_pool or dst_ip=ueip_pool, should be handled here
+void handle_pgw_sgi(struct flow *flow, struct dp_packet * packet)
+{
+    if (flow->in_port.ofp_port == ovs_phy_port){
+        //from www to pgw
+        if (pgw_fastpath == 0)
+        {
+            //not fast path
+            //dst=ueip
+            //get pgw with ueip, if no drop
+            //send packet to pgw sgi port, do not change packet
+        } else {
+            //fast path
+            //get t3 with ueip
+            //create new package with t3 and send to phy port
+        }
+
+    } else {
+        //from pgw to www
+        if (pgw_fastpath == 0)
+        {
+            //not fastpath
+            //output to phy port
+        } else {
+            //fast path
+            //should not be here
+            //handle gtpu should send the package directly
+        }
     }
 }
 

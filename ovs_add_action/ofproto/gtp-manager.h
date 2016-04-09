@@ -15,34 +15,50 @@
 
 struct gtp_pgw_node {
 	uint16 gtp_pgw_port;
+	uint16 pgw_sgi_port;
     ovs_be32 gtp_pgw_ip;
 };
 
 struct gtp_teid_to_pgw_node {
 	struct cmap_node node;
 	uint32 teid; 
-	uint16 pgw_index;
+	struct gtp_tunnel_node * gtp_tunnel_node;
 };
 
-struct gtpu_message {
+struct gtp_tunnel_node
+{
+	uint32 teid4_sgw_c;
+	uint32 teid5_sgw_u;
+	uint32 teid2_pgw_c;
+	uint32 teid3_pgw_u;
+	ovs_be32 ue_ip;
+	uint16 pgw_index;
+	int ref_count;
+};
+
+struct gtpu_msg_header {
 	uint8 version;
 	uint8 message_type;
 	uint16 message_length;
 	uint32 teid;
+
+	int body_offset;
 };
 
-struct gtpc_message {
+struct gtpc_msg_header {
 	uint8 version;
 	bool has_teid;
 	uint8 message_type;
 	uint16 message_length;
 	uint32 teid;
 	uint32 seq_num;
+
+	int body_offset;
 };
 
 void gtp_manager_init(void);
-void gtp_manager_set_ovs_id(uint16 ovs_id, uint16 total, uint16 phyport);
-void gtp_manager_add_pgw(ovs_be32 gtp_pgw_ip, uint16 gtp_pgw_port);
+void gtp_manager_set_params(uint16 ovs_id, uint16 total, uint16 phyport, uint8 fastpath);
+void gtp_manager_add_pgw(ovs_be32 gtp_pgw_ip, uint16 gtp_pgw_port, uint16 pgw_sgi_port);
 void gtp_manager_del_pgw(ovs_be32 gtp_pgw_ip);
 struct gtp_pgw_node * gtp_manager_get_pgw(void);
 

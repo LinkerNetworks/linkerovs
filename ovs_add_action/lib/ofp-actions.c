@@ -449,6 +449,9 @@ ofpact_next_flattened(const struct ofpact *ofpact)
     case OFPACT_OVS_TOTAL:
     case OFPACT_GTP_PGW_PORT:
     case OFPACT_OVS_PHY_PORT:
+    case OFPACT_HANDLE_PGW_SGI:
+    case OFPACT_PGW_SGI_PORT:
+    case OFPACT_PGW_FASTPATH:
         return ofpact_next(ofpact);
 
     case OFPACT_CT:
@@ -1541,6 +1544,71 @@ format_OPERATE_GTP(const struct ofpact_operate_gtp *a, struct ds *s)
 {
     ds_put_format(s, "operate_gtp:%d", a->operation);
 }
+
+
+/* Set pgw fast path actions. */
+static enum ofperr
+decode_OFPAT_RAW10_PGW_FASTPATH(uint8_t pgw_fastpath,
+                              enum ofp_version ofp_version OVS_UNUSED,
+                              struct ofpbuf *out)
+{
+    ofpact_put_PGW_FASTPATH(out)->pgw_fastpath = pgw_fastpath;
+    return 0;
+}
+
+static enum ofperr
+decode_OFPAT_RAW11_PGW_FASTPATH(uint8_t pgw_fastpath,
+                              enum ofp_version ofp_version OVS_UNUSED,
+                              struct ofpbuf *out)
+{
+    ofpact_put_PGW_FASTPATH(out)->pgw_fastpath = pgw_fastpath;
+    return 0;
+}
+
+static enum ofperr
+decode_OFPAT_RAW12_PGW_FASTPATH(uint8_t pgw_fastpath,
+                              enum ofp_version ofp_version OVS_UNUSED,
+                              struct ofpbuf *out)
+{
+    ofpact_put_PGW_FASTPATH(out)->pgw_fastpath = pgw_fastpath;
+    return 0;
+}
+
+static void
+encode_PGW_FASTPATH(const struct ofpact_pgw_fastpath *pgw_fastpath,
+                  enum ofp_version ofp_version, struct ofpbuf *out)
+{
+    if (ofp_version == OFP10_VERSION) {
+        put_OFPAT10_PGW_FASTPATH(out, pgw_fastpath->pgw_fastpath);
+    } else if (ofp_version == OFP11_VERSION) {
+        put_OFPAT11_PGW_FASTPATH(out, pgw_fastpath->pgw_fastpath);
+    } else {
+        put_OFPAT12_PGW_FASTPATH(out, pgw_fastpath->pgw_fastpath);
+    }
+}
+
+static char * OVS_WARN_UNUSED_RESULT
+parse_PGW_FASTPATH(char *arg, struct ofpbuf *ofpacts,
+                  enum ofputil_protocol *usable_protocols OVS_UNUSED)
+{
+    uint8_t pgw_fastpath;
+    char *error;
+
+    error = str_to_u8(arg, "pgw_fastpath", &pgw_fastpath);
+    if (error) {
+        return error;
+    }
+
+    ofpact_put_PGW_FASTPATH(ofpacts)->pgw_fastpath = pgw_fastpath;
+    return NULL;
+}
+
+static void
+format_PGW_FASTPATH(const struct ofpact_pgw_fastpath *a, struct ds *s)
+{
+    ds_put_format(s, "pgw_fastpath:%d", a->pgw_fastpath);
+}
+
 
 /* Set operate gtp set ovs id actions. */
 static enum ofperr
@@ -1731,6 +1799,70 @@ static void
 format_GTP_PGW_PORT(const struct ofpact_gtp_pgw_port *a, struct ds *s)
 {
     ds_put_format(s, "gtp_pgw_port:%d", a->gtp_pgw_port);
+}
+
+
+/* Set operate pgw sgi port actions. */
+static enum ofperr
+decode_OFPAT_RAW10_PGW_SGI_PORT(uint16_t pgw_sgi_port,
+                              enum ofp_version ofp_version OVS_UNUSED,
+                              struct ofpbuf *out)
+{
+    ofpact_put_PGW_SGI_PORT(out)->pgw_sgi_port = pgw_sgi_port;
+    return 0;
+}
+
+static enum ofperr
+decode_OFPAT_RAW11_PGW_SGI_PORT(uint16_t pgw_sgi_port,
+                              enum ofp_version ofp_version OVS_UNUSED,
+                              struct ofpbuf *out)
+{
+    ofpact_put_PGW_SGI_PORT(out)->pgw_sgi_port = pgw_sgi_port;
+    return 0;
+}
+
+static enum ofperr
+decode_OFPAT_RAW12_PGW_SGI_PORT(uint16_t pgw_sgi_port,
+                              enum ofp_version ofp_version OVS_UNUSED,
+                              struct ofpbuf *out)
+{
+    ofpact_put_PGW_SGI_PORT(out)->pgw_sgi_port = pgw_sgi_port;
+    return 0;
+}
+
+static void
+encode_PGW_SGI_PORT(const struct ofpact_pgw_sgi_port *pgw_sgi_port,
+                  enum ofp_version ofp_version, struct ofpbuf *out)
+{
+    if (ofp_version == OFP10_VERSION) {
+        put_OFPAT10_PGW_SGI_PORT(out, pgw_sgi_port->pgw_sgi_port);
+    } else if (ofp_version == OFP11_VERSION) {
+        put_OFPAT11_PGW_SGI_PORT(out, pgw_sgi_port->pgw_sgi_port);
+    } else {
+        put_OFPAT12_PGW_SGI_PORT(out, pgw_sgi_port->pgw_sgi_port);
+    }
+}
+
+static char * OVS_WARN_UNUSED_RESULT
+parse_PGW_SGI_PORT(char *arg, struct ofpbuf *ofpacts,
+                  enum ofputil_protocol *usable_protocols OVS_UNUSED)
+{
+    uint16_t pgw_sgi_port;
+    char *error;
+
+    error = str_to_u16(arg, "pgw_sgi_port", &pgw_sgi_port);
+    if (error) {
+        return error;
+    }
+
+    ofpact_put_PGW_SGI_PORT(ofpacts)->pgw_sgi_port = pgw_sgi_port;
+    return NULL;
+}
+
+static void
+format_PGW_SGI_PORT(const struct ofpact_pgw_sgi_port *a, struct ds *s)
+{
+    ds_put_format(s, "pgw_sgi_port:%d", a->pgw_sgi_port);
 }
 
 
@@ -5880,6 +6012,9 @@ ofpact_is_set_or_move_action(const struct ofpact *a)
     case OFPACT_OVS_TOTAL:
     case OFPACT_GTP_PGW_PORT:
     case OFPACT_OVS_PHY_PORT:
+    case OFPACT_HANDLE_PGW_SGI:
+    case OFPACT_PGW_SGI_PORT:
+    case OFPACT_PGW_FASTPATH:
         return true;
     case OFPACT_BUNDLE:
     case OFPACT_CLEAR_ACTIONS:
@@ -5958,6 +6093,9 @@ ofpact_is_allowed_in_actions_set(const struct ofpact *a)
     case OFPACT_OVS_TOTAL:
     case OFPACT_GTP_PGW_PORT:
     case OFPACT_OVS_PHY_PORT:
+    case OFPACT_HANDLE_PGW_SGI:
+    case OFPACT_PGW_SGI_PORT:
+    case OFPACT_PGW_FASTPATH:
         return true;
 
     /* In general these actions are excluded because they are not part of
@@ -6205,6 +6343,9 @@ ovs_instruction_type_from_ofpact_type(enum ofpact_type type)
     case OFPACT_OVS_TOTAL:
     case OFPACT_GTP_PGW_PORT:
     case OFPACT_OVS_PHY_PORT:
+    case OFPACT_HANDLE_PGW_SGI:
+    case OFPACT_PGW_SGI_PORT:
+    case OFPACT_PGW_FASTPATH:
     default:
         return OVSINST_OFPIT11_APPLY_ACTIONS;
     }
@@ -6652,7 +6793,14 @@ ofpact_check__(enum ofputil_protocol *usable_protocols, struct ofpact *a,
     case OFPACT_HANDLE_GTP:
     case OFPACT_OPERATE_GTP:
     case OFPACT_GTP_TEID: 
-    case OFPACT_GTP_PGW_IP:   
+    case OFPACT_GTP_PGW_IP:
+    case OFPACT_OVS_ID:
+    case OFPACT_OVS_TOTAL:
+    case OFPACT_GTP_PGW_PORT:
+    case OFPACT_OVS_PHY_PORT:
+    case OFPACT_HANDLE_PGW_SGI:
+    case OFPACT_PGW_SGI_PORT:
+    case OFPACT_PGW_FASTPATH:  
         return 0;
 
     case OFPACT_SET_IPV4_SRC:
@@ -7136,6 +7284,9 @@ get_ofpact_map(enum ofp_version version)
         { OFPACT_OVS_TOTAL, 33},
         { OFPACT_GTP_PGW_PORT, 34},
         { OFPACT_OVS_PHY_PORT, 35},
+        { OFPACT_HANDLE_PGW_SGI, 36},
+        { OFPACT_PGW_SGI_PORT, 37},
+        { OFPACT_PGW_FASTPATH, 38},
         { 0, -1 },
     };, 34
 
@@ -7174,6 +7325,9 @@ get_ofpact_map(enum ofp_version version)
         { OFPACT_OVS_TOTAL, 33},
         { OFPACT_GTP_PGW_PORT, 34},
         { OFPACT_OVS_PHY_PORT, 35},
+        { OFPACT_HANDLE_PGW_SGI, 36},
+        { OFPACT_PGW_SGI_PORT, 37},
+        { OFPACT_PGW_FASTPATH, 38},
         { 0, -1 },
     };
 
@@ -7203,6 +7357,9 @@ get_ofpact_map(enum ofp_version version)
         { OFPACT_OVS_TOTAL, 33},
         { OFPACT_GTP_PGW_PORT, 34},
         { OFPACT_OVS_PHY_PORT, 35},
+        { OFPACT_HANDLE_PGW_SGI, 36},
+        { OFPACT_PGW_SGI_PORT, 37},
+        { OFPACT_PGW_FASTPATH, 38},
         { 0, -1 },
     };
 
@@ -7339,6 +7496,9 @@ ofpact_outputs_to_port(const struct ofpact *ofpact, ofp_port_t port)
     case OFPACT_OVS_TOTAL:
     case OFPACT_GTP_PGW_PORT:
     case OFPACT_OVS_PHY_PORT:
+    case OFPACT_HANDLE_PGW_SGI:
+    case OFPACT_PGW_SGI_PORT:
+    case OFPACT_PGW_FASTPATH:
     default:
         return false;
     }
