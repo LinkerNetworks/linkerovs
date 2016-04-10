@@ -676,6 +676,8 @@ ofproto/ofproto-tnl-unixctl.man
 ofproto/ofproto-unixctl.man
 ofproto/ofproto.c
 ofproto/ofproto.h
+ofproto/gtp-manager.c
+ofproto/gtp-manager.h
 ofproto/pinsched.c
 ofproto/pinsched.h
 ofproto/pktbuf.c

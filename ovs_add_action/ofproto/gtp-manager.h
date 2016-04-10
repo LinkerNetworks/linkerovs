@@ -8,10 +8,10 @@
 #include "list.h"
 #include "ovs-thread.h"
 
-#define HASHMAP_PART_NUM 32;
-#define MAX_PGW_PER_NODE 1024;
-#define GTPU_PORT 2152;
-#define GTPC_PORT 2123;
+#define HASHMAP_PART_NUM 32
+#define MAX_PGW_PER_NODE 1024
+#define GTPU_PORT 2152
+#define GTPC_PORT 2123
 
 struct gtp_pgw_node {
 	uint16 gtp_pgw_port;
