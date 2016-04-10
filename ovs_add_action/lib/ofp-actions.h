@@ -74,6 +74,8 @@
     OFPACT(OVS_PHY_PORT,    ofpact_ovs_phy_port,ofpact, "ovs_phy_port")    \
     OFPACT(PGW_SGI_PORT,    ofpact_pgw_sgi_port,ofpact, "pgw_sgi_port")    \
     OFPACT(PGW_FASTPATH,    ofpact_pgw_fastpath,ofpact, "pgw_fastpath")    \
+    OFPACT(GTP_PGW_ETH,     ofpact_mac,         ofpact, "gtp_pgw_eth")   \
+    OFPACT(PGW_SGI_ETH,     ofpact_mac,         ofpact, "pgw_sgi_eth")   \
     OFPACT(SET_VLAN_VID,    ofpact_vlan_vid,    ofpact, "set_vlan_vid") \
     OFPACT(SET_VLAN_PCP,    ofpact_vlan_pcp,    ofpact, "set_vlan_pcp") \
     OFPACT(STRIP_VLAN,      ofpact_null,        ofpact, "strip_vlan")   \
@@ -348,9 +350,9 @@ struct ofpact_vlan_pcp {
     bool flow_has_vlan;         /* VLAN present at action validation time? */
 };
 
-/* OFPACT_SET_ETH_SRC, OFPACT_SET_ETH_DST.
+/* OFPACT_SET_ETH_SRC, OFPACT_SET_ETH_DST, OFPACT_GTP_PGW_ETH, OFPACT_PGW_SGI_ETH
  *
- * Used for OFPAT10_SET_DL_SRC, OFPAT10_SET_DL_DST. */
+ * Used for OFPAT10_SET_DL_SRC, OFPAT10_SET_DL_DST, OFPAT10_GTP_PGW_ETH, OFPAT11_GTP_PGW_ETH, OFPAT12_GTP_PGW_ETH, OFPAT10_PGW_SGI_ETH, OFPAT11_PGW_SGI_ETH, OFPAT12_PGW_SGI_ETH */
 struct ofpact_mac {
     struct ofpact ofpact;
     struct eth_addr mac;
@@ -496,8 +498,6 @@ struct ofpact_pgw_sgi_port {
     struct ofpact ofpact;
     uint16_t pgw_sgi_port;
 };
-
-
 
 /* OFPACT_PUSH_VLAN/MPLS/PBB
  *

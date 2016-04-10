@@ -5306,6 +5306,8 @@ handle_flow_mod(struct ofconn *ofconn, const struct ofp_header *oh)
         uint16_t gtp_pgw_port = 0;
         uint16_t ovs_phy_port = 0;
         uint8_t pgw_fastpath = 0;
+        struct eth_addr gtp_pgw_eth;
+        struct eth_addr pgw_sgi_eth;
         const struct ofpact *a;
         OFPACT_FOR_EACH_FLATTENED (a, ofm.fm.ofpacts, ofm.fm.ofpacts_len) {
             if (a->type == OFPACT_OPERATE_GTP){
@@ -5335,12 +5337,18 @@ handle_flow_mod(struct ofconn *ofconn, const struct ofp_header *oh)
             if (a->type == OFPACT_PGW_SGI_PORT){
                 pgw_sgi_port = ofpact_get_PGW_SGI_PORT(a)->pgw_sgi_port;
             }
-        }
+            if (a->type == OFPACT_GTP_PGW_ETH){
+                gtp_pgw_eth = ofpact_get_GTP_PGW_ETH(a)->mac;
+            }
+            if (a->type == OFPACT_PGW_SGI_ETH){
+                pgw_sgi_eth = ofpact_get_PGW_SGI_ETH(a)->mac;
+            }
+        }GTP_PGW_ETH
         if (operation != 0) {
             switch(operation) {
                 case 1: 
                     VLOG_INFO("Adding a pgw.");
-                    gtp_manager_add_pgw(gtp_pgw_ip, gtp_pgw_port, pgw_sgi_port);
+                    gtp_manager_add_pgw(gtp_pgw_ip, gtp_pgw_port, gtp_pgw_eth, pgw_sgi_port, pgw_sgi_eth);
                     break;
                 case 2:
                     VLOG_INFO("Deleting a pgw.");

@@ -4236,6 +4236,8 @@ recirc_unroll_actions(const struct ofpact *ofpacts, size_t ofpacts_len,
         case OFPACT_HANDLE_PGW_SGI:
         case OFPACT_PGW_SGI_PORT:
         case OFPACT_PGW_FASTPATH:
+        case OFPACT_GTP_PGW_ETH:
+        case OFPACT_PGW_SGI_ETH:
             /* These may not generate PACKET INs. */
             break;
 
@@ -4483,18 +4485,20 @@ do_xlate_actions(const struct ofpact *ofpacts, size_t ofpacts_len,
         case OFPACT_OVS_PHY_PORT:
         case OFPACT_PGW_SGI_PORT:
         case OFPACT_PGW_FASTPATH: 
+        case OFPACT_GTP_PGW_ETH:
+        case OFPACT_PGW_SGI_ETH:
             VLOG_INFO("SHOULD NOT BE HERE");
             break;
 
     case OFPACT_HANDLE_PGW_SGI:
             VLOG_INFO("OFPACT_HANDLE_PGW_SGI");
             CHECK_MPLS_RECIRCULATION();
-            handle_pgw_sgi(flow, ctx->xin->packet);
+            handle_pgw_sgi(flow, wc, ctx->xin->packet, ctx);
             break;
 	case OFPACT_HANDLE_GTP:
             VLOG_INFO("OFPACT_HANDLE_GTP");
             CHECK_MPLS_RECIRCULATION();
-            handle_gtp(flow, ctx->xin->packet);
+            handle_gtp(flow, wc, ctx->xin->packet, ctx);
             break;
 
         case OFPACT_SET_IP_DSCP:

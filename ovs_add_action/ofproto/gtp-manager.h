@@ -15,7 +15,9 @@
 
 struct gtp_pgw_node {
 	uint16 gtp_pgw_port;
+	struct eth_addr gtp_pgw_eth; 
 	uint16 pgw_sgi_port;
+	struct eth_addr pgw_sgi_eth; 
     ovs_be32 gtp_pgw_ip;
 };
 
@@ -23,6 +25,16 @@ struct gtp_teid_to_pgw_node {
 	struct cmap_node node;
 	uint32 teid; 
 	struct gtp_tunnel_node * gtp_tunnel_node;
+	struct ovs_mutex mutex;
+	uint8 ref_count;
+};
+
+struct gtp_ueip_to_pgw_node {
+	struct cmap_node node;
+	ovs_be32 ueip; 
+	struct gtp_tunnel_node * gtp_tunnel_node;
+	struct ovs_mutex mutex;
+	uint8 ref_count;
 };
 
 struct gtp_tunnel_node
