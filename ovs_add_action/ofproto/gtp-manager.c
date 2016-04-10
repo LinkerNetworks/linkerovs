@@ -569,7 +569,7 @@ handle_gtpc_message(struct flow *flow, struct flow_wildcards *wc, struct gtpc_ms
 }
 
 void
-handle_gtpu_message(struct flow *flow, struct gtpu_msg_header * gtpumsg, struct xlate_ctx *ctx)
+handle_gtpu_message(struct flow *flow, struct flow_wildcards *wc, struct gtpu_msg_header * gtpumsg, struct dp_packet * packet, struct xlate_ctx *ctx)
 {
     if (flow->in_port.ofp_port == ovs_phy_port){
         //from sgw to pgw

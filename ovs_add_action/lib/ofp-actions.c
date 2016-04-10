@@ -217,6 +217,24 @@ enum ofp_raw_action_type {
     OFPAT_RAW10_GTP_TEID,
     /* OF1.0(31): ovs_be32. */
     OFPAT_RAW10_GTP_PGW_IP,
+    /* OF1.0(32): uint16_t. */
+    OFPAT_RAW10_OVS_ID,
+    /* OF1.0(33): uint16_t. */
+    OFPAT_RAW10_OVS_TOTAL,
+    /* OF1.0(34): uint16_t. */
+    OFPAT_RAW10_GTP_PGW_PORT,
+    /* OF1.0(35): uint16_t. */
+    OFPAT_RAW10_OVS_PHY_PORT,
+    /* OF1.0(36): void. */
+    OFPAT_RAW10_HANDLE_PGW_SGI,
+    /* OF1.0(37): uint16_t. */
+    OFPAT_RAW10_PGW_SGI_PORT,
+    /* OF1.0(38): uint8_t. */
+    OFPAT_RAW10_PGW_FASTPATH,
+    /* OF1.0(39): struct eth_addr. */
+    OFPAT_RAW10_GTP_PGW_ETH,
+    /* OF1.0(40): struct eth_addr. */
+    OFPAT_RAW10_PGW_SGI_ETH,
 
     /* OF1.1(28): void. */
     OFPAT_RAW11_HANDLE_GTP,
@@ -226,6 +244,24 @@ enum ofp_raw_action_type {
     OFPAT_RAW11_GTP_TEID,
     /* OF1.1(31): ovs_be32. */
     OFPAT_RAW11_GTP_PGW_IP,
+    /* OF1.1(32): uint16_t. */
+    OFPAT_RAW11_OVS_ID,
+    /* OF1.1(33): uint16_t. */
+    OFPAT_RAW11_OVS_TOTAL,
+    /* OF1.1(34): uint16_t. */
+    OFPAT_RAW11_GTP_PGW_PORT,
+    /* OF1.1(35): uint16_t. */
+    OFPAT_RAW11_OVS_PHY_PORT,
+    /* OF1.1(36): void. */
+    OFPAT_RAW11_HANDLE_PGW_SGI,
+    /* OF1.1(37): uint16_t. */
+    OFPAT_RAW11_PGW_SGI_PORT,
+    /* OF1.1(38): uint8_t. */
+    OFPAT_RAW11_PGW_FASTPATH,
+    /* OF1.1(39): struct eth_addr. */
+    OFPAT_RAW11_GTP_PGW_ETH,
+    /* OF1.1(40): struct eth_addr. */
+    OFPAT_RAW11_PGW_SGI_ETH,
 
     /* OF1.2-1.4(28): void. */
     OFPAT_RAW12_HANDLE_GTP,
@@ -235,6 +271,24 @@ enum ofp_raw_action_type {
     OFPAT_RAW12_GTP_TEID,
     /* OF1.2-1.4(31): ovs_be32. */
     OFPAT_RAW12_GTP_PGW_IP,
+    /* OF1.2-1.4(32): uint16_t. */
+    OFPAT_RAW12_OVS_ID,
+    /* OF1.2-1.4(33): uint16_t. */
+    OFPAT_RAW12_OVS_TOTAL,
+    /* OF1.2-1.4(34): uint16_t. */
+    OFPAT_RAW12_GTP_PGW_PORT,
+    /* OF1.2-1.4(35): uint16_t. */
+    OFPAT_RAW12_OVS_PHY_PORT,
+    /* OF1.2-1.4(36): void. */
+    OFPAT_RAW12_HANDLE_PGW_SGI,
+    /* OF1.2-1.4(37): uint16_t. */
+    OFPAT_RAW12_PGW_SGI_PORT,
+    /* OF1.2-1.4(38): uint8_t. */
+    OFPAT_RAW12_PGW_FASTPATH,
+    /* OF1.2-1.4(39): struct eth_addr. */
+    OFPAT_RAW12_GTP_PGW_ETH,
+    /* OF1.2-1.4(40): struct eth_addr. */
+    OFPAT_RAW12_PGW_SGI_ETH,
 
     /* NX1.0-1.4(7): struct nx_action_reg_load.
      *
@@ -1595,7 +1649,7 @@ parse_GTP_PGW_ETH(char *arg, struct ofpbuf *ofpacts,
     struct eth_addr gtp_pgw_eth;
     char *error;
 
-    error = str_to_mac(arg, "gtp_pgw_eth", &gtp_pgw_eth);
+    error = str_to_mac(arg, &gtp_pgw_eth);
     if (error) {
         return error;
     }
@@ -1659,7 +1713,7 @@ parse_PGW_SGI_ETH(char *arg, struct ofpbuf *ofpacts,
     struct eth_addr pgw_sgi_eth;
     char *error;
 
-    error = str_to_mac(arg, "pgw_sgi_eth", &pgw_sgi_eth);
+    error = str_to_mac(arg, &pgw_sgi_eth);
     if (error) {
         return error;
     }

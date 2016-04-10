@@ -70,12 +70,27 @@ struct gtpc_msg_header {
 
 void gtp_manager_init(void);
 void gtp_manager_set_params(uint16 ovs_id, uint16 total, uint16 phyport, uint8 fastpath);
-void gtp_manager_add_pgw(ovs_be32 gtp_pgw_ip, uint16 gtp_pgw_port, uint16 pgw_sgi_port);
+void gtp_manager_add_pgw(ovs_be32 gtp_pgw_ip, uint16 gtp_pgw_port, struct eth_addr gtp_pgw_eth, uint16 pgw_sgi_port, struct eth_addr pgw_sgi_eth);
 void gtp_manager_del_pgw(ovs_be32 gtp_pgw_ip);
-struct gtp_pgw_node * gtp_manager_get_pgw(void);
+int gtp_manager_get_pgw(void);
+int gtp_manager_find_pgw(ovs_be32 gtp_pgw_ip);
 
-int gtp_manager_put_teid_pgw(uint32 teid, ovs_be32 gtp_pgw_ip);
+int gtp_manager_put_teid_pgw(uint32 teid, struct gtp_tunnel_node * gtp_tunnel_node);
 int gtp_manager_del_teid_pgw(uint32 teid);
-struct gtp_pgw_node * gtp_manager_get_teid_pgw(uint32 teid);
+struct gtp_teid_to_pgw_node * gtp_manager_get_teid_pgw(uint32 teid);
 
+int gtp_manager_put_ueip_pgw(ovs_be32 ueip, struct gtp_tunnel_node * gtp_tunnel_node);
+struct gtp_ueip_to_pgw_node * gtp_manager_get_ueip_pgw(uint32 ueip);
+int gtp_manager_del_ueip_pgw(uint32 ueip);
+
+bool maybe_gtpc_message(struct flow *flow);
+bool maybe_gtpu_message(struct flow *flow);
+struct gtpc_msg_header * parse_gtpc_msg_header(struct flow *flow, struct dp_packet * packet);
+struct gtpu_msg_header * parse_gtpu_message(struct flow *flow, struct dp_packet * packet);
+
+void handle_gtpc_message(struct flow *flow, struct flow_wildcards *wc, struct gtpc_msg_header * gtpcmsg, struct dp_packet * packet, struct xlate_ctx *ctx);
+void handle_gtpu_message(struct flow *flow, struct gtpu_msg_header * gtpumsg, struct xlate_ctx *ctx);
+
+void handle_gtp(struct flow *flow, struct flow_wildcards *wc, struct dp_packet * packet, struct xlate_ctx *ctx);
+void handle_pgw_sgi(struct flow *flow, struct flow_wildcards *wc, struct dp_packet * packet, struct xlate_ctx *ctx);
 #endif
