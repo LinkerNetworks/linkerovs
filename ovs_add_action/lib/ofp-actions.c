@@ -1601,134 +1601,6 @@ format_OPERATE_GTP(const struct ofpact_operate_gtp *a, struct ds *s)
     ds_put_format(s, "operate_gtp:%d", a->operation);
 }
 
-/* Set gtp pgw eth actions. */
-static enum ofperr
-decode_OFPAT_RAW10_GTP_PGW_ETH(const struct ofp_action_dl_addr *a,
-                              enum ofp_version ofp_version OVS_UNUSED,
-                              struct ofpbuf *out)
-{
-    ofpact_put_GTP_PGW_ETH(out)->mac = a->dl_addr;
-    return 0;
-}
-
-static enum ofperr
-decode_OFPAT_RAW11_GTP_PGW_ETH(const struct ofp_action_dl_addr *a,
-                              enum ofp_version ofp_version OVS_UNUSED,
-                              struct ofpbuf *out)
-{
-    ofpact_put_GTP_PGW_ETH(out)->mac = a->dl_addr;
-    return 0;
-}
-
-static enum ofperr
-decode_OFPAT_RAW12_GTP_PGW_ETH(const struct ofp_action_dl_addr *a,
-                              enum ofp_version ofp_version OVS_UNUSED,
-                              struct ofpbuf *out)
-{
-    ofpact_put_GTP_PGW_ETH(out)->mac = a->dl_addr;
-    return 0;
-}
-
-static void
-encode_GTP_PGW_ETH(const struct ofpact_mac *mac,
-                  enum ofp_version ofp_version, struct ofpbuf *out)
-{
-    if (ofp_version == OFP10_VERSION) {
-        put_OFPAT10_GTP_PGW_ETH(out, mac->mac);
-    } else if (ofp_version == OFP11_VERSION) {
-        put_OFPAT11_GTP_PGW_ETH(out, mac->mac);
-    } else {
-        put_OFPAT12_GTP_PGW_ETH(out, mac->mac);
-    }
-}
-
-static char * OVS_WARN_UNUSED_RESULT
-parse_GTP_PGW_ETH(char *arg, struct ofpbuf *ofpacts,
-                  enum ofputil_protocol *usable_protocols OVS_UNUSED)
-{
-    struct eth_addr gtp_pgw_eth;
-    char *error;
-
-    error = str_to_mac(arg, &gtp_pgw_eth);
-    if (error) {
-        return error;
-    }
-
-    ofpact_put_GTP_PGW_ETH(ofpacts)->mac = gtp_pgw_eth;
-    return NULL;
-}
-
-static void
-format_GTP_PGW_ETH(const struct ofpact_mac *a, struct ds *s)
-{
-    ds_put_format(s, "gtp_pgw_eth:"ETH_ADDR_FMT, ETH_ADDR_ARGS(a->mac));
-}
-
-
-/* Set pgw sgi eth actions. */
-static enum ofperr
-decode_OFPAT_RAW10_PGW_SGI_ETH(const struct ofp_action_dl_addr *a,
-                              enum ofp_version ofp_version OVS_UNUSED,
-                              struct ofpbuf *out)
-{
-    ofpact_put_PGW_SGI_ETH(out)->mac = a->dl_addr;
-    return 0;
-}
-
-static enum ofperr
-decode_OFPAT_RAW11_PGW_SGI_ETH(const struct ofp_action_dl_addr *a,
-                              enum ofp_version ofp_version OVS_UNUSED,
-                              struct ofpbuf *out)
-{
-    ofpact_put_PGW_SGI_ETH(out)->mac = a->dl_addr;
-    return 0;
-}
-
-static enum ofperr
-decode_OFPAT_RAW12_PGW_SGI_ETH(const struct ofp_action_dl_addr *a,
-                              enum ofp_version ofp_version OVS_UNUSED,
-                              struct ofpbuf *out)
-{
-    ofpact_put_PGW_SGI_ETH(out)->mac = a->dl_addr;
-    return 0;
-}
-
-static void
-encode_PGW_SGI_ETH(const struct ofpact_mac *mac,
-                  enum ofp_version ofp_version, struct ofpbuf *out)
-{
-    if (ofp_version == OFP10_VERSION) {
-        put_OFPAT10_PGW_SGI_ETH(out, mac->mac);
-    } else if (ofp_version == OFP11_VERSION) {
-        put_OFPAT11_PGW_SGI_ETH(out, mac->mac);
-    } else {
-        put_OFPAT12_PGW_SGI_ETH(out, mac->mac);
-    }
-}
-
-static char * OVS_WARN_UNUSED_RESULT
-parse_PGW_SGI_ETH(char *arg, struct ofpbuf *ofpacts,
-                  enum ofputil_protocol *usable_protocols OVS_UNUSED)
-{
-    struct eth_addr pgw_sgi_eth;
-    char *error;
-
-    error = str_to_mac(arg, &pgw_sgi_eth);
-    if (error) {
-        return error;
-    }
-
-    ofpact_put_PGW_SGI_ETH(ofpacts)->mac = pgw_sgi_eth;
-    return NULL;
-}
-
-static void
-format_PGW_SGI_ETH(const struct ofpact_mac *a, struct ds *s)
-{
-    ds_put_format(s, "pgw_sgi_eth:"ETH_ADDR_FMT, ETH_ADDR_ARGS(a->mac));
-}
-
-
 /* Set pgw fast path actions. */
 static enum ofperr
 decode_OFPAT_RAW10_PGW_FASTPATH(uint8_t pgw_fastpath,
@@ -2257,6 +2129,133 @@ format_SET_ETH_DST(const struct ofpact_mac *a, struct ds *s)
 {
     ds_put_format(s, "mod_dl_dst:"ETH_ADDR_FMT, ETH_ADDR_ARGS(a->mac));
 }
+
+/* Set gtp pgw eth actions. */
+static enum ofperr
+decode_OFPAT_RAW10_GTP_PGW_ETH(const struct ofp_action_dl_addr *a,
+                              enum ofp_version ofp_version OVS_UNUSED,
+                              struct ofpbuf *out)
+{
+    ofpact_put_GTP_PGW_ETH(out)->mac = a->dl_addr;
+    return 0;
+}
+
+static enum ofperr
+decode_OFPAT_RAW11_GTP_PGW_ETH(const struct ofp_action_dl_addr *a,
+                              enum ofp_version ofp_version OVS_UNUSED,
+                              struct ofpbuf *out)
+{
+    ofpact_put_GTP_PGW_ETH(out)->mac = a->dl_addr;
+    return 0;
+}
+
+static enum ofperr
+decode_OFPAT_RAW12_GTP_PGW_ETH(const struct ofp_action_dl_addr *a,
+                              enum ofp_version ofp_version OVS_UNUSED,
+                              struct ofpbuf *out)
+{
+    ofpact_put_GTP_PGW_ETH(out)->mac = a->dl_addr;
+    return 0;
+}
+
+static void
+encode_GTP_PGW_ETH(const struct ofpact_mac *mac,
+                  enum ofp_version ofp_version, struct ofpbuf *out)
+{
+    if (ofp_version == OFP10_VERSION) {
+        put_OFPAT10_GTP_PGW_ETH(out, mac->mac);
+    } else if (ofp_version == OFP11_VERSION) {
+        put_OFPAT11_GTP_PGW_ETH(out, mac->mac);
+    } else {
+        put_OFPAT12_GTP_PGW_ETH(out, mac->mac);
+    }
+}
+
+static char * OVS_WARN_UNUSED_RESULT
+parse_GTP_PGW_ETH(char *arg, struct ofpbuf *ofpacts,
+                  enum ofputil_protocol *usable_protocols OVS_UNUSED)
+{
+    struct eth_addr gtp_pgw_eth;
+    char *error;
+
+    error = str_to_mac(arg, &gtp_pgw_eth);
+    if (error) {
+        return error;
+    }
+
+    ofpact_put_GTP_PGW_ETH(ofpacts)->mac = gtp_pgw_eth;
+    return NULL;
+}
+
+static void
+format_GTP_PGW_ETH(const struct ofpact_mac *a, struct ds *s)
+{
+    ds_put_format(s, "gtp_pgw_eth:"ETH_ADDR_FMT, ETH_ADDR_ARGS(a->mac));
+}
+
+/* Set pgw sgi eth actions. */
+static enum ofperr
+decode_OFPAT_RAW10_PGW_SGI_ETH(const struct ofp_action_dl_addr *a,
+                              enum ofp_version ofp_version OVS_UNUSED,
+                              struct ofpbuf *out)
+{
+    ofpact_put_PGW_SGI_ETH(out)->mac = a->dl_addr;
+    return 0;
+}
+
+static enum ofperr
+decode_OFPAT_RAW11_PGW_SGI_ETH(const struct ofp_action_dl_addr *a,
+                              enum ofp_version ofp_version OVS_UNUSED,
+                              struct ofpbuf *out)
+{
+    ofpact_put_PGW_SGI_ETH(out)->mac = a->dl_addr;
+    return 0;
+}
+
+static enum ofperr
+decode_OFPAT_RAW12_PGW_SGI_ETH(const struct ofp_action_dl_addr *a,
+                              enum ofp_version ofp_version OVS_UNUSED,
+                              struct ofpbuf *out)
+{
+    ofpact_put_PGW_SGI_ETH(out)->mac = a->dl_addr;
+    return 0;
+}
+
+static void
+encode_PGW_SGI_ETH(const struct ofpact_mac *mac,
+                  enum ofp_version ofp_version, struct ofpbuf *out)
+{
+    if (ofp_version == OFP10_VERSION) {
+        put_OFPAT10_PGW_SGI_ETH(out, mac->mac);
+    } else if (ofp_version == OFP11_VERSION) {
+        put_OFPAT11_PGW_SGI_ETH(out, mac->mac);
+    } else {
+        put_OFPAT12_PGW_SGI_ETH(out, mac->mac);
+    }
+}
+
+static char * OVS_WARN_UNUSED_RESULT
+parse_PGW_SGI_ETH(char *arg, struct ofpbuf *ofpacts,
+                  enum ofputil_protocol *usable_protocols OVS_UNUSED)
+{
+    struct eth_addr pgw_sgi_eth;
+    char *error;
+
+    error = str_to_mac(arg, &pgw_sgi_eth);
+    if (error) {
+        return error;
+    }
+
+    ofpact_put_PGW_SGI_ETH(ofpacts)->mac = pgw_sgi_eth;
+    return NULL;
+}
+
+static void
+format_PGW_SGI_ETH(const struct ofpact_mac *a, struct ds *s)
+{
+    ds_put_format(s, "pgw_sgi_eth:"ETH_ADDR_FMT, ETH_ADDR_ARGS(a->mac));
+}
+
 
 /* Set IPv4 address actions. */
 
