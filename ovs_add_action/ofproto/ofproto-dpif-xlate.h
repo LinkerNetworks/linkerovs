@@ -217,4 +217,6 @@ void xlate_cache_delete(struct xlate_cache *);
 void xlate_txn_start(void);
 void xlate_txn_commit(void);
 
+void xlate_output_action(struct xlate_ctx *ctx, ofp_port_t port, uint16_t max_len, bool may_packet_in);
+
 #endif /* ofproto-dpif-xlate.h */

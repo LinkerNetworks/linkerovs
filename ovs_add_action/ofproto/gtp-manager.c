@@ -1,5 +1,6 @@
 #include <config.h>
 
+#include "lib/util.h"
 #include "gtp-manager.h"
 #include "openvswitch/vlog.h"
 
@@ -32,7 +33,6 @@ gtp_manager_init(void)
     current = 0;
     end = 0;
 
-    int i = 0;
     for (i = 0; i < MAX_PGW_PER_NODE; ++i)
     {
         pgw_list[i].gtp_pgw_ip = 0;
@@ -74,7 +74,7 @@ gtp_manager_add_pgw(ovs_be32 gtp_pgw_ip, uint16_t gtp_pgw_port, struct eth_addr 
     }
     if (!found)
     {
-        ASSERT(end < MAX_PGW_PER_NODE);
+        ovs_assert(end < MAX_PGW_PER_NODE);
         i = end++;
         pgw_list[i].gtp_pgw_ip = gtp_pgw_ip;
         pgw_list[i].gtp_pgw_port = gtp_pgw_port;
@@ -94,9 +94,7 @@ gtp_manager_del_pgw(ovs_be32 gtp_pgw_ip)
         {
             pgw_list[i].gtp_pgw_ip=0;
             pgw_list[i].gtp_pgw_port=0;
-            pgw_list[i].gtp_pgw_eth=0;
             pgw_list[i].pgw_sgi_port=0;
-            pgw_list[i].pgw_sgi_eth=0;
             break;
         }
     }
@@ -105,7 +103,6 @@ gtp_manager_del_pgw(ovs_be32 gtp_pgw_ip)
 int
 gtp_manager_get_pgw(void)
 {
-    struct gtp_pgw_node * pnode = NULL;
     int index = -1;
     int i;
     for (i = current; i < end; ++i)
@@ -137,24 +134,20 @@ int gtp_manager_find_pgw(ovs_be32 gtp_pgw_ip){
             break;
         }
     }
-    if (foundindex == -1)
-    {
-        return -1;
-    }
+    return foundindex;
 }
 
 int
 gtp_manager_put_teid_pgw(uint32_t teid, struct gtp_tunnel_node * gtp_tunnel_node)
 {
     uint32_t cmap_id = teid & 0x0000001F;
-    cmap teid2pgwmap = teid2pgw[cmap_id];
+    struct cmap teid2pgwmap = teid2pgw[cmap_id];
     struct gtp_teid_to_pgw_node * node = xmalloc(sizeof *node);
     node->teid = teid;
     node->gtp_tunnel_node = gtp_tunnel_node;
     node->ref_count = 1;
     ovs_mutex_lock(&teid2pgw_mutex[cmap_id]);
-    size_t ret = cmap_insert(&teid2pgwmap, CONST_CAST(struct cmap_node *, &node->node),
-                hash_int(teid, 0));
+    size_t ret = cmap_insert(&teid2pgwmap, CONST_CAST(struct cmap_node *, &node->node), hash_int(teid, 0));
     ovs_mutex_unlock(&teid2pgw_mutex[cmap_id]);
     return ret;
 }
@@ -163,7 +156,7 @@ struct gtp_teid_to_pgw_node *
 gtp_manager_get_teid_pgw(uint32_t teid)
 {
     uint32_t cmap_id = teid & 0x0000001F;
-    cmap teid2pgwmap = teid2pgw[cmap_id]; 
+    struct cmap teid2pgwmap = teid2pgw[cmap_id]; 
     struct gtp_teid_to_pgw_node *pgw_node;
 
     CMAP_FOR_EACH_WITH_HASH (pgw_node, node, hash_int(teid, 0), &teid2pgwmap) {
@@ -180,7 +173,7 @@ gtp_manager_get_teid_pgw(uint32_t teid)
 int gtp_manager_del_teid_pgw(uint32_t teid)
 {
     uint32_t cmap_id = teid & 0x0000001F;
-    cmap teid2pgwmap = teid2pgw[cmap_id];
+    struct cmap teid2pgwmap = teid2pgw[cmap_id];
     uint32_t hash = hash_int(teid, 0);
     struct gtp_teid_to_pgw_node * pgw_node;
     struct gtp_teid_to_pgw_node * found_node;
@@ -223,7 +216,7 @@ int
 gtp_manager_put_ueip_pgw(ovs_be32 ueip, struct gtp_tunnel_node * gtp_tunnel_node)
 {
     uint32_t cmap_id = (ueip & 0x1F000000) >> 24;
-    cmap ueip2pgwmap = ueip2pgw[cmap_id];
+    struct cmap ueip2pgwmap = ueip2pgw[cmap_id];
     struct gtp_ueip_to_pgw_node * node = xmalloc(sizeof *node);
     node->ueip = ueip;
     node->gtp_tunnel_node = gtp_tunnel_node;
@@ -239,7 +232,7 @@ struct gtp_ueip_to_pgw_node *
 gtp_manager_get_ueip_pgw(uint32_t ueip)
 {
     uint32_t cmap_id = (ueip & 0x1F000000) >> 24;
-    cmap ueip2pgwmap = ueip2pgw[cmap_id]; 
+    struct cmap ueip2pgwmap = ueip2pgw[cmap_id]; 
     struct gtp_ueip_to_pgw_node *pgw_node;
 
     CMAP_FOR_EACH_WITH_HASH (pgw_node, node, hash_int(ueip, 0), &ueip2pgwmap) {
@@ -256,7 +249,7 @@ gtp_manager_get_ueip_pgw(uint32_t ueip)
 int gtp_manager_del_ueip_pgw(uint32_t ueip)
 {
     uint32_t cmap_id = (ueip & 0x1F000000) >> 24;
-    cmap ueip2pgwmap = ueip2pgw[cmap_id];
+    struct cmap ueip2pgwmap = ueip2pgw[cmap_id];
     uint32_t hash = hash_int(ueip, 0);
     struct gtp_ueip_to_pgw_node * pgw_node;
     struct gtp_ueip_to_pgw_node * found_node;
@@ -310,7 +303,7 @@ bool maybe_gtpu_message(struct flow *flow){
 } 
 
 struct gtpc_msg_header *
-parse_gtpc_msg_header(struct flow *flow, struct dp_packet * packet)
+parse_gtpc_msg_header(struct dp_packet * packet)
 {
     struct gtpc_msg_header * msg = xmalloc(sizeof *msg);
     int offset = 0;
@@ -341,7 +334,7 @@ parse_gtpc_msg_header(struct flow *flow, struct dp_packet * packet)
 }
 
 struct gtpu_msg_header *
-parse_gtpu_message(struct flow *flow, struct dp_packet * packet)
+parse_gtpu_message(struct dp_packet * packet)
 {
     struct gtpu_msg_header * msg = xmalloc(sizeof *msg);
     int offset = 0;
@@ -389,9 +382,9 @@ handle_gtpc_message(struct flow *flow, struct flow_wildcards *wc, struct gtpc_ms
 
                 //set dst to pgw ip and mac
                 memset(&wc->masks.nw_dst, 0xff, sizeof wc->masks.nw_dst);
-                flow->nw_dst = pgw_lit[ramdompgw].gtp_pgw_ip;
+                flow->nw_dst = pgw_list[ramdompgw].gtp_pgw_ip;
                 WC_MASK_FIELD(wc, dl_dst);
-                flow->dl_dst = pgw_lit[ramdompgw].gtp_pgw_eth;
+                flow->dl_dst = pgw_list[ramdompgw].gtp_pgw_eth;
                 //output to pgw port
                 xlate_output_action(ctx, pgw_list[ramdompgw].gtp_pgw_port, 0, false);   
             }
@@ -402,16 +395,17 @@ handle_gtpc_message(struct flow *flow, struct flow_wildcards *wc, struct gtpc_ms
             {
                 //drop
             } else {
-                if (pgw_list[selectedpgw->gtp_tunnel_node->pgw_index].gtp_pgw_ip == 0) {
+                int selectedpgwindex = selectedpgw->gtp_tunnel_node->pgw_index;
+                if (pgw_list[selectedpgwindex].gtp_pgw_ip == 0) {
                     //drop
                 } else {
                     //set dst to pgw ip and mac
                     memset(&wc->masks.nw_dst, 0xff, sizeof wc->masks.nw_dst);
-                    flow->nw_dst = pgw_lit[selectedpgw].gtp_pgw_ip;
+                    flow->nw_dst = pgw_list[selectedpgwindex].gtp_pgw_ip;
                     WC_MASK_FIELD(wc, dl_dst);
-                    flow->dl_dst = pgw_lit[selectedpgw].gtp_pgw_eth;
+                    flow->dl_dst = pgw_list[selectedpgwindex].gtp_pgw_eth;
                     //output to pgw port
-                    xlate_output_action(ctx, pgw_list[selectedpgw].gtp_pgw_port, 0, false);
+                    xlate_output_action(ctx, pgw_list[selectedpgwindex].gtp_pgw_port, 0, false);
                 }
                 bool willfree = false;
                 ovs_mutex_lock(&selectedpgw->mutex);
@@ -587,16 +581,17 @@ handle_gtpu_message(struct flow *flow, struct flow_wildcards *wc, struct gtpu_ms
                 {
                     //drop
                 } else {
-                    if (pgw_list[selectedpgw->gtp_tunnel_node->pgw_index].gtp_pgw_ip == 0) {
+                    int selectedpgwindex = selectedpgw->gtp_tunnel_node->pgw_index;
+                    if (pgw_list[selectedpgwindex].gtp_pgw_ip == 0) {
                         //drop
                     } else {
                         //set dst to pgw ip and mac
                         memset(&wc->masks.nw_dst, 0xff, sizeof wc->masks.nw_dst);
-                        flow->nw_dst = pgw_lit[selectedpgw].gtp_pgw_ip;
+                        flow->nw_dst = pgw_list[selectedpgwindex].gtp_pgw_ip;
                         WC_MASK_FIELD(wc, dl_dst);
-                        flow->dl_dst = pgw_lit[selectedpgw].gtp_pgw_eth;
+                        flow->dl_dst = pgw_list[selectedpgwindex].gtp_pgw_eth;
                         //output to pgw port
-                        xlate_output_action(ctx, pgw_list[selectedpgw].gtp_pgw_port, 0, false);
+                        xlate_output_action(ctx, pgw_list[selectedpgwindex].gtp_pgw_port, 0, false);
                     }
                     bool willfree = false;
                     ovs_mutex_lock(&selectedpgw->mutex);
@@ -640,14 +635,13 @@ void handle_gtp(struct flow *flow, struct flow_wildcards *wc, struct dp_packet *
 {
     if (maybe_gtpc_message(flow)){
         struct gtpc_msg_header * gtpcmsgheader = NULL;
-        gtpcmsgheader = parse_gtpc_msg_header(flow, packet);
+        gtpcmsgheader = parse_gtpc_msg_header(packet);
         if(gtpcmsgheader != NULL) {
             handle_gtpc_message(flow, wc, gtpcmsgheader, packet, ctx);
-                free(gtpcmsgheader);                    
-            }
+            free(gtpcmsgheader);                    
         } else if (maybe_gtpu_message(flow)){
             struct gtpu_msg_header * gtpumsgheader = NULL;
-            gtpumsgheader = parse_gtpu_message(flow, packet);
+            gtpumsgheader = parse_gtpu_message(packet);
             if(gtpumsgheader != NULL) {
                 handle_gtpu_message(flow, wc, gtpumsgheader, packet, ctx);
                 free(gtpumsgheader);                    
@@ -667,18 +661,19 @@ void handle_pgw_sgi(struct flow *flow, struct flow_wildcards *wc, struct dp_pack
             //dst=ueip
             //get pgw with ueip, if no drop
             //send packet to pgw sgi port, do not change packet
-            struct gtp_ueip_to_pgw_node * selectedpgw = gtp_manager_put_ueip_pgw(flow->nw_dst);
+            struct gtp_ueip_to_pgw_node * selectedpgw = gtp_manager_get_ueip_pgw(flow->nw_dst);
             if (selectedpgw == NULL)
             {
                 //drop
             } else {
-                if (pgw_list[selectedpgw->gtp_tunnel_node->pgw_index].gtp_pgw_ip == 0) {
+                int selectedpgwindex = selectedpgw->gtp_tunnel_node->pgw_index;
+                if (pgw_list[selectedpgwindex].gtp_pgw_ip == 0) {
                     //drop
                 } else {
                     WC_MASK_FIELD(wc, dl_dst);
-                    flow->dl_dst = pgw_lit[selectedpgw].pgw_sgi_eth;
+                    flow->dl_dst = pgw_list[selectedpgwindex].pgw_sgi_eth;
                     //output to pgw port
-                    xlate_output_action(ctx, pgw_list[selectedpgw].pgw_sgi_port, 0, false);
+                    xlate_output_action(ctx, pgw_list[selectedpgwindex].pgw_sgi_port, 0, false);
                 }
                 bool willfree = false;
                 ovs_mutex_lock(&selectedpgw->mutex);
