@@ -7,6 +7,7 @@
 #include "cmap.h"
 #include "list.h"
 #include "ovs-thread.h"
+#include "ofproto/ofproto-dpif-xlate.h"
 
 #define HASHMAP_PART_NUM 32
 #define MAX_PGW_PER_NODE 1024

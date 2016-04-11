@@ -5305,6 +5305,7 @@ handle_flow_mod(struct ofconn *ofconn, const struct ofp_header *oh)
         uint16_t ovs_total = 0;
         uint16_t gtp_pgw_port = 0;
         uint16_t ovs_phy_port = 0;
+        uint16_t pgw_sgi_port = 0;
         uint8_t pgw_fastpath = 0;
         struct eth_addr gtp_pgw_eth;
         struct eth_addr pgw_sgi_eth;
