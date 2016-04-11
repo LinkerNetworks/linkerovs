@@ -1537,6 +1537,57 @@ format_HANDLE_GTP(const struct ofpact_null *a OVS_UNUSED, struct ds *s)
 {
     ds_put_cstr(s, "handle_gtp");
 }
+
+
+/* handle gtp actions. */
+static enum ofperr
+decode_OFPAT_RAW10_HANDLE_PGW_SGI(struct ofpbuf *out)
+{
+    ofpact_put_HANDLE_PGW_SGI(out)->ofpact.raw = OFPAT_RAW10_HANDLE_PGW_SGI;
+    return 0;
+}
+
+static enum ofperr
+decode_OFPAT_RAW11_HANDLE_PGW_SGI(struct ofpbuf *out)
+{
+    ofpact_put_HANDLE_PGW_SGI(out)->ofpact.raw = OFPAT_RAW11_HANDLE_PGW_SGI;
+    return 0;
+}
+
+static enum ofperr
+decode_OFPAT_RAW12_HANDLE_PGW_SGI(struct ofpbuf *out)
+{
+    ofpact_put_HANDLE_PGW_SGI(out)->ofpact.raw = OFPAT_RAW12_HANDLE_PGW_SGI;
+    return 0;
+}
+
+static void
+encode_HANDLE_PGW_SGI(const struct ofpact_null *null OVS_UNUSED,
+                  enum ofp_version ofp_version, struct ofpbuf *out)
+{
+    if (ofp_version == OFP10_VERSION) {
+        put_OFPAT10_HANDLE_PGW_SGI(out);
+    } else if (ofp_version == OFP11_VERSION) {
+        put_OFPAT11_HANDLE_PGW_SGI(out);
+    } else {
+        put_OFPAT12_HANDLE_PGW_SGI(out);
+    }
+}
+
+static char * OVS_WARN_UNUSED_RESULT
+parse_HANDLE_PGW_SGI(char *arg OVS_UNUSED, struct ofpbuf *ofpacts,
+                 enum ofputil_protocol *usable_protocols OVS_UNUSED)
+{
+    ofpact_put_HANDLE_PGW_SGI(ofpacts)->ofpact.raw = OFPAT_RAW10_HANDLE_PGW_SGI;
+    return NULL;
+}
+
+static void
+format_HANDLE_PGW_SGI(const struct ofpact_null *a OVS_UNUSED, struct ds *s)
+{
+    ds_put_cstr(s, "handle_pgw_sgi");
+}
+
 
 /* Set operate gtp actions. */
 static enum ofperr

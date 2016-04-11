@@ -5343,7 +5343,7 @@ handle_flow_mod(struct ofconn *ofconn, const struct ofp_header *oh)
             if (a->type == OFPACT_PGW_SGI_ETH){
                 pgw_sgi_eth = ofpact_get_PGW_SGI_ETH(a)->mac;
             }
-        }GTP_PGW_ETH
+        }
         if (operation != 0) {
             switch(operation) {
                 case 1: 
