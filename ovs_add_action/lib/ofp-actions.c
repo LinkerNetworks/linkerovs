@@ -7531,7 +7531,7 @@ get_ofpact_map(enum ofp_version version)
         { OFPACT_GTP_PGW_ETH, 39},
         { OFPACT_PGW_SGI_ETH, 40},
         { 0, -1 },
-    };, 34
+    };
 
     /* OpenFlow 1.1 actions. */
     static const struct ofpact_map of11[] = {
