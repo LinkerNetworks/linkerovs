@@ -2163,11 +2163,11 @@ encode_GTP_PGW_ETH(const struct ofpact_mac *mac,
                   enum ofp_version ofp_version, struct ofpbuf *out)
 {
     if (ofp_version == OFP10_VERSION) {
-        put_OFPAT10_GTP_PGW_ETH(out, mac->mac);
+        put_OFPAT10_GTP_PGW_ETH(out)->dl_addr = mac->mac;
     } else if (ofp_version == OFP11_VERSION) {
-        put_OFPAT11_GTP_PGW_ETH(out, mac->mac);
+        put_OFPAT11_GTP_PGW_ETH(out)->dl_addr = mac->mac;
     } else {
-        put_OFPAT12_GTP_PGW_ETH(out, mac->mac);
+        put_OFPAT12_GTP_PGW_ETH(out)->dl_addr = mac->mac;
     }
 }
 
@@ -2226,11 +2226,11 @@ encode_PGW_SGI_ETH(const struct ofpact_mac *mac,
                   enum ofp_version ofp_version, struct ofpbuf *out)
 {
     if (ofp_version == OFP10_VERSION) {
-        put_OFPAT10_PGW_SGI_ETH(out, mac->mac);
+        put_OFPAT10_PGW_SGI_ETH(out)->dl_addr = mac->mac;
     } else if (ofp_version == OFP11_VERSION) {
-        put_OFPAT11_PGW_SGI_ETH(out, mac->mac);
+        put_OFPAT11_PGW_SGI_ETH(out)->dl_addr = mac->mac;
     } else {
-        put_OFPAT12_PGW_SGI_ETH(out, mac->mac);
+        put_OFPAT12_PGW_SGI_ETH(out)->dl_addr = mac->mac;
     }
 }
 
