@@ -643,7 +643,7 @@ handle_gtpu_message(struct flow *flow, struct flow_wildcards *wc, struct gtpu_ms
                     }
                 }                
             } else {
-                VLOG_INFO("fast path not supported %d.", (uint64_t)packet);
+                VLOG_INFO("fast path not supported %"PRId64".", (uint64_t)packet);
                 //get body from package
                 //send the ip msg in body to phy port
                 //how? modify the current? drop the current and create new one?
@@ -736,7 +736,7 @@ void handle_pgw_sgi(struct flow *flow, struct flow_wildcards *wc, const struct d
                 }
             }       
         } else {
-            VLOG_INFO("fast path not supported %d.", (uint64_t)packet);
+            VLOG_INFO("fast path not supported %"PRId64".", (uint64_t)packet);
             //fast path
             //get t3 with ueip
             //create new package with t3 and send to phy port
