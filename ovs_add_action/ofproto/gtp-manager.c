@@ -7,14 +7,14 @@ VLOG_DEFINE_THIS_MODULE(gtp_manager);
 
 static struct ovs_mutex mutex;
 
-static uint16 ovs_id OVS_GUARDED_BY(mutex);
-static uint16 ovs_total OVS_GUARDED_BY(mutex);
-static uint16 ovs_phy_port OVS_GUARDED_BY(mutex);
-static uint8 pgw_fastpath OVS_GUARDED_BY(mutex);
+static uint16_t ovs_id OVS_GUARDED_BY(mutex);
+static uint16_t ovs_total OVS_GUARDED_BY(mutex);
+static uint16_t ovs_phy_port OVS_GUARDED_BY(mutex);
+static uint8_t pgw_fastpath OVS_GUARDED_BY(mutex);
 
 static struct gtp_pgw_node pgw_list[MAX_PGW_PER_NODE];
-static uint16 current;
-static uint16 end;
+static uint16_t current;
+static uint16_t end;
 
 static struct ovs_mutex teid2pgw_mutex[HASHMAP_PART_NUM];
 static struct cmap teid2pgw[HASHMAP_PART_NUM];
@@ -44,7 +44,7 @@ gtp_manager_init(void)
 }
 
 void
-gtp_manager_set_params(uint16 ovsid, uint16 total, uint16 phyport, uint8 fastpath)
+gtp_manager_set_params(uint16_t ovsid, uint16_t total, uint16_t phyport, uint8_t fastpath)
 {
     ovs_mutex_lock(&mutex);
     ovs_id = ovsid;
@@ -55,7 +55,7 @@ gtp_manager_set_params(uint16 ovsid, uint16 total, uint16 phyport, uint8 fastpat
 }
 
 void
-gtp_manager_add_pgw(ovs_be32 gtp_pgw_ip, uint16 gtp_pgw_port, struct eth_addr gtp_pgw_eth, uint16 pgw_sgi_port, struct eth_addr pgw_sgi_eth) 
+gtp_manager_add_pgw(ovs_be32 gtp_pgw_ip, uint16_t gtp_pgw_port, struct eth_addr gtp_pgw_eth, uint16_t pgw_sgi_port, struct eth_addr pgw_sgi_eth) 
 {
     bool found = false;
     int i = 0;
@@ -144,9 +144,9 @@ int gtp_manager_find_pgw(ovs_be32 gtp_pgw_ip){
 }
 
 int
-gtp_manager_put_teid_pgw(uint32 teid, struct gtp_tunnel_node * gtp_tunnel_node)
+gtp_manager_put_teid_pgw(uint32_t teid, struct gtp_tunnel_node * gtp_tunnel_node)
 {
-    uint32 cmap_id = teid & 0x0000001F;
+    uint32_t cmap_id = teid & 0x0000001F;
     cmap teid2pgwmap = teid2pgw[cmap_id];
     struct gtp_teid_to_pgw_node * node = xmalloc(sizeof *node);
     node->teid = teid;
@@ -160,9 +160,9 @@ gtp_manager_put_teid_pgw(uint32 teid, struct gtp_tunnel_node * gtp_tunnel_node)
 }
 
 struct gtp_teid_to_pgw_node * 
-gtp_manager_get_teid_pgw(uint32 teid)
+gtp_manager_get_teid_pgw(uint32_t teid)
 {
-    uint32 cmap_id = teid & 0x0000001F;
+    uint32_t cmap_id = teid & 0x0000001F;
     cmap teid2pgwmap = teid2pgw[cmap_id]; 
     struct gtp_teid_to_pgw_node *pgw_node;
 
@@ -177,9 +177,9 @@ gtp_manager_get_teid_pgw(uint32 teid)
     return NULL;
 }
 
-int gtp_manager_del_teid_pgw(uint32 teid)
+int gtp_manager_del_teid_pgw(uint32_t teid)
 {
-    uint32 cmap_id = teid & 0x0000001F;
+    uint32_t cmap_id = teid & 0x0000001F;
     cmap teid2pgwmap = teid2pgw[cmap_id];
     uint32_t hash = hash_int(teid, 0);
     struct gtp_teid_to_pgw_node * pgw_node;
@@ -222,7 +222,7 @@ int gtp_manager_del_teid_pgw(uint32 teid)
 int
 gtp_manager_put_ueip_pgw(ovs_be32 ueip, struct gtp_tunnel_node * gtp_tunnel_node)
 {
-    uint32 cmap_id = (ueip & 0x1F000000) >> 24;
+    uint32_t cmap_id = (ueip & 0x1F000000) >> 24;
     cmap ueip2pgwmap = ueip2pgw[cmap_id];
     struct gtp_ueip_to_pgw_node * node = xmalloc(sizeof *node);
     node->ueip = ueip;
@@ -236,9 +236,9 @@ gtp_manager_put_ueip_pgw(ovs_be32 ueip, struct gtp_tunnel_node * gtp_tunnel_node
 }
 
 struct gtp_ueip_to_pgw_node * 
-gtp_manager_get_ueip_pgw(uint32 ueip)
+gtp_manager_get_ueip_pgw(uint32_t ueip)
 {
-    uint32 cmap_id = (ueip & 0x1F000000) >> 24;
+    uint32_t cmap_id = (ueip & 0x1F000000) >> 24;
     cmap ueip2pgwmap = ueip2pgw[cmap_id]; 
     struct gtp_ueip_to_pgw_node *pgw_node;
 
@@ -253,9 +253,9 @@ gtp_manager_get_ueip_pgw(uint32 ueip)
     return NULL;
 }
 
-int gtp_manager_del_ueip_pgw(uint32 ueip)
+int gtp_manager_del_ueip_pgw(uint32_t ueip)
 {
-    uint32 cmap_id = (ueip & 0x1F000000) >> 24;
+    uint32_t cmap_id = (ueip & 0x1F000000) >> 24;
     cmap ueip2pgwmap = ueip2pgw[cmap_id];
     uint32_t hash = hash_int(ueip, 0);
     struct gtp_ueip_to_pgw_node * pgw_node;
@@ -314,26 +314,26 @@ parse_gtpc_msg_header(struct flow *flow, struct dp_packet * packet)
 {
     struct gtpc_msg_header * msg = xmalloc(sizeof *msg);
     int offset = 0;
-    uint8 * flag = dp_packet_at(packet, offset, 1);
+    uint8_t * flag = dp_packet_at(packet, offset, 1);
     msg->version = (*flag & 0xe0) >> 5;
     if(msg->version != 2){
         return NULL;
     }
     msg->has_teid = (*flag & 0x08) == 0 ? false:true;
     offset = offset + 1;
-    uint8 * message_type = dp_packet_at(packet, offset, 1);
+    uint8_t * message_type = dp_packet_at(packet, offset, 1);
     msg->message_type = *message_type;
     offset = offset + 1;
-    uint16 * message_length = dp_packet_at(packet, offset, 2);
+    uint16_t * message_length = dp_packet_at(packet, offset, 2);
     msg->message_length= *message_length;
     offset = offset + 2;
     if (msg->has_teid)
     {
-        uint32 * teid = dp_packet_at(packet, offset, 4);
+        uint32_t * teid = dp_packet_at(packet, offset, 4);
         msg->teid = *teid;
         offset = offset + 4;
     }
-    uint32 * seq_num = dp_packet_at(packet, offset, 4);
+    uint32_t * seq_num = dp_packet_at(packet, offset, 4);
     msg->seq_num = (*seq_num) >> 8;
     offset = offset + 4;
     msg->body_offset = offset;   
@@ -345,20 +345,20 @@ parse_gtpu_message(struct flow *flow, struct dp_packet * packet)
 {
     struct gtpu_msg_header * msg = xmalloc(sizeof *msg);
     int offset = 0;
-    uint8 * flag = dp_packet_at(packet, offset, 1);
+    uint8_t * flag = dp_packet_at(packet, offset, 1);
     msg->version = (*flag & 0xe0) >> 5;
     if(msg->version != 1){
         free(msg);
         return NULL;
     }
     offset = offset + 1;
-    uint8 * message_type = dp_packet_at(packet, offset, 1);
+    uint8_t * message_type = dp_packet_at(packet, offset, 1);
     msg->message_type = *message_type;
     offset = offset + 1;
-    uint16 * message_length = dp_packet_at(packet, offset, 2);
+    uint16_t * message_length = dp_packet_at(packet, offset, 2);
     msg->message_length= *message_length;
     offset = offset + 2;
-    uint32 * teid = dp_packet_at(packet, offset, 4);
+    uint32_t * teid = dp_packet_at(packet, offset, 4);
     msg->teid = *teid;
     offset = offset + 4;
     msg->body_offset = offset;
@@ -442,28 +442,28 @@ handle_gtpc_message(struct flow *flow, struct flow_wildcards *wc, struct gtpc_ms
             //create session response
             //int ret = gtp_manager_put_teid_pgw(gtpcmsg->teid, flow->nw_src);
             //get t2 from header
-            uint32 t2 = gtpcmsg->teid;
+            uint32_t t2 = gtpcmsg->teid;
             //continue to parse body
             int start = gtpcmsg->body_offset;
             //Octets 3 to 4 represent the Message Length field. 
             //This field shall indicate the length of the message in octets excluding the mandatory part of the GTP-C header (the first 4 octets).
             int length = gtpcmsg->message_length + 4;
             //get t4, t5, ueip
-            uint32 t4 = 0;
-            uint32 t5 = 0;
+            uint32_t t4 = 0;
+            uint32_t t5 = 0;
             ovs_be32 ueip = 0;
             while(start < length){
-                uint8 * ie_type = dp_packet_at(packet, start, 1);
-                uint16 * ie_length = dp_packet_at(packet, start+1, 2);
+                uint8_t * ie_type = dp_packet_at(packet, start, 1);
+                uint16_t * ie_length = dp_packet_at(packet, start+1, 2);
                 if (*ie_type == 87)
                 {
                     //t4
-                    uint32 *t4p = dp_packet_at(packet, start+5, 4);
+                    uint32_t *t4p = dp_packet_at(packet, start+5, 4);
                     t4 = *t4p;
                 } else if (*ie_type == 79)
                 {
                     //ueip
-                    uint32 *ueipp = dp_packet_at(packet, start+5, 4);
+                    uint32_t *ueipp = dp_packet_at(packet, start+5, 4);
                     ueip = htonl(*ueipp);
                 } else if (*ie_type == 93)
                 {
@@ -471,11 +471,11 @@ handle_gtpc_message(struct flow *flow, struct flow_wildcards *wc, struct gtpc_ms
                     int bcstart = start+4;
                     int bcstartend = bcstart + *ie_length;
                     while(bcstart < bcstartend){
-                        uint8 * bc_ie_type = dp_packet_at(packet, bcstart, 1);
-                        uint16 * bc_ie_length = dp_packet_at(packet, bcstart+1, 2);
+                        uint8_t * bc_ie_type = dp_packet_at(packet, bcstart, 1);
+                        uint16_t * bc_ie_length = dp_packet_at(packet, bcstart+1, 2);
                         if (*bc_ie_type == 87)
                         {
-                            uint32 *t5p = dp_packet_at(packet, bcstart+5, 4);
+                            uint32_t *t5p = dp_packet_at(packet, bcstart+5, 4);
                             t5 = *t5p;
                             break;
                         }
@@ -530,12 +530,12 @@ handle_gtpc_message(struct flow *flow, struct flow_wildcards *wc, struct gtpc_ms
             //delete session response
             //int ret = gtp_manager_del_teid_pgw(gtpcmsg->teid);
             //teid in header is t2
-            uint32 t2 = gtpcmsg->teid;
+            uint32_t t2 = gtpcmsg->teid;
             //both fastpath and not fastpath, the t2 is in map, get gtp_tunnel_node from t2
             struct gtp_teid_to_pgw_node * node = gtp_manager_get_teid_pgw(t2);
-            uint32 t4 = node->gtp_tunnel_node->teid4_sgw_c;
-            uint32 t5 = node->gtp_tunnel_node->teid5_sgw_u;
-            uint32 ueip = node->gtp_tunnel_node->ue_ip;
+            uint32_t t4 = node->gtp_tunnel_node->teid4_sgw_c;
+            uint32_t t5 = node->gtp_tunnel_node->teid5_sgw_u;
+            uint32_t ueip = node->gtp_tunnel_node->ue_ip;
             //delete t2, t3 when fastpath, t4, t5, ueip in map, delete one, unref one, if zero, free the node
             gtp_manager_del_teid_pgw(t4);
             gtp_manager_del_teid_pgw(t5);
@@ -718,4 +718,3 @@ void handle_pgw_sgi(struct flow *flow, struct flow_wildcards *wc, struct dp_pack
         }
     }
 }
-
