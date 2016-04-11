@@ -231,9 +231,9 @@ enum ofp_raw_action_type {
     OFPAT_RAW10_PGW_SGI_PORT,
     /* OF1.0(38): uint8_t. */
     OFPAT_RAW10_PGW_FASTPATH,
-    /* OF1.0(39): struct eth_addr. */
+    /* OF1.0(39): struct ofp_action_dl_addr. */
     OFPAT_RAW10_GTP_PGW_ETH,
-    /* OF1.0(40): struct eth_addr. */
+    /* OF1.0(40): struct ofp_action_dl_addr. */
     OFPAT_RAW10_PGW_SGI_ETH,
 
     /* OF1.1(28): void. */
@@ -258,9 +258,9 @@ enum ofp_raw_action_type {
     OFPAT_RAW11_PGW_SGI_PORT,
     /* OF1.1(38): uint8_t. */
     OFPAT_RAW11_PGW_FASTPATH,
-    /* OF1.1(39): struct eth_addr. */
+    /* OF1.1(39): struct ofp_action_dl_addr. */
     OFPAT_RAW11_GTP_PGW_ETH,
-    /* OF1.1(40): struct eth_addr. */
+    /* OF1.1(40): struct ofp_action_dl_addr. */
     OFPAT_RAW11_PGW_SGI_ETH,
 
     /* OF1.2-1.4(28): void. */
@@ -285,9 +285,9 @@ enum ofp_raw_action_type {
     OFPAT_RAW12_PGW_SGI_PORT,
     /* OF1.2-1.4(38): uint8_t. */
     OFPAT_RAW12_PGW_FASTPATH,
-    /* OF1.2-1.4(39): struct eth_addr. */
+    /* OF1.2-1.4(39): struct ofp_action_dl_addr. */
     OFPAT_RAW12_GTP_PGW_ETH,
-    /* OF1.2-1.4(40): struct eth_addr. */
+    /* OF1.2-1.4(40): struct ofp_action_dl_addr. */
     OFPAT_RAW12_PGW_SGI_ETH,
 
     /* NX1.0-1.4(7): struct nx_action_reg_load.
@@ -1603,29 +1603,29 @@ format_OPERATE_GTP(const struct ofpact_operate_gtp *a, struct ds *s)
 
 /* Set gtp pgw eth actions. */
 static enum ofperr
-decode_OFPAT_RAW10_GTP_PGW_ETH(const struct eth_addr mac,
+decode_OFPAT_RAW10_GTP_PGW_ETH(const struct ofp_action_dl_addr *a,
                               enum ofp_version ofp_version OVS_UNUSED,
                               struct ofpbuf *out)
 {
-    ofpact_put_GTP_PGW_ETH(out)->mac = mac;
+    ofpact_put_GTP_PGW_ETH(out)->mac = a->dl_addr;
     return 0;
 }
 
 static enum ofperr
-decode_OFPAT_RAW11_GTP_PGW_ETH(const struct eth_addr mac,
+decode_OFPAT_RAW11_GTP_PGW_ETH(const struct ofp_action_dl_addr *a,
                               enum ofp_version ofp_version OVS_UNUSED,
                               struct ofpbuf *out)
 {
-    ofpact_put_GTP_PGW_ETH(out)->mac = mac;
+    ofpact_put_GTP_PGW_ETH(out)->mac = a->dl_addr;
     return 0;
 }
 
 static enum ofperr
-decode_OFPAT_RAW12_GTP_PGW_ETH(const struct eth_addr mac,
+decode_OFPAT_RAW12_GTP_PGW_ETH(const struct ofp_action_dl_addr *a,
                               enum ofp_version ofp_version OVS_UNUSED,
                               struct ofpbuf *out)
 {
-    ofpact_put_GTP_PGW_ETH(out)->mac = mac;
+    ofpact_put_GTP_PGW_ETH(out)->mac = a->dl_addr;
     return 0;
 }
 
@@ -1667,29 +1667,29 @@ format_GTP_PGW_ETH(const struct ofpact_mac *a, struct ds *s)
 
 /* Set pgw sgi eth actions. */
 static enum ofperr
-decode_OFPAT_RAW10_PGW_SGI_ETH(const struct eth_addr mac,
+decode_OFPAT_RAW10_PGW_SGI_ETH(const struct ofp_action_dl_addr *a,
                               enum ofp_version ofp_version OVS_UNUSED,
                               struct ofpbuf *out)
 {
-    ofpact_put_PGW_SGI_ETH(out)->mac = mac;
+    ofpact_put_PGW_SGI_ETH(out)->mac = a->dl_addr;
     return 0;
 }
 
 static enum ofperr
-decode_OFPAT_RAW11_PGW_SGI_ETH(const struct eth_addr mac,
+decode_OFPAT_RAW11_PGW_SGI_ETH(const struct ofp_action_dl_addr *a,
                               enum ofp_version ofp_version OVS_UNUSED,
                               struct ofpbuf *out)
 {
-    ofpact_put_PGW_SGI_ETH(out)->mac = mac;
+    ofpact_put_PGW_SGI_ETH(out)->mac = a->dl_addr;
     return 0;
 }
 
 static enum ofperr
-decode_OFPAT_RAW12_PGW_SGI_ETH(const struct eth_addr mac,
+decode_OFPAT_RAW12_PGW_SGI_ETH(const struct ofp_action_dl_addr *a,
                               enum ofp_version ofp_version OVS_UNUSED,
                               struct ofpbuf *out)
 {
-    ofpact_put_PGW_SGI_ETH(out)->mac = mac;
+    ofpact_put_PGW_SGI_ETH(out)->mac = a->dl_addr;
     return 0;
 }
 
