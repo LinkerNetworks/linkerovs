@@ -59,6 +59,7 @@
 #include "tnl-ports.h"
 #include "tunnel.h"
 #include "openvswitch/vlog.h"
+#include "ofproto/gtp-manager.h"
 
 COVERAGE_DEFINE(xlate_actions);
 COVERAGE_DEFINE(xlate_actions_oversize);
