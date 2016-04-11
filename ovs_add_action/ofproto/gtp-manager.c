@@ -303,7 +303,7 @@ bool maybe_gtpu_message(struct flow *flow){
 } 
 
 struct gtpc_msg_header *
-parse_gtpc_msg_header(struct dp_packet * packet)
+parse_gtpc_msg_header(const struct dp_packet * packet)
 {
     struct gtpc_msg_header * msg = xmalloc(sizeof *msg);
     int offset = 0;
@@ -336,7 +336,7 @@ parse_gtpc_msg_header(struct dp_packet * packet)
 }
 
 struct gtpu_msg_header *
-parse_gtpu_message(struct dp_packet * packet)
+parse_gtpu_message(const struct dp_packet * packet)
 {
     struct gtpu_msg_header * msg = xmalloc(sizeof *msg);
     int offset = 0;
@@ -363,7 +363,7 @@ parse_gtpu_message(struct dp_packet * packet)
 }
 
 void
-handle_gtpc_message(struct flow *flow, struct flow_wildcards *wc, struct gtpc_msg_header * gtpcmsg, struct dp_packet * packet, struct xlate_ctx *ctx)
+handle_gtpc_message(struct flow *flow, struct flow_wildcards *wc, struct gtpc_msg_header * gtpcmsg, const struct dp_packet * packet, struct xlate_ctx *ctx)
 {
     VLOG_INFO("handle gtpc message......");
     if (flow->in_port.ofp_port == ovs_phy_port){
@@ -588,7 +588,7 @@ handle_gtpc_message(struct flow *flow, struct flow_wildcards *wc, struct gtpc_ms
 }
 
 void
-handle_gtpu_message(struct flow *flow, struct flow_wildcards *wc, struct gtpu_msg_header * gtpumsg, struct dp_packet * packet, struct xlate_ctx *ctx)
+handle_gtpu_message(struct flow *flow, struct flow_wildcards *wc, struct gtpu_msg_header * gtpumsg, const struct dp_packet * packet, struct xlate_ctx *ctx)
 {
     VLOG_INFO("handle gtpu message......");
     if (flow->in_port.ofp_port == ovs_phy_port){
@@ -643,7 +643,7 @@ handle_gtpu_message(struct flow *flow, struct flow_wildcards *wc, struct gtpu_ms
                     }
                 }                
             } else {
-                VLOG_INFO("fast path not supported %d.", packet);
+                VLOG_INFO("fast path not supported %d.", (uint64_t)packet);
                 //get body from package
                 //send the ip msg in body to phy port
                 //how? modify the current? drop the current and create new one?
@@ -666,7 +666,7 @@ handle_gtpu_message(struct flow *flow, struct flow_wildcards *wc, struct gtpu_ms
     }
 }
 
-void handle_gtp(struct flow *flow, struct flow_wildcards *wc, struct dp_packet * packet, struct xlate_ctx *ctx)
+void handle_gtp(struct flow *flow, struct flow_wildcards *wc, const struct dp_packet * packet, struct xlate_ctx *ctx)
 {
     if (maybe_gtpc_message(flow)){
         VLOG_INFO("handle gtpc......");
@@ -688,7 +688,7 @@ void handle_gtp(struct flow *flow, struct flow_wildcards *wc, struct dp_packet *
 }
 
 //src_ip=ueip_pool or dst_ip=ueip_pool, should be handled here
-void handle_pgw_sgi(struct flow *flow, struct flow_wildcards *wc, struct dp_packet * packet, struct xlate_ctx *ctx)
+void handle_pgw_sgi(struct flow *flow, struct flow_wildcards *wc, const struct dp_packet * packet, struct xlate_ctx *ctx)
 {
     VLOG_INFO("handle sgi......");
     if (flow->in_port.ofp_port == ovs_phy_port){
@@ -736,7 +736,7 @@ void handle_pgw_sgi(struct flow *flow, struct flow_wildcards *wc, struct dp_pack
                 }
             }       
         } else {
-            VLOG_INFO("fast path not supported %d.", packet);
+            VLOG_INFO("fast path not supported %d.", (uint64_t)packet);
             //fast path
             //get t3 with ueip
             //create new package with t3 and send to phy port

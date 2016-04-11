@@ -91,6 +91,6 @@ struct gtpu_msg_header * parse_gtpu_message(struct dp_packet * packet);
 
 void handle_gtpc_message(struct flow *flow, struct flow_wildcards *wc, struct gtpc_msg_header * gtpcmsg, struct dp_packet * packet, struct xlate_ctx *ctx);
 void handle_gtpu_message(struct flow *flow, struct flow_wildcards *wc, struct gtpu_msg_header * gtpumsg, struct dp_packet * packet, struct xlate_ctx *ctx);
-void handle_gtp(struct flow *flow, struct flow_wildcards *wc, struct dp_packet * packet, struct xlate_ctx *ctx);
-void handle_pgw_sgi(struct flow *flow, struct flow_wildcards *wc, struct dp_packet * packet, struct xlate_ctx *ctx);
+void handle_gtp(struct flow *flow, struct flow_wildcards *wc, const struct dp_packet * packet, struct xlate_ctx *ctx);
+void handle_pgw_sgi(struct flow *flow, struct flow_wildcards *wc, const struct dp_packet * packet, struct xlate_ctx *ctx);
 #endif
