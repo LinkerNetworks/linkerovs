@@ -289,14 +289,14 @@ int gtp_manager_del_ueip_pgw(uint32_t ueip)
 }
 
 bool maybe_gtpc_message(struct flow *flow){
-    if (is_ip_any(flow) && flow->nw_proto == IPPROTO_UDP && flow->tp_dst ==htons(GTPC_PORT) && flow->tp_src == htons(GTPC_PORT) ) {
+    if (is_ip_any(flow) && flow->nw_proto == IPPROTO_UDP && (flow->tp_dst ==htons(GTPC_PORT) || flow->tp_src == htons(GTPC_PORT)) ) {
         return true;
     }
     return false;
 }
 
 bool maybe_gtpu_message(struct flow *flow){
-    if (is_ip_any(flow) && flow->nw_proto == IPPROTO_UDP && flow->tp_dst ==htons(GTPU_PORT) && flow->tp_src == htons(GTPU_PORT) ) {
+    if (is_ip_any(flow) && flow->nw_proto == IPPROTO_UDP && (flow->tp_dst ==htons(GTPU_PORT) || flow->tp_src == htons(GTPU_PORT)) ) {
         return true;
     }
     return false;
