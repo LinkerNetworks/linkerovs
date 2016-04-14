@@ -2418,11 +2418,11 @@ encode_GTP_PGW_IP(const struct ofpact_gtp_pgw_ip *gtp_pgw_ip,
 {
     ovs_be32 addr = gtp_pgw_ip->gtp_pgw_ip;
     if (ofp_version == OFP10_VERSION) {
-        put_OFPAT10_GTP_PGW_IP(out, ntohl(addr));
+        put_OFPAT10_GTP_PGW_IP(out, addr);
     } else if (ofp_version == OFP11_VERSION) {
-        put_OFPAT11_GTP_PGW_IP(out, ntohl(addr));
+        put_OFPAT11_GTP_PGW_IP(out, addr);
     } else {
-        put_OFPAT12_GTP_PGW_IP(out, ntohl(addr));
+        put_OFPAT12_GTP_PGW_IP(out, addr);
     }
 }
 
@@ -2436,7 +2436,7 @@ parse_GTP_PGW_IP(char *arg, struct ofpbuf *ofpacts,
 static void
 format_GTP_PGW_IP(const struct ofpact_gtp_pgw_ip *a, struct ds *s)
 {
-    ds_put_format(s, "gtp_pgw_ip:"IP_FMT, IP_ARGS(ntohl(a->gtp_pgw_ip)));
+    ds_put_format(s, "gtp_pgw_ip:"IP_FMT, IP_ARGS(a->gtp_pgw_ip));
 }
 
 /* Set IPv4/v6 TOS actions. */

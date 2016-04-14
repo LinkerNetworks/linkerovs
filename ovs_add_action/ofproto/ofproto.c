@@ -5345,7 +5345,7 @@ handle_flow_mod(struct ofconn *ofconn, const struct ofp_header *oh)
                 pgw_sgi_eth = ofpact_get_PGW_SGI_ETH(a)->mac;
             }
         }
-        if (operation != 0) {
+        if (operatiop n != 0) {
             switch(operation) {
                 case 1: 
                     VLOG_INFO("Adding a pgw.");
@@ -5370,7 +5370,7 @@ handle_flow_mod(struct ofconn *ofconn, const struct ofp_header *oh)
             ds_put_format(&results, "pgw_fastpath=%"PRIu8",", pgw_fastpath);
             ds_put_format(&results, "gtp_teid=%#"PRIx32",", gtp_teid);
             ds_put_format(&results, "%s=", "gtp_pgw_ip");
-            ds_put_format(&results, IP_FMT, IP_ARGS(ntohl(gtp_pgw_ip)));
+            ds_put_format(&results, IP_FMT, IP_ARGS(gtp_pgw_ip));
             VLOG_INFO("Adding GTP rule : %s.", ds_cstr(&results));
             ds_destroy(&results);
             error = 0;
