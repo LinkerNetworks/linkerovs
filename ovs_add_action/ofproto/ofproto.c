@@ -5358,6 +5358,11 @@ handle_flow_mod(struct ofconn *ofconn, const struct ofp_header *oh)
                 case 3:
                     VLOG_INFO("Set global parameters.");
                     gtp_manager_set_params(ovs_id, ovs_total, ovs_phy_port, pgw_fastpath);
+                    break;
+                case 4:
+                    VLOG_INFO("dump ovs info.");
+                    gtp_manager_dump();
+                    break;
             }
             struct ds results;
             ds_init(&results);

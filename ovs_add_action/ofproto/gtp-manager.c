@@ -43,6 +43,41 @@ gtp_manager_init(void)
     ovs_mutex_unlock(&mutex);
 }
 
+void 
+gtp_manager_dump(void)
+{
+    VLOG_INFO("dumping ovs gtp info ........................");
+    VLOG_INFO("    ovs_id : %d ", ovs_id);
+    VLOG_INFO("    ovs_total : %d ", ovs_total);
+    VLOG_INFO("    ovs_phy_port : %d ", ovs_phy_port);
+    VLOG_INFO("    pgw_fastpath : %d ", pgw_fastpath);
+    VLOG_INFO("    ...........pgw list.............");
+    VLOG_INFO("    pgw current : %d ", current);
+    VLOG_INFO("    pgw end : %d ", end);
+    int i;
+    for (i = 0; i < end; ++i)
+    {
+        if (if (pgw_list[i].gtp_pgw_ip != 0)){
+            VLOG_INFO("    pgw %d : gtp_pgw_ip="IP_FMT" gtp_pgw_port=%d gtp_pgw_eth="ETH_ADDR_FMT" pgw_sgi_port=%d pgw_sgi_eth="ETH_ADDR_FMT" ", i, IP_ARGS(pgw_list[i].gtp_pgw_ip), pgw_list[i].gtp_pgw_port, ETH_ADDR_ARGS(pgw_list[i].gtp_pgw_eth), pgw_list[i].pgw_sgi_port, ETH_ADDR_ARGS(pgw_list[i].pgw_sgi_eth));
+        }
+    }
+    VLOG_INFO("    ...........teid->pgw.............");
+    for (i = 0; i < HASHMAP_PART_NUM; i++) {
+        struct gtp_teid_to_pgw_node *pgw_node;
+        CMAP_FOR_EACH (pgw_node, node, &teid2pgw[i]) {
+            VLOG_INFO("    teid %d -> { teid4_sgw_c=%d, teid5_sgw_u=%d, teid2_pgw_c=%d, teid3_pgw_u=%d, ue_ip="IP_FMT" pgw_index=%d }", pgw_node->teid, pgw_node->gtp_tunnel_node->teid4_sgw_c, pgw_node->gtp_tunnel_node->teid5_sgw_u, pgw_node->gtp_tunnel_node->teid2_pgw_c, pgw_node->gtp_tunnel_node->teid3_pgw_u, IP_ARGS(pgw_node->gtp_tunnel_node->ue_ip), pgw_node->gtp_tunnel_node->pgw_index);
+        }
+    }
+    VLOG_INFO("    ...........teid->pgw.............");
+    for (i = 0; i < HASHMAP_PART_NUM; i++) {
+        struct gtp_ueip_to_pgw_node *pgw_node;
+        CMAP_FOR_EACH (pgw_node, node, &ueip2pgw[i]) {
+            VLOG_INFO("    ueip "IP_FMT" -> { teid4_sgw_c=%d, teid5_sgw_u=%d, teid2_pgw_c=%d, teid3_pgw_u=%d, ue_ip="IP_FMT" pgw_index=%d }", IP_ARGS(pgw_node->ueip), pgw_node->gtp_tunnel_node->teid4_sgw_c, pgw_node->gtp_tunnel_node->teid5_sgw_u, pgw_node->gtp_tunnel_node->teid2_pgw_c, pgw_node->gtp_tunnel_node->teid3_pgw_u, IP_ARGS(pgw_node->gtp_tunnel_node->ue_ip), pgw_node->gtp_tunnel_node->pgw_index);
+        }
+    }
+}
+
+
 void
 gtp_manager_set_params(uint16_t ovsid, uint16_t total, uint16_t phyport, uint8_t fastpath)
 {
@@ -668,6 +703,11 @@ handle_gtpu_message(struct flow *flow, struct flow_wildcards *wc, struct gtpu_ms
 
 void handle_gtp(struct flow *flow, struct flow_wildcards *wc, const struct dp_packet * packet, struct xlate_ctx *ctx)
 {
+    if (packet == NULL){
+        VLOG_INFO("packet is null for revalidating");
+        return;
+    }
+
     if (maybe_gtpc_message(flow)){
         VLOG_INFO("handle gtpc......");
         struct gtpc_msg_header * gtpcmsgheader = NULL;
@@ -690,6 +730,11 @@ void handle_gtp(struct flow *flow, struct flow_wildcards *wc, const struct dp_pa
 //src_ip=ueip_pool or dst_ip=ueip_pool, should be handled here
 void handle_pgw_sgi(struct flow *flow, struct flow_wildcards *wc, const struct dp_packet * packet, struct xlate_ctx *ctx)
 {
+    if (packet == NULL){
+        VLOG_INFO("packet is null for revalidating");
+        return;
+    }
+
     VLOG_INFO("handle sgi......");
     if (flow->in_port.ofp_port == ovs_phy_port){
         //from www to pgw

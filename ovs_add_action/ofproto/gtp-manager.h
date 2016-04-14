@@ -70,6 +70,7 @@ struct gtpc_msg_header {
 };
 
 void gtp_manager_init(void);
+void gtp_manager_dump(void);
 void gtp_manager_set_params(uint16_t ovs_id, uint16_t total, uint16_t phyport, uint8_t fastpath);
 void gtp_manager_add_pgw(ovs_be32 gtp_pgw_ip, uint16_t gtp_pgw_port, struct eth_addr gtp_pgw_eth, uint16_t pgw_sgi_port, struct eth_addr pgw_sgi_eth);
 void gtp_manager_del_pgw(ovs_be32 gtp_pgw_ip);
