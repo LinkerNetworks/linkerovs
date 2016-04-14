@@ -341,6 +341,7 @@ struct gtpc_msg_header *
 parse_gtpc_msg_header(const struct dp_packet * packet)
 {
     struct gtpc_msg_header * msg = xmalloc(sizeof *msg);
+    int header_length = 0;
     int offset = (char *) dp_packet_get_udp_payload(packet) - (char *) dp_packet_data(packet);
     uint8_t * flag = dp_packet_at(packet, offset, 1);
     msg->version = (*flag & 0xe0) >> 5;
@@ -349,22 +350,28 @@ parse_gtpc_msg_header(const struct dp_packet * packet)
     }
     msg->has_teid = (*flag & 0x08) == 0 ? false:true;
     offset = offset + 1;
+    header_length = header_length + 1;
     uint8_t * message_type = dp_packet_at(packet, offset, 1);
     msg->message_type = *message_type;
     offset = offset + 1;
+    header_length = header_length + 1;
     ovs_be16 * message_length = dp_packet_at(packet, offset, 2);
     msg->message_length= ntohs(*message_length);
     offset = offset + 2;
+    header_length = header_length + 2;
     if (msg->has_teid)
     {
         ovs_be32  * teid = dp_packet_at(packet, offset, 4);
         msg->teid = ntohl(*teid);
         offset = offset + 4;
+        header_length = header_length + 4;
     }
     ovs_be32 * seq_num = dp_packet_at(packet, offset, 4);
     msg->seq_num = ntohl((*seq_num) & 0xFFFFFF00);
     offset = offset + 4;
+    header_length = header_length + 4;
     msg->body_offset = offset; 
+    msg->header_length = header_length;
 
     VLOG_INFO("parse gtpc message : version %d    message_type %d    teid=%#"PRIx32".", msg->version, msg->message_type, msg->teid); 
     return msg;
@@ -374,6 +381,7 @@ struct gtpu_msg_header *
 parse_gtpu_message(const struct dp_packet * packet)
 {
     struct gtpu_msg_header * msg = xmalloc(sizeof *msg);
+    int header_length = 0;
     int offset = (char *) dp_packet_get_udp_payload(packet) - (char *) dp_packet_data(packet);
     uint8_t * flag = dp_packet_at(packet, offset, 1);
     msg->version = (*flag & 0xe0) >> 5;
@@ -382,16 +390,21 @@ parse_gtpu_message(const struct dp_packet * packet)
         return NULL;
     }
     offset = offset + 1;
+    header_length = header_length + 1;
     uint8_t * message_type = dp_packet_at(packet, offset, 1);
     msg->message_type = *message_type;
     offset = offset + 1;
+    header_length = header_length + 1;
     ovs_be16 * message_length = dp_packet_at(packet, offset, 2);
     msg->message_length= ntohs(*message_length);
     offset = offset + 2;
+    header_length = header_length + 2;
     ovs_be32 * teid = dp_packet_at(packet, offset, 4);
     msg->teid = ntohl(*teid);
     offset = offset + 4;
+    header_length = header_length + 4;
     msg->body_offset = offset;
+    msg->header_length = header_length;
 
     VLOG_INFO("parse gtpu message : version %d    teid=%#"PRIx32".", msg->version, msg->teid);
     return msg;
@@ -493,11 +506,12 @@ handle_gtpc_message(struct flow *flow, struct flow_wildcards *wc, struct gtpc_ms
             //Octets 3 to 4 represent the Message Length field. 
             //This field shall indicate the length of the message in octets excluding the mandatory part of the GTP-C header (the first 4 octets).
             int length = gtpcmsg->message_length + 4;
+            int finish = start + (length - gtpcmsg->header_length);
             //get t4, t5, ueip
             uint32_t t4 = 0;
             uint32_t t5 = 0;
             ovs_be32 ueip = 0;
-            while(start < length){
+            while(start < finish){
                 uint8_t * ie_type = dp_packet_at(packet, start, 1);
                 ovs_be16 * ie_length = dp_packet_at(packet, start+1, 2);
                 uint16_t ie_length_t = ntohs(*ie_length);

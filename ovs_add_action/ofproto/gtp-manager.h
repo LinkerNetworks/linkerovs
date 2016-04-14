@@ -55,6 +55,7 @@ struct gtpu_msg_header {
 	uint16_t message_length;
 	uint32_t teid;
 
+        int header_length;
 	int body_offset;
 };
 
@@ -66,6 +67,7 @@ struct gtpc_msg_header {
 	uint32_t teid;
 	uint32_t seq_num;
 
+       int header_length; 
 	int body_offset;
 };
 
