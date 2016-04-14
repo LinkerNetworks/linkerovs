@@ -353,7 +353,7 @@ parse_gtpc_msg_header(const struct dp_packet * packet)
     msg->message_type = *message_type;
     offset = offset + 1;
     ovs_be16 * message_length = dp_packet_at(packet, offset, 2);
-    msg->message_length= ntohl(*message_length);
+    msg->message_length= ntohs(*message_length);
     offset = offset + 2;
     if (msg->has_teid)
     {
@@ -386,7 +386,7 @@ parse_gtpu_message(const struct dp_packet * packet)
     msg->message_type = *message_type;
     offset = offset + 1;
     ovs_be16 * message_length = dp_packet_at(packet, offset, 2);
-    msg->message_length= ntohl(*message_length);
+    msg->message_length= ntohs(*message_length);
     offset = offset + 2;
     ovs_be32 * teid = dp_packet_at(packet, offset, 4);
     msg->teid = ntohl(*teid);
@@ -500,6 +500,7 @@ handle_gtpc_message(struct flow *flow, struct flow_wildcards *wc, struct gtpc_ms
             while(start < length){
                 uint8_t * ie_type = dp_packet_at(packet, start, 1);
                 ovs_be16 * ie_length = dp_packet_at(packet, start+1, 2);
+                uint16_t ie_length_t = ntohs(*ie_length);
                 if (*ie_type == 87)
                 {
                     //t4
@@ -514,24 +515,25 @@ handle_gtpc_message(struct flow *flow, struct flow_wildcards *wc, struct gtpc_ms
                 {
                     //bearer context
                     int bcstart = start+4;
-                    int bcstartend = bcstart + *ie_length;
+                    int bcstartend = bcstart + ie_length_t;
                     while(bcstart < bcstartend){
                         uint8_t * bc_ie_type = dp_packet_at(packet, bcstart, 1);
                         ovs_be16 * bc_ie_length = dp_packet_at(packet, bcstart+1, 2);
+                        uint16_t bc_ie_length_t = ntohs(*bc_ie_length);
                         if (*bc_ie_type == 87)
                         {
                             ovs_be32 *t5p = dp_packet_at(packet, bcstart+5, 4);
                             t5 = ntohl(*t5p);
                             break;
                         }
-                        bcstart = bcstart + *bc_ie_length + 4;
+                        bcstart = bcstart + bc_ie_length_t + 4;
                     }
                 }
                 if (t4 !=0 && t5 !=0 && ueip != 0)
                 {
                     break;
                 }
-                start = start + *ie_length + 4;
+                start = start + ie_length_t + 4;
             }
             if (t4 !=0 && t5 !=0 && ueip != 0) {
                 if (pgw_fastpath == 0)
@@ -545,7 +547,7 @@ handle_gtpc_message(struct flow *flow, struct flow_wildcards *wc, struct gtpc_ms
                     node->teid5_sgw_u=t5;
                     node->ue_ip = ueip;
 
-                    VLOG_INFO("parse result from CreateSessionResponse : t2=%#"PRIx32", t4=%#"PRIx32", t5=%#"PRIx32", ueip="IP_FMT".", t2, t4, t5, IP_ARGS(ntohl(ueip)));
+                    VLOG_INFO("parse result from CreateSessionResponse : t2=%#"PRIx32", t4=%#"PRIx32", t5=%#"PRIx32", ueip="IP_FMT".", t2, t4, t5, IP_ARGS(ueip));
 
                     ////put t4->pnode, t5->pnode, ueip->pnode, t2->pnode
                     int pgwindex = gtp_manager_find_pgw(flow->nw_src);
