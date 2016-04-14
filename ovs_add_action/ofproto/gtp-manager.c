@@ -57,7 +57,7 @@ gtp_manager_dump(void)
     int i;
     for (i = 0; i < end; ++i)
     {
-        if (if (pgw_list[i].gtp_pgw_ip != 0)){
+        if (pgw_list[i].gtp_pgw_ip != 0){
             VLOG_INFO("    pgw %d : gtp_pgw_ip="IP_FMT" gtp_pgw_port=%d gtp_pgw_eth="ETH_ADDR_FMT" pgw_sgi_port=%d pgw_sgi_eth="ETH_ADDR_FMT" ", i, IP_ARGS(pgw_list[i].gtp_pgw_ip), pgw_list[i].gtp_pgw_port, ETH_ADDR_ARGS(pgw_list[i].gtp_pgw_eth), pgw_list[i].pgw_sgi_port, ETH_ADDR_ARGS(pgw_list[i].pgw_sgi_eth));
         }
     }
