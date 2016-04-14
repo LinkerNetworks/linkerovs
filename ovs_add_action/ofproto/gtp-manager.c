@@ -52,7 +52,7 @@ gtp_manager_dump(void)
     VLOG_INFO("    ovs_phy_port : %d ", ovs_phy_port);
     VLOG_INFO("    pgw_fastpath : %d ", pgw_fastpath);
     VLOG_INFO("    ...........pgw list.............");
-    VLOG_INFO("    pgw current : %d ", current);quit
+    VLOG_INFO("    pgw current : %d ", current);
     VLOG_INFO("    pgw end : %d ", end);
     int i;
     for (i = 0; i < end; ++i)
