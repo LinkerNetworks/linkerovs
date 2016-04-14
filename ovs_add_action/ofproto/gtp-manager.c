@@ -52,7 +52,7 @@ gtp_manager_dump(void)
     VLOG_INFO("    ovs_phy_port : %d ", ovs_phy_port);
     VLOG_INFO("    pgw_fastpath : %d ", pgw_fastpath);
     VLOG_INFO("    ...........pgw list.............");
-    VLOG_INFO("    pgw current : %d ", current);
+    VLOG_INFO("    pgw current : %d ", current);quit
     VLOG_INFO("    pgw end : %d ", end);
     int i;
     for (i = 0; i < end; ++i)
@@ -341,7 +341,7 @@ struct gtpc_msg_header *
 parse_gtpc_msg_header(const struct dp_packet * packet)
 {
     struct gtpc_msg_header * msg = xmalloc(sizeof *msg);
-    int offset = 0;
+    int offset = (char *) dp_packet_get_udp_payload(packet) - (char *) dp_packet_data(packet);
     uint8_t * flag = dp_packet_at(packet, offset, 1);
     msg->version = (*flag & 0xe0) >> 5;
     if(msg->version != 2){
