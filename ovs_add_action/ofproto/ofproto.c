@@ -5345,7 +5345,7 @@ handle_flow_mod(struct ofconn *ofconn, const struct ofp_header *oh)
                 pgw_sgi_eth = ofpact_get_PGW_SGI_ETH(a)->mac;
             }
         }
-        if (operatiop != 0) {
+        if (operation != 0) {
             switch(operation) {
                 case 1: 
                     VLOG_INFO("Adding a pgw.");
