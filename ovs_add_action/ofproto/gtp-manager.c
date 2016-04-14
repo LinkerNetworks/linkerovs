@@ -352,17 +352,17 @@ parse_gtpc_msg_header(const struct dp_packet * packet)
     uint8_t * message_type = dp_packet_at(packet, offset, 1);
     msg->message_type = *message_type;
     offset = offset + 1;
-    uint16_t * message_length = dp_packet_at(packet, offset, 2);
-    msg->message_length= *message_length;
+    ovs_be16 * message_length = dp_packet_at(packet, offset, 2);
+    msg->message_length= ntohl(*message_length);
     offset = offset + 2;
     if (msg->has_teid)
     {
-        uint32_t * teid = dp_packet_at(packet, offset, 4);
-        msg->teid = *teid;
+        ovs_be32  * teid = dp_packet_at(packet, offset, 4);
+        msg->teid = ntohl(*teid);
         offset = offset + 4;
     }
-    uint32_t * seq_num = dp_packet_at(packet, offset, 4);
-    msg->seq_num = (*seq_num) >> 8;
+    ovs_be32 * seq_num = dp_packet_at(packet, offset, 4);
+    msg->seq_num = ntohl((*seq_num) & 0xFFFFFF00);
     offset = offset + 4;
     msg->body_offset = offset; 
 
@@ -374,7 +374,7 @@ struct gtpu_msg_header *
 parse_gtpu_message(const struct dp_packet * packet)
 {
     struct gtpu_msg_header * msg = xmalloc(sizeof *msg);
-    int offset = 0;
+    int offset = (char *) dp_packet_get_udp_payload(packet) - (char *) dp_packet_data(packet);
     uint8_t * flag = dp_packet_at(packet, offset, 1);
     msg->version = (*flag & 0xe0) >> 5;
     if(msg->version != 1){
@@ -385,11 +385,11 @@ parse_gtpu_message(const struct dp_packet * packet)
     uint8_t * message_type = dp_packet_at(packet, offset, 1);
     msg->message_type = *message_type;
     offset = offset + 1;
-    uint16_t * message_length = dp_packet_at(packet, offset, 2);
-    msg->message_length= *message_length;
+    ovs_be16 * message_length = dp_packet_at(packet, offset, 2);
+    msg->message_length= ntohl(*message_length);
     offset = offset + 2;
-    uint32_t * teid = dp_packet_at(packet, offset, 4);
-    msg->teid = *teid;
+    ovs_be32 * teid = dp_packet_at(packet, offset, 4);
+    msg->teid = ntohl(*teid);
     offset = offset + 4;
     msg->body_offset = offset;
 
@@ -499,17 +499,17 @@ handle_gtpc_message(struct flow *flow, struct flow_wildcards *wc, struct gtpc_ms
             ovs_be32 ueip = 0;
             while(start < length){
                 uint8_t * ie_type = dp_packet_at(packet, start, 1);
-                uint16_t * ie_length = dp_packet_at(packet, start+1, 2);
+                ovs_be16 * ie_length = dp_packet_at(packet, start+1, 2);
                 if (*ie_type == 87)
                 {
                     //t4
-                    uint32_t *t4p = dp_packet_at(packet, start+5, 4);
-                    t4 = *t4p;
+                    ovs_be32 *t4p = dp_packet_at(packet, start+5, 4);
+                    t4 = ntohl(*t4p);
                 } else if (*ie_type == 79)
                 {
                     //ueip
-                    uint32_t *ueipp = dp_packet_at(packet, start+5, 4);
-                    ueip = htonl(*ueipp);
+                    ovs_be32 *ueipp = dp_packet_at(packet, start+5, 4);
+                    ueip = *ueipp;
                 } else if (*ie_type == 93)
                 {
                     //bearer context
@@ -517,11 +517,11 @@ handle_gtpc_message(struct flow *flow, struct flow_wildcards *wc, struct gtpc_ms
                     int bcstartend = bcstart + *ie_length;
                     while(bcstart < bcstartend){
                         uint8_t * bc_ie_type = dp_packet_at(packet, bcstart, 1);
-                        uint16_t * bc_ie_length = dp_packet_at(packet, bcstart+1, 2);
+                        ovs_be16 * bc_ie_length = dp_packet_at(packet, bcstart+1, 2);
                         if (*bc_ie_type == 87)
                         {
-                            uint32_t *t5p = dp_packet_at(packet, bcstart+5, 4);
-                            t5 = *t5p;
+                            ovs_be32 *t5p = dp_packet_at(packet, bcstart+5, 4);
+                            t5 = ntohl(*t5p);
                             break;
                         }
                         bcstart = bcstart + *bc_ie_length + 4;
@@ -557,6 +557,8 @@ handle_gtpc_message(struct flow *flow, struct flow_wildcards *wc, struct gtpc_ms
                         gtp_manager_put_teid_pgw(t5, node);
                         gtp_manager_put_ueip_pgw(ueip, node);
                         gtp_manager_put_teid_pgw(t2, node);
+                        VLOG_INFO(" { teid4_sgw_c=%d, teid5_sgw_u=%d, teid2_pgw_c=%d, ue_ip="IP_FMT" pgw_index=%d }", t4, t5, t2, IP_ARGS(ueip), pgwindex);
+
                         ////refcount = refcount+4
                         //output to phy port
                         VLOG_INFO("output to phy port %d.", ovs_phy_port);
@@ -592,7 +594,7 @@ handle_gtpc_message(struct flow *flow, struct flow_wildcards *wc, struct gtpc_ms
             gtp_manager_del_ueip_pgw(ueip);
             gtp_manager_del_teid_pgw(t2);
 
-            VLOG_INFO("delete session : t2=%#"PRIx32", t4=%#"PRIx32", t5=%#"PRIx32", ueip="IP_FMT".", t2, t4, t5, IP_ARGS(ntohl(ueip)));
+            VLOG_INFO("delete session : t2=%#"PRIx32", t4=%#"PRIx32", t5=%#"PRIx32", ueip="IP_FMT".", t2, t4, t5, IP_ARGS(ueip));
 
             bool willfree = false;
             ovs_mutex_lock(&node->mutex);
