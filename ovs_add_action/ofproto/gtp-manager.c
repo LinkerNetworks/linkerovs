@@ -39,6 +39,9 @@ gtp_manager_init(void)
     }
     for (i = 0; i < HASHMAP_PART_NUM; i++) {
         cmap_init(&teid2pgw[i]);
+        ovs_mutex_init(&teid2pgw_mutex[i]);
+        cmap_init(&ueip2pgw[i]);
+        ovs_mutex_init(&ueip2pgw_mutex[i]);
     }
     ovs_mutex_unlock(&mutex);
 }
