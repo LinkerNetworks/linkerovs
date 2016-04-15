@@ -378,7 +378,7 @@ parse_gtpc_msg_header(const struct dp_packet * packet)
     msg->body_offset = offset; 
     msg->header_length = header_length;
 
-    VLOG_INFO("parse gtpc message : version %d    message_type %d    teid=%#"PRIx32".", msg->version, msg->message_type, msg->teid); 
+    VLOG_INFO("parse gtpc message : version=%d    seq_num=%#"PRIx32"    message_type=%d    teid=%#"PRIx32".", msg->version, msg->seq_num, msg->message_type, msg->teid); 
     return msg;
 }
 
