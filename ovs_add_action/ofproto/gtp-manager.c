@@ -166,7 +166,7 @@ int gtp_manager_find_pgw(ovs_be32 gtp_pgw_ip){
     int i;
     for (i = 0; i < end; ++i)
     {
-        if (pgw_list[0].gtp_pgw_ip == gtp_pgw_ip)
+        if (pgw_list[i].gtp_pgw_ip == gtp_pgw_ip)
         {
             foundindex = i;
             break;
@@ -184,6 +184,7 @@ gtp_manager_put_teid_pgw(uint32_t teid, struct gtp_tunnel_node * gtp_tunnel_node
     node->teid = teid;
     node->gtp_tunnel_node = gtp_tunnel_node;
     node->ref_count = 1;
+    ovs_mutex_init(&node->mutex);
     ovs_mutex_lock(&teid2pgw_mutex[cmap_id]);
     size_t ret = cmap_insert(&teid2pgwmap, CONST_CAST(struct cmap_node *, &node->node), hash_int(teid, 0));
     ovs_mutex_unlock(&teid2pgw_mutex[cmap_id]);
@@ -259,6 +260,7 @@ gtp_manager_put_ueip_pgw(ovs_be32 ueip, struct gtp_tunnel_node * gtp_tunnel_node
     node->ueip = ueip;
     node->gtp_tunnel_node = gtp_tunnel_node;
     node->ref_count = 1;
+    ovs_mutex_init(&node->mutex);
     ovs_mutex_lock(&ueip2pgw_mutex[cmap_id]);
     size_t ret = cmap_insert(&ueip2pgwmap, CONST_CAST(struct cmap_node *, &node->node),
                 hash_int(ueip, 0));
