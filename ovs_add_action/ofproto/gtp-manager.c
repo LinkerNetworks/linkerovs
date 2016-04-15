@@ -372,7 +372,7 @@ parse_gtpc_msg_header(const struct dp_packet * packet)
         header_length = header_length + 4;
     }
     ovs_be32 * seq_num = dp_packet_at(packet, offset, 4);
-    msg->seq_num = ntohl((*seq_num) & 0xFFFFFF00);
+    msg->seq_num = (*seq_num) >> 8;
     offset = offset + 4;
     header_length = header_length + 4;
     msg->body_offset = offset; 
