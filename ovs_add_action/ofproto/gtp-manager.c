@@ -184,6 +184,7 @@ int gtp_manager_find_pgw(ovs_be32 gtp_pgw_ip){
 int
 gtp_manager_put_teid_pgw(uint32_t teid, struct gtp_tunnel_node * gtp_tunnel_node)
 {
+    VLOG_INFO("put_teid_pgw");
     uint32_t cmap_id = teid & 0x0000001F;
     struct cmap teid2pgwmap = teid2pgw[cmap_id];
     struct gtp_teid_to_pgw_node * node = xmalloc(sizeof *node);
@@ -260,6 +261,7 @@ int gtp_manager_del_teid_pgw(uint32_t teid)
 int
 gtp_manager_put_ueip_pgw(ovs_be32 ueip, struct gtp_tunnel_node * gtp_tunnel_node)
 {
+    VLOG_INFO("put_ueip_pgw");
     uint32_t cmap_id = (ueip & 0x1F000000) >> 24;
     struct cmap ueip2pgwmap = ueip2pgw[cmap_id];
     struct gtp_ueip_to_pgw_node * node = xmalloc(sizeof *node);
