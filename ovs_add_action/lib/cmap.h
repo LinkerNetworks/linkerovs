@@ -79,6 +79,8 @@ struct cmap {
     OVSRCU_TYPE(struct cmap_impl *) impl;
 };
 
+void cmap_infos(const struct cmap *cmap, int * n, int *  max, uint32_t* mask);
+
 /* Initialization. */
 void cmap_init(struct cmap *);
 void cmap_destroy(struct cmap *);

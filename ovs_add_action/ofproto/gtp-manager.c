@@ -193,7 +193,10 @@ gtp_manager_put_teid_pgw(uint32_t teid, struct gtp_tunnel_node * gtp_tunnel_node
     ovs_mutex_init(&node->mutex);
     ovs_mutex_lock(&teid2pgw_mutex[cmap_id]);
     size_t ret = cmap_insert(&teid2pgwmap, CONST_CAST(struct cmap_node *, &node->node), hash_int(teid, 0));
-    VLOG_INFO("put_teid_pgw n=%d max=%d mask=%d", teid2pgwmap.impl->n, teid2pgwmap.impl->max_n, teid2pgwmap.impl->mask);
+    int n, max;
+    uint32_t mask;
+    cmap_infos(&teid2pgwmap,&n, &max, &mask);
+    VLOG_INFO("put_teid_pgw n=%d max=%d mask=%d", n, max, mask);
     ovs_mutex_unlock(&teid2pgw_mutex[cmap_id]);
     return ret;
 }
@@ -271,7 +274,10 @@ gtp_manager_put_ueip_pgw(ovs_be32 ueip, struct gtp_tunnel_node * gtp_tunnel_node
     ovs_mutex_lock(&ueip2pgw_mutex[cmap_id]);
     size_t ret = cmap_insert(&ueip2pgwmap, CONST_CAST(struct cmap_node *, &node->node),
                 hash_int(ueip, 0));
-    VLOG_INFO("put_ueip_pgw n=%d max=%d mask=%d", ueip2pgwmap.impl->n, ueip2pgwmap.impl->max_n, ueip2pgwmap.impl->mask);
+    int n, max;
+    uint32_t mask;
+    cmap_infos(&ueip2pgwmap,&n, &max, &mask);
+    VLOG_INFO("put_ueip_pgw n=%d max=%d mask=%d", n, max, mask);
     ovs_mutex_unlock(&ueip2pgw_mutex[cmap_id]);
     return ret;
 }
