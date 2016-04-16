@@ -184,7 +184,6 @@ int gtp_manager_find_pgw(ovs_be32 gtp_pgw_ip){
 int
 gtp_manager_put_teid_pgw(uint32_t teid, struct gtp_tunnel_node * gtp_tunnel_node)
 {
-    VLOG_INFO("put_teid_pgw");
     uint32_t cmap_id = teid & 0x0000001F;
     struct cmap teid2pgwmap = teid2pgw[cmap_id];
     struct gtp_teid_to_pgw_node * node = xmalloc(sizeof *node);
@@ -194,6 +193,7 @@ gtp_manager_put_teid_pgw(uint32_t teid, struct gtp_tunnel_node * gtp_tunnel_node
     ovs_mutex_init(&node->mutex);
     ovs_mutex_lock(&teid2pgw_mutex[cmap_id]);
     size_t ret = cmap_insert(&teid2pgwmap, CONST_CAST(struct cmap_node *, &node->node), hash_int(teid, 0));
+    VLOG_INFO("put_teid_pgw n=%d max=%d mask=%d", teid2pgwmap.impl->n, teid2pgwmap.impl->max_n, teid2pgwmap.impl->mask);
     ovs_mutex_unlock(&teid2pgw_mutex[cmap_id]);
     return ret;
 }
@@ -261,7 +261,6 @@ int gtp_manager_del_teid_pgw(uint32_t teid)
 int
 gtp_manager_put_ueip_pgw(ovs_be32 ueip, struct gtp_tunnel_node * gtp_tunnel_node)
 {
-    VLOG_INFO("put_ueip_pgw");
     uint32_t cmap_id = (ueip & 0x1F000000) >> 24;
     struct cmap ueip2pgwmap = ueip2pgw[cmap_id];
     struct gtp_ueip_to_pgw_node * node = xmalloc(sizeof *node);
@@ -272,6 +271,7 @@ gtp_manager_put_ueip_pgw(ovs_be32 ueip, struct gtp_tunnel_node * gtp_tunnel_node
     ovs_mutex_lock(&ueip2pgw_mutex[cmap_id]);
     size_t ret = cmap_insert(&ueip2pgwmap, CONST_CAST(struct cmap_node *, &node->node),
                 hash_int(ueip, 0));
+    VLOG_INFO("put_ueip_pgw n=%d max=%d mask=%d", ueip2pgwmap.impl->n, ueip2pgwmap.impl->max_n, ueip2pgwmap.impl->mask);
     ovs_mutex_unlock(&ueip2pgw_mutex[cmap_id]);
     return ret;
 }
