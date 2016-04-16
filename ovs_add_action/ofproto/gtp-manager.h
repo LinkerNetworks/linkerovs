@@ -71,7 +71,7 @@ struct gtpc_msg_header {
 	int body_offset;
 };
 
-bool check_is_gtp(struct flow *flow);
+bool check_is_gtp(const struct flow *flow);
 void gtp_manager_init(void);
 void gtp_manager_dump(void);
 void gtp_manager_set_params(uint16_t ovs_id, uint16_t total, uint16_t phyport, uint8_t fastpath);
@@ -88,8 +88,8 @@ int gtp_manager_put_ueip_pgw(ovs_be32 ueip, struct gtp_tunnel_node * gtp_tunnel_
 struct gtp_ueip_to_pgw_node * gtp_manager_get_ueip_pgw(uint32_t ueip);
 int gtp_manager_del_ueip_pgw(uint32_t ueip);
 
-bool maybe_gtpc_message(struct flow *flow);
-bool maybe_gtpu_message(struct flow *flow);
+bool maybe_gtpc_message(const struct flow *flow);
+bool maybe_gtpu_message(const struct flow *flow);
 struct gtpc_msg_header * parse_gtpc_msg_header(const struct dp_packet * packet);
 struct gtpu_msg_header * parse_gtpu_message(const struct dp_packet * packet);
 
