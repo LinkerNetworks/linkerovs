@@ -71,6 +71,7 @@ struct gtpc_msg_header {
 	int body_offset;
 };
 
+bool check_is_gtp(struct flow *flow);
 void gtp_manager_init(void);
 void gtp_manager_dump(void);
 void gtp_manager_set_params(uint16_t ovs_id, uint16_t total, uint16_t phyport, uint8_t fastpath);

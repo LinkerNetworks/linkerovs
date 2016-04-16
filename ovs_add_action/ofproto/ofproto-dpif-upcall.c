@@ -39,6 +39,7 @@
 #include "seq.h"
 #include "unixctl.h"
 #include "openvswitch/vlog.h"
+#include "gtp-manager.h"
 
 #define MAX_QUEUE_LENGTH 512
 #define UPCALL_MAX_BATCH 64
@@ -1336,9 +1337,11 @@ handle_upcalls(struct udpif *udpif, struct upcall *upcalls,
          *      already.
          *
          *    - Upcall was a recirculation but we do not have a reference to
-         *      to the recirculation ID. */
+         *      to the recirculation ID. 
+         *    - GTP service
+         */
         if (may_put && upcall->type == DPIF_UC_MISS &&
-            (!upcall->recirc || upcall->have_recirc_ref)) {
+            (!upcall->recirc || upcall->have_recirc_ref) && !check_is_gtp(upcall->flow)) {
             struct udpif_key *ukey = upcall->ukey;
 
             upcall->ukey_persists = true;

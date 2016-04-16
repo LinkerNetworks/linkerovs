@@ -23,6 +23,12 @@ static struct cmap teid2pgw[HASHMAP_PART_NUM];
 static struct ovs_mutex ueip2pgw_mutex[HASHMAP_PART_NUM];
 static struct cmap ueip2pgw[HASHMAP_PART_NUM];
 
+bool
+check_is_gtp(struct flow * flow)
+{
+    return (maybe_gtpc_message(flow) || maybe_gtpu_message(flow));
+}
+
 void
 gtp_manager_init(void)
 {
