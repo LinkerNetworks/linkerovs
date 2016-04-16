@@ -24,7 +24,7 @@ static struct ovs_mutex ueip2pgw_mutex[HASHMAP_PART_NUM];
 static struct cmap ueip2pgw[HASHMAP_PART_NUM];
 
 bool
-check_is_gtp(struct flow * flow)
+check_is_gtp(const struct flow * flow)
 {
     return (maybe_gtpc_message(flow) || maybe_gtpu_message(flow));
 }
@@ -334,14 +334,14 @@ int gtp_manager_del_ueip_pgw(uint32_t ueip)
     return ret;
 }
 
-bool maybe_gtpc_message(struct flow *flow){
+bool maybe_gtpc_message(const struct flow *flow){
     if (is_ip_any(flow) && flow->nw_proto == IPPROTO_UDP && (flow->tp_dst ==htons(GTPC_PORT) || flow->tp_src == htons(GTPC_PORT)) ) {
         return true;
     }
     return false;
 }
 
-bool maybe_gtpu_message(struct flow *flow){
+bool maybe_gtpu_message(const struct flow *flow){
     if (is_ip_any(flow) && flow->nw_proto == IPPROTO_UDP && (flow->tp_dst ==htons(GTPU_PORT) || flow->tp_src == htons(GTPU_PORT)) ) {
         return true;
     }
