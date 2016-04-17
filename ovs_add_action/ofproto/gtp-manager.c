@@ -185,7 +185,7 @@ int
 gtp_manager_put_teid_pgw(uint32_t teid, struct gtp_tunnel_node * gtp_tunnel_node)
 {
     uint32_t cmap_id = teid & 0x0000001F;
-    struct cmap teid2pgwmap = teid2pgw[cmap_id];
+    struct cmap * teid2pgwmap = &teid2pgw[cmap_id];
     struct gtp_teid_to_pgw_node * node = xmalloc(sizeof *node);
     node->teid = teid;
     node->gtp_tunnel_node = gtp_tunnel_node;
@@ -194,10 +194,10 @@ gtp_manager_put_teid_pgw(uint32_t teid, struct gtp_tunnel_node * gtp_tunnel_node
     ovs_mutex_lock(&teid2pgw_mutex[cmap_id]);
     int n, max;
     uint32_t mask;
-    cmap_infos(&teid2pgwmap,&n, &max, &mask);
+    cmap_infos(teid2pgwmap,&n, &max, &mask);
     VLOG_INFO("before put_teid_pgw cmap_id=%d n=%d max=%d mask=%d",cmap_id, n, max, mask);
-    size_t ret = cmap_insert(&teid2pgwmap, CONST_CAST(struct cmap_node *, &node->node), hash_int(teid, 0));
-    cmap_infos(&teid2pgwmap,&n, &max, &mask);
+    size_t ret = cmap_insert(teid2pgwmap, CONST_CAST(struct cmap_node *, &node->node), hash_int(teid, 0));
+    cmap_infos(teid2pgwmap,&n, &max, &mask);
     VLOG_INFO("after put_teid_pgw cmap_id=%d n=%d max=%d mask=%d",cmap_id, n, max, mask);  
     ovs_mutex_unlock(&teid2pgw_mutex[cmap_id]);
     return ret;
@@ -207,10 +207,10 @@ struct gtp_teid_to_pgw_node *
 gtp_manager_get_teid_pgw(uint32_t teid)
 {
     uint32_t cmap_id = teid & 0x0000001F;
-    struct cmap teid2pgwmap = teid2pgw[cmap_id]; 
+    struct cmap * teid2pgwmap = &teid2pgw[cmap_id]; 
     struct gtp_teid_to_pgw_node *pgw_node;
 
-    CMAP_FOR_EACH_WITH_HASH (pgw_node, node, hash_int(teid, 0), &teid2pgwmap) {
+    CMAP_FOR_EACH_WITH_HASH (pgw_node, node, hash_int(teid, 0), teid2pgwmap) {
         if (pgw_node->teid == teid) {
             ovs_mutex_lock(&pgw_node->mutex);
             pgw_node->ref_count++;
@@ -224,11 +224,11 @@ gtp_manager_get_teid_pgw(uint32_t teid)
 int gtp_manager_del_teid_pgw(uint32_t teid)
 {
     uint32_t cmap_id = teid & 0x0000001F;
-    struct cmap teid2pgwmap = teid2pgw[cmap_id];
+    struct cmap * teid2pgwmap = &teid2pgw[cmap_id];
     uint32_t hash = hash_int(teid, 0);
     struct gtp_teid_to_pgw_node * pgw_node;
     struct gtp_teid_to_pgw_node * found_node;
-    CMAP_FOR_EACH_WITH_HASH (pgw_node, node, hash, &teid2pgwmap) {
+    CMAP_FOR_EACH_WITH_HASH (pgw_node, node, hash, teid2pgwmap) {
         if (pgw_node->teid == teid) {
             found_node = pgw_node;
             break;
@@ -239,7 +239,7 @@ int gtp_manager_del_teid_pgw(uint32_t teid)
         return -1;
     }
     ovs_mutex_lock(&teid2pgw_mutex[cmap_id]);
-    size_t ret = cmap_remove(&teid2pgwmap, &found_node->node, hash);
+    size_t ret = cmap_remove(teid2pgwmap, &found_node->node, hash);
     ovs_mutex_unlock(&teid2pgw_mutex[cmap_id]);
 
     bool willfree = false;
@@ -267,7 +267,7 @@ int
 gtp_manager_put_ueip_pgw(ovs_be32 ueip, struct gtp_tunnel_node * gtp_tunnel_node)
 {
     uint32_t cmap_id = (ueip & 0x1F000000) >> 24;
-    struct cmap ueip2pgwmap = ueip2pgw[cmap_id];
+    struct cmap * ueip2pgwmap = &ueip2pgw[cmap_id];
     struct gtp_ueip_to_pgw_node * node = xmalloc(sizeof *node);
     node->ueip = ueip;
     node->gtp_tunnel_node = gtp_tunnel_node;
@@ -276,11 +276,11 @@ gtp_manager_put_ueip_pgw(ovs_be32 ueip, struct gtp_tunnel_node * gtp_tunnel_node
     ovs_mutex_lock(&ueip2pgw_mutex[cmap_id]);
     int n, max;
     uint32_t mask;
-    cmap_infos(&ueip2pgwmap,&n, &max, &mask);
+    cmap_infos(ueip2pgwmap,&n, &max, &mask);
     VLOG_INFO("before put_ueip_pgw cmap_id=%d n=%d max=%d mask=%d",cmap_id, n, max, mask);
-    size_t ret = cmap_insert(&ueip2pgwmap, CONST_CAST(struct cmap_node *, &node->node),
+    size_t ret = cmap_insert(ueip2pgwmap, CONST_CAST(struct cmap_node *, &node->node),
                 hash_int(ueip, 0));
-    cmap_infos(&ueip2pgwmap,&n, &max, &mask);
+    cmap_infos(ueip2pgwmap,&n, &max, &mask);
     VLOG_INFO("after put_ueip_pgw cmap_id=%d n=%d max=%d mask=%d", cmap_id, n, max, mask);
     ovs_mutex_unlock(&ueip2pgw_mutex[cmap_id]);
     return ret;
@@ -290,10 +290,10 @@ struct gtp_ueip_to_pgw_node *
 gtp_manager_get_ueip_pgw(uint32_t ueip)
 {
     uint32_t cmap_id = (ueip & 0x1F000000) >> 24;
-    struct cmap ueip2pgwmap = ueip2pgw[cmap_id]; 
+    struct cmap * ueip2pgwmap = &ueip2pgw[cmap_id]; 
     struct gtp_ueip_to_pgw_node *pgw_node;
 
-    CMAP_FOR_EACH_WITH_HASH (pgw_node, node, hash_int(ueip, 0), &ueip2pgwmap) {
+    CMAP_FOR_EACH_WITH_HASH (pgw_node, node, hash_int(ueip, 0), ueip2pgwmap) {
         if (pgw_node->ueip == ueip) {
             ovs_mutex_lock(&pgw_node->mutex);
             pgw_node->ref_count++;
@@ -307,11 +307,11 @@ gtp_manager_get_ueip_pgw(uint32_t ueip)
 int gtp_manager_del_ueip_pgw(uint32_t ueip)
 {
     uint32_t cmap_id = (ueip & 0x1F000000) >> 24;
-    struct cmap ueip2pgwmap = ueip2pgw[cmap_id];
+    struct cmap * ueip2pgwmap = &ueip2pgw[cmap_id];
     uint32_t hash = hash_int(ueip, 0);
     struct gtp_ueip_to_pgw_node * pgw_node;
     struct gtp_ueip_to_pgw_node * found_node;
-    CMAP_FOR_EACH_WITH_HASH (pgw_node, node, hash, &ueip2pgwmap) {
+    CMAP_FOR_EACH_WITH_HASH (pgw_node, node, hash, ueip2pgwmap) {
         if (pgw_node->ueip == ueip) {
             found_node = pgw_node;
             break;
@@ -322,7 +322,7 @@ int gtp_manager_del_ueip_pgw(uint32_t ueip)
         return -1;
     }
     ovs_mutex_lock(&ueip2pgw_mutex[cmap_id]);
-    size_t ret = cmap_remove(&ueip2pgwmap, &found_node->node, hash);
+    size_t ret = cmap_remove(ueip2pgwmap, &found_node->node, hash);
     ovs_mutex_unlock(&ueip2pgw_mutex[cmap_id]);
     
     bool willfree = false;
