@@ -49,6 +49,7 @@
 #include "openvswitch/vlog.h"
 #include "lib/vswitch-idl.h"
 #include "lib/netdev-dpdk.h"
+#include "ofproto/gtp-manager.h"
 
 VLOG_DEFINE_THIS_MODULE(vswitchd);
 
@@ -84,6 +85,7 @@ main(int argc, char *argv[])
     remote = parse_options(argc, argv, &unixctl_path);
     fatal_ignore_sigpipe();
     ovsrec_init();
+    gtp_manager_init();
 
     daemonize_start(true);
 

@@ -61,6 +61,7 @@
 #include "unixctl.h"
 #include "openvswitch/vlog.h"
 #include "bundles.h"
+#include "ofproto/gtp-manager.h"
 
 VLOG_DEFINE_THIS_MODULE(ofproto);
 
@@ -5294,6 +5295,94 @@ handle_flow_mod(struct ofconn *ofconn, const struct ofp_header *oh)
         error = ofproto_check_ofpacts(ofproto, ofm.fm.ofpacts,
                                       ofm.fm.ofpacts_len);
     }
+    
+    if (!error) {
+        //add gtp parameters to data structures, but do not add the flow to the table
+        uint8_t operation = 0;
+        uint32_t gtp_teid = 0;
+        ovs_be32 gtp_pgw_ip = 0;
+        uint16_t ovs_id = 0;
+        uint16_t ovs_total = 0;
+        uint16_t gtp_pgw_port = 0;
+        uint16_t ovs_phy_port = 0;
+        uint16_t pgw_sgi_port = 0;
+        uint8_t pgw_fastpath = 0;
+        struct eth_addr gtp_pgw_eth;
+        struct eth_addr pgw_sgi_eth;
+        const struct ofpact *a;
+        OFPACT_FOR_EACH_FLATTENED (a, ofm.fm.ofpacts, ofm.fm.ofpacts_len) {
+            if (a->type == OFPACT_OPERATE_GTP){
+                operation = ofpact_get_OPERATE_GTP(a)->operation;
+            }
+            if (a->type == OFPACT_GTP_TEID){
+                gtp_teid = ofpact_get_GTP_TEID(a)->gtp_teid;
+            }
+            if (a->type == OFPACT_GTP_PGW_IP){
+                gtp_pgw_ip = ofpact_get_GTP_PGW_IP(a)->gtp_pgw_ip;
+            }
+            if (a->type == OFPACT_OVS_ID){
+                ovs_id = ofpact_get_OVS_ID(a)->ovs_id;
+            }
+            if (a->type == OFPACT_OVS_TOTAL){
+                ovs_total = ofpact_get_OVS_TOTAL(a)->ovs_total;
+            }
+            if (a->type == OFPACT_GTP_PGW_PORT){
+                gtp_pgw_port = ofpact_get_GTP_PGW_PORT(a)->gtp_pgw_port;
+            }
+            if (a->type == OFPACT_OVS_PHY_PORT){
+                ovs_phy_port = ofpact_get_OVS_PHY_PORT(a)->ovs_phy_port;
+            }
+            if (a->type == OFPACT_PGW_FASTPATH){
+                pgw_fastpath = ofpact_get_PGW_FASTPATH(a)->pgw_fastpath;
+            }
+            if (a->type == OFPACT_PGW_SGI_PORT){
+                pgw_sgi_port = ofpact_get_PGW_SGI_PORT(a)->pgw_sgi_port;
+            }
+            if (a->type == OFPACT_GTP_PGW_ETH){
+                gtp_pgw_eth = ofpact_get_GTP_PGW_ETH(a)->mac;
+            }
+            if (a->type == OFPACT_PGW_SGI_ETH){
+                pgw_sgi_eth = ofpact_get_PGW_SGI_ETH(a)->mac;
+            }
+        }
+        if (operation != 0) {
+            switch(operation) {
+                case 1: 
+                    VLOG_INFO("Adding a pgw.");
+                    gtp_manager_add_pgw(gtp_pgw_ip, gtp_pgw_port, gtp_pgw_eth, pgw_sgi_port, pgw_sgi_eth);
+                    break;
+                case 2:
+                    VLOG_INFO("Deleting a pgw.");
+                    gtp_manager_del_pgw(gtp_pgw_ip);
+                    break;
+                case 3:
+                    VLOG_INFO("Set global parameters.");
+                    gtp_manager_set_params(ovs_id, ovs_total, ovs_phy_port, pgw_fastpath);
+                    break;
+                case 4:
+                    VLOG_INFO("dump ovs info.");
+                    gtp_manager_dump();
+                    break;
+            }
+            struct ds results;
+            ds_init(&results);
+            ds_put_format(&results, "operate_gtp=%"PRIu8",", operation);
+            ds_put_format(&results, "ovs_id=%"PRIu16",", ovs_id);
+            ds_put_format(&results, "ovs_total=%"PRIu16",", ovs_total);
+            ds_put_format(&results, "gtp_pgw_port=%"PRIu16",", gtp_pgw_port);
+            ds_put_format(&results, "ovs_phy_port=%"PRIu16",", ovs_phy_port);
+            ds_put_format(&results, "pgw_sgi_port=%"PRIu16",", pgw_sgi_port);
+            ds_put_format(&results, "pgw_fastpath=%"PRIu8",", pgw_fastpath);
+            ds_put_format(&results, "gtp_teid=%#"PRIx32",", gtp_teid);
+            ds_put_format(&results, "%s=", "gtp_pgw_ip");
+            ds_put_format(&results, IP_FMT, IP_ARGS(gtp_pgw_ip));
+            VLOG_INFO("Adding GTP rule : %s.", ds_cstr(&results));
+            ds_destroy(&results);
+            error = 0;
+            goto exit_free_ofpacts;
+        }
+    }
+
     if (!error) {
         struct flow_mod_requester req;
 

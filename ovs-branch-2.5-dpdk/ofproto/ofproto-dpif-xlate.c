@@ -59,6 +59,7 @@
 #include "tnl-ports.h"
 #include "tunnel.h"
 #include "openvswitch/vlog.h"
+#include "ofproto/gtp-manager.h"
 
 COVERAGE_DEFINE(xlate_actions);
 COVERAGE_DEFINE(xlate_actions_oversize);
@@ -3809,7 +3810,7 @@ compose_dec_mpls_ttl_action(struct xlate_ctx *ctx)
     return true;
 }
 
-static void
+void
 xlate_output_action(struct xlate_ctx *ctx,
                     ofp_port_t port, uint16_t max_len, bool may_packet_in)
 {
@@ -4225,6 +4226,19 @@ recirc_unroll_actions(const struct ofpact *ofpacts, size_t ofpacts_len,
         case OFPACT_SAMPLE:
         case OFPACT_DEBUG_RECIRC:
         case OFPACT_CT:
+        case OFPACT_HANDLE_GTP:
+        case OFPACT_OPERATE_GTP:
+        case OFPACT_GTP_TEID:
+        case OFPACT_GTP_PGW_IP:
+        case OFPACT_OVS_ID:
+        case OFPACT_OVS_TOTAL:
+        case OFPACT_GTP_PGW_PORT:
+        case OFPACT_OVS_PHY_PORT:
+        case OFPACT_HANDLE_PGW_SGI:
+        case OFPACT_PGW_SGI_PORT:
+        case OFPACT_PGW_FASTPATH:
+        case OFPACT_GTP_PGW_ETH:
+        case OFPACT_PGW_SGI_ETH:
             /* These may not generate PACKET INs. */
             break;
 
@@ -4465,6 +4479,32 @@ do_xlate_actions(const struct ofpact *ofpacts, size_t ofpacts_len,
                 memset(&wc->masks.nw_dst, 0xff, sizeof wc->masks.nw_dst);
                 flow->nw_dst = ofpact_get_SET_IPV4_DST(a)->ipv4;
             }
+            break;
+//XXXXXX
+
+        case OFPACT_OPERATE_GTP:
+        case OFPACT_GTP_TEID:
+        case OFPACT_GTP_PGW_IP:
+        case OFPACT_OVS_ID:
+        case OFPACT_OVS_TOTAL:
+        case OFPACT_GTP_PGW_PORT:
+        case OFPACT_OVS_PHY_PORT:
+        case OFPACT_PGW_SGI_PORT:
+        case OFPACT_PGW_FASTPATH: 
+        case OFPACT_GTP_PGW_ETH:
+        case OFPACT_PGW_SGI_ETH:
+            VLOG_INFO("SHOULD NOT BE HERE");
+            break;
+
+    case OFPACT_HANDLE_PGW_SGI:
+            VLOG_INFO("OFPACT_HANDLE_PGW_SGI");
+            CHECK_MPLS_RECIRCULATION();
+            handle_pgw_sgi(flow, wc, ctx->xin->packet, ctx);
+            break;
+	case OFPACT_HANDLE_GTP:
+            VLOG_INFO("OFPACT_HANDLE_GTP");
+            CHECK_MPLS_RECIRCULATION();
+            handle_gtp(flow, wc, ctx->xin->packet, ctx);
             break;
 
         case OFPACT_SET_IP_DSCP:

@@ -256,6 +256,15 @@ cmap_destroy(struct cmap *cmap)
     }
 }
 
+void
+cmap_infos(const struct cmap *cmap, int * n, int *  max, uint32_t* mask)
+{
+    struct cmap_impl * p = cmap_get_impl(cmap);
+    *n = p->n;
+    *max = p->max_n;
+    *mask = p->mask;
+}
+
 /* Returns the number of elements in 'cmap'. */
 size_t
 cmap_count(const struct cmap *cmap)

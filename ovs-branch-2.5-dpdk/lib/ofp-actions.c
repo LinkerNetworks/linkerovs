@@ -208,6 +208,88 @@ enum ofp_raw_action_type {
     OFPAT_RAW12_SET_FIELD,
     /* OF1.5+(25): struct ofp12_action_set_field, ... */
     OFPAT_RAW15_SET_FIELD,
+
+    /* OF1.0(28): void. */
+    OFPAT_RAW10_HANDLE_GTP,
+    /* OF1.0(29): uint8_t. */
+    OFPAT_RAW10_OPERATE_GTP,
+    /* OF1.0(30): uint32_t. */
+    OFPAT_RAW10_GTP_TEID,
+    /* OF1.0(31): ovs_be32. */
+    OFPAT_RAW10_GTP_PGW_IP,
+    /* OF1.0(32): uint16_t. */
+    OFPAT_RAW10_OVS_ID,
+    /* OF1.0(33): uint16_t. */
+    OFPAT_RAW10_OVS_TOTAL,
+    /* OF1.0(34): uint16_t. */
+    OFPAT_RAW10_GTP_PGW_PORT,
+    /* OF1.0(35): uint16_t. */
+    OFPAT_RAW10_OVS_PHY_PORT,
+    /* OF1.0(36): void. */
+    OFPAT_RAW10_HANDLE_PGW_SGI,
+    /* OF1.0(37): uint16_t. */
+    OFPAT_RAW10_PGW_SGI_PORT,
+    /* OF1.0(38): uint8_t. */
+    OFPAT_RAW10_PGW_FASTPATH,
+    /* OF1.0(39): struct ofp_action_dl_addr. */
+    OFPAT_RAW10_GTP_PGW_ETH,
+    /* OF1.0(40): struct ofp_action_dl_addr. */
+    OFPAT_RAW10_PGW_SGI_ETH,
+
+    /* OF1.1(28): void. */
+    OFPAT_RAW11_HANDLE_GTP,
+    /* OF1.1(29): uint8_t. */
+    OFPAT_RAW11_OPERATE_GTP,
+    /* OF1.1(30): uint32_t. */
+    OFPAT_RAW11_GTP_TEID,
+    /* OF1.1(31): ovs_be32. */
+    OFPAT_RAW11_GTP_PGW_IP,
+    /* OF1.1(32): uint16_t. */
+    OFPAT_RAW11_OVS_ID,
+    /* OF1.1(33): uint16_t. */
+    OFPAT_RAW11_OVS_TOTAL,
+    /* OF1.1(34): uint16_t. */
+    OFPAT_RAW11_GTP_PGW_PORT,
+    /* OF1.1(35): uint16_t. */
+    OFPAT_RAW11_OVS_PHY_PORT,
+    /* OF1.1(36): void. */
+    OFPAT_RAW11_HANDLE_PGW_SGI,
+    /* OF1.1(37): uint16_t. */
+    OFPAT_RAW11_PGW_SGI_PORT,
+    /* OF1.1(38): uint8_t. */
+    OFPAT_RAW11_PGW_FASTPATH,
+    /* OF1.1(39): struct ofp_action_dl_addr. */
+    OFPAT_RAW11_GTP_PGW_ETH,
+    /* OF1.1(40): struct ofp_action_dl_addr. */
+    OFPAT_RAW11_PGW_SGI_ETH,
+
+    /* OF1.2-1.4(28): void. */
+    OFPAT_RAW12_HANDLE_GTP,
+    /* OF1.2-1.4(29): uint8_t. */
+    OFPAT_RAW12_OPERATE_GTP,
+    /* OF1.2-1.4(30): uint32_t. */
+    OFPAT_RAW12_GTP_TEID,
+    /* OF1.2-1.4(31): ovs_be32. */
+    OFPAT_RAW12_GTP_PGW_IP,
+    /* OF1.2-1.4(32): uint16_t. */
+    OFPAT_RAW12_OVS_ID,
+    /* OF1.2-1.4(33): uint16_t. */
+    OFPAT_RAW12_OVS_TOTAL,
+    /* OF1.2-1.4(34): uint16_t. */
+    OFPAT_RAW12_GTP_PGW_PORT,
+    /* OF1.2-1.4(35): uint16_t. */
+    OFPAT_RAW12_OVS_PHY_PORT,
+    /* OF1.2-1.4(36): void. */
+    OFPAT_RAW12_HANDLE_PGW_SGI,
+    /* OF1.2-1.4(37): uint16_t. */
+    OFPAT_RAW12_PGW_SGI_PORT,
+    /* OF1.2-1.4(38): uint8_t. */
+    OFPAT_RAW12_PGW_FASTPATH,
+    /* OF1.2-1.4(39): struct ofp_action_dl_addr. */
+    OFPAT_RAW12_GTP_PGW_ETH,
+    /* OF1.2-1.4(40): struct ofp_action_dl_addr. */
+    OFPAT_RAW12_PGW_SGI_ETH,
+
     /* NX1.0-1.4(7): struct nx_action_reg_load.
      *
      * [In OpenFlow 1.5, set_field is a superset of reg_load functionality, so
@@ -413,6 +495,19 @@ ofpact_next_flattened(const struct ofpact *ofpact)
     case OFPACT_CLEAR_ACTIONS:
     case OFPACT_WRITE_METADATA:
     case OFPACT_GOTO_TABLE:
+    case OFPACT_HANDLE_GTP:
+    case OFPACT_OPERATE_GTP:
+    case OFPACT_GTP_TEID:
+    case OFPACT_GTP_PGW_IP:
+    case OFPACT_OVS_ID:
+    case OFPACT_OVS_TOTAL:
+    case OFPACT_GTP_PGW_PORT:
+    case OFPACT_OVS_PHY_PORT:
+    case OFPACT_HANDLE_PGW_SGI:
+    case OFPACT_PGW_SGI_PORT:
+    case OFPACT_PGW_FASTPATH:
+    case OFPACT_GTP_PGW_ETH:
+    case OFPACT_PGW_SGI_ETH:
         return ofpact_next(ofpact);
 
     case OFPACT_CT:
@@ -1086,9 +1181,9 @@ decode_bundle(bool load, const struct nx_action_bundle *nab,
     for (i = 0; i < bundle->n_slaves; i++) {
         uint16_t ofp_port = ntohs(((ovs_be16 *)(nab + 1))[i]);
         ofpbuf_put(ofpacts, &ofp_port, sizeof ofp_port);
-        bundle = ofpacts->header;
     }
 
+    bundle = ofpacts->header;
     ofpact_update_len(ofpacts, &bundle->ofpact);
 
     if (!error) {
@@ -1394,6 +1489,553 @@ format_STRIP_VLAN(const struct ofpact_null *a, struct ds *s)
                     : "strip_vlan"));
 }
 
+/* handle gtp actions. */
+static enum ofperr
+decode_OFPAT_RAW10_HANDLE_GTP(struct ofpbuf *out)
+{
+    ofpact_put_HANDLE_GTP(out)->ofpact.raw = OFPAT_RAW10_HANDLE_GTP;
+    return 0;
+}
+
+static enum ofperr
+decode_OFPAT_RAW11_HANDLE_GTP(struct ofpbuf *out)
+{
+    ofpact_put_HANDLE_GTP(out)->ofpact.raw = OFPAT_RAW11_HANDLE_GTP;
+    return 0;
+}
+
+static enum ofperr
+decode_OFPAT_RAW12_HANDLE_GTP(struct ofpbuf *out)
+{
+    ofpact_put_HANDLE_GTP(out)->ofpact.raw = OFPAT_RAW12_HANDLE_GTP;
+    return 0;
+}
+
+static void
+encode_HANDLE_GTP(const struct ofpact_null *null OVS_UNUSED,
+                  enum ofp_version ofp_version, struct ofpbuf *out)
+{
+    if (ofp_version == OFP10_VERSION) {
+        put_OFPAT10_HANDLE_GTP(out);
+    } else if (ofp_version == OFP11_VERSION) {
+        put_OFPAT11_HANDLE_GTP(out);
+    } else {
+        put_OFPAT12_HANDLE_GTP(out);
+    }
+}
+
+static char * OVS_WARN_UNUSED_RESULT
+parse_HANDLE_GTP(char *arg OVS_UNUSED, struct ofpbuf *ofpacts,
+                 enum ofputil_protocol *usable_protocols OVS_UNUSED)
+{
+    ofpact_put_HANDLE_GTP(ofpacts)->ofpact.raw = OFPAT_RAW10_HANDLE_GTP;
+    return NULL;
+}
+
+static void
+format_HANDLE_GTP(const struct ofpact_null *a OVS_UNUSED, struct ds *s)
+{
+    ds_put_cstr(s, "handle_gtp");
+}
+
+
+/* handle gtp actions. */
+static enum ofperr
+decode_OFPAT_RAW10_HANDLE_PGW_SGI(struct ofpbuf *out)
+{
+    ofpact_put_HANDLE_PGW_SGI(out)->ofpact.raw = OFPAT_RAW10_HANDLE_PGW_SGI;
+    return 0;
+}
+
+static enum ofperr
+decode_OFPAT_RAW11_HANDLE_PGW_SGI(struct ofpbuf *out)
+{
+    ofpact_put_HANDLE_PGW_SGI(out)->ofpact.raw = OFPAT_RAW11_HANDLE_PGW_SGI;
+    return 0;
+}
+
+static enum ofperr
+decode_OFPAT_RAW12_HANDLE_PGW_SGI(struct ofpbuf *out)
+{
+    ofpact_put_HANDLE_PGW_SGI(out)->ofpact.raw = OFPAT_RAW12_HANDLE_PGW_SGI;
+    return 0;
+}
+
+static void
+encode_HANDLE_PGW_SGI(const struct ofpact_null *null OVS_UNUSED,
+                  enum ofp_version ofp_version, struct ofpbuf *out)
+{
+    if (ofp_version == OFP10_VERSION) {
+        put_OFPAT10_HANDLE_PGW_SGI(out);
+    } else if (ofp_version == OFP11_VERSION) {
+        put_OFPAT11_HANDLE_PGW_SGI(out);
+    } else {
+        put_OFPAT12_HANDLE_PGW_SGI(out);
+    }
+}
+
+static char * OVS_WARN_UNUSED_RESULT
+parse_HANDLE_PGW_SGI(char *arg OVS_UNUSED, struct ofpbuf *ofpacts,
+                 enum ofputil_protocol *usable_protocols OVS_UNUSED)
+{
+    ofpact_put_HANDLE_PGW_SGI(ofpacts)->ofpact.raw = OFPAT_RAW10_HANDLE_PGW_SGI;
+    return NULL;
+}
+
+static void
+format_HANDLE_PGW_SGI(const struct ofpact_null *a OVS_UNUSED, struct ds *s)
+{
+    ds_put_cstr(s, "handle_pgw_sgi");
+}
+
+
+/* Set operate gtp actions. */
+static enum ofperr
+decode_OFPAT_RAW10_OPERATE_GTP(uint8_t operation,
+                              enum ofp_version ofp_version OVS_UNUSED,
+                              struct ofpbuf *out)
+{
+    ofpact_put_OPERATE_GTP(out)->operation = operation;
+    return 0;
+}
+
+static enum ofperr
+decode_OFPAT_RAW11_OPERATE_GTP(uint8_t operation,
+                              enum ofp_version ofp_version OVS_UNUSED,
+                              struct ofpbuf *out)
+{
+    ofpact_put_OPERATE_GTP(out)->operation = operation;
+    return 0;
+}
+
+static enum ofperr
+decode_OFPAT_RAW12_OPERATE_GTP(uint8_t operation,
+                              enum ofp_version ofp_version OVS_UNUSED,
+                              struct ofpbuf *out)
+{
+    ofpact_put_OPERATE_GTP(out)->operation = operation;
+    return 0;
+}
+
+static void
+encode_OPERATE_GTP(const struct ofpact_operate_gtp *operation,
+                  enum ofp_version ofp_version, struct ofpbuf *out)
+{
+    if (ofp_version == OFP10_VERSION) {
+        put_OFPAT10_OPERATE_GTP(out, operation->operation);
+    } else if (ofp_version == OFP11_VERSION) {
+        put_OFPAT11_OPERATE_GTP(out, operation->operation);
+    } else {
+        put_OFPAT12_OPERATE_GTP(out, operation->operation);
+    }
+}
+
+static char * OVS_WARN_UNUSED_RESULT
+parse_OPERATE_GTP(char *arg, struct ofpbuf *ofpacts,
+                  enum ofputil_protocol *usable_protocols OVS_UNUSED)
+{
+    uint8_t operation;
+    char *error;
+
+    error = str_to_u8(arg, "operate_gtp", &operation);
+    if (error) {
+        return error;
+    }
+
+    ofpact_put_OPERATE_GTP(ofpacts)->operation = operation;
+    return NULL;
+}
+
+static void
+format_OPERATE_GTP(const struct ofpact_operate_gtp *a, struct ds *s)
+{
+    ds_put_format(s, "operate_gtp:%d", a->operation);
+}
+
+/* Set pgw fast path actions. */
+static enum ofperr
+decode_OFPAT_RAW10_PGW_FASTPATH(uint8_t pgw_fastpath,
+                              enum ofp_version ofp_version OVS_UNUSED,
+                              struct ofpbuf *out)
+{
+    ofpact_put_PGW_FASTPATH(out)->pgw_fastpath = pgw_fastpath;
+    return 0;
+}
+
+static enum ofperr
+decode_OFPAT_RAW11_PGW_FASTPATH(uint8_t pgw_fastpath,
+                              enum ofp_version ofp_version OVS_UNUSED,
+                              struct ofpbuf *out)
+{
+    ofpact_put_PGW_FASTPATH(out)->pgw_fastpath = pgw_fastpath;
+    return 0;
+}
+
+static enum ofperr
+decode_OFPAT_RAW12_PGW_FASTPATH(uint8_t pgw_fastpath,
+                              enum ofp_version ofp_version OVS_UNUSED,
+                              struct ofpbuf *out)
+{
+    ofpact_put_PGW_FASTPATH(out)->pgw_fastpath = pgw_fastpath;
+    return 0;
+}
+
+static void
+encode_PGW_FASTPATH(const struct ofpact_pgw_fastpath *pgw_fastpath,
+                  enum ofp_version ofp_version, struct ofpbuf *out)
+{
+    if (ofp_version == OFP10_VERSION) {
+        put_OFPAT10_PGW_FASTPATH(out, pgw_fastpath->pgw_fastpath);
+    } else if (ofp_version == OFP11_VERSION) {
+        put_OFPAT11_PGW_FASTPATH(out, pgw_fastpath->pgw_fastpath);
+    } else {
+        put_OFPAT12_PGW_FASTPATH(out, pgw_fastpath->pgw_fastpath);
+    }
+}
+
+static char * OVS_WARN_UNUSED_RESULT
+parse_PGW_FASTPATH(char *arg, struct ofpbuf *ofpacts,
+                  enum ofputil_protocol *usable_protocols OVS_UNUSED)
+{
+    uint8_t pgw_fastpath;
+    char *error;
+
+    error = str_to_u8(arg, "pgw_fastpath", &pgw_fastpath);
+    if (error) {
+        return error;
+    }
+
+    ofpact_put_PGW_FASTPATH(ofpacts)->pgw_fastpath = pgw_fastpath;
+    return NULL;
+}
+
+static void
+format_PGW_FASTPATH(const struct ofpact_pgw_fastpath *a, struct ds *s)
+{
+    ds_put_format(s, "pgw_fastpath:%d", a->pgw_fastpath);
+}
+
+
+/* Set operate gtp set ovs id actions. */
+static enum ofperr
+decode_OFPAT_RAW10_OVS_ID(uint16_t ovs_id,
+                              enum ofp_version ofp_version OVS_UNUSED,
+                              struct ofpbuf *out)
+{
+    ofpact_put_OVS_ID(out)->ovs_id = ovs_id;
+    return 0;
+}
+
+static enum ofperr
+decode_OFPAT_RAW11_OVS_ID(uint16_t ovs_id,
+                              enum ofp_version ofp_version OVS_UNUSED,
+                              struct ofpbuf *out)
+{
+    ofpact_put_OVS_ID(out)->ovs_id = ovs_id;
+    return 0;
+}
+
+static enum ofperr
+decode_OFPAT_RAW12_OVS_ID(uint16_t ovs_id,
+                              enum ofp_version ofp_version OVS_UNUSED,
+                              struct ofpbuf *out)
+{
+    ofpact_put_OVS_ID(out)->ovs_id = ovs_id;
+    return 0;
+}
+
+static void
+encode_OVS_ID(const struct ofpact_ovs_id *ovs_id,
+                  enum ofp_version ofp_version, struct ofpbuf *out)
+{
+    if (ofp_version == OFP10_VERSION) {
+        put_OFPAT10_OVS_ID(out, ovs_id->ovs_id);
+    } else if (ofp_version == OFP11_VERSION) {
+        put_OFPAT11_OVS_ID(out, ovs_id->ovs_id);
+    } else {
+        put_OFPAT12_OVS_ID(out, ovs_id->ovs_id);
+    }
+}
+
+static char * OVS_WARN_UNUSED_RESULT
+parse_OVS_ID(char *arg, struct ofpbuf *ofpacts,
+                  enum ofputil_protocol *usable_protocols OVS_UNUSED)
+{
+    uint16_t ovs_id;
+    char *error;
+
+    error = str_to_u16(arg, "ovs_id", &ovs_id);
+    if (error) {
+        return error;
+    }
+
+    ofpact_put_OVS_ID(ofpacts)->ovs_id = ovs_id;
+    return NULL;
+}
+
+static void
+format_OVS_ID(const struct ofpact_ovs_id *a, struct ds *s)
+{
+    ds_put_format(s, "ovs_id:%d", a->ovs_id);
+}
+
+
+/* Set operate gtp set ovs total actions. */
+static enum ofperr
+decode_OFPAT_RAW10_OVS_TOTAL(uint16_t ovs_total,
+                              enum ofp_version ofp_version OVS_UNUSED,
+                              struct ofpbuf *out)
+{
+    ofpact_put_OVS_TOTAL(out)->ovs_total = ovs_total;
+    return 0;
+}
+
+static enum ofperr
+decode_OFPAT_RAW11_OVS_TOTAL(uint16_t ovs_total,
+                              enum ofp_version ofp_version OVS_UNUSED,
+                              struct ofpbuf *out)
+{
+    ofpact_put_OVS_TOTAL(out)->ovs_total = ovs_total;
+    return 0;
+}
+
+static enum ofperr
+decode_OFPAT_RAW12_OVS_TOTAL(uint16_t ovs_total,
+                              enum ofp_version ofp_version OVS_UNUSED,
+                              struct ofpbuf *out)
+{
+    ofpact_put_OVS_TOTAL(out)->ovs_total = ovs_total;
+    return 0;
+}
+
+static void
+encode_OVS_TOTAL(const struct ofpact_ovs_total *ovs_total,
+                  enum ofp_version ofp_version, struct ofpbuf *out)
+{
+    if (ofp_version == OFP10_VERSION) {
+        put_OFPAT10_OVS_TOTAL(out, ovs_total->ovs_total);
+    } else if (ofp_version == OFP11_VERSION) {
+        put_OFPAT11_OVS_TOTAL(out, ovs_total->ovs_total);
+    } else {
+        put_OFPAT12_OVS_TOTAL(out, ovs_total->ovs_total);
+    }
+}
+
+static char * OVS_WARN_UNUSED_RESULT
+parse_OVS_TOTAL(char *arg, struct ofpbuf *ofpacts,
+                  enum ofputil_protocol *usable_protocols OVS_UNUSED)
+{
+    uint16_t ovs_total;
+    char *error;
+
+    error = str_to_u16(arg, "ovs_total", &ovs_total);
+    if (error) {
+        return error;
+    }
+
+    ofpact_put_OVS_TOTAL(ofpacts)->ovs_total = ovs_total;
+    return NULL;
+}
+
+static void
+format_OVS_TOTAL(const struct ofpact_ovs_total *a, struct ds *s)
+{
+    ds_put_format(s, "ovs_total:%d", a->ovs_total);
+}
+
+
+/* Set operate gtp pgw port actions. */
+static enum ofperr
+decode_OFPAT_RAW10_GTP_PGW_PORT(uint16_t gtp_pgw_port,
+                              enum ofp_version ofp_version OVS_UNUSED,
+                              struct ofpbuf *out)
+{
+    ofpact_put_GTP_PGW_PORT(out)->gtp_pgw_port = gtp_pgw_port;
+    return 0;
+}
+
+static enum ofperr
+decode_OFPAT_RAW11_GTP_PGW_PORT(uint16_t gtp_pgw_port,
+                              enum ofp_version ofp_version OVS_UNUSED,
+                              struct ofpbuf *out)
+{
+    ofpact_put_GTP_PGW_PORT(out)->gtp_pgw_port = gtp_pgw_port;
+    return 0;
+}
+
+static enum ofperr
+decode_OFPAT_RAW12_GTP_PGW_PORT(uint16_t gtp_pgw_port,
+                              enum ofp_version ofp_version OVS_UNUSED,
+                              struct ofpbuf *out)
+{
+    ofpact_put_GTP_PGW_PORT(out)->gtp_pgw_port = gtp_pgw_port;
+    return 0;
+}
+
+static void
+encode_GTP_PGW_PORT(const struct ofpact_gtp_pgw_port *gtp_pgw_port,
+                  enum ofp_version ofp_version, struct ofpbuf *out)
+{
+    if (ofp_version == OFP10_VERSION) {
+        put_OFPAT10_GTP_PGW_PORT(out, gtp_pgw_port->gtp_pgw_port);
+    } else if (ofp_version == OFP11_VERSION) {
+        put_OFPAT11_GTP_PGW_PORT(out, gtp_pgw_port->gtp_pgw_port);
+    } else {
+        put_OFPAT12_GTP_PGW_PORT(out, gtp_pgw_port->gtp_pgw_port);
+    }
+}
+
+static char * OVS_WARN_UNUSED_RESULT
+parse_GTP_PGW_PORT(char *arg, struct ofpbuf *ofpacts,
+                  enum ofputil_protocol *usable_protocols OVS_UNUSED)
+{
+    uint16_t gtp_pgw_port;
+    char *error;
+
+    error = str_to_u16(arg, "gtp_pgw_port", &gtp_pgw_port);
+    if (error) {
+        return error;
+    }
+
+    ofpact_put_GTP_PGW_PORT(ofpacts)->gtp_pgw_port = gtp_pgw_port;
+    return NULL;
+}
+
+static void
+format_GTP_PGW_PORT(const struct ofpact_gtp_pgw_port *a, struct ds *s)
+{
+    ds_put_format(s, "gtp_pgw_port:%d", a->gtp_pgw_port);
+}
+
+
+/* Set operate pgw sgi port actions. */
+static enum ofperr
+decode_OFPAT_RAW10_PGW_SGI_PORT(uint16_t pgw_sgi_port,
+                              enum ofp_version ofp_version OVS_UNUSED,
+                              struct ofpbuf *out)
+{
+    ofpact_put_PGW_SGI_PORT(out)->pgw_sgi_port = pgw_sgi_port;
+    return 0;
+}
+
+static enum ofperr
+decode_OFPAT_RAW11_PGW_SGI_PORT(uint16_t pgw_sgi_port,
+                              enum ofp_version ofp_version OVS_UNUSED,
+                              struct ofpbuf *out)
+{
+    ofpact_put_PGW_SGI_PORT(out)->pgw_sgi_port = pgw_sgi_port;
+    return 0;
+}
+
+static enum ofperr
+decode_OFPAT_RAW12_PGW_SGI_PORT(uint16_t pgw_sgi_port,
+                              enum ofp_version ofp_version OVS_UNUSED,
+                              struct ofpbuf *out)
+{
+    ofpact_put_PGW_SGI_PORT(out)->pgw_sgi_port = pgw_sgi_port;
+    return 0;
+}
+
+static void
+encode_PGW_SGI_PORT(const struct ofpact_pgw_sgi_port *pgw_sgi_port,
+                  enum ofp_version ofp_version, struct ofpbuf *out)
+{
+    if (ofp_version == OFP10_VERSION) {
+        put_OFPAT10_PGW_SGI_PORT(out, pgw_sgi_port->pgw_sgi_port);
+    } else if (ofp_version == OFP11_VERSION) {
+        put_OFPAT11_PGW_SGI_PORT(out, pgw_sgi_port->pgw_sgi_port);
+    } else {
+        put_OFPAT12_PGW_SGI_PORT(out, pgw_sgi_port->pgw_sgi_port);
+    }
+}
+
+static char * OVS_WARN_UNUSED_RESULT
+parse_PGW_SGI_PORT(char *arg, struct ofpbuf *ofpacts,
+                  enum ofputil_protocol *usable_protocols OVS_UNUSED)
+{
+    uint16_t pgw_sgi_port;
+    char *error;
+
+    error = str_to_u16(arg, "pgw_sgi_port", &pgw_sgi_port);
+    if (error) {
+        return error;
+    }
+
+    ofpact_put_PGW_SGI_PORT(ofpacts)->pgw_sgi_port = pgw_sgi_port;
+    return NULL;
+}
+
+static void
+format_PGW_SGI_PORT(const struct ofpact_pgw_sgi_port *a, struct ds *s)
+{
+    ds_put_format(s, "pgw_sgi_port:%d", a->pgw_sgi_port);
+}
+
+
+/* Set operate ovs phy port actions. */
+static enum ofperr
+decode_OFPAT_RAW10_OVS_PHY_PORT(uint16_t ovs_phy_port,
+                              enum ofp_version ofp_version OVS_UNUSED,
+                              struct ofpbuf *out)
+{
+    ofpact_put_OVS_PHY_PORT(out)->ovs_phy_port = ovs_phy_port;
+    return 0;
+}
+
+static enum ofperr
+decode_OFPAT_RAW11_OVS_PHY_PORT(uint16_t ovs_phy_port,
+                              enum ofp_version ofp_version OVS_UNUSED,
+                              struct ofpbuf *out)
+{
+    ofpact_put_OVS_PHY_PORT(out)->ovs_phy_port = ovs_phy_port;
+    return 0;
+}
+
+static enum ofperr
+decode_OFPAT_RAW12_OVS_PHY_PORT(uint16_t ovs_phy_port,
+                              enum ofp_version ofp_version OVS_UNUSED,
+                              struct ofpbuf *out)
+{
+    ofpact_put_OVS_PHY_PORT(out)->ovs_phy_port = ovs_phy_port;
+    return 0;
+}
+
+static void
+encode_OVS_PHY_PORT(const struct ofpact_ovs_phy_port *ovs_phy_port,
+                  enum ofp_version ofp_version, struct ofpbuf *out)
+{
+    if (ofp_version == OFP10_VERSION) {
+        put_OFPAT10_OVS_PHY_PORT(out, ovs_phy_port->ovs_phy_port);
+    } else if (ofp_version == OFP11_VERSION) {
+        put_OFPAT11_OVS_PHY_PORT(out, ovs_phy_port->ovs_phy_port);
+    } else {
+        put_OFPAT12_OVS_PHY_PORT(out, ovs_phy_port->ovs_phy_port);
+    }
+}
+
+static char * OVS_WARN_UNUSED_RESULT
+parse_OVS_PHY_PORT(char *arg, struct ofpbuf *ofpacts,
+                  enum ofputil_protocol *usable_protocols OVS_UNUSED)
+{
+    uint16_t ovs_phy_port;
+    char *error;
+
+    error = str_to_u16(arg, "ovs_phy_port", &ovs_phy_port);
+    if (error) {
+        return error;
+    }
+
+    ofpact_put_OVS_PHY_PORT(ofpacts)->ovs_phy_port = ovs_phy_port;
+    return NULL;
+}
+
+static void
+format_OVS_PHY_PORT(const struct ofpact_ovs_phy_port *a, struct ds *s)
+{
+    ds_put_format(s, "ovs_phy_port:%d", a->ovs_phy_port);
+}
+
+
 /* Push VLAN action. */
 
 static enum ofperr
@@ -1538,6 +2180,133 @@ format_SET_ETH_DST(const struct ofpact_mac *a, struct ds *s)
 {
     ds_put_format(s, "mod_dl_dst:"ETH_ADDR_FMT, ETH_ADDR_ARGS(a->mac));
 }
+
+/* Set gtp pgw eth actions. */
+static enum ofperr
+decode_OFPAT_RAW10_GTP_PGW_ETH(const struct ofp_action_dl_addr *a,
+                              enum ofp_version ofp_version OVS_UNUSED,
+                              struct ofpbuf *out)
+{
+    ofpact_put_GTP_PGW_ETH(out)->mac = a->dl_addr;
+    return 0;
+}
+
+static enum ofperr
+decode_OFPAT_RAW11_GTP_PGW_ETH(const struct ofp_action_dl_addr *a,
+                              enum ofp_version ofp_version OVS_UNUSED,
+                              struct ofpbuf *out)
+{
+    ofpact_put_GTP_PGW_ETH(out)->mac = a->dl_addr;
+    return 0;
+}
+
+static enum ofperr
+decode_OFPAT_RAW12_GTP_PGW_ETH(const struct ofp_action_dl_addr *a,
+                              enum ofp_version ofp_version OVS_UNUSED,
+                              struct ofpbuf *out)
+{
+    ofpact_put_GTP_PGW_ETH(out)->mac = a->dl_addr;
+    return 0;
+}
+
+static void
+encode_GTP_PGW_ETH(const struct ofpact_mac *mac,
+                  enum ofp_version ofp_version, struct ofpbuf *out)
+{
+    if (ofp_version == OFP10_VERSION) {
+        put_OFPAT10_GTP_PGW_ETH(out)->dl_addr = mac->mac;
+    } else if (ofp_version == OFP11_VERSION) {
+        put_OFPAT11_GTP_PGW_ETH(out)->dl_addr = mac->mac;
+    } else {
+        put_OFPAT12_GTP_PGW_ETH(out)->dl_addr = mac->mac;
+    }
+}
+
+static char * OVS_WARN_UNUSED_RESULT
+parse_GTP_PGW_ETH(char *arg, struct ofpbuf *ofpacts,
+                  enum ofputil_protocol *usable_protocols OVS_UNUSED)
+{
+    struct eth_addr gtp_pgw_eth;
+    char *error;
+
+    error = str_to_mac(arg, &gtp_pgw_eth);
+    if (error) {
+        return error;
+    }
+
+    ofpact_put_GTP_PGW_ETH(ofpacts)->mac = gtp_pgw_eth;
+    return NULL;
+}
+
+static void
+format_GTP_PGW_ETH(const struct ofpact_mac *a, struct ds *s)
+{
+    ds_put_format(s, "gtp_pgw_eth:"ETH_ADDR_FMT, ETH_ADDR_ARGS(a->mac));
+}
+
+/* Set pgw sgi eth actions. */
+static enum ofperr
+decode_OFPAT_RAW10_PGW_SGI_ETH(const struct ofp_action_dl_addr *a,
+                              enum ofp_version ofp_version OVS_UNUSED,
+                              struct ofpbuf *out)
+{
+    ofpact_put_PGW_SGI_ETH(out)->mac = a->dl_addr;
+    return 0;
+}
+
+static enum ofperr
+decode_OFPAT_RAW11_PGW_SGI_ETH(const struct ofp_action_dl_addr *a,
+                              enum ofp_version ofp_version OVS_UNUSED,
+                              struct ofpbuf *out)
+{
+    ofpact_put_PGW_SGI_ETH(out)->mac = a->dl_addr;
+    return 0;
+}
+
+static enum ofperr
+decode_OFPAT_RAW12_PGW_SGI_ETH(const struct ofp_action_dl_addr *a,
+                              enum ofp_version ofp_version OVS_UNUSED,
+                              struct ofpbuf *out)
+{
+    ofpact_put_PGW_SGI_ETH(out)->mac = a->dl_addr;
+    return 0;
+}
+
+static void
+encode_PGW_SGI_ETH(const struct ofpact_mac *mac,
+                  enum ofp_version ofp_version, struct ofpbuf *out)
+{
+    if (ofp_version == OFP10_VERSION) {
+        put_OFPAT10_PGW_SGI_ETH(out)->dl_addr = mac->mac;
+    } else if (ofp_version == OFP11_VERSION) {
+        put_OFPAT11_PGW_SGI_ETH(out)->dl_addr = mac->mac;
+    } else {
+        put_OFPAT12_PGW_SGI_ETH(out)->dl_addr = mac->mac;
+    }
+}
+
+static char * OVS_WARN_UNUSED_RESULT
+parse_PGW_SGI_ETH(char *arg, struct ofpbuf *ofpacts,
+                  enum ofputil_protocol *usable_protocols OVS_UNUSED)
+{
+    struct eth_addr pgw_sgi_eth;
+    char *error;
+
+    error = str_to_mac(arg, &pgw_sgi_eth);
+    if (error) {
+        return error;
+    }
+
+    ofpact_put_PGW_SGI_ETH(ofpacts)->mac = pgw_sgi_eth;
+    return NULL;
+}
+
+static void
+format_PGW_SGI_ETH(const struct ofpact_mac *a, struct ds *s)
+{
+    ds_put_format(s, "pgw_sgi_eth:"ETH_ADDR_FMT, ETH_ADDR_ARGS(a->mac));
+}
+
 
 /* Set IPv4 address actions. */
 
@@ -1613,6 +2382,61 @@ static void
 format_SET_IPV4_DST(const struct ofpact_ipv4 *a, struct ds *s)
 {
     ds_put_format(s, "mod_nw_dst:"IP_FMT, IP_ARGS(a->ipv4));
+}
+
+/* Set gtp pgw ip actions. */
+static enum ofperr
+decode_OFPAT_RAW10_GTP_PGW_IP(ovs_be32 gtp_pgw_ip,
+                            enum ofp_version ofp_version OVS_UNUSED,
+                            struct ofpbuf *out)
+{
+    ofpact_put_GTP_PGW_IP(out)->gtp_pgw_ip = gtp_pgw_ip;
+    return 0;
+}
+
+static enum ofperr
+decode_OFPAT_RAW11_GTP_PGW_IP(ovs_be32 gtp_pgw_ip,
+                            enum ofp_version ofp_version OVS_UNUSED,
+                            struct ofpbuf *out)
+{
+    ofpact_put_GTP_PGW_IP(out)->gtp_pgw_ip = gtp_pgw_ip;
+    return 0;
+}
+
+static enum ofperr
+decode_OFPAT_RAW12_GTP_PGW_IP(ovs_be32 gtp_pgw_ip,
+                            enum ofp_version ofp_version OVS_UNUSED,
+                            struct ofpbuf *out)
+{
+    ofpact_put_GTP_PGW_IP(out)->gtp_pgw_ip = gtp_pgw_ip;
+    return 0;
+}
+
+static void
+encode_GTP_PGW_IP(const struct ofpact_gtp_pgw_ip *gtp_pgw_ip,
+                    enum ofp_version ofp_version, struct ofpbuf *out)
+{
+    ovs_be32 addr = gtp_pgw_ip->gtp_pgw_ip;
+    if (ofp_version == OFP10_VERSION) {
+        put_OFPAT10_GTP_PGW_IP(out, addr);
+    } else if (ofp_version == OFP11_VERSION) {
+        put_OFPAT11_GTP_PGW_IP(out, addr);
+    } else {
+        put_OFPAT12_GTP_PGW_IP(out, addr);
+    }
+}
+
+static char * OVS_WARN_UNUSED_RESULT
+parse_GTP_PGW_IP(char *arg, struct ofpbuf *ofpacts,
+                   enum ofputil_protocol *usable_protocols OVS_UNUSED)
+{
+    return str_to_ip(arg, &ofpact_put_GTP_PGW_IP(ofpacts)->gtp_pgw_ip);
+}
+
+static void
+format_GTP_PGW_IP(const struct ofpact_gtp_pgw_ip *a, struct ds *s)
+{
+    ds_put_format(s, "gtp_pgw_ip:"IP_FMT, IP_ARGS(a->gtp_pgw_ip));
 }
 
 /* Set IPv4/v6 TOS actions. */
@@ -3363,6 +4187,60 @@ format_SET_TUNNEL(const struct ofpact_tunnel *a, struct ds *s)
                   (a->tun_id > UINT32_MAX
                    || a->ofpact.raw == NXAST_RAW_SET_TUNNEL64 ? "64" : ""),
                   a->tun_id);
+}
+
+/* Set gtp teid actions. */
+static enum ofperr
+decode_OFPAT_RAW10_GTP_TEID(uint32_t gtp_teid,
+                         enum ofp_version ofp_version OVS_UNUSED,
+                         struct ofpbuf *out)
+{
+    ofpact_put_GTP_TEID(out)->gtp_teid = gtp_teid;
+    return 0;
+}
+
+static enum ofperr
+decode_OFPAT_RAW11_GTP_TEID(uint32_t gtp_teid,
+                         enum ofp_version ofp_version OVS_UNUSED,
+                         struct ofpbuf *out)
+{
+    ofpact_put_GTP_TEID(out)->gtp_teid = gtp_teid;
+    return 0;
+}
+
+static enum ofperr
+decode_OFPAT_RAW12_GTP_TEID(uint32_t gtp_teid,
+                         enum ofp_version ofp_version OVS_UNUSED,
+                         struct ofpbuf *out)
+{
+    ofpact_put_GTP_TEID(out)->gtp_teid = gtp_teid;
+    return 0;
+}
+
+static void
+encode_GTP_TEID(const struct ofpact_gtp_teid *gtp_teid,
+             enum ofp_version ofp_version, struct ofpbuf *out)
+{
+    if (ofp_version == OFP10_VERSION) {
+        put_OFPAT10_GTP_TEID(out, gtp_teid->gtp_teid);
+    } else if (ofp_version == OFP11_VERSION) {
+        put_OFPAT11_GTP_TEID(out, gtp_teid->gtp_teid);
+    } else {
+        put_OFPAT12_GTP_TEID(out, gtp_teid->gtp_teid);
+    }
+}
+
+static char * OVS_WARN_UNUSED_RESULT
+parse_GTP_TEID(char *arg, struct ofpbuf *ofpacts,
+                    enum ofputil_protocol *usable_protocols OVS_UNUSED)
+{
+    return str_to_u32(arg, &ofpact_put_GTP_TEID(ofpacts)->gtp_teid);
+}
+
+static void
+format_GTP_TEID(const struct ofpact_gtp_teid *a, struct ds *s)
+{
+    ds_put_format(s, "gtp_teid:%#"PRIx32, a->gtp_teid);
 }
 
 /* Set queue action. */
@@ -5359,6 +6237,19 @@ ofpact_is_set_or_move_action(const struct ofpact *a)
     case OFPACT_SET_TUNNEL:
     case OFPACT_SET_VLAN_PCP:
     case OFPACT_SET_VLAN_VID:
+    case OFPACT_HANDLE_GTP:
+    case OFPACT_OPERATE_GTP:
+    case OFPACT_GTP_TEID:
+    case OFPACT_GTP_PGW_IP:
+    case OFPACT_OVS_ID:
+    case OFPACT_OVS_TOTAL:
+    case OFPACT_GTP_PGW_PORT:
+    case OFPACT_OVS_PHY_PORT:
+    case OFPACT_HANDLE_PGW_SGI:
+    case OFPACT_PGW_SGI_PORT:
+    case OFPACT_PGW_FASTPATH:
+    case OFPACT_GTP_PGW_ETH:
+    case OFPACT_PGW_SGI_ETH:
         return true;
     case OFPACT_BUNDLE:
     case OFPACT_CLEAR_ACTIONS:
@@ -5429,6 +6320,19 @@ ofpact_is_allowed_in_actions_set(const struct ofpact *a)
     case OFPACT_SET_VLAN_PCP:
     case OFPACT_SET_VLAN_VID:
     case OFPACT_STRIP_VLAN:
+    case OFPACT_HANDLE_GTP:
+    case OFPACT_OPERATE_GTP:
+    case OFPACT_GTP_TEID:
+    case OFPACT_GTP_PGW_IP:
+    case OFPACT_OVS_ID:
+    case OFPACT_OVS_TOTAL:
+    case OFPACT_GTP_PGW_PORT:
+    case OFPACT_OVS_PHY_PORT:
+    case OFPACT_HANDLE_PGW_SGI:
+    case OFPACT_PGW_SGI_PORT:
+    case OFPACT_PGW_FASTPATH:
+    case OFPACT_GTP_PGW_ETH:
+    case OFPACT_PGW_SGI_ETH:
         return true;
 
     /* In general these actions are excluded because they are not part of
@@ -5668,6 +6572,19 @@ ovs_instruction_type_from_ofpact_type(enum ofpact_type type)
     case OFPACT_SAMPLE:
     case OFPACT_DEBUG_RECIRC:
     case OFPACT_CT:
+    case OFPACT_HANDLE_GTP:
+    case OFPACT_OPERATE_GTP:
+    case OFPACT_GTP_TEID:
+    case OFPACT_GTP_PGW_IP:
+    case OFPACT_OVS_ID:
+    case OFPACT_OVS_TOTAL:
+    case OFPACT_GTP_PGW_PORT:
+    case OFPACT_OVS_PHY_PORT:
+    case OFPACT_HANDLE_PGW_SGI:
+    case OFPACT_PGW_SGI_PORT:
+    case OFPACT_PGW_FASTPATH:
+    case OFPACT_GTP_PGW_ETH:
+    case OFPACT_PGW_SGI_ETH:
     default:
         return OVSINST_OFPIT11_APPLY_ACTIONS;
     }
@@ -6110,6 +7027,21 @@ ofpact_check__(enum ofputil_protocol *usable_protocols, struct ofpact *a,
 
     case OFPACT_SET_ETH_SRC:
     case OFPACT_SET_ETH_DST:
+        return 0;
+
+    case OFPACT_HANDLE_GTP:
+    case OFPACT_OPERATE_GTP:
+    case OFPACT_GTP_TEID: 
+    case OFPACT_GTP_PGW_IP:
+    case OFPACT_OVS_ID:
+    case OFPACT_OVS_TOTAL:
+    case OFPACT_GTP_PGW_PORT:
+    case OFPACT_OVS_PHY_PORT:
+    case OFPACT_HANDLE_PGW_SGI:
+    case OFPACT_PGW_SGI_PORT:
+    case OFPACT_PGW_FASTPATH:  
+    case OFPACT_GTP_PGW_ETH:
+    case OFPACT_PGW_SGI_ETH:
         return 0;
 
     case OFPACT_SET_IPV4_SRC:
@@ -6585,6 +7517,19 @@ get_ofpact_map(enum ofp_version version)
         { OFPACT_SET_L4_SRC_PORT, 9 },
         { OFPACT_SET_L4_DST_PORT, 10 },
         { OFPACT_ENQUEUE, 11 },
+        { OFPACT_HANDLE_GTP, 28 },
+        { OFPACT_OPERATE_GTP, 29 },
+        { OFPACT_GTP_TEID, 30 },
+        { OFPACT_GTP_PGW_IP, 31 },
+        { OFPACT_OVS_ID, 32},
+        { OFPACT_OVS_TOTAL, 33},
+        { OFPACT_GTP_PGW_PORT, 34},
+        { OFPACT_OVS_PHY_PORT, 35},
+        { OFPACT_HANDLE_PGW_SGI, 36},
+        { OFPACT_PGW_SGI_PORT, 37},
+        { OFPACT_PGW_FASTPATH, 38},
+        { OFPACT_GTP_PGW_ETH, 39},
+        { OFPACT_PGW_SGI_ETH, 40},
         { 0, -1 },
     };
 
@@ -6615,6 +7560,19 @@ get_ofpact_map(enum ofp_version version)
         { OFPACT_GROUP, 22 },
         { OFPACT_SET_IP_TTL, 23 },
         { OFPACT_DEC_TTL, 24 },
+        { OFPACT_HANDLE_GTP, 28 },
+        { OFPACT_OPERATE_GTP, 29 },
+        { OFPACT_GTP_TEID, 30 },
+        { OFPACT_GTP_PGW_IP, 31 },
+        { OFPACT_OVS_ID, 32},
+        { OFPACT_OVS_TOTAL, 33},
+        { OFPACT_GTP_PGW_PORT, 34},
+        { OFPACT_OVS_PHY_PORT, 35},
+        { OFPACT_HANDLE_PGW_SGI, 36},
+        { OFPACT_PGW_SGI_PORT, 37},
+        { OFPACT_PGW_FASTPATH, 38},
+        { OFPACT_GTP_PGW_ETH, 39},
+        { OFPACT_PGW_SGI_ETH, 40},
         { 0, -1 },
     };
 
@@ -6636,6 +7594,19 @@ get_ofpact_map(enum ofp_version version)
         { OFPACT_SET_FIELD, 25 },
         /* OF1.3+ OFPAT_PUSH_PBB (26) not supported. */
         /* OF1.3+ OFPAT_POP_PBB (27) not supported. */
+        { OFPACT_HANDLE_GTP, 28 },
+        { OFPACT_OPERATE_GTP, 29 },
+        { OFPACT_GTP_TEID, 30 },
+        { OFPACT_GTP_PGW_IP, 31 },
+        { OFPACT_OVS_ID, 32},
+        { OFPACT_OVS_TOTAL, 33},
+        { OFPACT_GTP_PGW_PORT, 34},
+        { OFPACT_OVS_PHY_PORT, 35},
+        { OFPACT_HANDLE_PGW_SGI, 36},
+        { OFPACT_PGW_SGI_PORT, 37},
+        { OFPACT_PGW_FASTPATH, 38},
+        { OFPACT_GTP_PGW_ETH, 39},
+        { OFPACT_PGW_SGI_ETH, 40},
         { 0, -1 },
     };
 
@@ -6764,6 +7735,19 @@ ofpact_outputs_to_port(const struct ofpact *ofpact, ofp_port_t port)
     case OFPACT_GROUP:
     case OFPACT_DEBUG_RECIRC:
     case OFPACT_CT:
+    case OFPACT_HANDLE_GTP:
+    case OFPACT_OPERATE_GTP:
+    case OFPACT_GTP_TEID:
+    case OFPACT_GTP_PGW_IP:
+    case OFPACT_OVS_ID:
+    case OFPACT_OVS_TOTAL:
+    case OFPACT_GTP_PGW_PORT:
+    case OFPACT_OVS_PHY_PORT:
+    case OFPACT_HANDLE_PGW_SGI:
+    case OFPACT_PGW_SGI_PORT:
+    case OFPACT_PGW_FASTPATH:
+    case OFPACT_GTP_PGW_ETH:
+    case OFPACT_PGW_SGI_ETH:
     default:
         return false;
     }
@@ -6906,12 +7890,8 @@ ofpact_init(struct ofpact *ofpact, enum ofpact_type type, size_t len)
 void
 ofpact_update_len(struct ofpbuf *ofpacts, struct ofpact *ofpact)
 {
-    ptrdiff_t len;
-
     ovs_assert(ofpact == ofpacts->header);
-    len = (char *) ofpbuf_tail(ofpacts) - (char *) ofpact;
-    ovs_assert(len <= UINT16_MAX);
-    ofpact->len = len;
+    ofpact->len = (char *) ofpbuf_tail(ofpacts) - (char *) ofpact;
 }
 
 /* Pads out 'ofpacts' to a multiple of OFPACT_ALIGNTO bytes in length.  Each

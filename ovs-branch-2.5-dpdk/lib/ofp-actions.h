@@ -63,6 +63,19 @@
                                                                         \
     /* Header changes. */                                               \
     OFPACT(SET_FIELD,       ofpact_set_field,   ofpact, "set_field")    \
+    OFPACT(HANDLE_GTP,      ofpact_null,        ofpact, "handle_gtp")    \
+    OFPACT(HANDLE_PGW_SGI,  ofpact_null,        ofpact, "handle_pgw_sgi")    \
+    OFPACT(OPERATE_GTP,     ofpact_operate_gtp, ofpact, "operate_gtp")    \
+    OFPACT(GTP_TEID,        ofpact_gtp_teid,    ofpact, "gtp_teid")    \
+    OFPACT(GTP_PGW_IP,      ofpact_gtp_pgw_ip,  ofpact, "gtp_pgw_ip")    \
+    OFPACT(OVS_ID,          ofpact_ovs_id,      ofpact, "ovs_id")    \
+    OFPACT(OVS_TOTAL,       ofpact_ovs_total,   ofpact, "ovs_total")    \
+    OFPACT(GTP_PGW_PORT,    ofpact_gtp_pgw_port,ofpact, "gtp_pgw_port")    \
+    OFPACT(OVS_PHY_PORT,    ofpact_ovs_phy_port,ofpact, "ovs_phy_port")    \
+    OFPACT(PGW_SGI_PORT,    ofpact_pgw_sgi_port,ofpact, "pgw_sgi_port")    \
+    OFPACT(PGW_FASTPATH,    ofpact_pgw_fastpath,ofpact, "pgw_fastpath")    \
+    OFPACT(GTP_PGW_ETH,     ofpact_mac,         ofpact, "gtp_pgw_eth")   \
+    OFPACT(PGW_SGI_ETH,     ofpact_mac,         ofpact, "pgw_sgi_eth")   \
     OFPACT(SET_VLAN_VID,    ofpact_vlan_vid,    ofpact, "set_vlan_vid") \
     OFPACT(SET_VLAN_PCP,    ofpact_vlan_pcp,    ofpact, "set_vlan_pcp") \
     OFPACT(STRIP_VLAN,      ofpact_null,        ofpact, "strip_vlan")   \
@@ -337,9 +350,9 @@ struct ofpact_vlan_pcp {
     bool flow_has_vlan;         /* VLAN present at action validation time? */
 };
 
-/* OFPACT_SET_ETH_SRC, OFPACT_SET_ETH_DST.
+/* OFPACT_SET_ETH_SRC, OFPACT_SET_ETH_DST, OFPACT_GTP_PGW_ETH, OFPACT_PGW_SGI_ETH
  *
- * Used for OFPAT10_SET_DL_SRC, OFPAT10_SET_DL_DST. */
+ * Used for OFPAT10_SET_DL_SRC, OFPAT10_SET_DL_DST, OFPAT10_GTP_PGW_ETH, OFPAT11_GTP_PGW_ETH, OFPAT12_GTP_PGW_ETH, OFPAT10_PGW_SGI_ETH, OFPAT11_PGW_SGI_ETH, OFPAT12_PGW_SGI_ETH */
 struct ofpact_mac {
     struct ofpact ofpact;
     struct eth_addr mac;
@@ -412,6 +425,78 @@ struct ofpact_set_field {
     bool flow_has_vlan;   /* VLAN present at action validation time. */
     union mf_value value;
     union mf_value mask;
+};
+
+/* OFPACT_OPERATE_GTP.
+ *
+ * Used for OFPAT10_OPERATE_GTP, OFPAT11_OPERATE_GTP, OFPAT12_OPERATE_GTP  */
+struct ofpact_operate_gtp {
+    struct ofpact ofpact;
+    uint8_t operation;
+};
+
+/* OFPACT_PGW_FASTPATH.
+ *
+ * Used for OFPAT10_PGW_FASTPATH, OFPAT11_PGW_FASTPATH, OFPAT12_PGW_FASTPATH  */
+struct ofpact_pgw_fastpath {
+    struct ofpact ofpact;
+    uint8_t pgw_fastpath;
+};
+
+/* OFPACT_GTP_TEID.
+ *
+ * Used for OFPAT10_GTP_TEID, OFPAT11_GTP_TEID, OFPAT12_GTP_TEID */
+struct ofpact_gtp_teid {
+    struct ofpact ofpact;
+    uint32_t gtp_teid;
+};
+
+/* OFPACT_GTP_PGW_IP.
+ *
+ * Used for OFPAT10_GTP_PGW_IP, OFPAT11_GTP_PGW_IP, OFPAT12_GTP_PGW_IP */
+struct ofpact_gtp_pgw_ip {
+    struct ofpact ofpact;
+    ovs_be32 gtp_pgw_ip;
+};
+
+/* OFPACT_OVS_ID.
+ *
+ * Used for OFPAT10_OVS_ID, OFPAT11_OVS_ID, OFPAT12_OVS_ID */
+struct ofpact_ovs_id {
+    struct ofpact ofpact;
+    uint16_t ovs_id;
+};
+
+/* OFPACT_OVS_TOTAL.
+ *
+ * Used for OFPAT10_OVS_TOTAL, OFPAT11_OVS_TOTAL, OFPAT12_OVS_TOTAL */
+struct ofpact_ovs_total {
+    struct ofpact ofpact;
+    uint16_t ovs_total;
+};
+
+/* OFPACT_GTP_PGW_PORT.
+ *
+ * Used for OFPAT10_GTP_PGW_PORT, OFPAT11_GTP_PGW_PORT, OFPAT12_GTP_PGW_PORT */
+struct ofpact_gtp_pgw_port {
+    struct ofpact ofpact;
+    uint16_t gtp_pgw_port;
+};
+
+/* OFPACT_OVS_PHY_PORT.
+ *
+ * Used for OFPAT10_OVS_PHY_PORT, OFPAT11_OVS_PHY_PORT, OFPAT12_OVS_PHY_PORT */
+struct ofpact_ovs_phy_port {
+    struct ofpact ofpact;
+    uint16_t ovs_phy_port;
+};
+
+/* OFPACT_PGW_SGI_PORT.
+ *
+ * Used for OFPAT10_PGW_SGI_PORT, OFPAT11_PGW_SGI_PORT, OFPAT12_PGW_SGI_PORT */
+struct ofpact_pgw_sgi_port {
+    struct ofpact ofpact;
+    uint16_t pgw_sgi_port;
 };
 
 /* OFPACT_PUSH_VLAN/MPLS/PBB

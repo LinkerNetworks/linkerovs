@@ -26,6 +26,8 @@ ofproto_libofproto_la_SOURCES = \
 	ofproto/netflow.h \
 	ofproto/ofproto.c \
 	ofproto/ofproto.h \
+	ofproto/gtp-manager.c \
+	ofproto/gtp-manager.h \
 	ofproto/ofproto-dpif.c \
 	ofproto/ofproto-dpif.h \
 	ofproto/ofproto-dpif-ipfix.c \

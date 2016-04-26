@@ -36,6 +36,10 @@ struct dpif_sflow;
 struct mac_learning;
 struct mcast_snooping;
 struct xlate_cache;
+struct xbridge;
+struct xbundle;
+struct xport;
+struct xlate_ctx;
 
 struct xlate_out {
     enum slow_path_reason slow; /* 0 if fast path may be used. */
@@ -212,5 +216,7 @@ void xlate_cache_delete(struct xlate_cache *);
 
 void xlate_txn_start(void);
 void xlate_txn_commit(void);
+
+void xlate_output_action(struct xlate_ctx *ctx, ofp_port_t port, uint16_t max_len, bool may_packet_in);
 
 #endif /* ofproto-dpif-xlate.h */
