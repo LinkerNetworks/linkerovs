@@ -1,0 +1,1 @@
+cmd_/root/linkerovs/ovs-branch-2.5-dpdk/datapath/linux/vport-stt.ko := ld -r -m elf_x86_64 -T ./scripts/module-common.lds --build-id  -o /root/linkerovs/ovs-branch-2.5-dpdk/datapath/linux/vport-stt.ko /root/linkerovs/ovs-branch-2.5-dpdk/datapath/linux/vport-stt.o /root/linkerovs/ovs-branch-2.5-dpdk/datapath/linux/vport-stt.mod.o

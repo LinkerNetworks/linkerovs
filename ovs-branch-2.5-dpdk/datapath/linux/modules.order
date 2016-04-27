@@ -1,0 +1,6 @@
+kernel//root/linkerovs/ovs-branch-2.5-dpdk/datapath/linux/openvswitch.ko
+kernel//root/linkerovs/ovs-branch-2.5-dpdk/datapath/linux/vport-geneve.ko
+kernel//root/linkerovs/ovs-branch-2.5-dpdk/datapath/linux/vport-gre.ko
+kernel//root/linkerovs/ovs-branch-2.5-dpdk/datapath/linux/vport-lisp.ko
+kernel//root/linkerovs/ovs-branch-2.5-dpdk/datapath/linux/vport-stt.ko
+kernel//root/linkerovs/ovs-branch-2.5-dpdk/datapath/linux/vport-vxlan.ko
