@@ -977,8 +977,11 @@ dpdk_queue_flush__(struct netdev_dpdk *dev, int qid)
             rte_pktmbuf_free(txq->burst_pkts[i]);
         }
         rte_spinlock_lock(&dev->stats_lock);
-        dev->stats.tx_dropped += txq->count-nb_tx;
+        uint32_t dropped =  txq->count-nb_tx;
+        dev->stats.tx_dropped += dropped;
         rte_spinlock_unlock(&dev->stats_lock);
+
+        VLOG_INFO_RL(&rl, "dropped %d when free buffers", (int)dropped);
     }
 
     txq->count = 0;
@@ -1249,7 +1252,7 @@ dpdk_do_tx_copy(struct netdev *netdev, int qid, struct dp_packet **pkts,
         int size = dp_packet_size(pkts[i]);
 
         if (OVS_UNLIKELY(size > dev->max_packet_len)) {
-            VLOG_WARN_RL(&rl, "Too big size %d max_packet_len %d",
+            VLOG_INFO_RL(&rl, "Too big size %d max_packet_len %d",
                          (int)size , dev->max_packet_len);
 
             dropped++;
@@ -1345,7 +1348,7 @@ netdev_dpdk_send__(struct netdev_dpdk *dev, int qid,
                                     i-next_tx_idx);
                 }
 
-                VLOG_WARN_RL(&rl, "Too big size %d max_packet_len %d",
+                VLOG_INFO_RL(&rl, "Too big size %d max_packet_len %d",
                              (int)size , dev->max_packet_len);
 
                 dp_packet_delete(pkts[i]);
