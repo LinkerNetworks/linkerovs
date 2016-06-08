@@ -1,12 +1,12 @@
 ofproto/ofproto_libofproto_la-ofproto-dpif-sflow.lo: \
  ofproto/ofproto-dpif-sflow.c /usr/include/stdc-predef.h config.h \
  ofproto/ofproto-dpif-sflow.h \
- /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stdint.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stdint.h \
  /usr/include/stdint.h /usr/include/features.h /usr/include/sys/cdefs.h \
  /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
  /usr/include/gnu/stubs-64.h /usr/include/bits/wchar.h lib/svec.h \
- /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stdbool.h \
- /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stddef.h lib/odp-util.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stdbool.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stddef.h lib/odp-util.h \
  lib/string.h /usr/include/string.h /usr/include/xlocale.h \
  /usr/include/bits/string.h /usr/include/bits/string2.h \
  /usr/include/endian.h /usr/include/bits/endian.h \
@@ -22,8 +22,8 @@ ofproto/ofproto_libofproto_la-ofproto-dpif-sflow.lo: \
  /usr/include/bits/sockaddr.h /usr/include/asm/socket.h \
  /usr/include/asm-generic/socket.h /usr/include/asm/sockios.h \
  /usr/include/asm-generic/sockios.h /usr/include/bits/in.h lib/bitmap.h \
- /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/limits.h \
- /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/syslimits.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/limits.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/syslimits.h \
  /usr/include/limits.h /usr/include/bits/posix1_lim.h \
  /usr/include/bits/local_lim.h /usr/include/linux/limits.h \
  /usr/include/bits/posix2_lim.h /usr/include/bits/xopen_lim.h \
@@ -31,7 +31,7 @@ ofproto/ofproto_libofproto_la-ofproto-dpif-sflow.lo: \
  /usr/include/bits/waitstatus.h /usr/include/alloca.h \
  /usr/include/bits/stdlib-bsearch.h /usr/include/bits/stdlib-float.h \
  lib/util.h /usr/include/arpa/inet.h /usr/include/inttypes.h \
- /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stdarg.h lib/stdio.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stdarg.h lib/stdio.h \
  /usr/include/stdio.h /usr/include/libio.h /usr/include/_G_config.h \
  /usr/include/wchar.h /usr/include/bits/sys_errlist.h \
  /usr/include/bits/stdio.h lib/compiler.h include/openvswitch/compiler.h \
@@ -77,17 +77,59 @@ ofproto/ofproto_libofproto_la-ofproto-dpif-sflow.lo: \
  /root/dpdk-2.2.0/x86_64-native-linuxapp-gcc/include/rte_ether.h \
  /root/dpdk-2.2.0/x86_64-native-linuxapp-gcc/include/rte_memcpy.h \
  /root/dpdk-2.2.0/x86_64-native-linuxapp-gcc/include/rte_vect.h \
- /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/x86intrin.h \
- /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/ia32intrin.h \
- /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/mmintrin.h \
- /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/xmmintrin.h \
- /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/mm_malloc.h \
- /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/emmintrin.h \
- /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/pmmintrin.h \
- /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/tmmintrin.h \
- /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/immintrin.h \
- /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/fxsrintrin.h \
- /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/adxintrin.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/x86intrin.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/ia32intrin.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/mmintrin.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/xmmintrin.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/mm_malloc.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/emmintrin.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/pmmintrin.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/tmmintrin.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/ammintrin.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/smmintrin.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/popcntintrin.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/wmmintrin.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/immintrin.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/avxintrin.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/avx2intrin.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/avx512fintrin.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/avx512erintrin.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/avx512pfintrin.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/avx512cdintrin.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/avx512vlintrin.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/avx512bwintrin.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/avx512dqintrin.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/avx512vlbwintrin.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/avx512vldqintrin.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/avx512ifmaintrin.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/avx512ifmavlintrin.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/avx512vbmiintrin.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/avx512vbmivlintrin.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/shaintrin.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/lzcntintrin.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/bmiintrin.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/bmi2intrin.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/fmaintrin.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/f16cintrin.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/rtmintrin.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/xtestintrin.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/mm3dnow.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/prfchwintrin.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/fma4intrin.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/xopintrin.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/lwpintrin.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/tbmintrin.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/rdseedintrin.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/fxsrintrin.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/xsaveintrin.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/xsaveoptintrin.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/adxintrin.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/clwbintrin.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/pcommitintrin.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/clflushoptintrin.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/xsavesintrin.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/xsavecintrin.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/mwaitxintrin.h \
  /root/dpdk-2.2.0/x86_64-native-linuxapp-gcc/include/rte_random.h \
  /root/dpdk-2.2.0/x86_64-native-linuxapp-gcc/include/rte_mbuf.h \
  /root/dpdk-2.2.0/x86_64-native-linuxapp-gcc/include/rte_common.h \
@@ -124,24 +166,25 @@ ofproto/ofproto_libofproto_la-ofproto-dpif-sflow.lo: \
  /root/dpdk-2.2.0/x86_64-native-linuxapp-gcc/include/rte_malloc.h \
  lib/ovs-numa.h lib/hash.h lib/hmap.h lib/netdev.h lib/netlink.h \
  lib/ofpbuf.h ofproto/ofproto.h lib/cfm.h lib/classifier.h lib/cmap.h \
- lib/ovs-rcu.h lib/ovs-atomic.h lib/ovs-atomic-gcc4.7+.h \
- lib/ovs-atomic-flag-gcc4.7+.h lib/match.h lib/meta-flow.h \
- /usr/include/netinet/ip6.h lib/ofp-errors.h lib/pvector.h lib/rculist.h \
- lib/flow.h lib/meta-flow.h ofproto/netflow.h lib/sset.h lib/rstp.h \
- lib/smap.h lib/stp.h lib/lacp.h lib/packets.h lib/poll-loop.h \
- /usr/include/poll.h /usr/include/sys/poll.h /usr/include/bits/poll.h \
- lib/ovs-router.h lib/route-table.h lib/sflow_api.h /usr/include/unistd.h \
- /usr/include/bits/posix_opt.h /usr/include/bits/environments.h \
- /usr/include/bits/confname.h /usr/include/getopt.h lib/sflow.h \
- lib/socket-util.h /usr/include/sys/time.h \
- /usr/include/netinet/in_systm.h /usr/include/netinet/ip.h lib/timeval.h \
- include/openvswitch/vlog.h include/openvswitch/thread.h \
- include/openvswitch/util.h include/openvswitch/token-bucket.h \
- lib/unaligned.h ofproto/ofproto-provider.h lib/guarded-list.h \
- lib/ovs-thread.h lib/heap.h lib/hindex.h lib/list.h lib/ofp-actions.h \
- lib/ofp-util.h include/openflow/netronome-ext.h lib/ofp-errors.h \
- lib/ofp-util.h ofproto/ofproto.h lib/ovs-atomic.h lib/ovs-rcu.h \
- lib/ovs-thread.h lib/shash.h lib/simap.h
+ lib/ovs-rcu.h lib/ovs-atomic.h lib/ovs-atomic-c11.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stdatomic.h lib/match.h \
+ lib/meta-flow.h /usr/include/netinet/ip6.h lib/ofp-errors.h \
+ lib/pvector.h lib/rculist.h lib/flow.h lib/meta-flow.h ofproto/netflow.h \
+ lib/sset.h lib/rstp.h lib/smap.h lib/stp.h lib/lacp.h lib/packets.h \
+ lib/poll-loop.h /usr/include/poll.h /usr/include/sys/poll.h \
+ /usr/include/bits/poll.h lib/ovs-router.h lib/route-table.h \
+ lib/sflow_api.h /usr/include/unistd.h /usr/include/bits/posix_opt.h \
+ /usr/include/bits/environments.h /usr/include/bits/confname.h \
+ /usr/include/getopt.h lib/sflow.h lib/socket-util.h \
+ /usr/include/sys/time.h /usr/include/netinet/in_systm.h \
+ /usr/include/netinet/ip.h lib/timeval.h include/openvswitch/vlog.h \
+ include/openvswitch/thread.h include/openvswitch/util.h \
+ include/openvswitch/token-bucket.h lib/unaligned.h \
+ ofproto/ofproto-provider.h lib/guarded-list.h lib/ovs-thread.h \
+ lib/heap.h lib/hindex.h lib/list.h lib/ofp-actions.h lib/ofp-util.h \
+ include/openflow/netronome-ext.h lib/ofp-errors.h lib/ofp-util.h \
+ ofproto/ofproto.h lib/ovs-atomic.h lib/ovs-rcu.h lib/ovs-thread.h \
+ lib/shash.h lib/simap.h
 
 /usr/include/stdc-predef.h:
 
@@ -149,7 +192,7 @@ config.h:
 
 ofproto/ofproto-dpif-sflow.h:
 
-/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stdint.h:
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stdint.h:
 
 /usr/include/stdint.h:
 
@@ -167,9 +210,9 @@ ofproto/ofproto-dpif-sflow.h:
 
 lib/svec.h:
 
-/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stdbool.h:
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stdbool.h:
 
-/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stddef.h:
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stddef.h:
 
 lib/odp-util.h:
 
@@ -241,9 +284,9 @@ lib/flow.h:
 
 lib/bitmap.h:
 
-/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/limits.h:
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/limits.h:
 
-/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/syslimits.h:
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/syslimits.h:
 
 /usr/include/limits.h:
 
@@ -275,7 +318,7 @@ lib/util.h:
 
 /usr/include/inttypes.h:
 
-/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stdarg.h:
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stdarg.h:
 
 lib/stdio.h:
 
@@ -455,27 +498,111 @@ lib/netdev-dpdk.h:
 
 /root/dpdk-2.2.0/x86_64-native-linuxapp-gcc/include/rte_vect.h:
 
-/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/x86intrin.h:
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/x86intrin.h:
 
-/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/ia32intrin.h:
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/ia32intrin.h:
 
-/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/mmintrin.h:
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/mmintrin.h:
 
-/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/xmmintrin.h:
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/xmmintrin.h:
 
-/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/mm_malloc.h:
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/mm_malloc.h:
 
-/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/emmintrin.h:
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/emmintrin.h:
 
-/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/pmmintrin.h:
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/pmmintrin.h:
 
-/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/tmmintrin.h:
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/tmmintrin.h:
 
-/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/immintrin.h:
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/ammintrin.h:
 
-/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/fxsrintrin.h:
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/smmintrin.h:
 
-/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/adxintrin.h:
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/popcntintrin.h:
+
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/wmmintrin.h:
+
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/immintrin.h:
+
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/avxintrin.h:
+
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/avx2intrin.h:
+
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/avx512fintrin.h:
+
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/avx512erintrin.h:
+
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/avx512pfintrin.h:
+
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/avx512cdintrin.h:
+
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/avx512vlintrin.h:
+
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/avx512bwintrin.h:
+
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/avx512dqintrin.h:
+
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/avx512vlbwintrin.h:
+
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/avx512vldqintrin.h:
+
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/avx512ifmaintrin.h:
+
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/avx512ifmavlintrin.h:
+
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/avx512vbmiintrin.h:
+
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/avx512vbmivlintrin.h:
+
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/shaintrin.h:
+
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/lzcntintrin.h:
+
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/bmiintrin.h:
+
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/bmi2intrin.h:
+
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/fmaintrin.h:
+
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/f16cintrin.h:
+
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/rtmintrin.h:
+
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/xtestintrin.h:
+
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/mm3dnow.h:
+
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/prfchwintrin.h:
+
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/fma4intrin.h:
+
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/xopintrin.h:
+
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/lwpintrin.h:
+
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/tbmintrin.h:
+
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/rdseedintrin.h:
+
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/fxsrintrin.h:
+
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/xsaveintrin.h:
+
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/xsaveoptintrin.h:
+
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/adxintrin.h:
+
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/clwbintrin.h:
+
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/pcommitintrin.h:
+
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/clflushoptintrin.h:
+
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/xsavesintrin.h:
+
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/xsavecintrin.h:
+
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/mwaitxintrin.h:
 
 /root/dpdk-2.2.0/x86_64-native-linuxapp-gcc/include/rte_random.h:
 
@@ -569,9 +696,9 @@ lib/ovs-rcu.h:
 
 lib/ovs-atomic.h:
 
-lib/ovs-atomic-gcc4.7+.h:
+lib/ovs-atomic-c11.h:
 
-lib/ovs-atomic-flag-gcc4.7+.h:
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stdatomic.h:
 
 lib/match.h:
 

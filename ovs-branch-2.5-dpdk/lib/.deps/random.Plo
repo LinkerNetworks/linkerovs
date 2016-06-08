@@ -1,6 +1,6 @@
 lib/random.lo: lib/random.c /usr/include/stdc-predef.h config.h \
- lib/random.h /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stddef.h \
- /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stdint.h \
+ lib/random.h /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stddef.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stdint.h \
  /usr/include/stdint.h /usr/include/features.h /usr/include/sys/cdefs.h \
  /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
  /usr/include/gnu/stubs-64.h /usr/include/bits/wchar.h \
@@ -18,7 +18,7 @@ lib/random.lo: lib/random.c /usr/include/stdc-predef.h config.h \
  /usr/include/bits/pthreadtypes.h /usr/include/alloca.h \
  /usr/include/bits/stdlib-bsearch.h /usr/include/bits/stdlib-float.h \
  /usr/include/sys/time.h lib/entropy.h lib/hash.h \
- /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stdbool.h lib/string.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stdbool.h lib/string.h \
  /usr/include/string.h /usr/include/bits/string.h \
  /usr/include/bits/string2.h lib/util.h /usr/include/arpa/inet.h \
  /usr/include/netinet/in.h /usr/include/sys/socket.h \
@@ -28,22 +28,23 @@ lib/random.lo: lib/random.c /usr/include/stdc-predef.h config.h \
  /usr/include/asm-generic/socket.h /usr/include/asm/sockios.h \
  /usr/include/asm-generic/sockios.h /usr/include/bits/in.h \
  /usr/include/inttypes.h \
- /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/limits.h \
- /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/syslimits.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/limits.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/syslimits.h \
  /usr/include/limits.h /usr/include/bits/posix1_lim.h \
  /usr/include/bits/local_lim.h /usr/include/linux/limits.h \
  /usr/include/bits/posix2_lim.h /usr/include/bits/xopen_lim.h \
  /usr/include/bits/stdio_lim.h \
- /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stdarg.h lib/stdio.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stdarg.h lib/stdio.h \
  /usr/include/stdio.h /usr/include/libio.h /usr/include/_G_config.h \
  /usr/include/wchar.h /usr/include/bits/sys_errlist.h \
  /usr/include/bits/stdio.h lib/compiler.h include/openvswitch/compiler.h \
  include/openvswitch/types.h include/openvswitch/util.h \
  include/openvswitch/version.h lib/ovs-thread.h /usr/include/pthread.h \
  /usr/include/sched.h /usr/include/bits/sched.h /usr/include/bits/timex.h \
- /usr/include/bits/setjmp.h lib/ovs-atomic.h lib/ovs-atomic-gcc4.7+.h \
- lib/ovs-atomic-flag-gcc4.7+.h include/openvswitch/thread.h \
- include/openvswitch/util.h lib/timeval.h lib/type-props.h
+ /usr/include/bits/setjmp.h lib/ovs-atomic.h lib/ovs-atomic-c11.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stdatomic.h \
+ include/openvswitch/thread.h include/openvswitch/util.h lib/timeval.h \
+ lib/type-props.h
 
 /usr/include/stdc-predef.h:
 
@@ -51,9 +52,9 @@ config.h:
 
 lib/random.h:
 
-/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stddef.h:
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stddef.h:
 
-/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stdint.h:
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stdint.h:
 
 /usr/include/stdint.h:
 
@@ -129,7 +130,7 @@ lib/entropy.h:
 
 lib/hash.h:
 
-/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stdbool.h:
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stdbool.h:
 
 lib/string.h:
 
@@ -169,9 +170,9 @@ lib/util.h:
 
 /usr/include/inttypes.h:
 
-/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/limits.h:
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/limits.h:
 
-/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/syslimits.h:
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/syslimits.h:
 
 /usr/include/limits.h:
 
@@ -187,7 +188,7 @@ lib/util.h:
 
 /usr/include/bits/stdio_lim.h:
 
-/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stdarg.h:
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stdarg.h:
 
 lib/stdio.h:
 
@@ -227,9 +228,9 @@ lib/ovs-thread.h:
 
 lib/ovs-atomic.h:
 
-lib/ovs-atomic-gcc4.7+.h:
+lib/ovs-atomic-c11.h:
 
-lib/ovs-atomic-flag-gcc4.7+.h:
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stdatomic.h:
 
 include/openvswitch/thread.h:
 

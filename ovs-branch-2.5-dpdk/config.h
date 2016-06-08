@@ -102,7 +102,7 @@
 /* #undef HAVE_NET_IF_MIB_H */
 
 /* Define to 1 if OpenSSL is installed. */
-#define HAVE_OPENSSL 1
+/* #undef HAVE_OPENSSL */
 
 /* Define to 1 if `posix_memalign' works. */
 #define HAVE_POSIX_MEMALIGN 1
@@ -117,7 +117,7 @@
 #define HAVE_STATVFS 1
 
 /* Define to 1 if you have the <stdatomic.h> header file. */
-/* #undef HAVE_STDATOMIC_H */
+#define HAVE_STDATOMIC_H 1
 
 /* Define to 1 if you have the <stdint.h> header file. */
 #define HAVE_STDINT_H 1
@@ -175,12 +175,8 @@
    extenions. */
 #define HAVE___THREAD 1
 
-/* Define to the sub-directory in which libtool stores uninstalled libraries.
-   */
+/* Define to the sub-directory where libtool stores uninstalled libraries. */
 #define LT_OBJDIR ".libs/"
-
-/* Define to 1 if your C compiler doesn't accept -c and -o together. */
-/* #undef NO_MINUS_C_MINUS_O */
 
 /* Name of package */
 #define PACKAGE "openvswitch"

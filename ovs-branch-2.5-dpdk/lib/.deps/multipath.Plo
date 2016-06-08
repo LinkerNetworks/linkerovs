@@ -1,11 +1,11 @@
 lib/multipath.lo: lib/multipath.c /usr/include/stdc-predef.h config.h \
- lib/multipath.h /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stdint.h \
+ lib/multipath.h /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stdint.h \
  /usr/include/stdint.h /usr/include/features.h /usr/include/sys/cdefs.h \
  /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
  /usr/include/gnu/stubs-64.h /usr/include/bits/wchar.h lib/compiler.h \
  include/openvswitch/compiler.h lib/ofp-errors.h \
- /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stdbool.h \
- /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stddef.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stdbool.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stddef.h \
  include/openflow/openflow.h include/openflow/openflow-1.0.h \
  include/openflow/openflow-common.h include/openvswitch/types.h \
  /usr/include/sys/types.h /usr/include/bits/types.h \
@@ -24,15 +24,15 @@ lib/multipath.lo: lib/multipath.c /usr/include/stdc-predef.h config.h \
  /usr/include/asm-generic/socket.h /usr/include/asm/sockios.h \
  /usr/include/asm-generic/sockios.h /usr/include/bits/in.h \
  /usr/include/inttypes.h lib/dynamic-string.h \
- /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stdarg.h lib/stdio.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stdarg.h lib/stdio.h \
  /usr/include/stdio.h /usr/include/libio.h /usr/include/_G_config.h \
  /usr/include/wchar.h /usr/include/bits/stdio_lim.h \
  /usr/include/bits/sys_errlist.h /usr/include/bits/stdio.h \
  /usr/include/bits/timex.h /usr/include/xlocale.h lib/nx-match.h \
  lib/flow.h lib/string.h /usr/include/string.h /usr/include/bits/string.h \
  /usr/include/bits/string2.h /usr/include/stdlib.h lib/bitmap.h \
- /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/limits.h \
- /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/syslimits.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/limits.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/syslimits.h \
  /usr/include/limits.h /usr/include/bits/posix1_lim.h \
  /usr/include/bits/local_lim.h /usr/include/linux/limits.h \
  /usr/include/bits/posix2_lim.h /usr/include/bits/xopen_lim.h \
@@ -61,7 +61,7 @@ config.h:
 
 lib/multipath.h:
 
-/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stdint.h:
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stdint.h:
 
 /usr/include/stdint.h:
 
@@ -83,9 +83,9 @@ include/openvswitch/compiler.h:
 
 lib/ofp-errors.h:
 
-/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stdbool.h:
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stdbool.h:
 
-/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stddef.h:
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stddef.h:
 
 include/openflow/openflow.h:
 
@@ -163,7 +163,7 @@ include/openflow/openflow-1.5.h:
 
 lib/dynamic-string.h:
 
-/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stdarg.h:
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stdarg.h:
 
 lib/stdio.h:
 
@@ -201,9 +201,9 @@ lib/string.h:
 
 lib/bitmap.h:
 
-/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/limits.h:
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/limits.h:
 
-/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/syslimits.h:
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/syslimits.h:
 
 /usr/include/limits.h:
 

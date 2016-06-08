@@ -7,7 +7,7 @@ ovn/northd/ovn-northd.o: ovn/northd/ovn-northd.c \
  /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
  /usr/include/bits/byteswap-16.h /usr/include/xlocale.h \
  /usr/include/stdlib.h \
- /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stddef.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stddef.h \
  /usr/include/bits/waitflags.h /usr/include/bits/waitstatus.h \
  /usr/include/sys/types.h /usr/include/time.h /usr/include/sys/select.h \
  /usr/include/bits/select.h /usr/include/bits/sigset.h \
@@ -16,18 +16,18 @@ ovn/northd/ovn-northd.o: ovn/northd/ovn-northd.c \
  /usr/include/bits/stdlib-bsearch.h /usr/include/bits/stdlib-float.h \
  lib/stdio.h /usr/include/stdio.h /usr/include/libio.h \
  /usr/include/_G_config.h /usr/include/wchar.h \
- /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stdarg.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stdarg.h \
  /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h \
  /usr/include/bits/stdio.h lib/command-line.h lib/compiler.h \
  include/openvswitch/compiler.h lib/daemon.h \
- /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/limits.h \
- /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/syslimits.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/limits.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/syslimits.h \
  /usr/include/limits.h /usr/include/bits/posix1_lim.h \
  /usr/include/bits/local_lim.h /usr/include/linux/limits.h \
  /usr/include/bits/posix2_lim.h /usr/include/bits/xopen_lim.h \
- /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stdbool.h lib/dirs.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stdbool.h lib/dirs.h \
  lib/dynamic-string.h \
- /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stdint.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stdint.h \
  /usr/include/stdint.h /usr/include/bits/wchar.h \
  /usr/include/bits/timex.h lib/fatal-signal.h /usr/include/signal.h \
  /usr/include/bits/signum.h /usr/include/bits/siginfo.h \
@@ -64,7 +64,7 @@ ovn/northd/ovn-northd.o: ovn/northd/ovn-northd.c \
  /usr/include/linux/genetlink.h lib/ofpbuf.h lib/list.h \
  include/openvswitch/list.h lib/unaligned.h lib/type-props.h \
  lib/ofp-errors.h ovn/lib/ovn-nb-idl.h lib/ovsdb-data.h lib/ovsdb-types.h \
- /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/float.h lib/uuid.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/float.h lib/uuid.h \
  lib/ovsdb-idl-provider.h lib/ovsdb-idl.h lib/smap.h lib/uuid.h \
  ovn/lib/ovn-sb-idl.h lib/poll-loop.h /usr/include/poll.h \
  /usr/include/sys/poll.h /usr/include/bits/poll.h lib/stream.h \
@@ -112,7 +112,7 @@ config.h:
 
 /usr/include/stdlib.h:
 
-/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stddef.h:
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stddef.h:
 
 /usr/include/bits/waitflags.h:
 
@@ -150,7 +150,7 @@ lib/stdio.h:
 
 /usr/include/wchar.h:
 
-/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stdarg.h:
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stdarg.h:
 
 /usr/include/bits/stdio_lim.h:
 
@@ -166,9 +166,9 @@ include/openvswitch/compiler.h:
 
 lib/daemon.h:
 
-/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/limits.h:
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/limits.h:
 
-/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/syslimits.h:
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/syslimits.h:
 
 /usr/include/limits.h:
 
@@ -182,13 +182,13 @@ lib/daemon.h:
 
 /usr/include/bits/xopen_lim.h:
 
-/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stdbool.h:
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stdbool.h:
 
 lib/dirs.h:
 
 lib/dynamic-string.h:
 
-/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stdint.h:
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stdint.h:
 
 /usr/include/stdint.h:
 
@@ -368,7 +368,7 @@ lib/ovsdb-data.h:
 
 lib/ovsdb-types.h:
 
-/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/float.h:
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/float.h:
 
 lib/uuid.h:
 

@@ -1,5 +1,5 @@
 # -*- shell-script -*-
-HAVE_OPENSSL='yes'
+HAVE_OPENSSL='no'
 HAVE_PYTHON='yes'
 EGREP='/usr/bin/grep -E'
 PERL='/usr/bin/perl'

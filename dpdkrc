@@ -1,0 +1,7 @@
+export DPDK_DIR=/root/linkerovs/dpdk-2.2.0
+export RTE_SDK=/root/linkerovs/dpdk-2.2.0
+export RTE_TARGET=x86_64-native-linuxapp-gcc
+export DESTDIR=/usr/local/bin/dpdk
+export DPDK_BUILD=$DPDK_DIR/x86_64-native-linuxapp-gcc
+export OVS_DIR=/root/linkerovs/ovs-branch-2.5-dpdk
+

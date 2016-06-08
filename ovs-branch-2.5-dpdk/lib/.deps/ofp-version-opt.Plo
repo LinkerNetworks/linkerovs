@@ -1,9 +1,9 @@
 lib/ofp-version-opt.lo: lib/ofp-version-opt.c /usr/include/stdc-predef.h \
  config.h lib/dynamic-string.h \
- /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stdarg.h \
- /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stdbool.h \
- /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stddef.h \
- /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stdint.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stdarg.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stdbool.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stddef.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stdint.h \
  /usr/include/stdint.h /usr/include/features.h /usr/include/sys/cdefs.h \
  /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
  /usr/include/gnu/stubs-64.h /usr/include/bits/wchar.h lib/stdio.h \
@@ -14,8 +14,8 @@ lib/ofp-version-opt.lo: lib/ofp-version-opt.c /usr/include/stdc-predef.h \
  /usr/include/bits/stdio.h /usr/include/time.h /usr/include/bits/time.h \
  /usr/include/bits/timex.h /usr/include/xlocale.h lib/compiler.h \
  include/openvswitch/compiler.h lib/ofp-util.h lib/bitmap.h \
- /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/limits.h \
- /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/syslimits.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/limits.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/syslimits.h \
  /usr/include/limits.h /usr/include/bits/posix1_lim.h \
  /usr/include/bits/local_lim.h /usr/include/linux/limits.h \
  /usr/include/bits/posix2_lim.h /usr/include/bits/xopen_lim.h \
@@ -57,7 +57,8 @@ lib/ofp-version-opt.lo: lib/ofp-version-opt.c /usr/include/stdc-predef.h \
  lib/netdev.h include/openflow/netronome-ext.h lib/ofp-version-opt.h \
  lib/ovs-thread.h /usr/include/pthread.h /usr/include/sched.h \
  /usr/include/bits/sched.h /usr/include/bits/setjmp.h lib/ovs-atomic.h \
- lib/ovs-atomic-gcc4.7+.h lib/ovs-atomic-flag-gcc4.7+.h \
+ lib/ovs-atomic-c11.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stdatomic.h \
  include/openvswitch/thread.h include/openvswitch/util.h
 
 /usr/include/stdc-predef.h:
@@ -66,13 +67,13 @@ config.h:
 
 lib/dynamic-string.h:
 
-/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stdarg.h:
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stdarg.h:
 
-/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stdbool.h:
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stdbool.h:
 
-/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stddef.h:
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stddef.h:
 
-/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stdint.h:
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stdint.h:
 
 /usr/include/stdint.h:
 
@@ -124,9 +125,9 @@ lib/ofp-util.h:
 
 lib/bitmap.h:
 
-/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/limits.h:
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/limits.h:
 
-/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/syslimits.h:
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/syslimits.h:
 
 /usr/include/limits.h:
 
@@ -324,9 +325,9 @@ lib/ovs-thread.h:
 
 lib/ovs-atomic.h:
 
-lib/ovs-atomic-gcc4.7+.h:
+lib/ovs-atomic-c11.h:
 
-lib/ovs-atomic-flag-gcc4.7+.h:
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stdatomic.h:
 
 include/openvswitch/thread.h:
 

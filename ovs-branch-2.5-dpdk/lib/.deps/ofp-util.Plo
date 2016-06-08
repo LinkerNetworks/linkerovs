@@ -1,13 +1,13 @@
 lib/ofp-util.lo: lib/ofp-util.c /usr/include/stdc-predef.h config.h \
- lib/ofp-print.h /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stdint.h \
+ lib/ofp-print.h /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stdint.h \
  /usr/include/stdint.h /usr/include/features.h /usr/include/sys/cdefs.h \
  /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
  /usr/include/gnu/stubs-64.h /usr/include/bits/wchar.h lib/stdio.h \
  /usr/include/stdio.h \
- /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stddef.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stddef.h \
  /usr/include/bits/types.h /usr/include/bits/typesizes.h \
  /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h \
- /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stdarg.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stdarg.h \
  /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h \
  /usr/include/bits/stdio.h /usr/include/ctype.h /usr/include/endian.h \
  /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
@@ -31,7 +31,7 @@ lib/ofp-util.lo: lib/ofp-util.c /usr/include/stdc-predef.h config.h \
  /usr/include/bits/waitstatus.h /usr/include/alloca.h \
  /usr/include/bits/stdlib-bsearch.h /usr/include/bits/stdlib-float.h \
  lib/bundle.h /usr/include/arpa/inet.h \
- /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stdbool.h lib/compiler.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stdbool.h lib/compiler.h \
  include/openvswitch/compiler.h lib/ofp-errors.h \
  include/openflow/openflow.h include/openflow/openflow-1.0.h \
  include/openflow/openflow-common.h include/openvswitch/types.h \
@@ -39,15 +39,16 @@ lib/ofp-util.lo: lib/ofp-util.c /usr/include/stdc-predef.h config.h \
  include/openflow/openflow-1.3.h include/openflow/openflow-1.4.h \
  include/openflow/openflow-1.5.h include/openflow/nicira-ext.h \
  lib/byte-order.h lib/classifier.h lib/cmap.h lib/ovs-rcu.h \
- lib/ovs-atomic.h /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/limits.h \
- /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/syslimits.h \
+ lib/ovs-atomic.h /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/limits.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/syslimits.h \
  /usr/include/limits.h /usr/include/bits/posix1_lim.h \
  /usr/include/bits/local_lim.h /usr/include/linux/limits.h \
  /usr/include/bits/posix2_lim.h /usr/include/bits/xopen_lim.h \
  /usr/include/pthread.h /usr/include/sched.h /usr/include/bits/sched.h \
  /usr/include/bits/timex.h /usr/include/bits/setjmp.h lib/util.h \
  include/openvswitch/util.h include/openvswitch/version.h \
- lib/ovs-atomic-gcc4.7+.h lib/ovs-atomic-flag-gcc4.7+.h lib/match.h \
+ lib/ovs-atomic-c11.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stdatomic.h lib/match.h \
  lib/flow.h lib/bitmap.h lib/packets.h lib/geneve.h include/odp-netlink.h \
  include/openvswitch/types.h lib/random.h lib/hash.h lib/tun-metadata.h \
  lib/dynamic-string.h lib/netlink.h lib/netlink-protocol.h \
@@ -72,7 +73,7 @@ config.h:
 
 lib/ofp-print.h:
 
-/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stdint.h:
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stdint.h:
 
 /usr/include/stdint.h:
 
@@ -92,7 +93,7 @@ lib/stdio.h:
 
 /usr/include/stdio.h:
 
-/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stddef.h:
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stddef.h:
 
 /usr/include/bits/types.h:
 
@@ -104,7 +105,7 @@ lib/stdio.h:
 
 /usr/include/wchar.h:
 
-/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stdarg.h:
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stdarg.h:
 
 /usr/include/bits/stdio_lim.h:
 
@@ -204,7 +205,7 @@ lib/bundle.h:
 
 /usr/include/arpa/inet.h:
 
-/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stdbool.h:
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stdbool.h:
 
 lib/compiler.h:
 
@@ -242,9 +243,9 @@ lib/ovs-rcu.h:
 
 lib/ovs-atomic.h:
 
-/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/limits.h:
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/limits.h:
 
-/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/syslimits.h:
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/syslimits.h:
 
 /usr/include/limits.h:
 
@@ -274,9 +275,9 @@ include/openvswitch/util.h:
 
 include/openvswitch/version.h:
 
-lib/ovs-atomic-gcc4.7+.h:
+lib/ovs-atomic-c11.h:
 
-lib/ovs-atomic-flag-gcc4.7+.h:
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stdatomic.h:
 
 lib/match.h:
 

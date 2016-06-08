@@ -38,21 +38,21 @@ PATH: /root/bin
 ## Core tests. ##
 ## ----------- ##
 
-configure:2676: checking for a BSD-compatible install
-configure:2744: result: /usr/bin/install -c
-configure:2755: checking whether build environment is sane
-configure:2810: result: yes
-configure:2961: checking for a thread-safe mkdir -p
-configure:3000: result: /usr/bin/mkdir -p
-configure:3007: checking for gawk
-configure:3023: found /usr/bin/gawk
-configure:3034: result: gawk
-configure:3045: checking whether make sets $(MAKE)
-configure:3067: result: yes
-configure:3096: checking whether make supports nested variables
-configure:3113: result: yes
-configure:3192: checking how to create a pax tar archive
-configure:3203: tar --version
+configure:2684: checking for a BSD-compatible install
+configure:2752: result: /usr/bin/install -c
+configure:2763: checking whether build environment is sane
+configure:2818: result: yes
+configure:2969: checking for a thread-safe mkdir -p
+configure:3008: result: /usr/bin/mkdir -p
+configure:3015: checking for gawk
+configure:3031: found /usr/bin/gawk
+configure:3042: result: gawk
+configure:3053: checking whether make sets $(MAKE)
+configure:3075: result: yes
+configure:3104: checking whether make supports nested variables
+configure:3121: result: yes
+configure:3200: checking how to create a pax tar archive
+configure:3211: tar --version
 tar (GNU tar) 1.26
 Copyright (C) 2011 Free Software Foundation, Inc.
 License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>.
@@ -60,268 +60,98 @@ This is free software: you are free to change and redistribute it.
 There is NO WARRANTY, to the extent permitted by law.
 
 Written by John Gilmore and Jay Fenlason.
-configure:3206: $? = 0
-configure:3246: tardir=conftest.dir && eval tar --format=posix -chf - "$tardir" >conftest.tar
-configure:3249: $? = 0
-configure:3253: tar -xf - <conftest.tar
-configure:3256: $? = 0
-configure:3258: cat conftest.dir/file
+configure:3214: $? = 0
+configure:3254: tardir=conftest.dir && eval tar --format=posix -chf - "$tardir" >conftest.tar
+configure:3257: $? = 0
+configure:3261: tar -xf - <conftest.tar
+configure:3264: $? = 0
+configure:3266: cat conftest.dir/file
 GrepMe
-configure:3261: $? = 0
-configure:3274: result: gnutar
-configure:3295: checking for style of include used by make
-configure:3323: result: GNU
-configure:3394: checking for gcc
-configure:3410: found /usr/bin/gcc
-configure:3421: result: gcc
-configure:3650: checking for C compiler version
-configure:3659: gcc --version >&5
-gcc (GCC) 4.8.5 20150623 (Red Hat 4.8.5-4)
+configure:3269: $? = 0
+configure:3282: result: gnutar
+configure:3345: checking for style of include used by make
+configure:3373: result: GNU
+configure:3444: checking for gcc
+configure:3460: found /usr/bin/gcc
+configure:3471: result: gcc
+configure:3700: checking for C compiler version
+configure:3709: gcc --version >&5
+gcc (GCC) 5.3.1 20151207 (Red Hat 5.3.1-2)
 Copyright (C) 2015 Free Software Foundation, Inc.
 This is free software; see the source for copying conditions.  There is NO
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
-configure:3670: $? = 0
-configure:3659: gcc -v >&5
+configure:3720: $? = 0
+configure:3709: gcc -v >&5
 Using built-in specs.
 COLLECT_GCC=gcc
-COLLECT_LTO_WRAPPER=/usr/libexec/gcc/x86_64-redhat-linux/4.8.5/lto-wrapper
+COLLECT_LTO_WRAPPER=/usr/libexec/gcc/x86_64-redhat-linux/5.3.1/lto-wrapper
 Target: x86_64-redhat-linux
-Configured with: ../configure --prefix=/usr --mandir=/usr/share/man --infodir=/usr/share/info --with-bugurl=http://bugzilla.redhat.com/bugzilla --enable-bootstrap --enable-shared --enable-threads=posix --enable-checking=release --with-system-zlib --enable-__cxa_atexit --disable-libunwind-exceptions --enable-gnu-unique-object --enable-linker-build-id --with-linker-hash-style=gnu --enable-languages=c,c++,objc,obj-c++,java,fortran,ada,go,lto --enable-plugin --enable-initfini-array --disable-libgcj --with-isl=/builddir/build/BUILD/gcc-4.8.5-20150702/obj-x86_64-redhat-linux/isl-install --with-cloog=/builddir/build/BUILD/gcc-4.8.5-20150702/obj-x86_64-redhat-linux/cloog-install --enable-gnu-indirect-function --with-tune=generic --with-arch_32=x86-64 --build=x86_64-redhat-linux
+Configured with: ../configure --enable-bootstrap --enable-languages=c,c++,objc,obj-c++,fortran,ada,go,lto --prefix=/usr --mandir=/usr/share/man --infodir=/usr/share/info --with-bugurl=http://bugzilla.redhat.com/bugzilla --enable-shared --enable-threads=posix --enable-checking=release --enable-multilib --with-system-zlib --enable-__cxa_atexit --disable-libunwind-exceptions --enable-gnu-unique-object --enable-linker-build-id --with-linker-hash-style=gnu --enable-plugin --enable-initfini-array --disable-libgcj --with-isl --enable-libmpx --enable-gnu-indirect-function --with-tune=generic --with-arch_32=i686 --build=x86_64-redhat-linux
 Thread model: posix
-gcc version 4.8.5 20150623 (Red Hat 4.8.5-4) (GCC) 
-configure:3670: $? = 0
-configure:3659: gcc -V >&5
+gcc version 5.3.1 20151207 (Red Hat 5.3.1-2) (GCC) 
+configure:3720: $? = 0
+configure:3709: gcc -V >&5
 gcc: error: unrecognized command line option '-V'
 gcc: fatal error: no input files
 compilation terminated.
-configure:3670: $? = 4
-configure:3659: gcc -qversion >&5
+configure:3720: $? = 1
+configure:3709: gcc -qversion >&5
 gcc: error: unrecognized command line option '-qversion'
 gcc: fatal error: no input files
 compilation terminated.
-configure:3670: $? = 4
-configure:3690: checking whether the C compiler works
-configure:3712: gcc    conftest.c  >&5
-configure:3716: $? = 0
-configure:3764: result: yes
-configure:3767: checking for C compiler default output file name
-configure:3769: result: a.out
-configure:3775: checking for suffix of executables
-configure:3782: gcc -o conftest    conftest.c  >&5
-configure:3786: $? = 0
-configure:3808: result: 
-configure:3830: checking whether we are cross compiling
-configure:3838: gcc -o conftest    conftest.c  >&5
-configure:3842: $? = 0
-configure:3849: ./conftest
-configure:3853: $? = 0
-configure:3868: result: no
-configure:3873: checking for suffix of object files
-configure:3895: gcc -c   conftest.c >&5
-configure:3899: $? = 0
-configure:3920: result: o
-configure:3924: checking whether we are using the GNU C compiler
-configure:3943: gcc -c   conftest.c >&5
-configure:3943: $? = 0
-configure:3952: result: yes
-configure:3961: checking whether gcc accepts -g
-configure:3981: gcc -c -g  conftest.c >&5
-configure:3981: $? = 0
-configure:4022: result: yes
-configure:4039: checking for gcc option to accept ISO C89
-configure:4102: gcc  -c -g -O2  conftest.c >&5
-configure:4102: $? = 0
-configure:4115: result: none needed
-configure:4137: checking dependency style of gcc
-configure:4248: result: gcc3
-configure:4263: checking for gcc option to accept ISO C99
-configure:4412: gcc  -c -g -O2  conftest.c >&5
-conftest.c:61:29: error: expected ';', ',' or ')' before 'text'
- test_restrict (ccp restrict text)
-                             ^
-conftest.c: In function 'main':
-conftest.c:115:18: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'newvar'
-   char *restrict newvar = "Another string";
-                  ^
-conftest.c:115:18: error: 'newvar' undeclared (first use in this function)
-conftest.c:115:18: note: each undeclared identifier is reported only once for each function it appears in
-conftest.c:125:3: error: 'for' loop initial declarations are only allowed in C99 mode
-   for (int i = 0; i < ia->datasize; ++i)
-   ^
-conftest.c:125:3: note: use option -std=c99 or -std=gnu99 to compile your code
-configure:4412: $? = 1
-configure: failed program was:
-| /* confdefs.h */
-| #define PACKAGE_NAME "openvswitch"
-| #define PACKAGE_TARNAME "openvswitch"
-| #define PACKAGE_VERSION "2.5.1"
-| #define PACKAGE_STRING "openvswitch 2.5.1"
-| #define PACKAGE_BUGREPORT "bugs@openvswitch.org"
-| #define PACKAGE_URL ""
-| #define PACKAGE "openvswitch"
-| #define VERSION "2.5.1"
-| /* end confdefs.h.  */
-| #include <stdarg.h>
-| #include <stdbool.h>
-| #include <stdlib.h>
-| #include <wchar.h>
-| #include <stdio.h>
-| 
-| // Check varargs macros.  These examples are taken from C99 6.10.3.5.
-| #define debug(...) fprintf (stderr, __VA_ARGS__)
-| #define showlist(...) puts (#__VA_ARGS__)
-| #define report(test,...) ((test) ? puts (#test) : printf (__VA_ARGS__))
-| static void
-| test_varargs_macros (void)
-| {
-|   int x = 1234;
-|   int y = 5678;
-|   debug ("Flag");
-|   debug ("X = %d\n", x);
-|   showlist (The first, second, and third items.);
-|   report (x>y, "x is %d but y is %d", x, y);
-| }
-| 
-| // Check long long types.
-| #define BIG64 18446744073709551615ull
-| #define BIG32 4294967295ul
-| #define BIG_OK (BIG64 / BIG32 == 4294967297ull && BIG64 % BIG32 == 0)
-| #if !BIG_OK
-|   your preprocessor is broken;
-| #endif
-| #if BIG_OK
-| #else
-|   your preprocessor is broken;
-| #endif
-| static long long int bignum = -9223372036854775807LL;
-| static unsigned long long int ubignum = BIG64;
-| 
-| struct incomplete_array
-| {
-|   int datasize;
-|   double data[];
-| };
-| 
-| struct named_init {
-|   int number;
-|   const wchar_t *name;
-|   double average;
-| };
-| 
-| typedef const char *ccp;
-| 
-| static inline int
-| test_restrict (ccp restrict text)
-| {
-|   // See if C++-style comments work.
-|   // Iterate through items via the restricted pointer.
-|   // Also check for declarations in for loops.
-|   for (unsigned int i = 0; *(text+i) != '\0'; ++i)
-|     continue;
-|   return 0;
-| }
-| 
-| // Check varargs and va_copy.
-| static void
-| test_varargs (const char *format, ...)
-| {
-|   va_list args;
-|   va_start (args, format);
-|   va_list args_copy;
-|   va_copy (args_copy, args);
-| 
-|   const char *str;
-|   int number;
-|   float fnumber;
-| 
-|   while (*format)
-|     {
-|       switch (*format++)
-| 	{
-| 	case 's': // string
-| 	  str = va_arg (args_copy, const char *);
-| 	  break;
-| 	case 'd': // int
-| 	  number = va_arg (args_copy, int);
-| 	  break;
-| 	case 'f': // float
-| 	  fnumber = va_arg (args_copy, double);
-| 	  break;
-| 	default:
-| 	  break;
-| 	}
-|     }
-|   va_end (args_copy);
-|   va_end (args);
-| }
-| 
-| int
-| main ()
-| {
-| 
-|   // Check bool.
-|   _Bool success = false;
-| 
-|   // Check restrict.
-|   if (test_restrict ("String literal") == 0)
-|     success = true;
-|   char *restrict newvar = "Another string";
-| 
-|   // Check varargs.
-|   test_varargs ("s, d' f .", "string", 65, 34.234);
-|   test_varargs_macros ();
-| 
-|   // Check flexible array members.
-|   struct incomplete_array *ia =
-|     malloc (sizeof (struct incomplete_array) + (sizeof (double) * 10));
-|   ia->datasize = 10;
-|   for (int i = 0; i < ia->datasize; ++i)
-|     ia->data[i] = i * 1.234;
-| 
-|   // Check named initializers.
-|   struct named_init ni = {
-|     .number = 34,
-|     .name = L"Test wide string",
-|     .average = 543.34343,
-|   };
-| 
-|   ni.number = 58;
-| 
-|   int dynamic_array[ni.number];
-|   dynamic_array[ni.number - 1] = 543;
-| 
-|   // work around unused variable warnings
-|   return (!success || bignum == 0LL || ubignum == 0uLL || newvar[0] == 'x'
-| 	  || dynamic_array[ni.number - 1] != 543);
-| 
-|   ;
-|   return 0;
-| }
-configure:4412: gcc -std=gnu99 -c -g -O2  conftest.c >&5
-configure:4412: $? = 0
-configure:4432: result: -std=gnu99
-configure:4441: checking whether gcc -std=gnu99 and cc understand -c and -o together
-configure:4472: gcc -std=gnu99 -c conftest.c -o conftest2.o >&5
-configure:4476: $? = 0
-configure:4482: gcc -std=gnu99 -c conftest.c -o conftest2.o >&5
-configure:4486: $? = 0
-configure:4497: cc -c conftest.c >&5
-configure:4501: $? = 0
-configure:4509: cc -c conftest.c -o conftest2.o >&5
-configure:4513: $? = 0
-configure:4519: cc -c conftest.c -o conftest2.o >&5
-configure:4523: $? = 0
-configure:4541: result: yes
-configure:4571: checking how to run the C preprocessor
-configure:4602: gcc -std=gnu99 -E  conftest.c
-configure:4602: $? = 0
-configure:4616: gcc -std=gnu99 -E  conftest.c
+configure:3720: $? = 1
+configure:3740: checking whether the C compiler works
+configure:3762: gcc    conftest.c  >&5
+configure:3766: $? = 0
+configure:3814: result: yes
+configure:3817: checking for C compiler default output file name
+configure:3819: result: a.out
+configure:3825: checking for suffix of executables
+configure:3832: gcc -o conftest    conftest.c  >&5
+configure:3836: $? = 0
+configure:3858: result: 
+configure:3880: checking whether we are cross compiling
+configure:3888: gcc -o conftest    conftest.c  >&5
+configure:3892: $? = 0
+configure:3899: ./conftest
+configure:3903: $? = 0
+configure:3918: result: no
+configure:3923: checking for suffix of object files
+configure:3945: gcc -c   conftest.c >&5
+configure:3949: $? = 0
+configure:3970: result: o
+configure:3974: checking whether we are using the GNU C compiler
+configure:3993: gcc -c   conftest.c >&5
+configure:3993: $? = 0
+configure:4002: result: yes
+configure:4011: checking whether gcc accepts -g
+configure:4031: gcc -c -g  conftest.c >&5
+configure:4031: $? = 0
+configure:4072: result: yes
+configure:4089: checking for gcc option to accept ISO C89
+configure:4152: gcc  -c -g -O2  conftest.c >&5
+configure:4152: $? = 0
+configure:4165: result: none needed
+configure:4190: checking whether gcc understands -c and -o together
+configure:4212: gcc -c conftest.c -o conftest2.o
+configure:4215: $? = 0
+configure:4212: gcc -c conftest.c -o conftest2.o
+configure:4215: $? = 0
+configure:4227: result: yes
+configure:4246: checking dependency style of gcc
+configure:4357: result: gcc3
+configure:4372: checking for gcc option to accept ISO C99
+configure:4521: gcc  -c -g -O2  conftest.c >&5
+configure:4521: $? = 0
+configure:4534: result: none needed
+configure:4555: checking how to run the C preprocessor
+configure:4586: gcc -E  conftest.c
+configure:4586: $? = 0
+configure:4600: gcc -E  conftest.c
 conftest.c:11:28: fatal error: ac_nonexistent.h: No such file or directory
- #include <ac_nonexistent.h>
-                            ^
 compilation terminated.
-configure:4616: $? = 1
+configure:4600: $? = 1
 configure: failed program was:
 | /* confdefs.h */
 | #define PACKAGE_NAME "openvswitch"
@@ -334,15 +164,13 @@ configure: failed program was:
 | #define VERSION "2.5.1"
 | /* end confdefs.h.  */
 | #include <ac_nonexistent.h>
-configure:4641: result: gcc -std=gnu99 -E
-configure:4661: gcc -std=gnu99 -E  conftest.c
-configure:4661: $? = 0
-configure:4675: gcc -std=gnu99 -E  conftest.c
+configure:4625: result: gcc -E
+configure:4645: gcc -E  conftest.c
+configure:4645: $? = 0
+configure:4659: gcc -E  conftest.c
 conftest.c:11:28: fatal error: ac_nonexistent.h: No such file or directory
- #include <ac_nonexistent.h>
-                            ^
 compilation terminated.
-configure:4675: $? = 1
+configure:4659: $? = 1
 configure: failed program was:
 | /* confdefs.h */
 | #define PACKAGE_NAME "openvswitch"
@@ -355,66 +183,64 @@ configure: failed program was:
 | #define VERSION "2.5.1"
 | /* end confdefs.h.  */
 | #include <ac_nonexistent.h>
-configure:4704: checking for grep that handles long lines and -e
-configure:4762: result: /usr/bin/grep
-configure:4767: checking for fgrep
-configure:4829: result: /usr/bin/grep -F
-configure:4834: checking for egrep
-configure:4896: result: /usr/bin/grep -E
-configure:4905: checking for perl
-configure:4923: found /usr/bin/perl
-configure:4936: result: /usr/bin/perl
-configure:4954: checking for ANSI C header files
-configure:4974: gcc -std=gnu99 -c -g -O2  conftest.c >&5
-configure:4974: $? = 0
-configure:5047: gcc -std=gnu99 -o conftest -g -O2   conftest.c  >&5
-configure:5047: $? = 0
-configure:5047: ./conftest
-configure:5047: $? = 0
-configure:5058: result: yes
-configure:5071: checking for sys/types.h
-configure:5071: gcc -std=gnu99 -c -g -O2  conftest.c >&5
-configure:5071: $? = 0
-configure:5071: result: yes
-configure:5071: checking for sys/stat.h
-configure:5071: gcc -std=gnu99 -c -g -O2  conftest.c >&5
-configure:5071: $? = 0
-configure:5071: result: yes
-configure:5071: checking for stdlib.h
-configure:5071: gcc -std=gnu99 -c -g -O2  conftest.c >&5
-configure:5071: $? = 0
-configure:5071: result: yes
-configure:5071: checking for string.h
-configure:5071: gcc -std=gnu99 -c -g -O2  conftest.c >&5
-configure:5071: $? = 0
-configure:5071: result: yes
-configure:5071: checking for memory.h
-configure:5071: gcc -std=gnu99 -c -g -O2  conftest.c >&5
-configure:5071: $? = 0
-configure:5071: result: yes
-configure:5071: checking for strings.h
-configure:5071: gcc -std=gnu99 -c -g -O2  conftest.c >&5
-configure:5071: $? = 0
-configure:5071: result: yes
-configure:5071: checking for inttypes.h
-configure:5071: gcc -std=gnu99 -c -g -O2  conftest.c >&5
-configure:5071: $? = 0
-configure:5071: result: yes
-configure:5071: checking for stdint.h
-configure:5071: gcc -std=gnu99 -c -g -O2  conftest.c >&5
-configure:5071: $? = 0
-configure:5071: result: yes
-configure:5071: checking for unistd.h
-configure:5071: gcc -std=gnu99 -c -g -O2  conftest.c >&5
-configure:5071: $? = 0
-configure:5071: result: yes
-configure:5084: checking minix/config.h usability
-configure:5084: gcc -std=gnu99 -c -g -O2  conftest.c >&5
+configure:4688: checking for grep that handles long lines and -e
+configure:4746: result: /usr/bin/grep
+configure:4751: checking for fgrep
+configure:4813: result: /usr/bin/grep -F
+configure:4818: checking for egrep
+configure:4880: result: /usr/bin/grep -E
+configure:4889: checking for perl
+configure:4907: found /usr/bin/perl
+configure:4920: result: /usr/bin/perl
+configure:4938: checking for ANSI C header files
+configure:4958: gcc -c -g -O2  conftest.c >&5
+configure:4958: $? = 0
+configure:5031: gcc -o conftest -g -O2   conftest.c  >&5
+configure:5031: $? = 0
+configure:5031: ./conftest
+configure:5031: $? = 0
+configure:5042: result: yes
+configure:5055: checking for sys/types.h
+configure:5055: gcc -c -g -O2  conftest.c >&5
+configure:5055: $? = 0
+configure:5055: result: yes
+configure:5055: checking for sys/stat.h
+configure:5055: gcc -c -g -O2  conftest.c >&5
+configure:5055: $? = 0
+configure:5055: result: yes
+configure:5055: checking for stdlib.h
+configure:5055: gcc -c -g -O2  conftest.c >&5
+configure:5055: $? = 0
+configure:5055: result: yes
+configure:5055: checking for string.h
+configure:5055: gcc -c -g -O2  conftest.c >&5
+configure:5055: $? = 0
+configure:5055: result: yes
+configure:5055: checking for memory.h
+configure:5055: gcc -c -g -O2  conftest.c >&5
+configure:5055: $? = 0
+configure:5055: result: yes
+configure:5055: checking for strings.h
+configure:5055: gcc -c -g -O2  conftest.c >&5
+configure:5055: $? = 0
+configure:5055: result: yes
+configure:5055: checking for inttypes.h
+configure:5055: gcc -c -g -O2  conftest.c >&5
+configure:5055: $? = 0
+configure:5055: result: yes
+configure:5055: checking for stdint.h
+configure:5055: gcc -c -g -O2  conftest.c >&5
+configure:5055: $? = 0
+configure:5055: result: yes
+configure:5055: checking for unistd.h
+configure:5055: gcc -c -g -O2  conftest.c >&5
+configure:5055: $? = 0
+configure:5055: result: yes
+configure:5068: checking minix/config.h usability
+configure:5068: gcc -c -g -O2  conftest.c >&5
 conftest.c:54:26: fatal error: minix/config.h: No such file or directory
- #include <minix/config.h>
-                          ^
 compilation terminated.
-configure:5084: $? = 1
+configure:5068: $? = 1
 configure: failed program was:
 | /* confdefs.h */
 | #define PACKAGE_NAME "openvswitch"
@@ -470,14 +296,12 @@ configure: failed program was:
 | # include <unistd.h>
 | #endif
 | #include <minix/config.h>
-configure:5084: result: no
-configure:5084: checking minix/config.h presence
-configure:5084: gcc -std=gnu99 -E  conftest.c
+configure:5068: result: no
+configure:5068: checking minix/config.h presence
+configure:5068: gcc -E  conftest.c
 conftest.c:21:26: fatal error: minix/config.h: No such file or directory
- #include <minix/config.h>
-                          ^
 compilation terminated.
-configure:5084: $? = 1
+configure:5068: $? = 1
 configure: failed program was:
 | /* confdefs.h */
 | #define PACKAGE_NAME "openvswitch"
@@ -500,15 +324,15 @@ configure: failed program was:
 | #define HAVE_UNISTD_H 1
 | /* end confdefs.h.  */
 | #include <minix/config.h>
-configure:5084: result: no
-configure:5084: checking for minix/config.h
-configure:5084: result: no
-configure:5105: checking whether it is safe to define __EXTENSIONS__
-configure:5123: gcc -std=gnu99 -c -g -O2  conftest.c >&5
-configure:5123: $? = 0
-configure:5130: result: yes
-configure:5144: checking whether byte ordering is bigendian
-configure:5159: gcc -std=gnu99 -c -g -O2  conftest.c >&5
+configure:5068: result: no
+configure:5068: checking for minix/config.h
+configure:5068: result: no
+configure:5089: checking whether it is safe to define __EXTENSIONS__
+configure:5107: gcc -c -g -O2  conftest.c >&5
+configure:5107: $? = 0
+configure:5114: result: yes
+configure:5128: checking whether byte ordering is bigendian
+configure:5143: gcc -c -g -O2  conftest.c >&5
 conftest.c:27:9: error: unknown type name 'not'
          not a universal capable compiler
          ^
@@ -516,7 +340,7 @@ conftest.c:27:15: error: expected '=', ',', ';', 'asm' or '__attribute__' before
          not a universal capable compiler
                ^
 conftest.c:27:15: error: unknown type name 'universal'
-configure:5159: $? = 1
+configure:5143: $? = 1
 configure: failed program was:
 | /* confdefs.h */
 | #define PACKAGE_NAME "openvswitch"
@@ -548,9 +372,9 @@ configure: failed program was:
 | 	     #endif
 | 	     typedef int dummy;
 | 
-configure:5204: gcc -std=gnu99 -c -g -O2  conftest.c >&5
-configure:5204: $? = 0
-configure:5222: gcc -std=gnu99 -c -g -O2  conftest.c >&5
+configure:5188: gcc -c -g -O2  conftest.c >&5
+configure:5188: $? = 0
+configure:5206: gcc -c -g -O2  conftest.c >&5
 conftest.c: In function 'main':
 conftest.c:33:4: error: unknown type name 'not'
     not big endian
@@ -558,7 +382,7 @@ conftest.c:33:4: error: unknown type name 'not'
 conftest.c:33:12: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'endian'
     not big endian
             ^
-configure:5222: $? = 1
+configure:5206: $? = 1
 configure: failed program was:
 | /* confdefs.h */
 | #define PACKAGE_NAME "openvswitch"
@@ -598,141 +422,143 @@ configure: failed program was:
 |   ;
 |   return 0;
 | }
-configure:5350: result: no
-configure:5375: checking for special C compiler options needed for large files
-configure:5420: result: no
-configure:5426: checking for _FILE_OFFSET_BITS value needed for large files
-configure:5451: gcc -std=gnu99 -c -g -O2  conftest.c >&5
-configure:5451: $? = 0
-configure:5483: result: no
-configure:5598: checking build system type
-configure:5612: result: x86_64-unknown-linux-gnu
-configure:5632: checking host system type
-configure:5645: result: x86_64-unknown-linux-gnu
-configure:5686: checking how to print strings
-configure:5713: result: printf
-configure:5734: checking for a sed that does not truncate output
-configure:5798: result: /usr/bin/sed
-configure:5846: checking for ld used by gcc -std=gnu99
-configure:5913: result: /usr/bin/ld
-configure:5920: checking if the linker (/usr/bin/ld) is GNU ld
-configure:5935: result: yes
-configure:5947: checking for BSD- or MS-compatible name lister (nm)
-configure:5996: result: /usr/bin/nm -B
-configure:6126: checking the name lister (/usr/bin/nm -B) interface
-configure:6133: gcc -std=gnu99 -c -g -O2  conftest.c >&5
-configure:6136: /usr/bin/nm -B "conftest.o"
-configure:6139: output
+configure:5334: result: no
+configure:5359: checking for special C compiler options needed for large files
+configure:5404: result: no
+configure:5410: checking for _FILE_OFFSET_BITS value needed for large files
+configure:5435: gcc -c -g -O2  conftest.c >&5
+configure:5435: $? = 0
+configure:5467: result: no
+configure:5582: checking build system type
+configure:5596: result: x86_64-unknown-linux-gnu
+configure:5616: checking host system type
+configure:5629: result: x86_64-unknown-linux-gnu
+configure:5670: checking how to print strings
+configure:5697: result: printf
+configure:5718: checking for a sed that does not truncate output
+configure:5782: result: /usr/bin/sed
+configure:5830: checking for ld used by gcc
+configure:5897: result: /usr/bin/ld
+configure:5904: checking if the linker (/usr/bin/ld) is GNU ld
+configure:5919: result: yes
+configure:5931: checking for BSD- or MS-compatible name lister (nm)
+configure:5985: result: /usr/bin/nm -B
+configure:6115: checking the name lister (/usr/bin/nm -B) interface
+configure:6122: gcc -c -g -O2  conftest.c >&5
+configure:6125: /usr/bin/nm -B "conftest.o"
+configure:6128: output
 0000000000000000 B some_variable
-configure:6146: result: BSD nm
-configure:6149: checking whether ln -s works
-configure:6153: result: yes
-configure:6161: checking the maximum length of command line arguments
-configure:6291: result: 1572864
-configure:6308: checking whether the shell understands some XSI constructs
-configure:6318: result: yes
-configure:6322: checking whether the shell understands "+="
-configure:6328: result: yes
-configure:6363: checking how to convert x86_64-unknown-linux-gnu file names to x86_64-unknown-linux-gnu format
-configure:6403: result: func_convert_file_noop
-configure:6410: checking how to convert x86_64-unknown-linux-gnu file names to toolchain format
-configure:6430: result: func_convert_file_noop
-configure:6437: checking for /usr/bin/ld option to reload object files
-configure:6444: result: -r
-configure:6518: checking for objdump
-configure:6534: found /usr/bin/objdump
-configure:6545: result: objdump
-configure:6577: checking how to recognize dependent libraries
-configure:6779: result: pass_all
-configure:6864: checking for dlltool
-configure:6894: result: no
-configure:6924: checking how to associate runtime and link libraries
-configure:6951: result: printf %s\n
-configure:7011: checking for ar
-configure:7027: found /usr/bin/ar
-configure:7038: result: ar
-configure:7075: checking for archiver @FILE support
-configure:7092: gcc -std=gnu99 -c -g -O2  conftest.c >&5
-configure:7092: $? = 0
-configure:7095: ar cru libconftest.a @conftest.lst >&5
-configure:7098: $? = 0
-configure:7103: ar cru libconftest.a @conftest.lst >&5
+configure:6135: result: BSD nm
+configure:6138: checking whether ln -s works
+configure:6142: result: yes
+configure:6150: checking the maximum length of command line arguments
+configure:6281: result: 1572864
+configure:6329: checking how to convert x86_64-unknown-linux-gnu file names to x86_64-unknown-linux-gnu format
+configure:6369: result: func_convert_file_noop
+configure:6376: checking how to convert x86_64-unknown-linux-gnu file names to toolchain format
+configure:6396: result: func_convert_file_noop
+configure:6403: checking for /usr/bin/ld option to reload object files
+configure:6410: result: -r
+configure:6484: checking for objdump
+configure:6500: found /usr/bin/objdump
+configure:6511: result: objdump
+configure:6543: checking how to recognize dependent libraries
+configure:6743: result: pass_all
+configure:6828: checking for dlltool
+configure:6858: result: no
+configure:6888: checking how to associate runtime and link libraries
+configure:6915: result: printf %s\n
+configure:6975: checking for ar
+configure:6991: found /usr/bin/ar
+configure:7002: result: ar
+configure:7039: checking for archiver @FILE support
+configure:7056: gcc -c -g -O2  conftest.c >&5
+configure:7056: $? = 0
+configure:7059: ar cru libconftest.a @conftest.lst >&5
+ar: `u' modifier ignored since `D' is the default (see `U')
+configure:7062: $? = 0
+configure:7067: ar cru libconftest.a @conftest.lst >&5
+ar: `u' modifier ignored since `D' is the default (see `U')
 ar: conftest.o: No such file or directory
-configure:7106: $? = 1
-configure:7118: result: @
-configure:7176: checking for strip
-configure:7192: found /usr/bin/strip
-configure:7203: result: strip
-configure:7275: checking for ranlib
-configure:7291: found /usr/bin/ranlib
-configure:7302: result: ranlib
-configure:7404: checking command to parse /usr/bin/nm -B output from gcc -std=gnu99 object
-configure:7524: gcc -std=gnu99 -c -g -O2  conftest.c >&5
-configure:7527: $? = 0
-configure:7531: /usr/bin/nm -B conftest.o \| sed -n -e 's/^.*[ ]\([ABCDGIRSTW][ABCDGIRSTW]*\)[ ][ ]*\([_A-Za-z][_A-Za-z0-9]*\)$/\1 \2 \2/p' | sed '/ __gnu_lto/d' \> conftest.nm
-configure:7534: $? = 0
-configure:7600: gcc -std=gnu99 -o conftest -g -O2   conftest.c conftstm.o >&5
-configure:7603: $? = 0
-configure:7641: result: ok
-configure:7678: checking for sysroot
-configure:7708: result: no
-configure:7785: gcc -std=gnu99 -c -g -O2  conftest.c >&5
-configure:7788: $? = 0
-configure:7964: checking for mt
-configure:7994: result: no
-configure:8014: checking if : is a manifest tool
-configure:8020: : '-?'
-configure:8028: result: no
-configure:8667: checking for dlfcn.h
-configure:8667: gcc -std=gnu99 -c -g -O2  conftest.c >&5
-configure:8667: $? = 0
-configure:8667: result: yes
-configure:8872: checking for objdir
-configure:8887: result: .libs
-configure:9158: checking if gcc -std=gnu99 supports -fno-rtti -fno-exceptions
-configure:9176: gcc -std=gnu99 -c -g -O2  -fno-rtti -fno-exceptions conftest.c >&5
-cc1: warning: command line option '-fno-rtti' is valid for C++/ObjC++ but not for C [enabled by default]
-configure:9180: $? = 0
-configure:9193: result: no
-configure:9520: checking for gcc -std=gnu99 option to produce PIC
-configure:9527: result: -fPIC -DPIC
-configure:9535: checking if gcc -std=gnu99 PIC flag -fPIC -DPIC works
-configure:9553: gcc -std=gnu99 -c -g -O2  -fPIC -DPIC -DPIC conftest.c >&5
-configure:9557: $? = 0
-configure:9570: result: yes
-configure:9599: checking if gcc -std=gnu99 static flag -static works
-configure:9627: result: no
-configure:9642: checking if gcc -std=gnu99 supports -c -o file.o
-configure:9663: gcc -std=gnu99 -c -g -O2  -o out/conftest2.o conftest.c >&5
-configure:9667: $? = 0
-configure:9689: result: yes
-configure:9697: checking if gcc -std=gnu99 supports -c -o file.o
-configure:9744: result: yes
-configure:9777: checking whether the gcc -std=gnu99 linker (/usr/bin/ld -m elf_x86_64) supports shared libraries
-configure:10930: result: yes
-configure:11170: checking dynamic linker characteristics
-configure:11681: gcc -std=gnu99 -o conftest -g -O2   -Wl,-rpath -Wl,/foo conftest.c  >&5
-configure:11681: $? = 0
-configure:11907: result: GNU/Linux ld.so
-configure:12014: checking how to hardcode library paths into programs
-configure:12039: result: immediate
-configure:12579: checking whether stripping libraries is possible
-configure:12584: result: yes
-configure:12619: checking if libtool supports shared libraries
-configure:12621: result: yes
-configure:12624: checking whether to build shared libraries
-configure:12645: result: no
-configure:12648: checking whether to build static libraries
-configure:12652: result: yes
-configure:12725: checking for library containing pow
-configure:12756: gcc -std=gnu99 -o conftest -g -O2   conftest.c  >&5
-conftest.c:35:6: warning: conflicting types for built-in function 'pow' [enabled by default]
+configure:7070: $? = 1
+configure:7082: result: @
+configure:7140: checking for strip
+configure:7156: found /usr/bin/strip
+configure:7167: result: strip
+configure:7239: checking for ranlib
+configure:7255: found /usr/bin/ranlib
+configure:7266: result: ranlib
+configure:7368: checking command to parse /usr/bin/nm -B output from gcc object
+configure:7521: gcc -c -g -O2  conftest.c >&5
+configure:7524: $? = 0
+configure:7528: /usr/bin/nm -B conftest.o \| sed -n -e 's/^.*[ ]\([ABCDGIRSTW][ABCDGIRSTW]*\)[ ][ ]*\([_A-Za-z][_A-Za-z0-9]*\)$/\1 \2 \2/p' | sed '/ __gnu_lto/d' \> conftest.nm
+configure:7531: $? = 0
+configure:7597: gcc -o conftest -g -O2   conftest.c conftstm.o >&5
+configure:7600: $? = 0
+configure:7638: result: ok
+configure:7685: checking for sysroot
+configure:7715: result: no
+configure:7722: checking for a working dd
+configure:7760: result: /usr/bin/dd
+configure:7764: checking how to truncate binary pipes
+configure:7779: result: /usr/bin/dd bs=4096 count=1
+configure:7915: gcc -c -g -O2  conftest.c >&5
+configure:7918: $? = 0
+configure:8108: checking for mt
+configure:8138: result: no
+configure:8158: checking if : is a manifest tool
+configure:8164: : '-?'
+configure:8172: result: no
+configure:8846: checking for dlfcn.h
+configure:8846: gcc -c -g -O2  conftest.c >&5
+configure:8846: $? = 0
+configure:8846: result: yes
+configure:9101: checking for objdir
+configure:9116: result: .libs
+configure:9380: checking if gcc supports -fno-rtti -fno-exceptions
+configure:9398: gcc -c -g -O2  -fno-rtti -fno-exceptions conftest.c >&5
+cc1: warning: command line option '-fno-rtti' is valid for C++/ObjC++ but not for C
+configure:9402: $? = 0
+configure:9415: result: no
+configure:9773: checking for gcc option to produce PIC
+configure:9780: result: -fPIC -DPIC
+configure:9788: checking if gcc PIC flag -fPIC -DPIC works
+configure:9806: gcc -c -g -O2  -fPIC -DPIC -DPIC conftest.c >&5
+configure:9810: $? = 0
+configure:9823: result: yes
+configure:9852: checking if gcc static flag -static works
+configure:9880: result: no
+configure:9895: checking if gcc supports -c -o file.o
+configure:9916: gcc -c -g -O2  -o out/conftest2.o conftest.c >&5
+configure:9920: $? = 0
+configure:9942: result: yes
+configure:9950: checking if gcc supports -c -o file.o
+configure:9997: result: yes
+configure:10030: checking whether the gcc linker (/usr/bin/ld -m elf_x86_64) supports shared libraries
+configure:11289: result: yes
+configure:11529: checking dynamic linker characteristics
+configure:12110: gcc -o conftest -g -O2   -Wl,-rpath -Wl,/foo conftest.c  >&5
+configure:12110: $? = 0
+configure:12350: result: GNU/Linux ld.so
+configure:12472: checking how to hardcode library paths into programs
+configure:12497: result: immediate
+configure:13045: checking whether stripping libraries is possible
+configure:13050: result: yes
+configure:13085: checking if libtool supports shared libraries
+configure:13087: result: yes
+configure:13090: checking whether to build shared libraries
+configure:13115: result: no
+configure:13118: checking whether to build static libraries
+configure:13122: result: yes
+configure:13195: checking for library containing pow
+configure:13226: gcc -o conftest -g -O2   conftest.c  >&5
+conftest.c:35:6: warning: conflicting types for built-in function 'pow'
  char pow ();
       ^
-/tmp/ccy6rxGr.o: In function `main':
+/tmp/ccb26uKd.o: In function `main':
 /root/linkerovs/ovs-branch-2.5-dpdk/conftest.c:39: undefined reference to `pow'
 collect2: error: ld returned 1 exit status
-configure:12756: $? = 1
+configure:13226: $? = 1
 configure: failed program was:
 | /* confdefs.h */
 | #define PACKAGE_NAME "openvswitch"
@@ -776,22 +602,22 @@ configure: failed program was:
 |   ;
 |   return 0;
 | }
-configure:12756: gcc -std=gnu99 -o conftest -g -O2   conftest.c -lm   >&5
-conftest.c:35:6: warning: conflicting types for built-in function 'pow' [enabled by default]
+configure:13226: gcc -o conftest -g -O2   conftest.c -lm   >&5
+conftest.c:35:6: warning: conflicting types for built-in function 'pow'
  char pow ();
       ^
-configure:12756: $? = 0
-configure:12773: result: -lm
-configure:12781: checking for library containing clock_gettime
-configure:12812: gcc -std=gnu99 -o conftest -g -O2   conftest.c -lm  >&5
-configure:12812: $? = 0
-configure:12829: result: none required
-configure:12837: checking for library containing timer_create
-configure:12868: gcc -std=gnu99 -o conftest -g -O2   conftest.c -lm  >&5
-/tmp/ccMxHcIH.o: In function `main':
+configure:13226: $? = 0
+configure:13243: result: -lm
+configure:13251: checking for library containing clock_gettime
+configure:13282: gcc -o conftest -g -O2   conftest.c -lm  >&5
+configure:13282: $? = 0
+configure:13299: result: none required
+configure:13307: checking for library containing timer_create
+configure:13338: gcc -o conftest -g -O2   conftest.c -lm  >&5
+/tmp/ccMfwGrp.o: In function `main':
 /root/linkerovs/ovs-branch-2.5-dpdk/conftest.c:39: undefined reference to `timer_create'
 collect2: error: ld returned 1 exit status
-configure:12868: $? = 1
+configure:13338: $? = 1
 configure: failed program was:
 | /* confdefs.h */
 | #define PACKAGE_NAME "openvswitch"
@@ -835,16 +661,15 @@ configure: failed program was:
 |   ;
 |   return 0;
 | }
-configure:12868: gcc -std=gnu99 -o conftest -g -O2   conftest.c -lrt  -lm  >&5
-configure:12868: $? = 0
-configure:12885: result: -lrt
-configure:12893: checking for library containing pthread_create
-configure:12924: gcc -std=gnu99 -o conftest -g -O2   conftest.c -lrt -lm  >&5
-/usr/bin/ld: /tmp/cclYGLhH.o: undefined reference to symbol 'pthread_create@@GLIBC_2.2.5'
-/usr/bin/ld: note: 'pthread_create@@GLIBC_2.2.5' is defined in DSO /lib64/libpthread.so.0 so try adding it to the linker command line
-/lib64/libpthread.so.0: could not read symbols: Invalid operation
+configure:13338: gcc -o conftest -g -O2   conftest.c -lrt  -lm  >&5
+configure:13338: $? = 0
+configure:13355: result: -lrt
+configure:13363: checking for library containing pthread_create
+configure:13394: gcc -o conftest -g -O2   conftest.c -lrt -lm  >&5
+/usr/bin/ld: /tmp/cchSwVjz.o: undefined reference to symbol 'pthread_create@@GLIBC_2.2.5'
+/usr/lib64/libpthread.so.0: error adding symbols: DSO missing from command line
 collect2: error: ld returned 1 exit status
-configure:12924: $? = 1
+configure:13394: $? = 1
 configure: failed program was:
 | /* confdefs.h */
 | #define PACKAGE_NAME "openvswitch"
@@ -888,28 +713,26 @@ configure: failed program was:
 |   ;
 |   return 0;
 | }
-configure:12924: gcc -std=gnu99 -o conftest -g -O2   conftest.c -lpthread  -lrt -lm  >&5
-configure:12924: $? = 0
-configure:12941: result: -lpthread
-configure:12949: checking whether strerror_r is declared
-configure:12949: gcc -std=gnu99 -c -g -O2  conftest.c >&5
-configure:12949: $? = 0
-configure:12949: result: yes
-configure:12962: checking for strerror_r
-configure:12962: gcc -std=gnu99 -o conftest -g -O2   conftest.c -lpthread -lrt -lm  >&5
-configure:12962: $? = 0
-configure:12962: result: yes
-configure:12971: checking whether strerror_r returns char *
-configure:12995: gcc -std=gnu99 -c -g -O2  conftest.c >&5
-configure:12995: $? = 0
-configure:13033: result: yes
-configure:13042: checking vmware.h usability
-configure:13042: gcc -std=gnu99 -c -g -O2  conftest.c >&5
+configure:13394: gcc -o conftest -g -O2   conftest.c -lpthread  -lrt -lm  >&5
+configure:13394: $? = 0
+configure:13411: result: -lpthread
+configure:13419: checking whether strerror_r is declared
+configure:13419: gcc -c -g -O2  conftest.c >&5
+configure:13419: $? = 0
+configure:13419: result: yes
+configure:13432: checking for strerror_r
+configure:13432: gcc -o conftest -g -O2   conftest.c -lpthread -lrt -lm  >&5
+configure:13432: $? = 0
+configure:13432: result: yes
+configure:13441: checking whether strerror_r returns char *
+configure:13465: gcc -c -g -O2  conftest.c >&5
+configure:13465: $? = 0
+configure:13503: result: yes
+configure:13512: checking vmware.h usability
+configure:13512: gcc -c -g -O2  conftest.c >&5
 conftest.c:64:20: fatal error: vmware.h: No such file or directory
- #include <vmware.h>
-                    ^
 compilation terminated.
-configure:13042: $? = 1
+configure:13512: $? = 1
 configure: failed program was:
 | /* confdefs.h */
 | #define PACKAGE_NAME "openvswitch"
@@ -975,14 +798,12 @@ configure: failed program was:
 | # include <unistd.h>
 | #endif
 | #include <vmware.h>
-configure:13042: result: no
-configure:13042: checking vmware.h presence
-configure:13042: gcc -std=gnu99 -E  conftest.c
+configure:13512: result: no
+configure:13512: checking vmware.h presence
+configure:13512: gcc -E  conftest.c
 conftest.c:31:20: fatal error: vmware.h: No such file or directory
- #include <vmware.h>
-                    ^
 compilation terminated.
-configure:13042: $? = 1
+configure:13512: $? = 1
 configure: failed program was:
 | /* confdefs.h */
 | #define PACKAGE_NAME "openvswitch"
@@ -1015,18 +836,16 @@ configure: failed program was:
 | #define STRERROR_R_CHAR_P 1
 | /* end confdefs.h.  */
 | #include <vmware.h>
-configure:13042: result: no
-configure:13042: checking for vmware.h
-configure:13042: result: no
-configure:13063: checking for MSVC x64 compiler
-configure:13076: result: no
-configure:13080: checking windows.h usability
-configure:13080: gcc -std=gnu99 -c -g -O2  conftest.c >&5
+configure:13512: result: no
+configure:13512: checking for vmware.h
+configure:13512: result: no
+configure:13533: checking for MSVC x64 compiler
+configure:13546: result: no
+configure:13550: checking windows.h usability
+configure:13550: gcc -c -g -O2  conftest.c >&5
 conftest.c:64:21: fatal error: windows.h: No such file or directory
- #include <windows.h>
-                     ^
 compilation terminated.
-configure:13080: $? = 1
+configure:13550: $? = 1
 configure: failed program was:
 | /* confdefs.h */
 | #define PACKAGE_NAME "openvswitch"
@@ -1092,14 +911,12 @@ configure: failed program was:
 | # include <unistd.h>
 | #endif
 | #include <windows.h>
-configure:13080: result: no
-configure:13080: checking windows.h presence
-configure:13080: gcc -std=gnu99 -E  conftest.c
+configure:13550: result: no
+configure:13550: checking windows.h presence
+configure:13550: gcc -E  conftest.c
 conftest.c:31:21: fatal error: windows.h: No such file or directory
- #include <windows.h>
-                     ^
 compilation terminated.
-configure:13080: $? = 1
+configure:13550: $? = 1
 configure: failed program was:
 | /* confdefs.h */
 | #define PACKAGE_NAME "openvswitch"
@@ -1132,26 +949,34 @@ configure: failed program was:
 | #define STRERROR_R_CHAR_P 1
 | /* end confdefs.h.  */
 | #include <windows.h>
-configure:13080: result: no
-configure:13080: checking for windows.h
-configure:13080: result: no
-configure:13240: checking for linux/netlink.h
-configure:13240: gcc -std=gnu99 -c -g -O2  conftest.c >&5
-configure:13240: $? = 0
-configure:13240: result: yes
-configure:13296: checking for pkg-config
-configure:13314: found /usr/bin/pkg-config
-configure:13326: result: /usr/bin/pkg-config
-configure:13386: checking whether compiling and linking against OpenSSL works
-Trying link with SSL_LDFLAGS= ; SSL_LIBS=-lssl -lcrypto  ; SSL_INCLUDES= 
-configure:13408: gcc -std=gnu99 -o conftest -g -O2       conftest.c -lssl -lcrypto   -lpthread -lrt -lm  >&5
-configure:13408: $? = 0
-configure:13410: result: yes
-configure:13477: checking for capng_clear in -lcap-ng
-configure:13502: gcc -std=gnu99 -o conftest -g -O2   conftest.c -lcap-ng  -lpthread -lrt -lm  >&5
-/usr/bin/ld: cannot find -lcap-ng
-collect2: error: ld returned 1 exit status
-configure:13502: $? = 1
+configure:13550: result: no
+configure:13550: checking for windows.h
+configure:13550: result: no
+configure:13710: checking for linux/netlink.h
+configure:13710: gcc -c -g -O2  conftest.c >&5
+configure:13710: $? = 0
+configure:13710: result: yes
+configure:13766: checking for pkg-config
+configure:13784: found /usr/bin/pkg-config
+configure:13796: result: /usr/bin/pkg-config
+configure:13829: checking for openssl/ssl.h in /usr/local/ssl
+configure:13844: result: no
+configure:13829: checking for openssl/ssl.h in /usr/lib/ssl
+configure:13844: result: no
+configure:13829: checking for openssl/ssl.h in /usr/ssl
+configure:13844: result: no
+configure:13829: checking for openssl/ssl.h in /usr/pkg
+configure:13844: result: no
+configure:13829: checking for openssl/ssl.h in /usr/local
+configure:13844: result: no
+configure:13829: checking for openssl/ssl.h in /usr
+configure:13844: result: no
+configure:13856: checking whether compiling and linking against OpenSSL works
+Trying link with SSL_LDFLAGS=; SSL_LIBS=; SSL_INCLUDES=
+configure:13878: gcc -o conftest -g -O2     conftest.c  -lpthread -lrt -lm  >&5
+conftest.c:33:25: fatal error: openssl/ssl.h: No such file or directory
+compilation terminated.
+configure:13878: $? = 1
 configure: failed program was:
 | /* confdefs.h */
 | #define PACKAGE_NAME "openvswitch"
@@ -1184,7 +1009,59 @@ configure: failed program was:
 | #define STRERROR_R_CHAR_P 1
 | #define VSTUDIO_DDK 1
 | #define HAVE_NETLINK 1
-| #define HAVE_OPENSSL 1
+| /* end confdefs.h.  */
+| #include <openssl/ssl.h>
+| int
+| main ()
+| {
+| SSL_CTX *ctx=NULL;SSL_new(ctx)
+|   ;
+|   return 0;
+| }
+configure:13886: result: no
+configure:13895: WARNING: Cannot find openssl:
+
+
+
+OpenFlow connections over SSL will not be supported.
+(You may use --disable-ssl to suppress this warning.)
+configure:13947: checking for capng_clear in -lcap-ng
+configure:13972: gcc -o conftest -g -O2   conftest.c -lcap-ng  -lpthread -lrt -lm  >&5
+/usr/bin/ld: cannot find -lcap-ng
+collect2: error: ld returned 1 exit status
+configure:13972: $? = 1
+configure: failed program was:
+| /* confdefs.h */
+| #define PACKAGE_NAME "openvswitch"
+| #define PACKAGE_TARNAME "openvswitch"
+| #define PACKAGE_VERSION "2.5.1"
+| #define PACKAGE_STRING "openvswitch 2.5.1"
+| #define PACKAGE_BUGREPORT "bugs@openvswitch.org"
+| #define PACKAGE_URL ""
+| #define PACKAGE "openvswitch"
+| #define VERSION "2.5.1"
+| #define STDC_HEADERS 1
+| #define HAVE_SYS_TYPES_H 1
+| #define HAVE_SYS_STAT_H 1
+| #define HAVE_STDLIB_H 1
+| #define HAVE_STRING_H 1
+| #define HAVE_MEMORY_H 1
+| #define HAVE_STRINGS_H 1
+| #define HAVE_INTTYPES_H 1
+| #define HAVE_STDINT_H 1
+| #define HAVE_UNISTD_H 1
+| #define __EXTENSIONS__ 1
+| #define _ALL_SOURCE 1
+| #define _GNU_SOURCE 1
+| #define _POSIX_PTHREAD_SEMANTICS 1
+| #define _TANDEM_SOURCE 1
+| #define HAVE_DLFCN_H 1
+| #define LT_OBJDIR ".libs/"
+| #define HAVE_DECL_STRERROR_R 1
+| #define HAVE_STRERROR_R 1
+| #define STRERROR_R_CHAR_P 1
+| #define VSTUDIO_DDK 1
+| #define HAVE_NETLINK 1
 | /* end confdefs.h.  */
 | 
 | /* Override any GCC internal prototype to avoid an error.
@@ -1201,31 +1078,29 @@ configure: failed program was:
 |   ;
 |   return 0;
 | }
-configure:13511: result: no
-configure:13525: WARNING: cannot find libcap-ng.
+configure:13981: result: no
+configure:13995: WARNING: cannot find libcap-ng.
 --user option will not be supported on Linux.
 (you may use --disable-libcapng to suppress this warning). 
-configure:13558: checking for Python 2.x for x >= 7
-configure:13584: result: /usr/bin/python
-configure:13604: checking for dot
-configure:13615: result: no
-configure:13625: checking net/if_packet.h usability
-configure:13625: gcc -std=gnu99 -c -g -O2  conftest.c >&5
-configure:13625: $? = 0
-configure:13625: result: yes
-configure:13625: checking net/if_packet.h presence
-configure:13625: gcc -std=gnu99 -E  conftest.c
-configure:13625: $? = 0
-configure:13625: result: yes
-configure:13625: checking for net/if_packet.h
-configure:13625: result: yes
-configure:13646: checking net/if_dl.h usability
-configure:13646: gcc -std=gnu99 -c -g -O2  conftest.c >&5
-conftest.c:68:23: fatal error: net/if_dl.h: No such file or directory
- #include <net/if_dl.h>
-                       ^
+configure:14028: checking for Python 2.x for x >= 7
+configure:14054: result: /usr/bin/python
+configure:14074: checking for dot
+configure:14085: result: no
+configure:14095: checking net/if_packet.h usability
+configure:14095: gcc -c -g -O2  conftest.c >&5
+configure:14095: $? = 0
+configure:14095: result: yes
+configure:14095: checking net/if_packet.h presence
+configure:14095: gcc -E  conftest.c
+configure:14095: $? = 0
+configure:14095: result: yes
+configure:14095: checking for net/if_packet.h
+configure:14095: result: yes
+configure:14116: checking net/if_dl.h usability
+configure:14116: gcc -c -g -O2  conftest.c >&5
+conftest.c:67:23: fatal error: net/if_dl.h: No such file or directory
 compilation terminated.
-configure:13646: $? = 1
+configure:14116: $? = 1
 configure: failed program was:
 | /* confdefs.h */
 | #define PACKAGE_NAME "openvswitch"
@@ -1258,7 +1133,6 @@ configure: failed program was:
 | #define STRERROR_R_CHAR_P 1
 | #define VSTUDIO_DDK 1
 | #define HAVE_NETLINK 1
-| #define HAVE_OPENSSL 1
 | #define HAVE_IF_PACKET 1
 | /* end confdefs.h.  */
 | #include <stdio.h>
@@ -1295,14 +1169,12 @@ configure: failed program was:
 | # include <unistd.h>
 | #endif
 | #include <net/if_dl.h>
-configure:13646: result: no
-configure:13646: checking net/if_dl.h presence
-configure:13646: gcc -std=gnu99 -E  conftest.c
-conftest.c:35:23: fatal error: net/if_dl.h: No such file or directory
- #include <net/if_dl.h>
-                       ^
+configure:14116: result: no
+configure:14116: checking net/if_dl.h presence
+configure:14116: gcc -E  conftest.c
+conftest.c:34:23: fatal error: net/if_dl.h: No such file or directory
 compilation terminated.
-configure:13646: $? = 1
+configure:14116: $? = 1
 configure: failed program was:
 | /* confdefs.h */
 | #define PACKAGE_NAME "openvswitch"
@@ -1335,34 +1207,33 @@ configure: failed program was:
 | #define STRERROR_R_CHAR_P 1
 | #define VSTUDIO_DDK 1
 | #define HAVE_NETLINK 1
-| #define HAVE_OPENSSL 1
 | #define HAVE_IF_PACKET 1
 | /* end confdefs.h.  */
 | #include <net/if_dl.h>
-configure:13646: result: no
-configure:13646: checking for net/if_dl.h
-configure:13646: result: no
-configure:13725: checking whether strtok_r macro segfaults on some inputs
-configure:13761: gcc -std=gnu99 -o conftest -g -O2   conftest.c -lpthread -lrt -lm  >&5
-configure:13761: $? = 0
-configure:13761: ./conftest
-configure:13761: $? = 0
-configure:13771: result: no
-configure:13779: checking whether sys_siglist is declared
-configure:13779: gcc -std=gnu99 -c -g -O2  conftest.c >&5
-configure:13779: $? = 0
-configure:13779: result: yes
-configure:13791: checking for struct stat.st_mtim.tv_nsec
-configure:13791: gcc -std=gnu99 -c -g -O2  conftest.c >&5
-configure:13791: $? = 0
-configure:13791: result: yes
-configure:13801: checking for struct stat.st_mtimensec
-configure:13801: gcc -std=gnu99 -c -g -O2  conftest.c >&5
+configure:14116: result: no
+configure:14116: checking for net/if_dl.h
+configure:14116: result: no
+configure:14195: checking whether strtok_r macro segfaults on some inputs
+configure:14231: gcc -o conftest -g -O2   conftest.c -lpthread -lrt -lm  >&5
+configure:14231: $? = 0
+configure:14231: ./conftest
+configure:14231: $? = 0
+configure:14241: result: no
+configure:14249: checking whether sys_siglist is declared
+configure:14249: gcc -c -g -O2  conftest.c >&5
+configure:14249: $? = 0
+configure:14249: result: yes
+configure:14261: checking for struct stat.st_mtim.tv_nsec
+configure:14261: gcc -c -g -O2  conftest.c >&5
+configure:14261: $? = 0
+configure:14261: result: yes
+configure:14271: checking for struct stat.st_mtimensec
+configure:14271: gcc -c -g -O2  conftest.c >&5
 conftest.c: In function 'main':
-conftest.c:43:12: error: 'struct stat' has no member named 'st_mtimensec'
+conftest.c:42:12: error: 'struct stat' has no member named 'st_mtimensec'
  if (ac_aggr.st_mtimensec)
             ^
-configure:13801: $? = 1
+configure:14271: $? = 1
 configure: failed program was:
 | /* confdefs.h */
 | #define PACKAGE_NAME "openvswitch"
@@ -1395,7 +1266,6 @@ configure: failed program was:
 | #define STRERROR_R_CHAR_P 1
 | #define VSTUDIO_DDK 1
 | #define HAVE_NETLINK 1
-| #define HAVE_OPENSSL 1
 | #define HAVE_IF_PACKET 1
 | #define HAVE_DECL_SYS_SIGLIST 1
 | #define HAVE_STRUCT_STAT_ST_MTIM_TV_NSEC 1
@@ -1411,12 +1281,12 @@ configure: failed program was:
 |   ;
 |   return 0;
 | }
-configure:13801: gcc -std=gnu99 -c -g -O2  conftest.c >&5
+configure:14271: gcc -c -g -O2  conftest.c >&5
 conftest.c: In function 'main':
-conftest.c:43:19: error: 'struct stat' has no member named 'st_mtimensec'
+conftest.c:42:19: error: 'struct stat' has no member named 'st_mtimensec'
  if (sizeof ac_aggr.st_mtimensec)
                    ^
-configure:13801: $? = 1
+configure:14271: $? = 1
 configure: failed program was:
 | /* confdefs.h */
 | #define PACKAGE_NAME "openvswitch"
@@ -1449,7 +1319,6 @@ configure: failed program was:
 | #define STRERROR_R_CHAR_P 1
 | #define VSTUDIO_DDK 1
 | #define HAVE_NETLINK 1
-| #define HAVE_OPENSSL 1
 | #define HAVE_IF_PACKET 1
 | #define HAVE_DECL_SYS_SIGLIST 1
 | #define HAVE_STRUCT_STAT_ST_MTIM_TV_NSEC 1
@@ -1465,14 +1334,14 @@ configure: failed program was:
 |   ;
 |   return 0;
 | }
-configure:13801: result: no
-configure:13812: checking for struct ifreq.ifr_flagshigh
-configure:13812: gcc -std=gnu99 -c -g -O2  conftest.c >&5
+configure:14271: result: no
+configure:14282: checking for struct ifreq.ifr_flagshigh
+configure:14282: gcc -c -g -O2  conftest.c >&5
 conftest.c: In function 'main':
-conftest.c:43:12: error: 'struct ifreq' has no member named 'ifr_flagshigh'
+conftest.c:42:12: error: 'struct ifreq' has no member named 'ifr_flagshigh'
  if (ac_aggr.ifr_flagshigh)
             ^
-configure:13812: $? = 1
+configure:14282: $? = 1
 configure: failed program was:
 | /* confdefs.h */
 | #define PACKAGE_NAME "openvswitch"
@@ -1505,7 +1374,6 @@ configure: failed program was:
 | #define STRERROR_R_CHAR_P 1
 | #define VSTUDIO_DDK 1
 | #define HAVE_NETLINK 1
-| #define HAVE_OPENSSL 1
 | #define HAVE_IF_PACKET 1
 | #define HAVE_DECL_SYS_SIGLIST 1
 | #define HAVE_STRUCT_STAT_ST_MTIM_TV_NSEC 1
@@ -1521,12 +1389,12 @@ configure: failed program was:
 |   ;
 |   return 0;
 | }
-configure:13812: gcc -std=gnu99 -c -g -O2  conftest.c >&5
+configure:14282: gcc -c -g -O2  conftest.c >&5
 conftest.c: In function 'main':
-conftest.c:43:19: error: 'struct ifreq' has no member named 'ifr_flagshigh'
+conftest.c:42:19: error: 'struct ifreq' has no member named 'ifr_flagshigh'
  if (sizeof ac_aggr.ifr_flagshigh)
                    ^
-configure:13812: $? = 1
+configure:14282: $? = 1
 configure: failed program was:
 | /* confdefs.h */
 | #define PACKAGE_NAME "openvswitch"
@@ -1559,7 +1427,6 @@ configure: failed program was:
 | #define STRERROR_R_CHAR_P 1
 | #define VSTUDIO_DDK 1
 | #define HAVE_NETLINK 1
-| #define HAVE_OPENSSL 1
 | #define HAVE_IF_PACKET 1
 | #define HAVE_DECL_SYS_SIGLIST 1
 | #define HAVE_STRUCT_STAT_ST_MTIM_TV_NSEC 1
@@ -1575,219 +1442,82 @@ configure: failed program was:
 |   ;
 |   return 0;
 | }
-configure:13812: result: no
-configure:13826: checking for mlockall
-configure:13826: gcc -std=gnu99 -o conftest -g -O2   conftest.c -lpthread -lrt -lm  >&5
-configure:13826: $? = 0
-configure:13826: result: yes
-configure:13826: checking for strnlen
-configure:13826: gcc -std=gnu99 -o conftest -g -O2   conftest.c -lpthread -lrt -lm  >&5
-configure:13826: $? = 0
-configure:13826: result: yes
-configure:13826: checking for getloadavg
-configure:13826: gcc -std=gnu99 -o conftest -g -O2   conftest.c -lpthread -lrt -lm  >&5
-configure:13826: $? = 0
-configure:13826: result: yes
-configure:13826: checking for statvfs
-configure:13826: gcc -std=gnu99 -o conftest -g -O2   conftest.c -lpthread -lrt -lm  >&5
-configure:13826: $? = 0
-configure:13826: result: yes
-configure:13826: checking for getmntent_r
-configure:13826: gcc -std=gnu99 -o conftest -g -O2   conftest.c -lpthread -lrt -lm  >&5
-configure:13826: $? = 0
-configure:13826: result: yes
-configure:13838: checking mntent.h usability
-configure:13838: gcc -std=gnu99 -c -g -O2  conftest.c >&5
-configure:13838: $? = 0
-configure:13838: result: yes
-configure:13838: checking mntent.h presence
-configure:13838: gcc -std=gnu99 -E  conftest.c
-configure:13838: $? = 0
-configure:13838: result: yes
-configure:13838: checking for mntent.h
-configure:13838: result: yes
-configure:13838: checking sys/statvfs.h usability
-configure:13838: gcc -std=gnu99 -c -g -O2  conftest.c >&5
-configure:13838: $? = 0
-configure:13838: result: yes
-configure:13838: checking sys/statvfs.h presence
-configure:13838: gcc -std=gnu99 -E  conftest.c
-configure:13838: $? = 0
-configure:13838: result: yes
-configure:13838: checking for sys/statvfs.h
-configure:13838: result: yes
-configure:13838: checking linux/types.h usability
-configure:13838: gcc -std=gnu99 -c -g -O2  conftest.c >&5
-configure:13838: $? = 0
-configure:13838: result: yes
-configure:13838: checking linux/types.h presence
-configure:13838: gcc -std=gnu99 -E  conftest.c
-configure:13838: $? = 0
-configure:13838: result: yes
-configure:13838: checking for linux/types.h
-configure:13838: result: yes
-configure:13838: checking linux/if_ether.h usability
-configure:13838: gcc -std=gnu99 -c -g -O2  conftest.c >&5
-configure:13838: $? = 0
-configure:13838: result: yes
-configure:13838: checking linux/if_ether.h presence
-configure:13838: gcc -std=gnu99 -E  conftest.c
-configure:13838: $? = 0
-configure:13838: result: yes
-configure:13838: checking for linux/if_ether.h
-configure:13838: result: yes
-configure:13838: checking stdatomic.h usability
-configure:13838: gcc -std=gnu99 -c -g -O2  conftest.c >&5
-conftest.c:79:23: fatal error: stdatomic.h: No such file or directory
- #include <stdatomic.h>
-                       ^
-compilation terminated.
-configure:13838: $? = 1
-configure: failed program was:
-| /* confdefs.h */
-| #define PACKAGE_NAME "openvswitch"
-| #define PACKAGE_TARNAME "openvswitch"
-| #define PACKAGE_VERSION "2.5.1"
-| #define PACKAGE_STRING "openvswitch 2.5.1"
-| #define PACKAGE_BUGREPORT "bugs@openvswitch.org"
-| #define PACKAGE_URL ""
-| #define PACKAGE "openvswitch"
-| #define VERSION "2.5.1"
-| #define STDC_HEADERS 1
-| #define HAVE_SYS_TYPES_H 1
-| #define HAVE_SYS_STAT_H 1
-| #define HAVE_STDLIB_H 1
-| #define HAVE_STRING_H 1
-| #define HAVE_MEMORY_H 1
-| #define HAVE_STRINGS_H 1
-| #define HAVE_INTTYPES_H 1
-| #define HAVE_STDINT_H 1
-| #define HAVE_UNISTD_H 1
-| #define __EXTENSIONS__ 1
-| #define _ALL_SOURCE 1
-| #define _GNU_SOURCE 1
-| #define _POSIX_PTHREAD_SEMANTICS 1
-| #define _TANDEM_SOURCE 1
-| #define HAVE_DLFCN_H 1
-| #define LT_OBJDIR ".libs/"
-| #define HAVE_DECL_STRERROR_R 1
-| #define HAVE_STRERROR_R 1
-| #define STRERROR_R_CHAR_P 1
-| #define VSTUDIO_DDK 1
-| #define HAVE_NETLINK 1
-| #define HAVE_OPENSSL 1
-| #define HAVE_IF_PACKET 1
-| #define HAVE_DECL_SYS_SIGLIST 1
-| #define HAVE_STRUCT_STAT_ST_MTIM_TV_NSEC 1
-| #define HAVE_MLOCKALL 1
-| #define HAVE_STRNLEN 1
-| #define HAVE_GETLOADAVG 1
-| #define HAVE_STATVFS 1
-| #define HAVE_GETMNTENT_R 1
-| #define HAVE_MNTENT_H 1
-| #define HAVE_SYS_STATVFS_H 1
-| #define HAVE_LINUX_TYPES_H 1
-| #define HAVE_LINUX_IF_ETHER_H 1
-| /* end confdefs.h.  */
-| #include <stdio.h>
-| #ifdef HAVE_SYS_TYPES_H
-| # include <sys/types.h>
-| #endif
-| #ifdef HAVE_SYS_STAT_H
-| # include <sys/stat.h>
-| #endif
-| #ifdef STDC_HEADERS
-| # include <stdlib.h>
-| # include <stddef.h>
-| #else
-| # ifdef HAVE_STDLIB_H
-| #  include <stdlib.h>
-| # endif
-| #endif
-| #ifdef HAVE_STRING_H
-| # if !defined STDC_HEADERS && defined HAVE_MEMORY_H
-| #  include <memory.h>
-| # endif
-| # include <string.h>
-| #endif
-| #ifdef HAVE_STRINGS_H
-| # include <strings.h>
-| #endif
-| #ifdef HAVE_INTTYPES_H
-| # include <inttypes.h>
-| #endif
-| #ifdef HAVE_STDINT_H
-| # include <stdint.h>
-| #endif
-| #ifdef HAVE_UNISTD_H
-| # include <unistd.h>
-| #endif
-| #include <stdatomic.h>
-configure:13838: result: no
-configure:13838: checking stdatomic.h presence
-configure:13838: gcc -std=gnu99 -E  conftest.c
-conftest.c:46:23: fatal error: stdatomic.h: No such file or directory
- #include <stdatomic.h>
-                       ^
-compilation terminated.
-configure:13838: $? = 1
-configure: failed program was:
-| /* confdefs.h */
-| #define PACKAGE_NAME "openvswitch"
-| #define PACKAGE_TARNAME "openvswitch"
-| #define PACKAGE_VERSION "2.5.1"
-| #define PACKAGE_STRING "openvswitch 2.5.1"
-| #define PACKAGE_BUGREPORT "bugs@openvswitch.org"
-| #define PACKAGE_URL ""
-| #define PACKAGE "openvswitch"
-| #define VERSION "2.5.1"
-| #define STDC_HEADERS 1
-| #define HAVE_SYS_TYPES_H 1
-| #define HAVE_SYS_STAT_H 1
-| #define HAVE_STDLIB_H 1
-| #define HAVE_STRING_H 1
-| #define HAVE_MEMORY_H 1
-| #define HAVE_STRINGS_H 1
-| #define HAVE_INTTYPES_H 1
-| #define HAVE_STDINT_H 1
-| #define HAVE_UNISTD_H 1
-| #define __EXTENSIONS__ 1
-| #define _ALL_SOURCE 1
-| #define _GNU_SOURCE 1
-| #define _POSIX_PTHREAD_SEMANTICS 1
-| #define _TANDEM_SOURCE 1
-| #define HAVE_DLFCN_H 1
-| #define LT_OBJDIR ".libs/"
-| #define HAVE_DECL_STRERROR_R 1
-| #define HAVE_STRERROR_R 1
-| #define STRERROR_R_CHAR_P 1
-| #define VSTUDIO_DDK 1
-| #define HAVE_NETLINK 1
-| #define HAVE_OPENSSL 1
-| #define HAVE_IF_PACKET 1
-| #define HAVE_DECL_SYS_SIGLIST 1
-| #define HAVE_STRUCT_STAT_ST_MTIM_TV_NSEC 1
-| #define HAVE_MLOCKALL 1
-| #define HAVE_STRNLEN 1
-| #define HAVE_GETLOADAVG 1
-| #define HAVE_STATVFS 1
-| #define HAVE_GETMNTENT_R 1
-| #define HAVE_MNTENT_H 1
-| #define HAVE_SYS_STATVFS_H 1
-| #define HAVE_LINUX_TYPES_H 1
-| #define HAVE_LINUX_IF_ETHER_H 1
-| /* end confdefs.h.  */
-| #include <stdatomic.h>
-configure:13838: result: no
-configure:13838: checking for stdatomic.h
-configure:13838: result: no
-configure:13850: checking for net/if_mib.h
-configure:13850: gcc -std=gnu99 -c -g -O2  conftest.c >&5
+configure:14282: result: no
+configure:14296: checking for mlockall
+configure:14296: gcc -o conftest -g -O2   conftest.c -lpthread -lrt -lm  >&5
+configure:14296: $? = 0
+configure:14296: result: yes
+configure:14296: checking for strnlen
+configure:14296: gcc -o conftest -g -O2   conftest.c -lpthread -lrt -lm  >&5
+configure:14296: $? = 0
+configure:14296: result: yes
+configure:14296: checking for getloadavg
+configure:14296: gcc -o conftest -g -O2   conftest.c -lpthread -lrt -lm  >&5
+configure:14296: $? = 0
+configure:14296: result: yes
+configure:14296: checking for statvfs
+configure:14296: gcc -o conftest -g -O2   conftest.c -lpthread -lrt -lm  >&5
+configure:14296: $? = 0
+configure:14296: result: yes
+configure:14296: checking for getmntent_r
+configure:14296: gcc -o conftest -g -O2   conftest.c -lpthread -lrt -lm  >&5
+configure:14296: $? = 0
+configure:14296: result: yes
+configure:14308: checking mntent.h usability
+configure:14308: gcc -c -g -O2  conftest.c >&5
+configure:14308: $? = 0
+configure:14308: result: yes
+configure:14308: checking mntent.h presence
+configure:14308: gcc -E  conftest.c
+configure:14308: $? = 0
+configure:14308: result: yes
+configure:14308: checking for mntent.h
+configure:14308: result: yes
+configure:14308: checking sys/statvfs.h usability
+configure:14308: gcc -c -g -O2  conftest.c >&5
+configure:14308: $? = 0
+configure:14308: result: yes
+configure:14308: checking sys/statvfs.h presence
+configure:14308: gcc -E  conftest.c
+configure:14308: $? = 0
+configure:14308: result: yes
+configure:14308: checking for sys/statvfs.h
+configure:14308: result: yes
+configure:14308: checking linux/types.h usability
+configure:14308: gcc -c -g -O2  conftest.c >&5
+configure:14308: $? = 0
+configure:14308: result: yes
+configure:14308: checking linux/types.h presence
+configure:14308: gcc -E  conftest.c
+configure:14308: $? = 0
+configure:14308: result: yes
+configure:14308: checking for linux/types.h
+configure:14308: result: yes
+configure:14308: checking linux/if_ether.h usability
+configure:14308: gcc -c -g -O2  conftest.c >&5
+configure:14308: $? = 0
+configure:14308: result: yes
+configure:14308: checking linux/if_ether.h presence
+configure:14308: gcc -E  conftest.c
+configure:14308: $? = 0
+configure:14308: result: yes
+configure:14308: checking for linux/if_ether.h
+configure:14308: result: yes
+configure:14308: checking stdatomic.h usability
+configure:14308: gcc -c -g -O2  conftest.c >&5
+configure:14308: $? = 0
+configure:14308: result: yes
+configure:14308: checking stdatomic.h presence
+configure:14308: gcc -E  conftest.c
+configure:14308: $? = 0
+configure:14308: result: yes
+configure:14308: checking for stdatomic.h
+configure:14308: result: yes
+configure:14320: checking for net/if_mib.h
+configure:14320: gcc -c -g -O2  conftest.c >&5
 conftest.c:49:24: fatal error: net/if_mib.h: No such file or directory
- #include <net/if_mib.h>
-                        ^
 compilation terminated.
-configure:13850: $? = 1
+configure:14320: $? = 1
 configure: failed program was:
 | /* confdefs.h */
 | #define PACKAGE_NAME "openvswitch"
@@ -1820,7 +1550,6 @@ configure: failed program was:
 | #define STRERROR_R_CHAR_P 1
 | #define VSTUDIO_DDK 1
 | #define HAVE_NETLINK 1
-| #define HAVE_OPENSSL 1
 | #define HAVE_IF_PACKET 1
 | #define HAVE_DECL_SYS_SIGLIST 1
 | #define HAVE_STRUCT_STAT_ST_MTIM_TV_NSEC 1
@@ -1833,33 +1562,32 @@ configure: failed program was:
 | #define HAVE_SYS_STATVFS_H 1
 | #define HAVE_LINUX_TYPES_H 1
 | #define HAVE_LINUX_IF_ETHER_H 1
+| #define HAVE_STDATOMIC_H 1
 | /* end confdefs.h.  */
 | #include <sys/types.h>
 | #include <net/if.h>
 | 
 | #include <net/if_mib.h>
-configure:13850: result: no
-configure:13890: checking for library containing backtrace
-configure:13921: gcc -std=gnu99 -o conftest -g -O2   conftest.c -lpthread -lrt -lm  >&5
-configure:13921: $? = 0
-configure:13938: result: none required
-configure:13950: checking linux/perf_event.h usability
-configure:13950: gcc -std=gnu99 -c -g -O2  conftest.c >&5
-configure:13950: $? = 0
-configure:13950: result: yes
-configure:13950: checking linux/perf_event.h presence
-configure:13950: gcc -std=gnu99 -E  conftest.c
-configure:13950: $? = 0
-configure:13950: result: yes
-configure:13950: checking for linux/perf_event.h
-configure:13950: result: yes
-configure:13962: checking valgrind/valgrind.h usability
-configure:13962: gcc -std=gnu99 -c -g -O2  conftest.c >&5
+configure:14320: result: no
+configure:14360: checking for library containing backtrace
+configure:14391: gcc -o conftest -g -O2   conftest.c -lpthread -lrt -lm  >&5
+configure:14391: $? = 0
+configure:14408: result: none required
+configure:14420: checking linux/perf_event.h usability
+configure:14420: gcc -c -g -O2  conftest.c >&5
+configure:14420: $? = 0
+configure:14420: result: yes
+configure:14420: checking linux/perf_event.h presence
+configure:14420: gcc -E  conftest.c
+configure:14420: $? = 0
+configure:14420: result: yes
+configure:14420: checking for linux/perf_event.h
+configure:14420: result: yes
+configure:14432: checking valgrind/valgrind.h usability
+configure:14432: gcc -c -g -O2  conftest.c >&5
 conftest.c:81:31: fatal error: valgrind/valgrind.h: No such file or directory
- #include <valgrind/valgrind.h>
-                               ^
 compilation terminated.
-configure:13962: $? = 1
+configure:14432: $? = 1
 configure: failed program was:
 | /* confdefs.h */
 | #define PACKAGE_NAME "openvswitch"
@@ -1892,7 +1620,6 @@ configure: failed program was:
 | #define STRERROR_R_CHAR_P 1
 | #define VSTUDIO_DDK 1
 | #define HAVE_NETLINK 1
-| #define HAVE_OPENSSL 1
 | #define HAVE_IF_PACKET 1
 | #define HAVE_DECL_SYS_SIGLIST 1
 | #define HAVE_STRUCT_STAT_ST_MTIM_TV_NSEC 1
@@ -1905,6 +1632,7 @@ configure: failed program was:
 | #define HAVE_SYS_STATVFS_H 1
 | #define HAVE_LINUX_TYPES_H 1
 | #define HAVE_LINUX_IF_ETHER_H 1
+| #define HAVE_STDATOMIC_H 1
 | #define HAVE_BACKTRACE 1
 | #define HAVE_LINUX_PERF_EVENT_H 1
 | /* end confdefs.h.  */
@@ -1942,14 +1670,12 @@ configure: failed program was:
 | # include <unistd.h>
 | #endif
 | #include <valgrind/valgrind.h>
-configure:13962: result: no
-configure:13962: checking valgrind/valgrind.h presence
-configure:13962: gcc -std=gnu99 -E  conftest.c
+configure:14432: result: no
+configure:14432: checking valgrind/valgrind.h presence
+configure:14432: gcc -E  conftest.c
 conftest.c:48:31: fatal error: valgrind/valgrind.h: No such file or directory
- #include <valgrind/valgrind.h>
-                               ^
 compilation terminated.
-configure:13962: $? = 1
+configure:14432: $? = 1
 configure: failed program was:
 | /* confdefs.h */
 | #define PACKAGE_NAME "openvswitch"
@@ -1982,7 +1708,6 @@ configure: failed program was:
 | #define STRERROR_R_CHAR_P 1
 | #define VSTUDIO_DDK 1
 | #define HAVE_NETLINK 1
-| #define HAVE_OPENSSL 1
 | #define HAVE_IF_PACKET 1
 | #define HAVE_DECL_SYS_SIGLIST 1
 | #define HAVE_STRUCT_STAT_ST_MTIM_TV_NSEC 1
@@ -1995,18 +1720,19 @@ configure: failed program was:
 | #define HAVE_SYS_STATVFS_H 1
 | #define HAVE_LINUX_TYPES_H 1
 | #define HAVE_LINUX_IF_ETHER_H 1
+| #define HAVE_STDATOMIC_H 1
 | #define HAVE_BACKTRACE 1
 | #define HAVE_LINUX_PERF_EVENT_H 1
 | /* end confdefs.h.  */
 | #include <valgrind/valgrind.h>
-configure:13962: result: no
-configure:13962: checking for valgrind/valgrind.h
-configure:13962: result: no
-configure:13972: checking for connect in -lsocket
-configure:13997: gcc -std=gnu99 -o conftest -g -O2   conftest.c -lsocket  -lpthread -lrt -lm  >&5
+configure:14432: result: no
+configure:14432: checking for valgrind/valgrind.h
+configure:14432: result: no
+configure:14442: checking for connect in -lsocket
+configure:14467: gcc -o conftest -g -O2   conftest.c -lsocket  -lpthread -lrt -lm  >&5
 /usr/bin/ld: cannot find -lsocket
 collect2: error: ld returned 1 exit status
-configure:13997: $? = 1
+configure:14467: $? = 1
 configure: failed program was:
 | /* confdefs.h */
 | #define PACKAGE_NAME "openvswitch"
@@ -2039,7 +1765,6 @@ configure: failed program was:
 | #define STRERROR_R_CHAR_P 1
 | #define VSTUDIO_DDK 1
 | #define HAVE_NETLINK 1
-| #define HAVE_OPENSSL 1
 | #define HAVE_IF_PACKET 1
 | #define HAVE_DECL_SYS_SIGLIST 1
 | #define HAVE_STRUCT_STAT_ST_MTIM_TV_NSEC 1
@@ -2052,6 +1777,7 @@ configure: failed program was:
 | #define HAVE_SYS_STATVFS_H 1
 | #define HAVE_LINUX_TYPES_H 1
 | #define HAVE_LINUX_IF_ETHER_H 1
+| #define HAVE_STDATOMIC_H 1
 | #define HAVE_BACKTRACE 1
 | #define HAVE_LINUX_PERF_EVENT_H 1
 | /* end confdefs.h.  */
@@ -2070,31 +1796,29 @@ configure: failed program was:
 |   ;
 |   return 0;
 | }
-configure:14006: result: no
-configure:14017: checking for library containing gethostbyname
-configure:14048: gcc -std=gnu99 -o conftest -g -O2   conftest.c -lpthread -lrt -lm  >&5
-configure:14048: $? = 0
-configure:14065: result: none required
-configure:14073: checking XenServer release
-configure:14085: result: none
-configure:14097: checking for groff
-configure:14108: result: yes
-configure:14118: checking whether make is GNU make
-configure:14124: invoking make --version:
+configure:14476: result: no
+configure:14487: checking for library containing gethostbyname
+configure:14518: gcc -o conftest -g -O2   conftest.c -lpthread -lrt -lm  >&5
+configure:14518: $? = 0
+configure:14535: result: none required
+configure:14543: checking XenServer release
+configure:14555: result: none
+configure:14567: checking for groff
+configure:14578: result: yes
+configure:14588: checking whether make is GNU make
+configure:14594: invoking make --version:
 GNU Make 3.82
 Built for x86_64-redhat-linux-gnu
 Copyright (C) 2010  Free Software Foundation, Inc.
 License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
 This is free software: you are free to change and redistribute it.
 There is NO WARRANTY, to the extent permitted by law.
-configure:14135: result: yes
-configure:14145: checking whether gcc -std=gnu99 has <threads.h> that supports thread_local
-configure:14162: gcc -std=gnu99 -o conftest -g -O2   conftest.c -lpthread -lrt -lm  >&5
+configure:14605: result: yes
+configure:14615: checking whether gcc has <threads.h> that supports thread_local
+configure:14632: gcc -o conftest -g -O2   conftest.c -lpthread -lrt -lm  >&5
 conftest.c:48:21: fatal error: threads.h: No such file or directory
- #include <threads.h>
-                     ^
 compilation terminated.
-configure:14162: $? = 1
+configure:14632: $? = 1
 configure: failed program was:
 | /* confdefs.h */
 | #define PACKAGE_NAME "openvswitch"
@@ -2127,7 +1851,6 @@ configure: failed program was:
 | #define STRERROR_R_CHAR_P 1
 | #define VSTUDIO_DDK 1
 | #define HAVE_NETLINK 1
-| #define HAVE_OPENSSL 1
 | #define HAVE_IF_PACKET 1
 | #define HAVE_DECL_SYS_SIGLIST 1
 | #define HAVE_STRUCT_STAT_ST_MTIM_TV_NSEC 1
@@ -2140,6 +1863,7 @@ configure: failed program was:
 | #define HAVE_SYS_STATVFS_H 1
 | #define HAVE_LINUX_TYPES_H 1
 | #define HAVE_LINUX_IF_ETHER_H 1
+| #define HAVE_STDATOMIC_H 1
 | #define HAVE_BACKTRACE 1
 | #define HAVE_LINUX_PERF_EVENT_H 1
 | /* end confdefs.h.  */
@@ -2152,20 +1876,20 @@ configure: failed program was:
 |   ;
 |   return 0;
 | }
-configure:14170: result: no
-configure:14177: checking whether gcc -std=gnu99 supports __thread
-configure:14193: gcc -std=gnu99 -o conftest -g -O2   conftest.c -lpthread -lrt -lm  >&5
-configure:14193: $? = 0
-configure:14201: result: yes
-configure:14209: checking for library containing __atomic_load_8
-configure:14240: gcc -std=gnu99 -o conftest -g -O2   conftest.c -lpthread -lrt -lm  >&5
-conftest.c:56:6: warning: conflicting types for built-in function '__atomic_load_8' [enabled by default]
+configure:14640: result: no
+configure:14647: checking whether gcc supports __thread
+configure:14663: gcc -o conftest -g -O2   conftest.c -lpthread -lrt -lm  >&5
+configure:14663: $? = 0
+configure:14671: result: yes
+configure:14679: checking for library containing __atomic_load_8
+configure:14710: gcc -o conftest -g -O2   conftest.c -lpthread -lrt -lm  >&5
+conftest.c:56:6: warning: conflicting types for built-in function '__atomic_load_8'
  char __atomic_load_8 ();
       ^
-/tmp/ccrOHZYJ.o: In function `main':
+/tmp/ccd7wUwH.o: In function `main':
 /root/linkerovs/ovs-branch-2.5-dpdk/conftest.c:60: undefined reference to `__atomic_load_8'
 collect2: error: ld returned 1 exit status
-configure:14240: $? = 1
+configure:14710: $? = 1
 configure: failed program was:
 | /* confdefs.h */
 | #define PACKAGE_NAME "openvswitch"
@@ -2198,7 +1922,6 @@ configure: failed program was:
 | #define STRERROR_R_CHAR_P 1
 | #define VSTUDIO_DDK 1
 | #define HAVE_NETLINK 1
-| #define HAVE_OPENSSL 1
 | #define HAVE_IF_PACKET 1
 | #define HAVE_DECL_SYS_SIGLIST 1
 | #define HAVE_STRUCT_STAT_ST_MTIM_TV_NSEC 1
@@ -2211,6 +1934,7 @@ configure: failed program was:
 | #define HAVE_SYS_STATVFS_H 1
 | #define HAVE_LINUX_TYPES_H 1
 | #define HAVE_LINUX_IF_ETHER_H 1
+| #define HAVE_STDATOMIC_H 1
 | #define HAVE_BACKTRACE 1
 | #define HAVE_LINUX_PERF_EVENT_H 1
 | #define HAVE___THREAD 1
@@ -2230,13 +1954,13 @@ configure: failed program was:
 |   ;
 |   return 0;
 | }
-configure:14240: gcc -std=gnu99 -o conftest -g -O2   conftest.c -latomic  -lpthread -lrt -lm  >&5
-conftest.c:56:6: warning: conflicting types for built-in function '__atomic_load_8' [enabled by default]
+configure:14710: gcc -o conftest -g -O2   conftest.c -latomic  -lpthread -lrt -lm  >&5
+conftest.c:56:6: warning: conflicting types for built-in function '__atomic_load_8'
  char __atomic_load_8 ();
       ^
-/usr/bin/ld: cannot find /usr/lib64/libatomic.so.1.0.0
+/usr/bin/ld: cannot find /usr/lib64/libatomic.so.1.1.0
 collect2: error: ld returned 1 exit status
-configure:14240: $? = 1
+configure:14710: $? = 1
 configure: failed program was:
 | /* confdefs.h */
 | #define PACKAGE_NAME "openvswitch"
@@ -2269,7 +1993,6 @@ configure: failed program was:
 | #define STRERROR_R_CHAR_P 1
 | #define VSTUDIO_DDK 1
 | #define HAVE_NETLINK 1
-| #define HAVE_OPENSSL 1
 | #define HAVE_IF_PACKET 1
 | #define HAVE_DECL_SYS_SIGLIST 1
 | #define HAVE_STRUCT_STAT_ST_MTIM_TV_NSEC 1
@@ -2282,6 +2005,7 @@ configure: failed program was:
 | #define HAVE_SYS_STATVFS_H 1
 | #define HAVE_LINUX_TYPES_H 1
 | #define HAVE_LINUX_IF_ETHER_H 1
+| #define HAVE_STDATOMIC_H 1
 | #define HAVE_BACKTRACE 1
 | #define HAVE_LINUX_PERF_EVENT_H 1
 | #define HAVE___THREAD 1
@@ -2301,45 +2025,45 @@ configure: failed program was:
 |   ;
 |   return 0;
 | }
-configure:14257: result: no
-configure:14265: checking whether gcc -std=gnu99 supports GCC 4.0+ atomic built-ins
-configure:14332: gcc -std=gnu99 -o conftest -g -O2   conftest.c -lpthread -lrt -lm  >&5
-configure:14332: $? = 0
-configure:14340: result: yes
-configure:14347: checking value of __atomic_always_lock_free(1)
-configure:14352: gcc -std=gnu99 -o conftest -g -O2   conftest.c -lpthread -lrt -lm  >&5
-configure:14352: $? = 0
-configure:14352: ./conftest
-configure:14352: $? = 0
-configure:14359: result: 1
-configure:14368: checking value of __atomic_always_lock_free(2)
-configure:14373: gcc -std=gnu99 -o conftest -g -O2   conftest.c -lpthread -lrt -lm  >&5
-configure:14373: $? = 0
-configure:14373: ./conftest
-configure:14373: $? = 0
-configure:14380: result: 1
-configure:14389: checking value of __atomic_always_lock_free(4)
-configure:14394: gcc -std=gnu99 -o conftest -g -O2   conftest.c -lpthread -lrt -lm  >&5
-configure:14394: $? = 0
-configure:14394: ./conftest
-configure:14394: $? = 0
-configure:14401: result: 1
-configure:14410: checking value of __atomic_always_lock_free(8)
-configure:14415: gcc -std=gnu99 -o conftest -g -O2   conftest.c -lpthread -lrt -lm  >&5
-configure:14415: $? = 0
-configure:14415: ./conftest
-configure:14415: $? = 0
-configure:14422: result: 1
-configure:14431: checking for library containing aio_write
-configure:14462: gcc -std=gnu99 -o conftest -g -O2   conftest.c -lpthread -lrt -lm  >&5
-configure:14462: $? = 0
-configure:14479: result: none required
-configure:14497: checking for pthread_set_name_np
-configure:14497: gcc -std=gnu99 -o conftest -g -O2   conftest.c -lpthread -lrt -lm  >&5
-/tmp/ccGarJZk.o: In function `main':
+configure:14727: result: no
+configure:14735: checking whether gcc supports GCC 4.0+ atomic built-ins
+configure:14802: gcc -o conftest -g -O2   conftest.c -lpthread -lrt -lm  >&5
+configure:14802: $? = 0
+configure:14810: result: yes
+configure:14817: checking value of __atomic_always_lock_free(1)
+configure:14822: gcc -o conftest -g -O2   conftest.c -lpthread -lrt -lm  >&5
+configure:14822: $? = 0
+configure:14822: ./conftest
+configure:14822: $? = 0
+configure:14829: result: 1
+configure:14838: checking value of __atomic_always_lock_free(2)
+configure:14843: gcc -o conftest -g -O2   conftest.c -lpthread -lrt -lm  >&5
+configure:14843: $? = 0
+configure:14843: ./conftest
+configure:14843: $? = 0
+configure:14850: result: 1
+configure:14859: checking value of __atomic_always_lock_free(4)
+configure:14864: gcc -o conftest -g -O2   conftest.c -lpthread -lrt -lm  >&5
+configure:14864: $? = 0
+configure:14864: ./conftest
+configure:14864: $? = 0
+configure:14871: result: 1
+configure:14880: checking value of __atomic_always_lock_free(8)
+configure:14885: gcc -o conftest -g -O2   conftest.c -lpthread -lrt -lm  >&5
+configure:14885: $? = 0
+configure:14885: ./conftest
+configure:14885: $? = 0
+configure:14892: result: 1
+configure:14901: checking for library containing aio_write
+configure:14932: gcc -o conftest -g -O2   conftest.c -lpthread -lrt -lm  >&5
+configure:14932: $? = 0
+configure:14949: result: none required
+configure:14967: checking for pthread_set_name_np
+configure:14967: gcc -o conftest -g -O2   conftest.c -lpthread -lrt -lm  >&5
+/tmp/ccE1k5Qg.o: In function `main':
 /root/linkerovs/ovs-branch-2.5-dpdk/conftest.c:88: undefined reference to `pthread_set_name_np'
 collect2: error: ld returned 1 exit status
-configure:14497: $? = 1
+configure:14967: $? = 1
 configure: failed program was:
 | /* confdefs.h */
 | #define PACKAGE_NAME "openvswitch"
@@ -2372,7 +2096,6 @@ configure: failed program was:
 | #define STRERROR_R_CHAR_P 1
 | #define VSTUDIO_DDK 1
 | #define HAVE_NETLINK 1
-| #define HAVE_OPENSSL 1
 | #define HAVE_IF_PACKET 1
 | #define HAVE_DECL_SYS_SIGLIST 1
 | #define HAVE_STRUCT_STAT_ST_MTIM_TV_NSEC 1
@@ -2385,6 +2108,7 @@ configure: failed program was:
 | #define HAVE_SYS_STATVFS_H 1
 | #define HAVE_LINUX_TYPES_H 1
 | #define HAVE_LINUX_IF_ETHER_H 1
+| #define HAVE_STDATOMIC_H 1
 | #define HAVE_BACKTRACE 1
 | #define HAVE_LINUX_PERF_EVENT_H 1
 | #define HAVE___THREAD 1
@@ -2432,58 +2156,58 @@ configure: failed program was:
 |   ;
 |   return 0;
 | }
-configure:14497: result: no
-configure:14507: checking for pthread_setname_np() variant
-configure:14524: gcc -std=gnu99 -o conftest -g -O2   conftest.c -lpthread -lrt -lm  >&5
-configure:14524: $? = 0
-configure:14550: result: glibc
-configure:14565: checking whether __linux__ is defined
-configure:14581: gcc -std=gnu99 -c -g -O2  conftest.c >&5
-configure:14581: $? = 0
-configure:14588: result: true
-configure:14598: checking for working posix_memalign
-configure:14622: gcc -std=gnu99 -o conftest -g -O2   conftest.c -lpthread -lrt -lm  >&5
-configure:14622: $? = 0
-configure:14622: ./conftest
-configure:14622: $? = 0
-configure:14632: result: yes
-configure:14643: checking whether the preprocessor supports include_next
-configure:14681: gcc -std=gnu99 -c -g -O2  -Iconftestd1b -Iconftestd2 conftest.c >&5
-configure:14681: $? = 0
-configure:14702: result: yes
-configure:14723: checking whether system header files limit the line length
-configure:14746: result: no
-configure:14772: checking for stdio.h
-configure:14772: gcc -std=gnu99 -c -g -O2  conftest.c >&5
-configure:14772: $? = 0
-configure:14772: result: yes
-configure:14772: checking for string.h
-configure:14772: result: yes
-configure:14937: checking whether gcc -std=gnu99 accepts -Werror
-configure:14955: gcc -std=gnu99 -c -g -O2  -Werror  conftest.c >&5
-configure:14955: $? = 0
-configure:14963: result: yes
-configure:14972: checking whether gcc -std=gnu99 accepts -Wall
-configure:14990: gcc -std=gnu99 -c -g -O2 -Werror -Wall  conftest.c >&5
-configure:14990: $? = 0
-configure:14998: result: yes
-configure:15008: checking whether gcc -std=gnu99 accepts -Wextra
-configure:15026: gcc -std=gnu99 -c -g -O2 -Werror -Wextra  conftest.c >&5
-configure:15026: $? = 0
-configure:15034: result: yes
-configure:15044: checking whether gcc -std=gnu99 accepts -Wno-sign-compare
-configure:15062: gcc -std=gnu99 -c -g -O2 -Werror -Wno-sign-compare  conftest.c >&5
-configure:15062: $? = 0
-configure:15070: result: yes
-configure:15080: checking whether gcc -std=gnu99 accepts -Wpointer-arith
-configure:15098: gcc -std=gnu99 -c -g -O2 -Werror -Wpointer-arith  conftest.c >&5
-configure:15098: $? = 0
-configure:15106: result: yes
-configure:15116: checking whether gcc -std=gnu99 accepts -Wformat-security
-configure:15134: gcc -std=gnu99 -c -g -O2 -Werror -Wformat-security  conftest.c >&5
+configure:14967: result: no
+configure:14977: checking for pthread_setname_np() variant
+configure:14994: gcc -o conftest -g -O2   conftest.c -lpthread -lrt -lm  >&5
+configure:14994: $? = 0
+configure:15020: result: glibc
+configure:15035: checking whether __linux__ is defined
+configure:15051: gcc -c -g -O2  conftest.c >&5
+configure:15051: $? = 0
+configure:15058: result: true
+configure:15068: checking for working posix_memalign
+configure:15092: gcc -o conftest -g -O2   conftest.c -lpthread -lrt -lm  >&5
+configure:15092: $? = 0
+configure:15092: ./conftest
+configure:15092: $? = 0
+configure:15102: result: yes
+configure:15113: checking whether the preprocessor supports include_next
+configure:15151: gcc -c -g -O2  -Iconftestd1b -Iconftestd2 conftest.c >&5
+configure:15151: $? = 0
+configure:15172: result: yes
+configure:15193: checking whether system header files limit the line length
+configure:15216: result: no
+configure:15242: checking for stdio.h
+configure:15242: gcc -c -g -O2  conftest.c >&5
+configure:15242: $? = 0
+configure:15242: result: yes
+configure:15242: checking for string.h
+configure:15242: result: yes
+configure:15407: checking whether gcc accepts -Werror
+configure:15425: gcc -c -g -O2  -Werror  conftest.c >&5
+configure:15425: $? = 0
+configure:15433: result: yes
+configure:15442: checking whether gcc accepts -Wall
+configure:15460: gcc -c -g -O2 -Werror -Wall  conftest.c >&5
+configure:15460: $? = 0
+configure:15468: result: yes
+configure:15478: checking whether gcc accepts -Wextra
+configure:15496: gcc -c -g -O2 -Werror -Wextra  conftest.c >&5
+configure:15496: $? = 0
+configure:15504: result: yes
+configure:15514: checking whether gcc accepts -Wno-sign-compare
+configure:15532: gcc -c -g -O2 -Werror -Wno-sign-compare  conftest.c >&5
+configure:15532: $? = 0
+configure:15540: result: yes
+configure:15550: checking whether gcc accepts -Wpointer-arith
+configure:15568: gcc -c -g -O2 -Werror -Wpointer-arith  conftest.c >&5
+configure:15568: $? = 0
+configure:15576: result: yes
+configure:15586: checking whether gcc accepts -Wformat-security
+configure:15604: gcc -c -g -O2 -Werror -Wformat-security  conftest.c >&5
 cc1: error: -Wformat-security ignored without -Wformat [-Werror=format-security]
 cc1: all warnings being treated as errors
-configure:15134: $? = 1
+configure:15604: $? = 1
 configure: failed program was:
 | /* confdefs.h */
 | #define PACKAGE_NAME "openvswitch"
@@ -2516,7 +2240,6 @@ configure: failed program was:
 | #define STRERROR_R_CHAR_P 1
 | #define VSTUDIO_DDK 1
 | #define HAVE_NETLINK 1
-| #define HAVE_OPENSSL 1
 | #define HAVE_IF_PACKET 1
 | #define HAVE_DECL_SYS_SIGLIST 1
 | #define HAVE_STRUCT_STAT_ST_MTIM_TV_NSEC 1
@@ -2529,6 +2252,7 @@ configure: failed program was:
 | #define HAVE_SYS_STATVFS_H 1
 | #define HAVE_LINUX_TYPES_H 1
 | #define HAVE_LINUX_IF_ETHER_H 1
+| #define HAVE_STDATOMIC_H 1
 | #define HAVE_BACKTRACE 1
 | #define HAVE_LINUX_PERF_EVENT_H 1
 | #define HAVE___THREAD 1
@@ -2550,30 +2274,30 @@ configure: failed program was:
 |   ;
 |   return 0;
 | }
-configure:15142: result: no
-configure:15152: checking whether gcc -std=gnu99 accepts -Wswitch-enum
-configure:15170: gcc -std=gnu99 -c -g -O2 -Werror -Wswitch-enum  conftest.c >&5
-configure:15170: $? = 0
-configure:15178: result: yes
-configure:15188: checking whether gcc -std=gnu99 accepts -Wunused-parameter
-configure:15206: gcc -std=gnu99 -c -g -O2 -Werror -Wunused-parameter  conftest.c >&5
-configure:15206: $? = 0
-configure:15214: result: yes
-configure:15224: checking whether gcc -std=gnu99 accepts -Wbad-function-cast
-configure:15242: gcc -std=gnu99 -c -g -O2 -Werror -Wbad-function-cast  conftest.c >&5
-configure:15242: $? = 0
-configure:15250: result: yes
-configure:15260: checking whether gcc -std=gnu99 accepts -Wcast-align
-configure:15278: gcc -std=gnu99 -c -g -O2 -Werror -Wcast-align  conftest.c >&5
-configure:15278: $? = 0
-configure:15286: result: yes
-configure:15296: checking whether gcc -std=gnu99 accepts -Wstrict-prototypes
-configure:15314: gcc -std=gnu99 -c -g -O2 -Werror -Wstrict-prototypes  conftest.c >&5
+configure:15612: result: no
+configure:15622: checking whether gcc accepts -Wswitch-enum
+configure:15640: gcc -c -g -O2 -Werror -Wswitch-enum  conftest.c >&5
+configure:15640: $? = 0
+configure:15648: result: yes
+configure:15658: checking whether gcc accepts -Wunused-parameter
+configure:15676: gcc -c -g -O2 -Werror -Wunused-parameter  conftest.c >&5
+configure:15676: $? = 0
+configure:15684: result: yes
+configure:15694: checking whether gcc accepts -Wbad-function-cast
+configure:15712: gcc -c -g -O2 -Werror -Wbad-function-cast  conftest.c >&5
+configure:15712: $? = 0
+configure:15720: result: yes
+configure:15730: checking whether gcc accepts -Wcast-align
+configure:15748: gcc -c -g -O2 -Werror -Wcast-align  conftest.c >&5
+configure:15748: $? = 0
+configure:15756: result: yes
+configure:15766: checking whether gcc accepts -Wstrict-prototypes
+configure:15784: gcc -c -g -O2 -Werror -Wstrict-prototypes  conftest.c >&5
 conftest.c:60:1: error: function declaration isn't a prototype [-Werror=strict-prototypes]
  main ()
  ^
 cc1: all warnings being treated as errors
-configure:15314: $? = 1
+configure:15784: $? = 1
 configure: failed program was:
 | /* confdefs.h */
 | #define PACKAGE_NAME "openvswitch"
@@ -2606,7 +2330,6 @@ configure: failed program was:
 | #define STRERROR_R_CHAR_P 1
 | #define VSTUDIO_DDK 1
 | #define HAVE_NETLINK 1
-| #define HAVE_OPENSSL 1
 | #define HAVE_IF_PACKET 1
 | #define HAVE_DECL_SYS_SIGLIST 1
 | #define HAVE_STRUCT_STAT_ST_MTIM_TV_NSEC 1
@@ -2619,6 +2342,7 @@ configure: failed program was:
 | #define HAVE_SYS_STATVFS_H 1
 | #define HAVE_LINUX_TYPES_H 1
 | #define HAVE_LINUX_IF_ETHER_H 1
+| #define HAVE_STDATOMIC_H 1
 | #define HAVE_BACKTRACE 1
 | #define HAVE_LINUX_PERF_EVENT_H 1
 | #define HAVE___THREAD 1
@@ -2640,15 +2364,15 @@ configure: failed program was:
 |   ;
 |   return 0;
 | }
-configure:15322: result: no
-configure:15332: checking whether gcc -std=gnu99 accepts -Wold-style-definition
-configure:15350: gcc -std=gnu99 -c -g -O2 -Werror -Wold-style-definition  conftest.c >&5
+configure:15792: result: no
+configure:15802: checking whether gcc accepts -Wold-style-definition
+configure:15820: gcc -c -g -O2 -Werror -Wold-style-definition  conftest.c >&5
 conftest.c: In function 'main':
 conftest.c:60:1: error: old-style function definition [-Werror=old-style-definition]
  main ()
  ^
 cc1: all warnings being treated as errors
-configure:15350: $? = 1
+configure:15820: $? = 1
 configure: failed program was:
 | /* confdefs.h */
 | #define PACKAGE_NAME "openvswitch"
@@ -2681,7 +2405,6 @@ configure: failed program was:
 | #define STRERROR_R_CHAR_P 1
 | #define VSTUDIO_DDK 1
 | #define HAVE_NETLINK 1
-| #define HAVE_OPENSSL 1
 | #define HAVE_IF_PACKET 1
 | #define HAVE_DECL_SYS_SIGLIST 1
 | #define HAVE_STRUCT_STAT_ST_MTIM_TV_NSEC 1
@@ -2694,6 +2417,7 @@ configure: failed program was:
 | #define HAVE_SYS_STATVFS_H 1
 | #define HAVE_LINUX_TYPES_H 1
 | #define HAVE_LINUX_IF_ETHER_H 1
+| #define HAVE_STDATOMIC_H 1
 | #define HAVE_BACKTRACE 1
 | #define HAVE_LINUX_PERF_EVENT_H 1
 | #define HAVE___THREAD 1
@@ -2715,19 +2439,19 @@ configure: failed program was:
 |   ;
 |   return 0;
 | }
-configure:15358: result: no
-configure:15368: checking whether gcc -std=gnu99 accepts -Wmissing-prototypes
-configure:15386: gcc -std=gnu99 -c -g -O2 -Werror -Wmissing-prototypes  conftest.c >&5
-configure:15386: $? = 0
-configure:15394: result: yes
-configure:15404: checking whether gcc -std=gnu99 accepts -Wmissing-field-initializers
-configure:15422: gcc -std=gnu99 -c -g -O2 -Werror -Wmissing-field-initializers  conftest.c >&5
-configure:15422: $? = 0
-configure:15430: result: yes
-configure:15440: checking whether gcc -std=gnu99 accepts -Wthread-safety
-configure:15458: gcc -std=gnu99 -c -g -O2 -Werror -Wthread-safety  conftest.c >&5
+configure:15828: result: no
+configure:15838: checking whether gcc accepts -Wmissing-prototypes
+configure:15856: gcc -c -g -O2 -Werror -Wmissing-prototypes  conftest.c >&5
+configure:15856: $? = 0
+configure:15864: result: yes
+configure:15874: checking whether gcc accepts -Wmissing-field-initializers
+configure:15892: gcc -c -g -O2 -Werror -Wmissing-field-initializers  conftest.c >&5
+configure:15892: $? = 0
+configure:15900: result: yes
+configure:15910: checking whether gcc accepts -Wthread-safety
+configure:15928: gcc -c -g -O2 -Werror -Wthread-safety  conftest.c >&5
 gcc: error: unrecognized command line option '-Wthread-safety'
-configure:15458: $? = 1
+configure:15928: $? = 1
 configure: failed program was:
 | /* confdefs.h */
 | #define PACKAGE_NAME "openvswitch"
@@ -2760,7 +2484,6 @@ configure: failed program was:
 | #define STRERROR_R_CHAR_P 1
 | #define VSTUDIO_DDK 1
 | #define HAVE_NETLINK 1
-| #define HAVE_OPENSSL 1
 | #define HAVE_IF_PACKET 1
 | #define HAVE_DECL_SYS_SIGLIST 1
 | #define HAVE_STRUCT_STAT_ST_MTIM_TV_NSEC 1
@@ -2773,6 +2496,7 @@ configure: failed program was:
 | #define HAVE_SYS_STATVFS_H 1
 | #define HAVE_LINUX_TYPES_H 1
 | #define HAVE_LINUX_IF_ETHER_H 1
+| #define HAVE_STDATOMIC_H 1
 | #define HAVE_BACKTRACE 1
 | #define HAVE_LINUX_PERF_EVENT_H 1
 | #define HAVE___THREAD 1
@@ -2794,15 +2518,15 @@ configure: failed program was:
 |   ;
 |   return 0;
 | }
-configure:15466: result: no
-configure:15476: checking whether gcc -std=gnu99 accepts -fno-strict-aliasing
-configure:15494: gcc -std=gnu99 -c -g -O2 -Werror -fno-strict-aliasing  conftest.c >&5
-configure:15494: $? = 0
-configure:15502: result: yes
-configure:15512: checking whether gcc -std=gnu99 accepts -Qunused-arguments
-configure:15530: gcc -std=gnu99 -c -g -O2 -Werror -Qunused-arguments  conftest.c >&5
+configure:15936: result: no
+configure:15946: checking whether gcc accepts -fno-strict-aliasing
+configure:15964: gcc -c -g -O2 -Werror -fno-strict-aliasing  conftest.c >&5
+configure:15964: $? = 0
+configure:15972: result: yes
+configure:15982: checking whether gcc accepts -Qunused-arguments
+configure:16000: gcc -c -g -O2 -Werror -Qunused-arguments  conftest.c >&5
 gcc: error: unrecognized command line option '-Qunused-arguments'
-configure:15530: $? = 1
+configure:16000: $? = 1
 configure: failed program was:
 | /* confdefs.h */
 | #define PACKAGE_NAME "openvswitch"
@@ -2835,7 +2559,6 @@ configure: failed program was:
 | #define STRERROR_R_CHAR_P 1
 | #define VSTUDIO_DDK 1
 | #define HAVE_NETLINK 1
-| #define HAVE_OPENSSL 1
 | #define HAVE_IF_PACKET 1
 | #define HAVE_DECL_SYS_SIGLIST 1
 | #define HAVE_STRUCT_STAT_ST_MTIM_TV_NSEC 1
@@ -2848,6 +2571,7 @@ configure: failed program was:
 | #define HAVE_SYS_STATVFS_H 1
 | #define HAVE_LINUX_TYPES_H 1
 | #define HAVE_LINUX_IF_ETHER_H 1
+| #define HAVE_STDATOMIC_H 1
 | #define HAVE_BACKTRACE 1
 | #define HAVE_LINUX_PERF_EVENT_H 1
 | #define HAVE___THREAD 1
@@ -2869,30 +2593,31 @@ configure: failed program was:
 |   ;
 |   return 0;
 | }
-configure:15538: result: no
-configure:15548: checking whether gcc -std=gnu99 accepts -Wno-unused
-configure:15566: gcc -std=gnu99 -c -g -O2 -Werror -Wno-unused  conftest.c >&5
-configure:15566: $? = 0
-configure:15574: result: yes
-configure:15591: checking whether gcc -std=gnu99 accepts -Wno-unused-parameter
-configure:15609: gcc -std=gnu99 -c -g -O2 -Werror -Wno-unused-parameter  conftest.c >&5
-configure:15609: $? = 0
-configure:15617: result: yes
-configure:15641: checking target hint for cgcc
-configure:15655: result: x86_64
-configure:15667: checking whether make has GNU make $(if) extension
-configure:15678: invoking make -f conftest.mk all:
+configure:16008: result: no
+configure:16018: checking whether gcc accepts -Wno-unused
+configure:16036: gcc -c -g -O2 -Werror -Wno-unused  conftest.c >&5
+configure:16036: $? = 0
+configure:16044: result: yes
+configure:16061: checking whether gcc accepts -Wno-unused-parameter
+configure:16079: gcc -c -g -O2 -Werror -Wno-unused-parameter  conftest.c >&5
+configure:16079: $? = 0
+configure:16087: result: yes
+configure:16111: checking target hint for cgcc
+configure:16125: result: x86_64
+configure:16137: checking whether make has GNU make $(if) extension
+configure:16148: invoking make -f conftest.mk all:
 echo y > conftest.out
-configure:15680: conftest.out contains:
+configure:16150: conftest.out contains:
 y
-configure:15690: result: yes
-configure:20155: gcc -std=gnu99 -c -g -O2  conftest.c >&5
-configure:20155: $? = 0
-configure:20194: gcc -std=gnu99 -o conftest -g -O2 -I/root/dpdk-2.2.0/x86_64-native-linuxapp-gcc/include   -L/root/dpdk-2.2.0/x86_64-native-linuxapp-gcc/lib conftest.c -ldpdk  -lpthread -lrt -lm   >&5
-/root/dpdk-2.2.0/x86_64-native-linuxapp-gcc/lib/libdpdk.so: undefined reference to `dlopen'
-/root/dpdk-2.2.0/x86_64-native-linuxapp-gcc/lib/libdpdk.so: undefined reference to `dlerror'
+configure:16160: result: yes
+configure:20625: gcc -c -g -O2  conftest.c >&5
+configure:20625: $? = 0
+configure:20664: gcc -o conftest -g -O2 -I/root/dpdk-2.2.0/x86_64-native-linuxapp-gcc/include   -L/root/dpdk-2.2.0/x86_64-native-linuxapp-gcc/lib conftest.c -ldpdk  -lpthread -lrt -lm   >&5
+/root/dpdk-2.2.0/x86_64-native-linuxapp-gcc/lib/libdpdk.a(eal_common_options.o): In function `eal_plugins_init':
+eal_common_options.c:(.text+0x683): undefined reference to `dlopen'
+eal_common_options.c:(.text+0x694): undefined reference to `dlerror'
 collect2: error: ld returned 1 exit status
-configure:20194: $? = 1
+configure:20664: $? = 1
 configure: failed program was:
 | /* confdefs.h */
 | #define PACKAGE_NAME "openvswitch"
@@ -2925,7 +2650,6 @@ configure: failed program was:
 | #define STRERROR_R_CHAR_P 1
 | #define VSTUDIO_DDK 1
 | #define HAVE_NETLINK 1
-| #define HAVE_OPENSSL 1
 | #define HAVE_IF_PACKET 1
 | #define HAVE_DECL_SYS_SIGLIST 1
 | #define HAVE_STRUCT_STAT_ST_MTIM_TV_NSEC 1
@@ -2938,6 +2662,7 @@ configure: failed program was:
 | #define HAVE_SYS_STATVFS_H 1
 | #define HAVE_LINUX_TYPES_H 1
 | #define HAVE_LINUX_IF_ETHER_H 1
+| #define HAVE_STDATOMIC_H 1
 | #define HAVE_BACKTRACE 1
 | #define HAVE_LINUX_PERF_EVENT_H 1
 | #define HAVE___THREAD 1
@@ -2961,22 +2686,22 @@ configure: failed program was:
 |   ;
 |   return 0;
 | }
-configure:20194: gcc -std=gnu99 -o conftest -g -O2 -I/root/dpdk-2.2.0/x86_64-native-linuxapp-gcc/include   -L/root/dpdk-2.2.0/x86_64-native-linuxapp-gcc/lib conftest.c -ldpdk -ldl -lpthread -lrt -lm   >&5
-configure:20194: $? = 0
-configure:20211: checking whether gcc -std=gnu99 accepts -mssse3
-configure:20229: gcc -std=gnu99 -c -g -O2 -Werror -mssse3  conftest.c >&5
-configure:20229: $? = 0
-configure:20237: result: yes
-configure:20286: gcc -std=gnu99 -c -g -O2  conftest.c >&5
+configure:20664: gcc -o conftest -g -O2 -I/root/dpdk-2.2.0/x86_64-native-linuxapp-gcc/include   -L/root/dpdk-2.2.0/x86_64-native-linuxapp-gcc/lib conftest.c -ldpdk -ldl -lpthread -lrt -lm   >&5
+configure:20664: $? = 0
+configure:20681: checking whether gcc accepts -mssse3
+configure:20699: gcc -c -g -O2 -Werror -mssse3  conftest.c >&5
+configure:20699: $? = 0
+configure:20707: result: yes
+configure:20756: gcc -c -g -O2  conftest.c >&5
 conftest.c:59:1: note: #pragma message: Checking for pragma message
  _Pragma("message(\"Checking for pragma message\")")
  ^
-configure:20286: $? = 0
-configure:20340: checking whether make supports nested variables
-configure:20357: result: yes
-configure:20478: checking that generated files are newer than configure
-configure:20484: result: done
-configure:20590: creating ./config.status
+configure:20756: $? = 0
+configure:20810: checking whether make supports nested variables
+configure:20827: result: yes
+configure:20948: checking that generated files are newer than configure
+configure:20954: result: done
+configure:21060: creating ./config.status
 
 ## ---------------------- ##
 ## Running config.status. ##
@@ -2993,34 +2718,34 @@ generated by GNU Autoconf 2.69.  Invocation command line was
 
 on localhost.localdomain
 
-config.status:1225: creating lib/stdio.h
-config.status:1225: creating lib/string.h
-config.status:1225: creating ovsdb/libovsdb.sym
-config.status:1225: creating ofproto/libofproto.sym
-config.status:1225: creating lib/libsflow.sym
-config.status:1225: creating lib/libopenvswitch.sym
-config.status:1225: creating ovn/lib/libovn.sym
-config.status:1225: creating vtep/libvtep.sym
-config.status:1225: creating Makefile
-config.status:1225: creating datapath/Makefile
-config.status:1225: creating datapath/linux/Kbuild
-config.status:1225: creating datapath/linux/Makefile
-config.status:1225: creating datapath/linux/Makefile.main
-config.status:1225: creating tests/atlocal
-config.status:1225: creating lib/libopenvswitch.pc
-config.status:1225: creating lib/libsflow.pc
-config.status:1225: creating ofproto/libofproto.pc
-config.status:1225: creating ovsdb/libovsdb.pc
-config.status:1225: creating include/openvswitch/version.h
-config.status:1225: creating config.h
-config.status:1406: config.h is unchanged
-config.status:1454: executing tests/atconfig commands
-config.status:1454: executing depfiles commands
-config.status:1454: executing libtool commands
-config.status:1454: executing include/openflow/openflow.h.stamp commands
-config.status:1454: executing utilities/bugtool/dummy commands
-config.status:1454: executing ovn/dummy commands
-config.status:1454: executing ovn/utilities/dummy commands
+config.status:1227: creating lib/stdio.h
+config.status:1227: creating lib/string.h
+config.status:1227: creating ovsdb/libovsdb.sym
+config.status:1227: creating ofproto/libofproto.sym
+config.status:1227: creating lib/libsflow.sym
+config.status:1227: creating lib/libopenvswitch.sym
+config.status:1227: creating ovn/lib/libovn.sym
+config.status:1227: creating vtep/libvtep.sym
+config.status:1227: creating Makefile
+config.status:1227: creating datapath/Makefile
+config.status:1227: creating datapath/linux/Kbuild
+config.status:1227: creating datapath/linux/Makefile
+config.status:1227: creating datapath/linux/Makefile.main
+config.status:1227: creating tests/atlocal
+config.status:1227: creating lib/libopenvswitch.pc
+config.status:1227: creating lib/libsflow.pc
+config.status:1227: creating ofproto/libofproto.pc
+config.status:1227: creating ovsdb/libovsdb.pc
+config.status:1227: creating include/openvswitch/version.h
+config.status:1227: creating config.h
+config.status:1408: config.h is unchanged
+config.status:1456: executing tests/atconfig commands
+config.status:1456: executing depfiles commands
+config.status:1456: executing libtool commands
+config.status:1456: executing include/openflow/openflow.h.stamp commands
+config.status:1456: executing utilities/bugtool/dummy commands
+config.status:1456: executing ovn/dummy commands
+config.status:1456: executing ovn/utilities/dummy commands
 
 ## ---------------- ##
 ## Cache variables. ##
@@ -3043,6 +2768,8 @@ ac_cv_env_LDFLAGS_set=
 ac_cv_env_LDFLAGS_value=
 ac_cv_env_LIBS_set=
 ac_cv_env_LIBS_value=
+ac_cv_env_LT_SYS_LIBRARY_PATH_set=
+ac_cv_env_LT_SYS_LIBRARY_PATH_value=
 ac_cv_env_PERL_set=
 ac_cv_env_PERL_value=
 ac_cv_env_build_alias_set=
@@ -3073,7 +2800,7 @@ ac_cv_header_mntent_h=yes
 ac_cv_header_net_if_dl_h=no
 ac_cv_header_net_if_mib_h=no
 ac_cv_header_net_if_packet_h=yes
-ac_cv_header_stdatomic_h=no
+ac_cv_header_stdatomic_h=yes
 ac_cv_header_stdc=yes
 ac_cv_header_stdint_h=yes
 ac_cv_header_stdio_h=yes
@@ -3101,18 +2828,18 @@ ac_cv_path_PERL=/usr/bin/perl
 ac_cv_path_PKG_CONFIG=/usr/bin/pkg-config
 ac_cv_path_SED=/usr/bin/sed
 ac_cv_path_install='/usr/bin/install -c'
+ac_cv_path_lt_DD=/usr/bin/dd
 ac_cv_path_mkdir=/usr/bin/mkdir
 ac_cv_prog_AWK=gawk
-ac_cv_prog_CPP='gcc -std=gnu99 -E'
+ac_cv_prog_CPP='gcc -E'
 ac_cv_prog_ac_ct_AR=ar
 ac_cv_prog_ac_ct_CC=gcc
 ac_cv_prog_ac_ct_OBJDUMP=objdump
 ac_cv_prog_ac_ct_RANLIB=ranlib
 ac_cv_prog_ac_ct_STRIP=strip
 ac_cv_prog_cc_c89=
-ac_cv_prog_cc_c99=-std=gnu99
+ac_cv_prog_cc_c99=
 ac_cv_prog_cc_g=yes
-ac_cv_prog_cc_gcc_c_o=yes
 ac_cv_prog_make_make_set=yes
 ac_cv_safe_to_define___extensions__=yes
 ac_cv_search___atomic_load_8=no
@@ -3128,6 +2855,7 @@ ac_cv_sys_file_offset_bits=no
 ac_cv_sys_largefile_CC=no
 am_cv_CC_dependencies_compiler_type=gcc3
 am_cv_make_support_nested_variables=yes
+am_cv_prog_cc_c_o=yes
 am_cv_prog_tar_pax=gnutar
 ax_cv_func_posix_memalign_works=yes
 cl_cv_x64=no
@@ -3154,12 +2882,14 @@ lt_cv_prog_gnu_ld=yes
 lt_cv_sharedlib_from_linklib_cmd='printf %s\n'
 lt_cv_shlibpath_overrides_runpath=no
 lt_cv_sys_global_symbol_pipe='sed -n -e '\''s/^.*[	 ]\([ABCDGIRSTW][ABCDGIRSTW]*\)[	 ][	 ]*\([_A-Za-z][_A-Za-z0-9]*\)$/\1 \2 \2/p'\'' | sed '\''/ __gnu_lto/d'\'''
-lt_cv_sys_global_symbol_to_c_name_address='sed -n -e '\''s/^: \([^ ]*\)[ ]*$/  {\"\1\", (void *) 0},/p'\'' -e '\''s/^[ABCDGIRSTW]* \([^ ]*\) \([^ ]*\)$/  {"\2", (void *) \&\2},/p'\'''
-lt_cv_sys_global_symbol_to_c_name_address_lib_prefix='sed -n -e '\''s/^: \([^ ]*\)[ ]*$/  {\"\1\", (void *) 0},/p'\'' -e '\''s/^[ABCDGIRSTW]* \([^ ]*\) \(lib[^ ]*\)$/  {"\2", (void *) \&\2},/p'\'' -e '\''s/^[ABCDGIRSTW]* \([^ ]*\) \([^ ]*\)$/  {"lib\2", (void *) \&\2},/p'\'''
-lt_cv_sys_global_symbol_to_cdecl='sed -n -e '\''s/^T .* \(.*\)$/extern int \1();/p'\'' -e '\''s/^[ABCDGIRSTW]* .* \(.*\)$/extern char \1;/p'\'''
+lt_cv_sys_global_symbol_to_c_name_address='sed -n -e '\''s/^: \(.*\) .*$/  {"\1", (void *) 0},/p'\'' -e '\''s/^[ABCDGIRSTW][ABCDGIRSTW]* .* \(.*\)$/  {"\1", (void *) \&\1},/p'\'''
+lt_cv_sys_global_symbol_to_c_name_address_lib_prefix='sed -n -e '\''s/^: \(.*\) .*$/  {"\1", (void *) 0},/p'\'' -e '\''s/^[ABCDGIRSTW][ABCDGIRSTW]* .* \(lib.*\)$/  {"\1", (void *) \&\1},/p'\'' -e '\''s/^[ABCDGIRSTW][ABCDGIRSTW]* .* \(.*\)$/  {"lib\1", (void *) \&\1},/p'\'''
+lt_cv_sys_global_symbol_to_cdecl='sed -n -e '\''s/^T .* \(.*\)$/extern int \1();/p'\'' -e '\''s/^[ABCDGIRSTW][ABCDGIRSTW]* .* \(.*\)$/extern char \1;/p'\'''
+lt_cv_sys_global_symbol_to_import=
 lt_cv_sys_max_cmd_len=1572864
 lt_cv_to_host_file_cmd=func_convert_file_noop
 lt_cv_to_tool_file_cmd=func_convert_file_noop
+lt_cv_truncate_bin='/usr/bin/dd bs=4096 count=1'
 ovs_cv__Qunused_arguments=no
 ovs_cv__Wall=yes
 ovs_cv__Wbad_function_cast=yes
@@ -3201,7 +2931,7 @@ ovs_cv_xsversion=none
 ## Output variables. ##
 ## ----------------- ##
 
-ACLOCAL='${SHELL} /root/linkerovs/ovs-branch-2.5-dpdk/build-aux/missing aclocal-1.13'
+ACLOCAL='${SHELL} /root/linkerovs/ovs-branch-2.5-dpdk/build-aux/missing aclocal-1.15'
 AMDEPBACKSLASH='\'
 AMDEP_FALSE='#'
 AMDEP_TRUE=''
@@ -3214,14 +2944,14 @@ AR='ar'
 AUTOCONF='${SHELL} /root/linkerovs/ovs-branch-2.5-dpdk/build-aux/missing autoconf'
 AUTOHEADER='${SHELL} /root/linkerovs/ovs-branch-2.5-dpdk/build-aux/missing autoheader'
 AUTOM4TE='${SHELL} /root/linkerovs/ovs-branch-2.5-dpdk/build-aux/missing autom4te'
-AUTOMAKE='${SHELL} /root/linkerovs/ovs-branch-2.5-dpdk/build-aux/missing automake-1.13'
+AUTOMAKE='${SHELL} /root/linkerovs/ovs-branch-2.5-dpdk/build-aux/missing automake-1.15'
 AWK='gawk'
 CAPNG_LDADD=''
-CC='$(if $(C),env REAL_CC="gcc -std=gnu99" CHECK="$(SPARSE) -I $(top_srcdir)/include/sparse $(SPARSEFLAGS) $(SPARSE_EXTRA_INCLUDES) " cgcc $(CGCCFLAGS),gcc -std=gnu99)'
+CC='$(if $(C),env REAL_CC="gcc" CHECK="$(SPARSE) -I $(top_srcdir)/include/sparse $(SPARSEFLAGS) $(SPARSE_EXTRA_INCLUDES) " cgcc $(CGCCFLAGS),gcc)'
 CCDEPMODE='depmode=gcc3'
 CFLAGS='-g -O2'
 CGCCFLAGS='-target=x86_64'
-CPP='gcc -std=gnu99 -E'
+CPP='gcc -E'
 CPPFLAGS=''
 CYGPATH_W='echo'
 DBDIR='${sysconfdir}/${PACKAGE}'
@@ -3257,9 +2987,9 @@ HAVE_LIBCAPNG_FALSE=''
 HAVE_LIBCAPNG_TRUE='#'
 HAVE_NETLINK_FALSE='#'
 HAVE_NETLINK_TRUE=''
-HAVE_OPENSSL='yes'
-HAVE_OPENSSL_FALSE='#'
-HAVE_OPENSSL_TRUE=''
+HAVE_OPENSSL='no'
+HAVE_OPENSSL_FALSE=''
+HAVE_OPENSSL_TRUE='#'
 HAVE_POSIX_AIO_FALSE='#'
 HAVE_POSIX_AIO_TRUE=''
 HAVE_PYTHON='yes'
@@ -3293,6 +3023,7 @@ LTLIBOBJS=''
 LT_AGE='0'
 LT_CURRENT='1'
 LT_REVISION='0'
+LT_SYS_LIBRARY_PATH=''
 MAKEINFO='${SHELL} /root/linkerovs/ovs-branch-2.5-dpdk/build-aux/missing makeinfo'
 MANIFEST_TOOL=':'
 MKDIR_P='/usr/bin/mkdir -p'
@@ -3339,9 +3070,9 @@ SHELL='/bin/sh'
 SPARSE='sparse'
 SPARSEFLAGS='-m64'
 SPARSE_EXTRA_INCLUDES='-I /usr/local/include '
-SSL_INCLUDES=' '
-SSL_LDFLAGS=' '
-SSL_LIBS='-lssl -lcrypto  '
+SSL_INCLUDES=''
+SSL_LDFLAGS=''
+SSL_LIBS=''
 STRIP='strip'
 VERSION='2.5.1'
 VSTUDIO_CONFIG=''
@@ -3435,7 +3166,6 @@ target_alias=''
 #define STRERROR_R_CHAR_P 1
 #define VSTUDIO_DDK 1
 #define HAVE_NETLINK 1
-#define HAVE_OPENSSL 1
 #define HAVE_IF_PACKET 1
 #define HAVE_DECL_SYS_SIGLIST 1
 #define HAVE_STRUCT_STAT_ST_MTIM_TV_NSEC 1
@@ -3448,6 +3178,7 @@ target_alias=''
 #define HAVE_SYS_STATVFS_H 1
 #define HAVE_LINUX_TYPES_H 1
 #define HAVE_LINUX_IF_ETHER_H 1
+#define HAVE_STDATOMIC_H 1
 #define HAVE_BACKTRACE 1
 #define HAVE_LINUX_PERF_EVENT_H 1
 #define HAVE___THREAD 1

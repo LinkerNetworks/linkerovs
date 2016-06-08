@@ -1,16 +1,16 @@
 lib/daemon-unix.lo: lib/daemon-unix.c /usr/include/stdc-predef.h config.h \
- lib/daemon.h /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/limits.h \
- /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/syslimits.h \
+ lib/daemon.h /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/limits.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/syslimits.h \
  /usr/include/limits.h /usr/include/features.h /usr/include/sys/cdefs.h \
  /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
  /usr/include/gnu/stubs-64.h /usr/include/bits/posix1_lim.h \
  /usr/include/bits/local_lim.h /usr/include/linux/limits.h \
  /usr/include/bits/posix2_lim.h /usr/include/bits/xopen_lim.h \
  /usr/include/bits/stdio_lim.h \
- /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stdbool.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stdbool.h \
  /usr/include/sys/types.h /usr/include/bits/types.h \
  /usr/include/bits/typesizes.h /usr/include/time.h \
- /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stddef.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stddef.h \
  /usr/include/endian.h /usr/include/bits/endian.h \
  /usr/include/bits/byteswap.h /usr/include/bits/byteswap-16.h \
  /usr/include/sys/select.h /usr/include/bits/select.h \
@@ -40,7 +40,7 @@ lib/daemon-unix.lo: lib/daemon-unix.c /usr/include/stdc-predef.h config.h \
  lib/dirs.h lib/lockfile.h lib/ovs-thread.h /usr/include/pthread.h \
  /usr/include/sched.h /usr/include/bits/sched.h /usr/include/bits/timex.h \
  /usr/include/bits/setjmp.h lib/ovs-atomic.h \
- /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stdint.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stdint.h \
  /usr/include/stdint.h /usr/include/bits/wchar.h lib/util.h \
  /usr/include/arpa/inet.h /usr/include/netinet/in.h \
  /usr/include/sys/socket.h /usr/include/sys/uio.h \
@@ -49,16 +49,16 @@ lib/daemon-unix.lo: lib/daemon-unix.c /usr/include/stdc-predef.h config.h \
  /usr/include/asm-generic/socket.h /usr/include/asm/sockios.h \
  /usr/include/asm-generic/sockios.h /usr/include/bits/in.h \
  /usr/include/inttypes.h \
- /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stdarg.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stdarg.h \
  /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h \
  /usr/include/bits/sys_errlist.h /usr/include/bits/stdio.h \
  include/openvswitch/types.h include/openvswitch/util.h \
- include/openvswitch/version.h lib/ovs-atomic-gcc4.7+.h \
- lib/ovs-atomic-flag-gcc4.7+.h include/openvswitch/thread.h \
- include/openvswitch/util.h lib/process.h lib/socket-util.h \
- /usr/include/sys/time.h /usr/include/netinet/in_systm.h \
- /usr/include/netinet/ip.h lib/timeval.h lib/type-props.h \
- include/openvswitch/vlog.h include/openvswitch/list.h \
+ include/openvswitch/version.h lib/ovs-atomic-c11.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stdatomic.h \
+ include/openvswitch/thread.h include/openvswitch/util.h lib/process.h \
+ lib/socket-util.h /usr/include/sys/time.h \
+ /usr/include/netinet/in_systm.h /usr/include/netinet/ip.h lib/timeval.h \
+ lib/type-props.h include/openvswitch/vlog.h include/openvswitch/list.h \
  include/openvswitch/token-bucket.h
 
 /usr/include/stdc-predef.h:
@@ -67,9 +67,9 @@ config.h:
 
 lib/daemon.h:
 
-/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/limits.h:
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/limits.h:
 
-/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/syslimits.h:
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/syslimits.h:
 
 /usr/include/limits.h:
 
@@ -95,7 +95,7 @@ lib/daemon.h:
 
 /usr/include/bits/stdio_lim.h:
 
-/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stdbool.h:
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stdbool.h:
 
 /usr/include/sys/types.h:
 
@@ -105,7 +105,7 @@ lib/daemon.h:
 
 /usr/include/time.h:
 
-/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stddef.h:
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stddef.h:
 
 /usr/include/endian.h:
 
@@ -241,7 +241,7 @@ lib/ovs-thread.h:
 
 lib/ovs-atomic.h:
 
-/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stdint.h:
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stdint.h:
 
 /usr/include/stdint.h:
 
@@ -275,7 +275,7 @@ lib/util.h:
 
 /usr/include/inttypes.h:
 
-/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stdarg.h:
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stdarg.h:
 
 /usr/include/libio.h:
 
@@ -293,9 +293,9 @@ include/openvswitch/util.h:
 
 include/openvswitch/version.h:
 
-lib/ovs-atomic-gcc4.7+.h:
+lib/ovs-atomic-c11.h:
 
-lib/ovs-atomic-flag-gcc4.7+.h:
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stdatomic.h:
 
 include/openvswitch/thread.h:
 

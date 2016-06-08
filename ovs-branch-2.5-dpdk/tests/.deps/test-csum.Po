@@ -1,6 +1,6 @@
 tests/test-csum.o: tests/test-csum.c /usr/include/stdc-predef.h config.h \
- lib/csum.h /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stddef.h \
- /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stdint.h \
+ lib/csum.h /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stddef.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stdint.h \
  /usr/include/stdint.h /usr/include/features.h /usr/include/sys/cdefs.h \
  /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
  /usr/include/gnu/stubs-64.h /usr/include/bits/wchar.h \
@@ -20,7 +20,7 @@ tests/test-csum.o: tests/test-csum.c /usr/include/stdc-predef.h config.h \
  /usr/include/asm-generic/sockios.h /usr/include/bits/in.h \
  /usr/include/netinet/ip.h lib/stdio.h /usr/include/stdio.h \
  /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h \
- /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stdarg.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stdarg.h \
  /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h \
  /usr/include/bits/stdio.h /usr/include/stdlib.h \
  /usr/include/bits/waitflags.h /usr/include/bits/waitstatus.h \
@@ -30,10 +30,10 @@ tests/test-csum.o: tests/test-csum.c /usr/include/stdc-predef.h config.h \
  /usr/include/bits/string2.h lib/crc32c.h tests/ovstest.h lib/compiler.h \
  lib/command-line.h lib/compiler.h lib/packets.h lib/geneve.h \
  include/odp-netlink.h include/openvswitch/types.h lib/random.h \
- lib/hash.h /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stdbool.h \
+ lib/hash.h /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stdbool.h \
  lib/util.h /usr/include/arpa/inet.h \
- /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/limits.h \
- /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/syslimits.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/limits.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/syslimits.h \
  /usr/include/limits.h /usr/include/bits/posix1_lim.h \
  /usr/include/bits/local_lim.h /usr/include/linux/limits.h \
  /usr/include/bits/posix2_lim.h /usr/include/bits/xopen_lim.h \
@@ -61,9 +61,9 @@ config.h:
 
 lib/csum.h:
 
-/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stddef.h:
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stddef.h:
 
-/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stdint.h:
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stdint.h:
 
 /usr/include/stdint.h:
 
@@ -151,7 +151,7 @@ lib/stdio.h:
 
 /usr/include/wchar.h:
 
-/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stdarg.h:
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stdarg.h:
 
 /usr/include/bits/stdio_lim.h:
 
@@ -203,15 +203,15 @@ lib/random.h:
 
 lib/hash.h:
 
-/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stdbool.h:
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stdbool.h:
 
 lib/util.h:
 
 /usr/include/arpa/inet.h:
 
-/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/limits.h:
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/limits.h:
 
-/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/syslimits.h:
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/syslimits.h:
 
 /usr/include/limits.h:
 

@@ -6,8 +6,8 @@ utilities/ovs-testcontroller.o: utilities/ovs-testcontroller.c \
  /usr/include/linux/errno.h /usr/include/asm/errno.h \
  /usr/include/asm-generic/errno.h /usr/include/asm-generic/errno-base.h \
  /usr/include/getopt.h \
- /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/limits.h \
- /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/syslimits.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/limits.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/syslimits.h \
  /usr/include/limits.h /usr/include/bits/posix1_lim.h \
  /usr/include/bits/local_lim.h /usr/include/linux/limits.h \
  /usr/include/bits/posix2_lim.h /usr/include/bits/xopen_lim.h \
@@ -16,7 +16,7 @@ utilities/ovs-testcontroller.o: utilities/ovs-testcontroller.c \
  /usr/include/bits/typesizes.h /usr/include/bits/signum.h \
  /usr/include/time.h /usr/include/bits/siginfo.h \
  /usr/include/bits/sigaction.h /usr/include/bits/sigcontext.h \
- /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stddef.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stddef.h \
  /usr/include/bits/sigstack.h /usr/include/sys/ucontext.h \
  /usr/include/bits/pthreadtypes.h /usr/include/bits/sigthread.h \
  /usr/include/stdlib.h /usr/include/bits/waitflags.h \
@@ -29,14 +29,14 @@ utilities/ovs-testcontroller.o: utilities/ovs-testcontroller.c \
  /usr/include/bits/stdlib-bsearch.h /usr/include/bits/stdlib-float.h \
  lib/stdio.h /usr/include/stdio.h /usr/include/libio.h \
  /usr/include/_G_config.h /usr/include/wchar.h \
- /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stdarg.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stdarg.h \
  /usr/include/bits/sys_errlist.h /usr/include/bits/stdio.h lib/string.h \
  /usr/include/string.h /usr/include/bits/string.h \
  /usr/include/bits/string2.h lib/command-line.h lib/compiler.h \
  include/openvswitch/compiler.h lib/compiler.h lib/daemon.h \
- /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stdbool.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stdbool.h \
  lib/fatal-signal.h lib/learning-switch.h \
- /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stdint.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stdint.h \
  /usr/include/stdint.h /usr/include/bits/wchar.h lib/ofp-util.h \
  lib/bitmap.h lib/util.h /usr/include/arpa/inet.h \
  /usr/include/netinet/in.h /usr/include/sys/socket.h \
@@ -70,13 +70,14 @@ utilities/ovs-testcontroller.o: utilities/ovs-testcontroller.c \
  lib/ofpbuf.h lib/poll-loop.h /usr/include/poll.h /usr/include/sys/poll.h \
  /usr/include/bits/poll.h lib/rconn.h lib/ovs-thread.h \
  /usr/include/pthread.h /usr/include/sched.h /usr/include/bits/sched.h \
- /usr/include/bits/setjmp.h lib/ovs-atomic.h lib/ovs-atomic-gcc4.7+.h \
- lib/ovs-atomic-flag-gcc4.7+.h include/openvswitch/thread.h \
- include/openvswitch/util.h lib/simap.h lib/hmap.h lib/stream-ssl.h \
- lib/timeval.h lib/unixctl.h lib/util.h include/openvswitch/vconn.h \
- include/openvswitch/vlog.h include/openvswitch/token-bucket.h \
- lib/socket-util.h /usr/include/sys/time.h \
- /usr/include/netinet/in_systm.h /usr/include/netinet/ip.h lib/ofp-util.h
+ /usr/include/bits/setjmp.h lib/ovs-atomic.h lib/ovs-atomic-c11.h \
+ /usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stdatomic.h \
+ include/openvswitch/thread.h include/openvswitch/util.h lib/simap.h \
+ lib/hmap.h lib/stream-ssl.h lib/timeval.h lib/unixctl.h lib/util.h \
+ include/openvswitch/vconn.h include/openvswitch/vlog.h \
+ include/openvswitch/token-bucket.h lib/socket-util.h \
+ /usr/include/sys/time.h /usr/include/netinet/in_systm.h \
+ /usr/include/netinet/ip.h lib/ofp-util.h
 
 /usr/include/stdc-predef.h:
 
@@ -106,9 +107,9 @@ config.h:
 
 /usr/include/getopt.h:
 
-/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/limits.h:
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/limits.h:
 
-/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/syslimits.h:
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/syslimits.h:
 
 /usr/include/limits.h:
 
@@ -142,7 +143,7 @@ config.h:
 
 /usr/include/bits/sigcontext.h:
 
-/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stddef.h:
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stddef.h:
 
 /usr/include/bits/sigstack.h:
 
@@ -194,7 +195,7 @@ lib/stdio.h:
 
 /usr/include/wchar.h:
 
-/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stdarg.h:
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stdarg.h:
 
 /usr/include/bits/sys_errlist.h:
 
@@ -218,13 +219,13 @@ lib/compiler.h:
 
 lib/daemon.h:
 
-/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stdbool.h:
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stdbool.h:
 
 lib/fatal-signal.h:
 
 lib/learning-switch.h:
 
-/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stdint.h:
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stdint.h:
 
 /usr/include/stdint.h:
 
@@ -396,9 +397,9 @@ lib/ovs-thread.h:
 
 lib/ovs-atomic.h:
 
-lib/ovs-atomic-gcc4.7+.h:
+lib/ovs-atomic-c11.h:
 
-lib/ovs-atomic-flag-gcc4.7+.h:
+/usr/lib/gcc/x86_64-redhat-linux/5.3.1/include/stdatomic.h:
 
 include/openvswitch/thread.h:
 
