@@ -954,6 +954,7 @@ static inline void
 dpdk_queue_flush__(struct netdev_dpdk *dev, int qid)
 {
     struct dpdk_tx_queue *txq = &dev->tx_q[qid];
+    int retrytime = 0;
     uint32_t nb_tx = 0;
 
     while (nb_tx != txq->count) {
@@ -962,6 +963,13 @@ dpdk_queue_flush__(struct netdev_dpdk *dev, int qid)
         ret = rte_eth_tx_burst(dev->port_id, qid, txq->burst_pkts + nb_tx,
                                txq->count - nb_tx);
         if (!ret) {
+
+            if (retrytime < 3) {
+                xsleep(1);
+                retrytime++;
+                continue;
+            }
+
             break;
         }
 
