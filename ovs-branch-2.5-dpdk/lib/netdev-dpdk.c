@@ -981,7 +981,7 @@ dpdk_queue_flush__(struct netdev_dpdk *dev, int qid)
         dev->stats.tx_dropped += dropped;
         rte_spinlock_unlock(&dev->stats_lock);
 
-        VLOG_INFO_RL(&rl, "dropped %d when free buffers", (int)dropped);
+        VLOG_INFO_RL(&rl, "In queue %d, transfered %d, dropped %d when free buffers", (int)txq->count, (int)nb_tx, (int)dropped);
     }
 
     txq->count = 0;
