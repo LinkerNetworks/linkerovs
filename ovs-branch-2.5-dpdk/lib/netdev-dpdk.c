@@ -1567,6 +1567,7 @@ netdev_dpdk_get_stats(const struct netdev *netdev, struct netdev_stats *stats)
 
     ovs_mutex_unlock(&dev->mutex);
 
+    VLOG_INFO_RL(&rl, "rx_nombuf %d, imissed %d, dropped %d when received", (int)rte_stats.rx_nombuf, (int)rte_stats.imissed, (int)stats->rx_dropped);
     return 0;
 }
 
