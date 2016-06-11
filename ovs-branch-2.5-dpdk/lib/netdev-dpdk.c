@@ -111,7 +111,7 @@ static char *vhost_sock_dir = NULL;   /* Location of vhost-user sockets */
 /*
  * Maximum amount of time in micro seconds to try and enqueue to vhost.
  */
-#define VHOST_ENQ_RETRY_USECS 100
+#define VHOST_ENQ_RETRY_USECS 500
 
 static const struct rte_eth_conf port_conf = {
     .rxmode = {
