@@ -1,4 +1,4 @@
-source /root/linkerovs/dpdkrc
+source /home/root/linkerovs/dpdkrc
 
 cd ./dpdk-2.2.0
 
