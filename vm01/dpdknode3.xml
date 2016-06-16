@@ -1,0 +1,72 @@
+<domain type='kvm' xmlns:qemu='http://libvirt.org/schemas/domain/qemu/1.0'>
+  <name>dpdknode3</name>
+  <memory unit='GiB'>4</memory>
+  <currentMemory unit='GiB'>4</currentMemory>
+  <vcpu placement='static' cpuset='8-15'>8</vcpu>
+  <iothreads>2</iothreads>
+  <cputune>
+    <shares>2048</shares>
+    <period>1000000</period>
+    <quota>-1</quota>
+    <emulator_period>1000000</emulator_period>
+    <emulator_quota>-1</emulator_quota>
+    <vcpupin vcpu='0' cpuset='8'/>
+    <vcpupin vcpu='1' cpuset='9'/>
+    <vcpupin vcpu='2' cpuset='10'/>
+    <vcpupin vcpu='3' cpuset='11'/>
+    <vcpupin vcpu='4' cpuset='12'/>
+    <vcpupin vcpu='5' cpuset='13'/>
+    <vcpupin vcpu='6' cpuset='14'/>
+    <vcpupin vcpu='7' cpuset='15'/>
+    <emulatorpin cpuset='4-5'/>
+    <iothreadpin iothread='1' cpuset='6'/>
+    <iothreadpin iothread='2' cpuset='7'/>
+  </cputune>
+  <resource>
+    <partition>/machine</partition>
+  </resource>
+  <os>
+    <type arch='x86_64' machine='pc-i440fx-2.4'>hvm</type>
+    <boot dev='hd'/>
+  </os>
+  <features>
+    <acpi/>
+  </features>
+  <clock offset='utc'/>
+  <on_poweroff>destroy</on_poweroff>
+  <on_reboot>restart</on_reboot>
+  <on_crash>destroy</on_crash>
+  <devices>
+    <emulator>/usr/local/bin/qemu-system-x86_64</emulator>
+    <disk type='file' device='disk'>
+      <driver name='qemu' type='qcow2'/>
+      <source file='/home/kvm/dpdknode3.qcow2'/>
+      <target dev='vda' bus='virtio'/>
+    </disk>
+    <controller type='pci' index='0' model='pci-root'/>
+    <input type='mouse' bus='ps2'/>
+    <input type='keyboard' bus='ps2'/>
+    <graphics type='vnc' port='-1' autoport='yes' listen='0.0.0.0' keymap='en-us'>
+      <listen type='address' address='0.0.0.0'/>
+    </graphics>
+    <video>
+      <model type='cirrus' vram='16384' heads='1'/>
+    </video>
+    <memballoon model='virtio'>
+    </memballoon>
+  </devices>
+  <qemu:commandline>
+    <qemu:arg value='-chardev'/>
+    <qemu:arg value='socket,id=char1,path=/usr/local/var/run/openvswitch/vhost-user1'/>
+    <qemu:arg value='-netdev'/>
+    <qemu:arg value='type=vhost-user,id=mynet1,chardev=char1,vhostforce'/>
+    <qemu:arg value='-device'/>
+    <qemu:arg value='virtio-net-pci,mac=52:54:00:00:00:03,netdev=mynet1'/>
+    <qemu:arg value='-object'/>
+    <qemu:arg value='memory-backend-file,id=mem,size=4096M,mem-path=/dev/hugepages,share=on'/>
+    <qemu:arg value='-numa'/>
+    <qemu:arg value='node,memdev=mem'/>
+    <qemu:arg value='-mem-prealloc'/>
+  </qemu:commandline>
+</domain>
+
