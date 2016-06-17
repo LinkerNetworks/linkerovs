@@ -2568,3 +2568,21 @@ Performance Tuning:
 
 	See below information on dpdkvhostcuse and dpdkvhostuser ports.
 	See [DPDK Docs] for more information on `testpmd`.
+	
+What do elevated UDP RcvbufErrors indicate?
+
+When a host shows elevated UDP RcvbufErrors, these typically indicate that the network (including NIC and driver) is delivering UDP datagrams to the IP stack faster than the user-space application can drain it.
+
+This is typically alleviated by
+
+the application servicing its socket buffer faster
+the application increasing the size of its socket buffer via the SO_RCVBUF buf socket option (see socket(7))
+having the administrator increase global socket buffer limits via the udp and core rmem sysctls.
+There are ways to determine where drops are occurring in the kernel. For instance, "dropwatch" can help narrow down the function. From the function name, it should be pretty obvious what is causing drops.
+
+Jun 17 09:26:08 localhost systemd: Started Virtual Machine qemu-2-dpdknode3.
+Jun 17 09:26:08 localhost systemd: Starting Virtual Machine qemu-2-dpdknode3.
+Jun 17 09:26:09 localhost journal: Unable to read from monitor: Connection reset by peer
+Jun 17 09:26:09 localhost journal: internal error: early end of file from monitor: possible problem:#0122016-06-17T13:26:09.405420Z qemu-system-x86_64: -netdev type=vhost-user,id=mynet1,chardev=char1,vhostforce: chardev "char1" went up
+
+
